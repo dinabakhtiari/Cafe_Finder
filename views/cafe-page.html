@@ -21,75 +21,27 @@
         <article>
             <h1>Melu Cafe</h1>
             <p>Added by: <strong class="cafe-author">username</strong> | Date: <span id="current-date">Loading date...</span></p>
+            <p><strong>Location:</strong> Stuttgart, Germany</p>
             <img src="cafe-detailed.jpg" alt="Spacious workspace inside Melu Cafe">
             
-            <div>
-                <form action="/cafes/1/like" method="POST">
-                    <button type="submit">❤️ Like / Save for later</button>
-                </form>
+            <div class="cafe-likes-section" style="margin: 15px 0; display: flex; align-items: center; gap: 15px;">
+                <div class="likes-count">
+                    <span>Total Likes: <strong>42</strong></span>
+                </div>
+                
+                <div class="user-like-action">
+                    <form action="/cafes/1/like" method="POST">
+                        <button type="submit">Like Cafe</button>
+                        </form>
+                </div>
             </div>
 
             <h3>Description</h3>
             <p>This cafe provides great seating, quiet background music, and stable internet for long working hours.</p>
             
-            <div class="cafe-features-selection">
-                <h3>Cafe Features</h3>
-                <p style="color: gray; font-size: 0.9em;">Select all features available at this location:</p>
-                
-                <div>
-                    <input type="checkbox" id="tag-wifi" name="tags" value="wifi" checked>
-                    <label for="tag-wifi">⚡ Fast Wi-Fi</label>
-                </div>
-                
-                <div>
-                    <input type="checkbox" id="tag-outlets" name="tags" value="outlets" checked>
-                    <label for="tag-outlets">🔌 Power Outlets</label>
-                </div>
-                
-                <div>
-                    <input type="checkbox" id="tag-quiet" name="tags" value="quiet">
-                    <label for="tag-quiet">🤫 Quiet Environment</label>
-                </div>
-                
-                <div>
-                    <input type="checkbox" id="tag-tables" name="tags" value="tables">
-                    <label for="tag-tables">🪑 Big Tables</label>
-                </div>
-                
-                <div>
-                    <input type="checkbox" id="tag-outdoor" name="tags" value="outdoor">
-                    <label for="tag-outdoor">🌿 Outdoor Seating</label>
-                </div>
-                
-                <div>
-                    <input type="checkbox" id="tag-ac" name="tags" value="ac">
-                    <label for="tag-ac">❄️ Air Conditioning</label>
-                </div>
-                
-                <div>
-                    <input type="checkbox" id="tag-parking" name="tags" value="parking">
-                    <label for="tag-parking">🚗 Parking Available</label>
-                </div>
-                
-                <div>
-                    <input type="checkbox" id="tag-discount" name="tags" value="student-discount" checked>
-                    <label for="tag-discount">🎓 Student Discount</label>
-                </div>
-                
-                <div>
-                    <input type="checkbox" id="tag-coffee" name="tags" value="specialty-coffee">
-                    <label for="tag-coffee">☕ Specialty Coffee</label>
-                </div>
-                
-                <div>
-                    <input type="checkbox" id="tag-snacks" name="tags" value="snacks">
-                    <label for="tag-snacks">🥐 Bakery & Snacks</label>
-                </div>
-            </div>
-
-            <div style="margin-top: 20px;">
+            <div style="margin: 15px 0;">
                 <a href="#">Share on Facebook</a> | 
-                <a href="#">Share on X</a>
+                <a href="#">Share on Instagram</a>
             </div>
         </article>
 
@@ -99,18 +51,67 @@
             <h2>Comments & Reviews</h2>
             
             <form action="/cafes/1/comments" method="POST">
+                
                 <div>
                     <label for="rating">Rating (1-5):</label>
-                    <input type="number" id="rating" name="rating" min="1" max="5" required>
+                    <input type="number" id="rating" name="rating" min="1" max="5" placeholder="5" required>
                 </div>
+                
+                <div class="cafe-features-selection" style="margin: 20px 0;">
+                    <h4>What features did you experience here?</h4>
+                    <p style="color: gray; font-size: 0.85em; margin-top: -5px;">Select all options that apply to this cafe location:</p>
+                    
+                    <div>
+                        <input type="checkbox" id="tag-wifi" name="tags" value="wifi">
+                        <label for="tag-wifi">⚡ Fast Wi-Fi</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="tag-outlets" name="tags" value="outlets">
+                        <label for="tag-outlets">🔌 Power Outlets</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="tag-quiet" name="tags" value="quiet">
+                        <label for="tag-quiet">🤫 Quiet Environment</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="tag-tables" name="tags" value="tables">
+                        <label for="tag-tables">🪑 Big Tables</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="tag-outdoor" name="tags" value="outdoor">
+                        <label for="tag-outdoor">🌿 Outdoor Seating</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="tag-ac" name="tags" value="ac">
+                        <label for="tag-ac">❄️ Air Conditioning</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="tag-parking" name="tags" value="parking">
+                        <label for="tag-parking">🚗 Parking Available</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="tag-discount" name="tags" value="student-discount">
+                        <label for="tag-discount">🎓 Student Discount</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="tag-coffee" name="tags" value="specialty-coffee">
+                        <label for="tag-coffee">☕ Specialty Coffee</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="tag-snacks" name="tags" value="snacks">
+                        <label for="tag-snacks">🥐 Bakery & Snacks</label>
+                    </div>
+                </div>
+
                 <div>
                     <label for="comment-text">Your Review:</label>
-                    <textarea id="comment-text" name="commentText" rows="4" cols="50" required></textarea>
+                    <textarea id="comment-text" name="commentText" rows="4" cols="50" placeholder="Tell others about your study or remote work experience here..." required></textarea>
                 </div>
-                <button type="submit">Submit Review</button>
+                
+                <button type="submit" style="margin-top: 10px;">Submit Review & Features</button>
             </form>
 
-            <div>
+            <div style="margin-top: 20px;">
                 <h4>Elahe <span>(Score: 5/5)</span></h4>
                 <p>Loved the atmosphere! Definitely coming back next week.</p>
             </div>
