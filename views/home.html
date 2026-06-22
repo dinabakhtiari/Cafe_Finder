@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cafe Finder - Home</title>
+    <title>Cafe Finder </title>
 </head>
 <body>
     <header>
@@ -20,17 +20,36 @@
     <main>
         <section>
             <form action="/search" method="GET">
-                <input type="text" name="search" placeholder="Search cafes by name...">
                 
-                <label for="tag-select">Filter by feature:</label>
-                <select id="tag-select" name="tag">
-                    <option value="">All Cafes</option>
-                    <option value="wifi">Fast Wi-Fi</option>
-                    <option value="quiet">Quiet Environment</option>
-                    <option value="outlets">Power Outlets</option>
-                </select>
+                <div>
+                    <input type="text" name="search" placeholder="Search cafes by name...">
+                </div>
                 
-                <button type="submit">Search</button>
+                <div>
+                    <h4>Filter Options:</h4>
+            
+                    <label for="city-input">City:</label>
+                    <input type="text" id="city-input" name="city" placeholder="e.g. Stuttgart, Walldorf...">
+
+                    <label for="tag-select">Feature:</label>
+                    <select id="tag-select" name="tag">
+                        <option value="">All Features</option>
+                        <option value="wifi">Fast Wi-Fi</option>
+                        <option value="quiet">Quiet Environment</option>
+                        <option value="outlets">Power Outlets</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="sort-select">Sort by:</label>
+                    <select id="sort-select" name="sort">
+                        <option value="newest">Newest First</option>
+                        <option value="highest-rated">Highest Rated</option>
+                        <option value="most-liked">Most Liked</option>
+                    </select>
+                </div>
+                
+                <button type="submit">Apply & Search</button>
             </form>
         </section>
 
