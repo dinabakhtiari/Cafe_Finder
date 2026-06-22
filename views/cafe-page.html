@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe Details</title>
+</head>
+<body>
+    <main>
+        <article>
+            <h1>Melu Cafe</h1>
+            <p>Added by: Dina | Date: June 2026</p>
+            <img src="cafe-detailed.jpg" alt="Spacious workspace inside Melu Cafe">
+            
+            <div>
+                <form action="/cafes/1/like" method="POST">
+                    <button type="submit">❤️ Like / Save for later</button>
+                </form>
+            </div>
+
+            <h3>Description</h3>
+            <p>This cafe provides great seating, quiet background music, and stable internet for long working hours.</p>
+            
+            <p><strong>Tags:</strong> Fast Wi-Fi, Power Outlets</p>
+
+            <div>
+                <a href="#">Share on Facebook</a> | 
+                <a href="#">Share on X</a>
+            </div>
+        </article>
+
+        <hr>
+
+        <section>
+            <h2>Comments & Reviews</h2>
+            
+            <form action="/cafes/1/comments" method="POST">
+                <div>
+                    <label for="rating">Rating (1-5):</label>
+                    <input type="number" id="rating" name="rating" min="1" max="5" required>
+                </div>
+                <div>
+                    <label for="comment-text">Your Review:</label>
+                    <textarea id="comment-text" name="commentText" rows="4" cols="50" required></textarea>
+                </div>
+                <button type="submit">Submit Review</button>
+            </form>
+
+            <div>
+                <h4>Elahe <span>(Score: 5/5)</span></h4>
+                <p>Loved the atmosphere! Definitely coming back next week.</p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
