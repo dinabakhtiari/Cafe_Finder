@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe Finder - Home</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home">Home</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="user-profile.html">Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <form action="/search" method="GET">
+                <input type="text" name="search" placeholder="Search cafes by name...">
+                
+                <label for="tag-select">Filter by feature:</label>
+                <select id="tag-select" name="tag">
+                    <option value="">All Cafes</option>
+                    <option value="wifi">Fast Wi-Fi</option>
+                    <option value="quiet">Quiet Environment</option>
+                    <option value="outlets">Power Outlets</option>
+                </select>
+                
+                <button type="submit">Search</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Recommended Cafes</h2>
+            <a href="/cafes/new">Add New Cafe</a>
+
+            <article>
+                <img src="placeholder.jpg" alt="Cafe interior with wooden tables">
+                <h3>Melu Cafe</h3>
+                <p>A perfect place for programming and study sessions near campus.</p>
+                <p>Tags: <span>Fast Wi-Fi</span>, <span>Power Outlets</span></p>
+                <a href="/cafes/1">View Details</a>
+            </article>
+        </section>
+    </main>
+</body>
+</html>
