@@ -14,6 +14,9 @@ connection.connect((err) => {
 // start app
 const app = express();
 const port = 3000;
+const authRouter = require('./routes/auth.js')
+
+app.use('/', authRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
