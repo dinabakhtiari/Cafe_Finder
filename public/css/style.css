@@ -1,4 +1,4 @@
-/* 1. Global Reset and Base Styles */
+/* Global Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -12,47 +12,132 @@ body {
     line-height: 1.6;
 }
 
-/* 2. Header and Navigation Styles */
+/* Header and Navigation Layout (Flexbox Layout with Logo & Nav) */
 header {
     background-color: #ffffff;
     border-bottom: 1px solid #e6dfd5;
-    padding: 15px 5%;
+    padding: 15px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centers the inner wrapper container */
+    align-items: center;
 }
 
-header nav ul {
+.header-container {
+    width: 100%;
+    max-width: 1200px; /* Matches the maximum width of main content */
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between; /* Pushes logo to left and nav menu to right */
+    align-items: center;
+}
+
+/* Logo Brand Styling */
+.header-container .logo a {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #6f4e37;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+/* Navigation Links Styling */
+.header-container nav ul {
     list-style: none;
     display: flex;
-    justify-content: flex-end; 
     gap: 25px;
+    align-items: center;
 }
 
-header nav ul li a {
+.header-container nav ul li a {
     text-decoration: none;
     color: #4a3f35;
     font-weight: 600;
     transition: color 0.3s ease;
 }
 
-header nav ul li a:hover {
+.header-container nav ul li a:hover {
     color: #6f4e37; /* Smooth color transition on hover */
 }
 
-/* 3. Main Content Layout Container */
+/* Main Content Layout Container (Centered Flexbox Architecture) */
 main {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers all direct section blocks horizontally */
+    justify-content: center;
     max-width: 1200px;
     margin: 40px auto;
     padding: 0 20px;
+    width: 100%;
 }
 
-/* 4. Section Dividers (Horizontal Rules) */
+/* Ensures sections take full proportional width and center internal content */
+.search-filter-section,
+.popular-cities-section,
+.recommended-cafes-section {
+    width: 100%;
+    max-width: 800px; /* Restricts maximum expansion for clean focus */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Component Specific Layouts (Forms, Grids, and Lists) */
+
+/* Centering the home page search form components */
+.search-filter-section form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.search-filter-section form div {
+    width: 100%;
+    max-width: 500px; /* Contains input boxes cleanly in the center */
+}
+
+.search-filter-section button {
+    width: 100%;
+    max-width: 200px;
+}
+
+/* Popular City Shortcut Navigation Cards Wrapper */
+.city-cards-container {
+    display: flex;
+    justify-content: center; /* Aligns city cards centered in the row row */
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap; /* Supports dynamic device wrapping */
+    width: 100%;
+    margin-top: 25px;
+}
+
+/* Recommended Cafes Display Showcase Grid */
+.cafes-grid {
+    display: flex;
+    justify-content: center; /* Aligns cafe item boxes centered in the grid block */
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 25px;
+}
+
+/* Structural Elements and Global Footer */
 hr {
     border: 0;
     height: 1px;
     background-color: #e6dfd5;
     margin: 40px 0;
+    width: 100%;
+    max-width: 800px; /* Synchronizes separator length with sections */
 }
 
-/* 5. Footer Styles */
 footer {
     text-align: center;
     padding: 30px 0;
@@ -60,6 +145,7 @@ footer {
     border-top: 1px solid #e6dfd5;
     color: #8c7e74;
     font-size: 0.9em;
+    width: 100%;
 }
 
 footer a {
