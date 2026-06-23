@@ -7,22 +7,28 @@
     box-sizing: border-box;
 }
 
+/* Updated body to push footer to the absolute bottom */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #fdfbf7;
     color: #2c2520;
     line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Forces body to take full screen height */
 }
 
+/* Main expands to fill all available vertical workspace gap */
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
+    margin: 0 auto; /* Removed top/bottom massive margins */
+    padding: 40px 20px;
     width: 100%;
+    flex: 1; /* CRITICAL: Pushes footer down by taking all remaining space */
 }
 
 hr {
@@ -31,7 +37,7 @@ hr {
     background-color: #e6dfd5;
     margin: 40px 0;
     width: 100%;
-    max-width: 1100px; /* Aligned with grid widths */
+    max-width: 1100px;
 }
 
 /* ==========================================================================
@@ -89,11 +95,12 @@ header {
 footer, .auth-footer, .about-footer, .cafe-details-footer, .results-footer, .profile-footer {
     text-align: center;
     padding: 30px 0;
-    margin-top: 60px;
+    margin-top: auto; /* CRITICAL: Automatically snaps footer to screen bottom */
     border-top: 1px solid #e6dfd5;
     color: #8c7e74;
     font-size: 0.9em;
     width: 100%;
+    background-color: #fdfbf7; /* Prevents background leaking */
 }
 
 footer a, .footer-link {
@@ -334,7 +341,10 @@ footer a:hover, .footer-link:hover {
    ========================================================================= */
 .auth-main {
     max-width: 1200px;
-    margin: 40px auto;
+    margin: 0 auto;
+    display: flex;
+    align-items: center; /* Vertical center alignment */
+    justify-content: center; /* Horizontal center alignment */
 }
 
 .auth-wrapper {
@@ -342,7 +352,7 @@ footer a:hover, .footer-link:hover {
     justify-content: center;
     align-items: center;
     width: 100%;
-    min-height: 450px;
+    padding: 20px 0;
 }
 
 /* Base style for auth containers */
