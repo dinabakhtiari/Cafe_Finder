@@ -463,6 +463,26 @@ footer a:hover, .footer-link:hover {
     color: #523928;
 }
 
+/* Forgot Password Layout Alignment */
+.forgot-password-container {
+    text-align: right;
+    margin-top: -10px; /* Pulls it slightly closer to the password input field above */
+    margin-bottom: 5px;
+}
+
+.forgot-link {
+    color: #6f4e37;
+    font-size: 0.85em;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.forgot-link:hover {
+    color: #523928;
+    text-decoration: underline;
+}
+
 /* ==========================================================================
    6. ABOUT US & CONTACT PAGE STYLES
    ========================================================================== */
