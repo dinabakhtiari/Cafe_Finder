@@ -26,20 +26,31 @@
 
     <main>
         <section class="search-filter-section">
-            <form action="/search" method="GET">
+            <form action="/search" method="GET" class="michelin-form">
                 
-                <div>
-                    <input type="text" name="search" placeholder="Search cafes by name...">
+                <div class="search-main-row">
+                    <div class="search-input-wrapper">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" name="search" placeholder="z.B. Stadt, Restaurant, PLZ, Adresse suchen...">
+                    </div>
+                    <a href="/search" class="map-toggle-btn" title="Show Map View">🗺️</a>
                 </div>
                 
-                <div>
-                    <h4>Filter Options:</h4>
-            
-                    <label for="city-input">City:</label>
-                    <input type="text" id="city-input" name="city" placeholder="e.g. Stuttgart, Walldorf...">
+                <div class="filters-horizontal-row">
+    
+                    <button type="button" class="filter-icon-btn" aria-label="Quick Filters">⚡</button>
+    
+                    <div class="filter-badge-select">
+                        <select name="city" id="city-filter" aria-label="Filter by City">
+                            <option value="">City</option>
+                            <option value="Stuttgart">Stuttgart</option>
+                            <option value="Mannheim">Mannheim</option>
+                            <option value="Heidelberg">Heidelberg</option>
+                        </select>
+                    </div>
 
-                    <label for="tag-select">Feature:</label>
-                    <select id="tag-select" name="tag">
+                 <div class="filter-badge-select">
+                    <select name="tag" id="tag-select" aria-label="Filter by Cafe Features">
                         <option value="">All Features</option>
                         <option value="wifi">⚡ Fast Wi-Fi</option>
                         <option value="outlets">🔌 Power Outlets</option>
@@ -54,15 +65,15 @@
                     </select>
                 </div>
 
-                <div>
-                    <label for="sort-select">Sort by:</label>
-                    <select id="sort-select" name="sort">
-                        <option value="newest">Newest First</option>
-                        <option value="highest-rated">Highest Rated</option>
+                <div class="filter-badge-select">
+                    <select name="sort" id="sort-filter" aria-label="Sort Cafes">
+                        <option value="newest">Sort: Newest First</option>
+                        <option value="highest-rated">Sort: Highest Rated</option>
                     </select>
                 </div>
-                
-                <button type="submit">Apply & Search</button>
+
+                <button type="submit" class="filter-submit-badge">Apply & Search</button>
+            </div>
             </form>
         </section>
 
@@ -100,21 +111,67 @@
 
         <section class="recommended-cafes-section">
             <h2>Recommended Cafes</h2>
-            <a href="/cafes/new">Add New Cafe</a>
+            <a href="/cafes/new" class="add-cafe-btn">Add New Cafe</a>
 
             <div class="cafes-grid">
                 <article class="cafe-card">
-                    <img src="placeholder.jpg" alt="Cafe interior with wooden tables">
+                    <img src="placeholder.jpg" alt="Cafe interior">
                     <h3>Melu Cafe</h3>
                     <p><strong>Location:</strong> Stuttgart</p>
                     <p>⭐ <strong>4.5</strong> / 5 (12 reviews)</p>
                     <p>A perfect place for programming and study sessions near campus.</p>
-                    <p>
-                        Tags: 
-                        <span>⚡ Fast Wi-Fi</span>, 
-                        <span>🔌 Power Outlets</span>
-                    </p>
+                    <p>Tags: <span>⚡ Fast Wi-Fi</span>, <span>🔌 Power Outlets</span></p>
                     <a href="/cafes/1">View Details</a>
+                </article>
+
+                <article class="cafe-card">
+                    <img src="placeholder.jpg" alt="Cafe interior">
+                    <h3>Paska.L Choux</h3>
+                    <p><strong>Location:</strong> Mannheim</p>
+                    <p>⭐ <strong>4.7</strong> / 5 (18 reviews)</p>
+                    <p>Quiet environment with excellent French pastries and big tables.</p>
+                    <p>Tags: <span>🤫 Quiet</span>, <span>🪑 Big Tables</span></p>
+                    <a href="/cafes/2">View Details</a>
+                </article>
+
+                <article class="cafe-card">
+                    <img src="placeholder.jpg" alt="Cafe interior">
+                    <h3>Ingwer Cafe</h3>
+                    <p><strong>Location:</strong> Heidelberg</p>
+                    <p>⭐ <strong>4.2</strong> / 5 (9 reviews)</p>
+                    <p>Cozy workspace setup with bright natural light and outdoor seating.</p>
+                    <p>Tags: <span>🌿 Outdoor</span>, <span>⚡ Fast Wi-Fi</span></p>
+                    <a href="/cafes/3">View Details</a>
+                </article>
+
+                <article class="cafe-card">
+                    <img src="placeholder.jpg" alt="Cafe interior">
+                    <h3>Green Wall Coffee</h3>
+                    <p><strong>Location:</strong> Stuttgart</p>
+                    <p>⭐ <strong>4.6</strong> / 5 (15 reviews)</p>
+                    <p>Modern design covered in plants, offering student discounts.</p>
+                    <p>Tags: <span>🎓 Discount</span>, <span>❄️ AC</span></p>
+                    <a href="/cafes/4">View Details</a>
+                </article>
+
+                <article class="cafe-card">
+                    <img src="placeholder.jpg" alt="Cafe interior">
+                    <h3>Kawa Roastery</h3>
+                    <p><strong>Location:</strong> Mannheim</p>
+                    <p>⭐ <strong>4.8</strong> / 5 (22 reviews)</p>
+                    <p>Specialty coffee destination with dedicated silent zones for remote work.</p>
+                    <p>Tags: <span>☕ Specialty</span>, <span>🤫 Quiet</span></p>
+                    <a href="/cafes/5">View Details</a>
+                </article>
+
+                <article class="cafe-card">
+                    <img src="placeholder.jpg" alt="Cafe interior">
+                    <h3>The Philosopher</h3>
+                    <p><strong>Location:</strong> Heidelberg</p>
+                    <p>⭐ <strong>4.4</strong> / 5 (14 reviews)</p>
+                    <p>Spacious historic location close to the library with massive study areas.</p>
+                    <p>Tags: <span>🪑 Big Tables</span>, <span>🚗 Parking</span></p>
+                    <a href="/cafes/6">View Details</a>
                 </article>
             </div>
         </section>

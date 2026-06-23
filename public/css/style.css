@@ -1,4 +1,6 @@
-/* GLOBAL RESET & BASE STYLES*/
+/* ==========================================================================
+   1. GLOBAL RESET & BASE STYLES
+   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -29,10 +31,12 @@ hr {
     background-color: #e6dfd5;
     margin: 40px 0;
     width: 100%;
-    max-width: 800px;
+    max-width: 1100px; /* Aligned with grid widths */
 }
 
-/* SHARED HEADER & NAVIGATION*/
+/* ==========================================================================
+   2. SHARED HEADER & NAVIGATION
+   ========================================================================== */
 header {
     background-color: #ffffff;
     border-bottom: 1px solid #e6dfd5;
@@ -79,7 +83,9 @@ header {
     color: #6f4e37;
 }
 
-/* SHARED FOOTER COMPONENT*/
+/* ==========================================================================
+   3. SHARED FOOTER COMPONENT
+   ========================================================================== */
 footer, .auth-footer, .about-footer, .cafe-details-footer, .results-footer, .profile-footer {
     text-align: center;
     padding: 30px 0;
@@ -100,56 +106,160 @@ footer a:hover, .footer-link:hover {
     text-decoration: underline;
 }
 
-/* Specific sub-footer gray color overrides */
 .auth-footer, .about-footer, .cafe-details-footer, .results-footer, .profile-footer {
     border-top: 1px solid #eee;
     color: gray;
 }
+
 .auth-footer .footer-link, .about-footer .footer-link, 
 .cafe-details-footer .footer-link, .results-footer .footer-link, 
 .profile-footer .footer-link {
     color: gray;
 }
 
-/* HOME PAGE STYLES */
+/* ==========================================================================
+   4. HOME PAGE STYLES (MICHELIN BAR & PERFECTLY UNIFIED GRIDS)
+   ========================================================================== */
 .search-filter-section,
 .popular-cities-section,
 .recommended-cafes-section {
     width: 100%;
-    max-width: 800px;
+    max-width: 1200px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
 }
 
-/* Search & Filters Form */
-.search-filter-section form {
+/* Michelin Layout Form */
+.michelin-form {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 15px;
 }
 
-.search-filter-section form div {
+.search-main-row {
     width: 100%;
-    max-width: 500px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
 }
 
-.search-filter-section button {
-    width: 100%;
-    max-width: 200px;
+.search-input-wrapper {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
+    padding: 8px 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
-/* Popular Cities Component */
-.city-cards-container {
+.search-icon {
+    font-size: 1.1em;
+    color: #999;
+    margin-right: 10px;
+}
+
+.search-input-wrapper input[type="text"] {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #2c2520;
+    background: transparent;
+}
+
+.map-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
+    width: 45px;
+    height: 45px;
+    text-decoration: none;
+    font-size: 1.2em;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    transition: background-color 0.2s ease;
+}
+
+.map-toggle-btn:hover {
+    background-color: #f5f5f5;
+}
+
+.filters-horizontal-row {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-icon-btn {
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 20px;
+    padding: 6px 14px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.filter-badge-select {
+    position: relative;
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 20px;
+    padding: 4px 12px;
+    transition: all 0.2s ease;
+}
+
+.filter-badge-select:hover {
+    border-color: #6f4e37;
+    background-color: #fdfbf7;
+}
+
+.filter-badge-select select {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 0.88em;
+    font-weight: 500;
+    color: #4a3f35;
+    cursor: pointer;
+    padding-right: 5px;
+}
+
+.filter-submit-badge {
+    background-color: #6f4e37;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    padding: 7px 18px;
+    font-size: 0.88em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-left: auto;
+}
+
+.filter-submit-badge:hover {
+    background-color: #523928;
+}
+
+/* UNIFIED CONTAINER FOR GRIDS (Cities & Cafes share the exact structural limits) */
+.city-cards-container, .cafes-grid {
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 25px;
+    align-items: stretch;
+    gap: 30px;
     flex-wrap: wrap;
     width: 100%;
+    max-width: 1100px;
     margin-top: 25px;
 }
 
@@ -158,49 +268,70 @@ footer a:hover, .footer-link:hover {
     color: inherit;
 }
 
+/* Unified City Card Setup (Sized exactly like the Cafe Cards) */
 .city-card {
-    border: 1px solid #ccc;
-    padding: 15px;
+    border: 1px solid #ddd;
+    padding: 20px;
     border-radius: 8px;
     text-align: center;
     background-color: #ffffff;
+    width: 320px; /* Set to exactly 320px matching cafe-card */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.city-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(111, 78, 55, 0.1);
 }
 
 .city-card img {
-    width: 100px;
-    height: 100px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     object-fit: cover;
+    margin-bottom: 15px;
 }
 
-/* Recommended Cafes Grid */
+.city-card h3 {
+    font-size: 1.3em;
+    color: #2c2520;
+}
+
+/* Unified Cafe Card Layout */
+.add-cafe-btn {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #6f4e37;
+    text-decoration: none;
+    font-weight: bold;
+}
+
 .cafes-grid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 25px;
-    flex-wrap: wrap;
-    width: 100%;
-    margin-top: 25px;
+    margin-top: 10px;
 }
 
 .cafe-card {
     border: 1px solid #ddd;
-    padding: 15px;
+    padding: 20px;
     border-radius: 8px;
-    max-width: 300px;
+    width: 320px; /* Identical width match */
     background-color: #ffffff;
     text-align: left;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
 }
 
 .cafe-card img {
     width: 100%;
-    height: 180px;
+    height: 200px;
     object-fit: cover;
     border-radius: 4px;
+    margin-bottom: 12px;
 }
 
-/* AUTHENTICATION (LOGIN & REGISTER) PAGE STYLES */
+/* ==========================================================================
+   5. AUTHENTICATION (LOGIN & REGISTER) PAGE STYLES
+   ========================================================================== */
 .auth-main {
     max-width: 600px;
     margin: 40px auto;
@@ -211,7 +342,9 @@ footer a:hover, .footer-link:hover {
     padding: 20px 0;
 }
 
-/* ABOUT US & CONTACT PAGE STYLES */
+/* ==========================================================================
+   6. ABOUT US & CONTACT PAGE STYLES
+   ========================================================================== */
 .about-main {
     max-width: 800px;
     margin: 40px auto;
@@ -244,7 +377,9 @@ footer a:hover, .footer-link:hover {
     text-align: left;
 }
 
-/* CAFE DETAILS PAGE STYLES */
+/* ==========================================================================
+   7. CAFE DETAILS PAGE STYLES
+   ========================================================================== */
 .cafe-details-main {
     max-width: 800px;
     margin: 40px auto;
@@ -337,7 +472,9 @@ footer a:hover, .footer-link:hover {
     color: #6f4e37;
 }
 
-/* SEARCH RESULTS PAGE STYLES (MODERN CARDS & MAP) */
+/* ==========================================================================
+   8. SEARCH RESULTS PAGE STYLES (MODERN CARDS & MAP)
+   ========================================================================== */
 .results-main {
     max-width: 1200px;
     margin: 30px auto;
@@ -426,7 +563,9 @@ footer a:hover, .footer-link:hover {
     text-align: center;
 }
 
-/* USER PROFILE PAGE STYLES */
+/* ==========================================================================
+   9. USER PROFILE PAGE STYLES
+   ========================================================================== */
 .profile-main {
     max-width: 800px;
     margin: 40px auto;
