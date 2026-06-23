@@ -152,3 +152,492 @@ footer a {
     color: #6f4e37;
     text-decoration: none;
 }
+
+/* Styling for city link wrappers */
+.city-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Updated City Card layout rules without inline properties */
+.city-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.city-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Recommended cafe card updates */
+.cafe-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    max-width: 300px;
+    background-color: #ffffff;
+}
+
+.cafe-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+
+/* Auth Page Layout Configuration */
+.auth-main {
+    max-width: 600px; /* Slimmer layout specifically for forms */
+    margin: 40px auto;
+}
+
+.auth-section {
+    width: 100%;
+    padding: 20px 0;
+}
+
+/* Auth Footer specific rules to clear validation errors */
+.auth-footer {
+    margin-top: 50px;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+    text-align: center;
+    font-size: 0.9em;
+    color: gray;
+}
+
+.auth-footer .footer-link {
+    color: gray;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.auth-footer .footer-link:hover {
+    text-decoration: underline;
+}
+
+/* About Page Specific Layout Rules */
+.about-main {
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+.about-section {
+    width: 100%;
+}
+
+/* Contact Form Button Styling */
+.contact-form .contact-submit-btn {
+    margin-top: 10px;
+    background-color: #6f4e37;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.contact-form .contact-submit-btn:hover {
+    background-color: #523928;
+}
+
+/* Direct Contact Info Positioning */
+.direct-contact-info {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #555;
+    text-align: left;
+}
+
+/* About Page Footer Styles to maintain visual design */
+.about-footer {
+    margin-top: 50px;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+    text-align: center;
+    font-size: 0.9em;
+    color: gray;
+    width: 100%;
+}
+
+.about-footer .footer-link {
+    color: gray;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.about-footer .footer-link:hover {
+    text-decoration: underline;
+}
+
+/* Cafe Details Page Layout */
+.cafe-details-main {
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+.cafe-details-article,
+.reviews-section {
+    width: 100%;
+    text-align: left;
+}
+
+.cafe-main-img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+/* Rating Summary Styles */
+.cafe-rating-summary {
+    margin: 15px 0;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cafe-rating-summary .reviews-count {
+    color: gray;
+    font-size: 0.9em;
+}
+
+/* Bookmark Button Styling */
+.cafe-bookmark-action .bookmark-btn {
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: #ffffff;
+    border: 1px solid #6f4e37;
+    color: #6f4e37;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.cafe-bookmark-action .bookmark-btn:hover {
+    background-color: #6f4e37;
+    color: #ffffff;
+}
+
+/* Social Share Block */
+.share-links {
+    margin: 15px 0;
+}
+
+/* Review Features Selection Form Box */
+.cafe-features-selection {
+    margin: 20px 0;
+}
+
+.cafe-features-selection .features-tip {
+    color: gray;
+    font-size: 0.85em;
+    margin-top: -5px;
+    margin-bottom: 10px;
+}
+
+.review-form .review-submit-btn {
+    margin-top: 10px;
+    background-color: #6f4e37;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.review-form .review-submit-btn:hover {
+    background-color: #523928;
+}
+
+/* Dynamic User Comments Block */
+.user-comment-box {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #e6dfd5;
+    border-radius: 6px;
+}
+
+.user-comment-box .comment-score {
+    font-weight: normal;
+    font-size: 0.9em;
+    color: #6f4e37;
+}
+
+/* Cafe Details Footer Custom Rules */
+.cafe-details-footer {
+    margin-top: 50px;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+    text-align: center;
+    font-size: 0.9em;
+    color: gray;
+    width: 100%;
+}
+
+.cafe-details-footer .footer-link {
+    color: gray;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.cafe-details-footer .footer-link:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   12. Search Results Page Layout & Modern Grid (Screenshot Design)
+   ========================================================================== */
+.results-main {
+    max-width: 1200px;
+    margin: 30px auto;
+    width: 100%;
+}
+
+.city-header {
+    text-align: left;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Wide Map View styling */
+.map-container {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+#map-placeholder {
+    width: 100%;
+    height: 350px;
+    background-color: #e5e3df;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #666;
+}
+
+/* Grid Layout for modern image-overlay cards */
+.modern-cafes-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+/* Modern Photo Card Architecture */
+.modern-cafe-card {
+    position: relative;
+    width: 300px;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.modern-cafe-card .card-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+
+.modern-cafe-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect: Subtle zoom on image */
+.modern-cafe-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Text overlay on top of the image (Dark gradient effect) */
+.modern-cafe-card .card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0) 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.modern-cafe-card .card-overlay h3 {
+    color: #ffffff;
+    margin: 0;
+    font-size: 1.3em;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+/* Search Results Footer */
+.results-footer {
+    margin-top: 50px;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+    text-align: center;
+    font-size: 0.9em;
+    color: gray;
+    width: 100%;
+}
+
+.results-footer .footer-link {
+    color: gray;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.results-footer .footer-link:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   13. User Profile Page Styles
+   ========================================================================== */
+.profile-main {
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+.profile-info-section {
+    text-align: center;
+    width: 100%;
+}
+
+/* Avatar layout properties replacing inline style */
+.profile-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.profile-username {
+    color: #6f4e37;
+    font-weight: 600;
+}
+
+.profile-bio {
+    margin: 10px 0;
+    color: #555;
+}
+
+.profile-edit-link {
+    display: inline-block;
+    color: #6f4e37;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid #6f4e37;
+    padding: 5px 15px;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+.profile-edit-link:hover {
+    background-color: #6f4e37;
+    color: #fff;
+}
+
+/* Lists and Action Buttons layout inside sections */
+.profile-data-section {
+    width: 100%;
+    text-align: left;
+}
+
+.profile-list {
+    list-style: none;
+    margin-top: 15px;
+}
+
+.profile-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #e6dfd5;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.inline-form {
+    display: inline;
+}
+
+.item-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.item-actions a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Form Action Buttons specific styling */
+.action-edit-btn { color: #4a5d4e; }
+.action-view-btn { color: #6f4e37; }
+
+.action-delete-btn,
+.action-remove-btn {
+    background: none;
+    border: none;
+    color: #c0392b;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1em;
+}
+
+.action-delete-btn:hover,
+.action-remove-btn:hover,
+.item-actions a:hover {
+    text-decoration: underline;
+}
+
+/* Profile Footer Configuration */
+.profile-footer {
+    margin-top: 50px;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+    text-align: center;
+    font-size: 0.9em;
+    color: gray;
+    width: 100%;
+}
+
+.profile-footer .footer-link {
+    color: gray;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.profile-footer .footer-link:hover {
+    text-decoration: underline;
+}

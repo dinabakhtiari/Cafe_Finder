@@ -8,44 +8,44 @@
 </head>
 <body>
     <header>
-    <div class="header-container">
-        <div class="logo">
-            <a href="/home">☕ Cafe Finder</a>
+        <div class="header-container">
+            <div class="logo">
+                <a href="/home">☕ Cafe Finder</a>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </nav>
         </div>
-        
-        <nav>
-            <ul>
-                <li><a href="/home">Home</a></li>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/profile">Profile</a></li>
-                <li><a href="/logout">Logout</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+    </header>
 
-    <main>
-        <article>
+    <main class="cafe-details-main">
+        <article class="cafe-details-article">
             <h1>Melu Cafe</h1>
             <p>Added by: <strong class="cafe-author">username</strong> | Date: <span id="current-date">Loading date...</span></p>
-            <p><strong>Location:</strong>Stuttgart</p>
-            <img src="cafe-detailed.jpg" alt="Spacious workspace inside Melu Cafe">
+            <p><strong>Location:</strong> Stuttgart</p>
+            <img src="cafe-detailed.jpg" alt="Spacious workspace inside Melu Cafe" class="cafe-main-img">
             
-            <div class="cafe-rating-summary" style="margin: 15px 0; font-size: 1.1em; display: flex; align-items: center; gap: 8px;">
+            <div class="cafe-rating-summary">
                 <span>⭐ <strong>4.5</strong></span>
-                <span style="color: gray; font-size: 0.9em;">(based on 12 reviews)</span>
+                <span class="reviews-count">(based on 12 reviews)</span>
             </div>
 
             <div class="cafe-bookmark-action">
-                    <form action="/cafes/1/bookmark" method="POST">
-                        <button type="submit" style="cursor: pointer; padding: 5px 10px;">🔖 Add to Favorites</button>
-                        </form>
-                </div>
+                <form action="/cafes/1/bookmark" method="POST">
+                    <button type="submit" class="bookmark-btn">🔖 Add to Favorites</button>
+                </form>
+            </div>
 
             <h3>Description</h3>
             <p>This cafe provides great seating, quiet background music, and stable internet for long working hours.</p>
             
-            <div style="margin: 15px 0;">
+            <div class="share-links">
                 <a href="#">Share on Facebook</a> | 
                 <a href="#">Share on Instagram</a>
             </div>
@@ -53,19 +53,19 @@
 
         <hr>
 
-        <section>
+        <section class="reviews-section">
             <h2>Comments & Reviews</h2>
             
-            <form action="/cafes/1/comments" method="POST">
+            <form action="/cafes/1/comments" method="POST" class="review-form">
                 
                 <div>
                     <label for="rating">Rating (1-5):</label>
                     <input type="number" id="rating" name="rating" min="1" max="5" placeholder="5" required>
                 </div>
                 
-                <div class="cafe-features-selection" style="margin: 20px 0;">
+                <div class="cafe-features-selection">
                     <h4>What features did you experience here?</h4>
-                    <p style="color: gray; font-size: 0.85em; margin-top: -5px;">Select all options that apply to this cafe location:</p>
+                    <p class="features-tip">Select all options that apply to this cafe location:</p>
                     
                     <div>
                         <input type="checkbox" id="tag-wifi" name="tags" value="wifi">
@@ -114,23 +114,22 @@
                     <textarea id="comment-text" name="commentText" rows="4" cols="50" placeholder="Tell others about your study or remote work experience here..." required></textarea>
                 </div>
                 
-                <button type="submit" style="margin-top: 10px;">Submit Review & Features</button>
+                <button type="submit" class="review-submit-btn">Submit Review & Features</button>
             </form>
 
-            <div style="margin-top: 20px;">
-                <h4>Elahe <span>(Score: 5/5)</span></h4>
+            <div class="user-comment-box">
+                <h4>Elahe <span class="comment-score">(Score: 5/5)</span></h4>
                 <p>Loved the atmosphere! Definitely coming back next week.</p>
             </div>
         </section>
     </main>
 
-    <footer style="margin-top: 50px; padding: 20px 0; border-top: 1px solid #eee; text-align: center; font-size: 0.9em; color: gray;">
+    <footer class="cafe-details-footer">
         <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
         <p>
-            <a href="/about" style="color: gray; margin: 0 10px;">About Us & Contact</a> | 
-            <a href="/home" style="color: gray; margin: 0 10px;">Home</a>
+            <a href="/about" class="footer-link">About Us & Contact</a> | 
+            <a href="/home" class="footer-link">Home</a>
         </p>
     </footer>
-    
 </body>
 </html>

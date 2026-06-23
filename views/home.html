@@ -8,21 +8,21 @@
 </head>
 <body>
     <header>
-    <div class="header-container">
-        <div class="logo">
-            <a href="/home">☕ Cafe Finder</a>
+        <div class="header-container">
+            <div class="logo">
+                <a href="/home">☕ Cafe Finder</a>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </nav>
         </div>
-        
-        <nav>
-            <ul>
-                <li><a href="/home">Home</a></li>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/profile">Profile</a></li>
-                <li><a href="/logout">Logout</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+    </header>
 
     <main>
         <section class="search-filter-section">
@@ -68,34 +68,33 @@
 
         <hr>
 
-  
         <section class="popular-cities-section">
             <h2>Explore Cafes by City</h2>
             <p>Click on a city to quickly discover its best study spots:</p>
     
-            <div class="city-cards-container" style="display: flex; gap: 20px;">
-                <a href="/search?city=Stuttgart" style="text-decoration: none; color: inherit;">
-                <div class="city-card" style="border: 1px solid #ccc; padding: 15px; border-radius: 8px; text-align: center;">
-                    <img src="stuttgart.jpg" alt="Stuttgart Cityscape" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
-                    <h3>Stuttgart</h3>
-                </div>
-            </a>
+            <div class="city-cards-container">
+                <a href="/search?city=Stuttgart" class="city-card-link">
+                    <div class="city-card">
+                        <img src="stuttgart.jpg" alt="Stuttgart Cityscape">
+                        <h3>Stuttgart</h3>
+                    </div>
+                </a>
 
-            <a href="/search?city=Mannheim" style="text-decoration: none; color: inherit;">
-                <div class="city-card" style="border: 1px solid #ccc; padding: 15px; border-radius: 8px; text-align: center;">
-                    <img src="mannheim.jpg" alt="Mannheim Water Tower" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
-                    <h3>Mannheim</h3>
-                </div>
-            </a>
+                <a href="/search?city=Mannheim" class="city-card-link">
+                    <div class="city-card">
+                        <img src="mannheim.jpg" alt="Mannheim Water Tower">
+                        <h3>Mannheim</h3>
+                    </div>
+                </a>
 
-            <a href="/search?city=Heidelberg" style="text-decoration: none; color: inherit;">
-                <div class="city-card" style="border: 1px solid #ccc; padding: 15px; border-radius: 8px; text-align: center;">
-                    <img src="heidelberg.jpg" alt="Heidelberg Castle and Old Bridge" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
-                    <h3>Heidelberg</h3>
-                </div>
-            </a>
-        </div>
-    </section>
+                <a href="/search?city=Heidelberg" class="city-card-link">
+                    <div class="city-card">
+                        <img src="heidelberg.jpg" alt="Heidelberg Castle and Old Bridge">
+                        <h3>Heidelberg</h3>
+                    </div>
+                </a>
+            </div>
+        </section>
 
         <hr>
 
@@ -103,9 +102,9 @@
             <h2>Recommended Cafes</h2>
             <a href="/cafes/new">Add New Cafe</a>
 
-            <div class="cafes-grid" style="margin-top: 20px;">
-                <article class="cafe-card" style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; max-width: 300px;">
-                    <img src="placeholder.jpg" alt="Cafe interior with wooden tables" style="width: 100%; height: 180px; object-fit: cover; border-radius: 4px;">
+            <div class="cafes-grid">
+                <article class="cafe-card">
+                    <img src="placeholder.jpg" alt="Cafe interior with wooden tables">
                     <h3>Melu Cafe</h3>
                     <p><strong>Location:</strong> Stuttgart</p>
                     <p>⭐ <strong>4.5</strong> / 5 (12 reviews)</p>
@@ -121,11 +120,11 @@
         </section>
     </main>
 
-    <footer style="margin-top: 50px; padding: 20px 0; border-top: 1px solid #eee; text-align: center; font-size: 0.9em; color: gray;">
+    <footer>
         <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
         <p>
-            <a href="/about" style="color: gray; margin: 0 10px;">About Us & Contact</a> | 
-            <a href="/home" style="color: gray; margin: 0 10px;">Home</a>
+            <a href="/about">About Us & Contact</a> | 
+            <a href="/home">Home</a>
         </p>
     </footer>
 </body>

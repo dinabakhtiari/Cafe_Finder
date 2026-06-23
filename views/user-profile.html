@@ -8,71 +8,73 @@
 </head>
 <body>
     <header>
-    <div class="header-container">
-        <div class="logo">
-            <a href="/home">☕ Cafe Finder</a>
+        <div class="header-container">
+            <div class="logo">
+                <a href="/home">☕ Cafe Finder</a>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </nav>
         </div>
-        
-        <nav>
-            <ul>
-                <li><a href="/home">Home</a></li>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/profile">Profile</a></li>
-                <li><a href="/logout">Logout</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+    </header>
 
-    <main>
-        <section>
-            <img src="avatar.jpg" alt="Dina's profile picture" style="width: 150px; height: 150px; border-radius: 50%;">
+    <main class="profile-main">
+        <section class="profile-info-section">
+            <img src="avatar.jpg" alt="Dina's profile picture" class="profile-avatar">
             <h2>Dina Bakhtiari</h2>
-            <p>Username: @dina_b</p>
-            <p>Bio: Computer Science Student | Passionate about discovering quiet study spots.</p>
-            <a href="/profile/edit">Edit Profile</a>
+            <p class="profile-username">Username: @dina_b</p>
+            <p class="profile-bio">Bio: Computer Science Student | Passionate about discovering quiet study spots.</p>
+            <a href="/profile/edit" class="profile-edit-link">Edit Profile</a>
         </section>
 
         <hr>
 
-        <section>
+        <section class="profile-data-section">
             <h3>My Created Cafes</h3>
-            <ul>
-                <li>
-                    <strong>Melu Cafe</strong> (Added on: 2026-06-22) - Stuttgart
-                    <a href="/cafes/1/edit">Edit</a>
-                    <form action="/cafes/1/delete" method="POST" style="display:inline;">
-                        <button type="submit" onclick="return confirm('Are you sure you want to delete this cafe?');">Delete</button>
-                    </form>
+            <ul class="profile-list">
+                <li class="profile-list-item">
+                    <span class="item-details"><strong>Melu Cafe</strong> (Added on: 2026-06-22) - Stuttgart</span>
+                    <div class="item-actions">
+                        <a href="/cafes/1/edit" class="action-edit-btn">Edit</a>
+                        <form action="/cafes/1/delete" method="POST" class="inline-form">
+                            <button type="submit" class="action-delete-btn" onclick="return confirm('Are you sure you want to delete this cafe?');">Delete</button>
+                        </form>
+                    </div>
                 </li>
             </ul>
         </section>
 
         <hr>
 
-        <section>
+        <section class="profile-data-section">
             <h3>My Favorite Cafes (Bookmarks)</h3>
             
-            <ul>
-                <li>
-                    <strong>Melu Cafe</strong> - ⭐ 4.5/5 (Stuttgart)
-                    <a href="/cafes/1">View Details</a>
-                    
-                    <form action="/cafes/1/bookmark" method="POST" style="display:inline; margin-left: 10px;">
-                        <button type="submit">❌ Remove</button>
-                    </form>
+            <ul class="profile-list">
+                <li class="profile-list-item">
+                    <span class="item-details"><strong>Melu Cafe</strong> - ⭐ 4.5/5 (Stuttgart)</span>
+                    <div class="item-actions">
+                        <a href="/cafes/1" class="action-view-btn">View Details</a>
+                        <form action="/cafes/1/bookmark" method="POST" class="inline-form">
+                            <button type="submit" class="action-remove-btn">❌ Remove</button>
+                        </form>
+                    </div>
                 </li>
             </ul>
         </section>
     </main>
 
-    <footer style="margin-top: 50px; padding: 20px 0; border-top: 1px solid #eee; text-align: center; font-size: 0.9em; color: gray;">
+    <footer class="profile-footer">
         <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
         <p>
-            <a href="/about" style="color: gray; margin: 0 10px;">About Us & Contact</a> | 
-            <a href="/home" style="color: gray; margin: 0 10px;">Home</a>
+            <a href="/about" class="footer-link">About Us & Contact</a> | 
+            <a href="/home" class="footer-link">Home</a>
         </p>
     </footer>
-    
 </body>
 </html>
