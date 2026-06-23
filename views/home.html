@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cafe Finder </title>
+    <title>Cafe Finder - Home</title>
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="home">Home</a></li>
-                <li><a href="about-us.html">About Us</a></li>
-                <li><a href="user-profile.html">Profile</a></li>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/profile">Profile</a></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section>
+        <section class="search-filter-section">
             <form action="/search" method="GET">
                 
                 <div>
@@ -34,7 +34,6 @@
                     <label for="tag-select">Feature:</label>
                     <select id="tag-select" name="tag">
                         <option value="">All Features</option>
-
                         <option value="wifi">⚡ Fast Wi-Fi</option>
                         <option value="outlets">🔌 Power Outlets</option>
                         <option value="quiet">🤫 Quiet Environment</option>
@@ -53,7 +52,6 @@
                     <select id="sort-select" name="sort">
                         <option value="newest">Newest First</option>
                         <option value="highest-rated">Highest Rated</option>
-                        <option value="most-liked">Most Liked</option>
                     </select>
                 </div>
                 
@@ -61,18 +59,67 @@
             </form>
         </section>
 
-        <section>
+        <hr>
+
+  
+        <section class="popular-cities-section">
+            <h2>Explore Cafes by City</h2>
+            <p>Click on a city to quickly discover its best study spots:</p>
+    
+            <div class="city-cards-container" style="display: flex; gap: 20px;">
+                <a href="/search?city=Stuttgart" style="text-decoration: none; color: inherit;">
+                <div class="city-card" style="border: 1px solid #ccc; padding: 15px; border-radius: 8px; text-align: center;">
+                    <img src="stuttgart.jpg" alt="Stuttgart Cityscape" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+                    <h3>Stuttgart</h3>
+                </div>
+            </a>
+
+            <a href="/search?city=Mannheim" style="text-decoration: none; color: inherit;">
+                <div class="city-card" style="border: 1px solid #ccc; padding: 15px; border-radius: 8px; text-align: center;">
+                    <img src="mannheim.jpg" alt="Mannheim Water Tower" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+                    <h3>Mannheim</h3>
+                </div>
+            </a>
+
+            <a href="/search?city=Heidelberg" style="text-decoration: none; color: inherit;">
+                <div class="city-card" style="border: 1px solid #ccc; padding: 15px; border-radius: 8px; text-align: center;">
+                    <img src="heidelberg.jpg" alt="Heidelberg Castle and Old Bridge" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+                    <h3>Heidelberg</h3>
+                </div>
+            </a>
+        </div>
+    </section>
+
+        <hr>
+
+        <section class="recommended-cafes-section">
             <h2>Recommended Cafes</h2>
             <a href="/cafes/new">Add New Cafe</a>
 
-            <article>
-                <img src="placeholder.jpg" alt="Cafe interior with wooden tables">
-                <h3>Melu Cafe</h3>
-                <p>A perfect place for programming and study sessions near campus.</p>
-                <p>Tags: <span>Fast Wi-Fi</span>, <span>Power Outlets</span></p>
-                <a href="/cafes/1">View Details</a>
-            </article>
+            <div class="cafes-grid" style="margin-top: 20px;">
+                <article class="cafe-card" style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; max-width: 300px;">
+                    <img src="placeholder.jpg" alt="Cafe interior with wooden tables" style="width: 100%; height: 180px; object-fit: cover; border-radius: 4px;">
+                    <h3>Melu Cafe</h3>
+                    <p><strong>Location:</strong> Stuttgart</p>
+                    <p>⭐ <strong>4.5</strong> / 5 (12 reviews)</p>
+                    <p>A perfect place for programming and study sessions near campus.</p>
+                    <p>
+                        Tags: 
+                        <span>⚡ Fast Wi-Fi</span>, 
+                        <span>🔌 Power Outlets</span>
+                    </p>
+                    <a href="/cafes/1">View Details</a>
+                </article>
+            </div>
         </section>
     </main>
+
+    <footer style="margin-top: 50px; padding: 20px 0; border-top: 1px solid #eee; text-align: center; font-size: 0.9em; color: gray;">
+        <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
+        <p>
+            <a href="/about" style="color: gray; margin: 0 10px;">About Us & Contact</a> | 
+            <a href="/home" style="color: gray; margin: 0 10px;">Home</a>
+        </p>
+    </footer>
 </body>
 </html>
