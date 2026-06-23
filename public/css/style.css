@@ -1,0 +1,68 @@
+/* 1. Global Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fdfbf7;
+    color: #2c2520;
+    line-height: 1.6;
+}
+
+/* 2. Header and Navigation Styles */
+header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e6dfd5;
+    padding: 15px 5%;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end; 
+    gap: 25px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #4a3f35;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: #6f4e37; /* Smooth color transition on hover */
+}
+
+/* 3. Main Content Layout Container */
+main {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* 4. Section Dividers (Horizontal Rules) */
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #e6dfd5;
+    margin: 40px 0;
+}
+
+/* 5. Footer Styles */
+footer {
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 60px;
+    border-top: 1px solid #e6dfd5;
+    color: #8c7e74;
+    font-size: 0.9em;
+}
+
+footer a {
+    color: #6f4e37;
+    text-decoration: none;
+}
