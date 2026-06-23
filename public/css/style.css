@@ -331,15 +331,136 @@ footer a:hover, .footer-link:hover {
 
 /* ==========================================================================
    5. AUTHENTICATION (LOGIN & REGISTER) PAGE STYLES
-   ========================================================================== */
+   ========================================================================= */
 .auth-main {
-    max-width: 600px;
+    max-width: 1200px;
     margin: 40px auto;
 }
 
-.auth-section {
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    padding: 20px 0;
+    min-height: 450px;
+}
+
+/* Base style for auth containers */
+.auth-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 30px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    text-align: left;
+    transition: opacity 0.25s ease-in-out;
+}
+
+/* Control visibility states without causing layout shifting */
+.id-hidden {
+    display: none;
+    opacity: 0;
+}
+
+.id-active {
+    display: block;
+    opacity: 1;
+}
+
+.auth-card h2 {
+    font-size: 1.8em;
+    color: #6f4e37;
+    margin-bottom: 5px;
+}
+
+.auth-subtitle {
+    font-size: 0.9em;
+    color: gray;
+    margin-bottom: 25px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #4a3f35;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="email"],
+.auth-form input[type="password"] {
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
+    padding: 10px 15px;
+    font-size: 0.95em;
+    color: #2c2520;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.auth-form input:focus {
+    border-color: #6f4e37;
+    box-shadow: 0 0 0 3px rgba(111, 78, 55, 0.1);
+}
+
+.auth-submit-btn {
+    background-color: #6f4e37;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 100%;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.auth-submit-btn:hover {
+    background-color: #523928;
+}
+
+/* Prompt container and toggle button styling text */
+.auth-switch-prompt {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 0.92em;
+    color: #4a3f35;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+.switch-link-btn {
+    background: none;
+    border: none;
+    color: #6f4e37;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    text-decoration: underline;
+}
+
+.switch-link-btn:hover {
+    color: #523928;
 }
 
 /* ==========================================================================
