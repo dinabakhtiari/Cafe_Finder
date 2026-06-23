@@ -5,11 +5,11 @@ const connection = require('../utils/connection.js')
 
 // Register routes
 router.get('/register', (req, res) => {
-    res.render('../views/register.ejs')
+    res.render('register')
 });
 
 router.post('/register', async (req, res) => {
-    if (req.body.password != req.body.confirm_password) {
+    if (req.body.password !== req.body.confirm_password) {
         return res.render('register', {
             message: "Passwords don't match"
         });
@@ -17,8 +17,8 @@ router.post('/register', async (req, res) => {
     const hashedPwd = await bcryptjs.hash(req.body.password, 10);
 
     connection.query(
-        'INSERT INTO users SET ?',
-        { name: req.body.name, email: req.body.email, password: hashedPwd },
+        'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
+        [ req.body.name, req.body.email, hashedPwd ],
         (err, result) => {
             if (err) {
                 return res.render('register', {
@@ -32,11 +32,33 @@ router.post('/register', async (req, res) => {
 });
 // Login routes
 router.get('/login', (req, res) => {
-    res.render('../views/login.ejs');
+    res.render('login');
 })
 
-router.post('/login', (req, res) => {
-
+router.post('/login', async (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    connection.query(
+        'SELECT * FROM users WHERE email = ?',
+        [ email ],
+        async (err, result) => {
+            if (result.length === 0 || err) {
+                return res.render('login', {
+                    message: 'Email or password is incorrect'
+                });
+            }
+            const hashedPwd = result[0].password;
+            const pwdMatch = await bcryptjs.compare(password, hashedPwd);
+            if (pwdMatch) {
+                req.session.userId = result[0].id;
+                return res.redirect('/');
+            } else {
+                return res.render('login', {
+                    message: 'Email or password is incorrect'
+                });
+            }
+        }
+    )
 })
 
 module.exports = router;
