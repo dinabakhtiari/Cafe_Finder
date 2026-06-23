@@ -1,4 +1,4 @@
-/* Global Reset and Base Styles */
+/* GLOBAL RESET & BASE STYLES*/
 * {
     margin: 0;
     padding: 0;
@@ -12,27 +12,46 @@ body {
     line-height: 1.6;
 }
 
-/* Header and Navigation Layout (Flexbox Layout with Logo & Nav) */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #e6dfd5;
+    margin: 40px 0;
+    width: 100%;
+    max-width: 800px;
+}
+
+/* SHARED HEADER & NAVIGATION*/
 header {
     background-color: #ffffff;
     border-bottom: 1px solid #e6dfd5;
     padding: 15px 0;
     width: 100%;
     display: flex;
-    justify-content: center; /* Centers the inner wrapper container */
+    justify-content: center;
     align-items: center;
 }
 
 .header-container {
     width: 100%;
-    max-width: 1200px; /* Matches the maximum width of main content */
+    max-width: 1200px;
     padding: 0 20px;
     display: flex;
-    justify-content: space-between; /* Pushes logo to left and nav menu to right */
+    justify-content: space-between;
     align-items: center;
 }
 
-/* Logo Brand Styling */
 .header-container .logo a {
     font-size: 1.5em;
     font-weight: bold;
@@ -42,7 +61,6 @@ header {
     align-items: center;
 }
 
-/* Navigation Links Styling */
 .header-container nav ul {
     list-style: none;
     display: flex;
@@ -58,36 +76,54 @@ header {
 }
 
 .header-container nav ul li a:hover {
-    color: #6f4e37; /* Smooth color transition on hover */
+    color: #6f4e37;
 }
 
-/* Main Content Layout Container (Centered Flexbox Architecture) */
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centers all direct section blocks horizontally */
-    justify-content: center;
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
+/* SHARED FOOTER COMPONENT*/
+footer, .auth-footer, .about-footer, .cafe-details-footer, .results-footer, .profile-footer {
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 60px;
+    border-top: 1px solid #e6dfd5;
+    color: #8c7e74;
+    font-size: 0.9em;
     width: 100%;
 }
 
-/* Ensures sections take full proportional width and center internal content */
+footer a, .footer-link {
+    color: #6f4e37;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer a:hover, .footer-link:hover {
+    text-decoration: underline;
+}
+
+/* Specific sub-footer gray color overrides */
+.auth-footer, .about-footer, .cafe-details-footer, .results-footer, .profile-footer {
+    border-top: 1px solid #eee;
+    color: gray;
+}
+.auth-footer .footer-link, .about-footer .footer-link, 
+.cafe-details-footer .footer-link, .results-footer .footer-link, 
+.profile-footer .footer-link {
+    color: gray;
+}
+
+/* HOME PAGE STYLES */
 .search-filter-section,
 .popular-cities-section,
 .recommended-cafes-section {
     width: 100%;
-    max-width: 800px; /* Restricts maximum expansion for clean focus */
+    max-width: 800px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
 }
 
-/* Component Specific Layouts (Forms, Grids, and Lists) */
-
-/* Centering the home page search form components */
+/* Search & Filters Form */
 .search-filter-section form {
     width: 100%;
     display: flex;
@@ -98,7 +134,7 @@ main {
 
 .search-filter-section form div {
     width: 100%;
-    max-width: 500px; /* Contains input boxes cleanly in the center */
+    max-width: 500px;
 }
 
 .search-filter-section button {
@@ -106,21 +142,10 @@ main {
     max-width: 200px;
 }
 
-/* Popular City Shortcut Navigation Cards Wrapper */
+/* Popular Cities Component */
 .city-cards-container {
     display: flex;
-    justify-content: center; /* Aligns city cards centered in the row row */
-    align-items: center;
-    gap: 25px;
-    flex-wrap: wrap; /* Supports dynamic device wrapping */
-    width: 100%;
-    margin-top: 25px;
-}
-
-/* Recommended Cafes Display Showcase Grid */
-.cafes-grid {
-    display: flex;
-    justify-content: center; /* Aligns cafe item boxes centered in the grid block */
+    justify-content: center;
     align-items: center;
     gap: 25px;
     flex-wrap: wrap;
@@ -128,38 +153,11 @@ main {
     margin-top: 25px;
 }
 
-/* Structural Elements and Global Footer */
-hr {
-    border: 0;
-    height: 1px;
-    background-color: #e6dfd5;
-    margin: 40px 0;
-    width: 100%;
-    max-width: 800px; /* Synchronizes separator length with sections */
-}
-
-footer {
-    text-align: center;
-    padding: 30px 0;
-    margin-top: 60px;
-    border-top: 1px solid #e6dfd5;
-    color: #8c7e74;
-    font-size: 0.9em;
-    width: 100%;
-}
-
-footer a {
-    color: #6f4e37;
-    text-decoration: none;
-}
-
-/* Styling for city link wrappers */
 .city-card-link {
     text-decoration: none;
     color: inherit;
 }
 
-/* Updated City Card layout rules without inline properties */
 .city-card {
     border: 1px solid #ccc;
     padding: 15px;
@@ -175,13 +173,24 @@ footer a {
     object-fit: cover;
 }
 
-/* Recommended cafe card updates */
+/* Recommended Cafes Grid */
+.cafes-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 25px;
+}
+
 .cafe-card {
     border: 1px solid #ddd;
     padding: 15px;
     border-radius: 8px;
     max-width: 300px;
     background-color: #ffffff;
+    text-align: left;
 }
 
 .cafe-card img {
@@ -191,10 +200,9 @@ footer a {
     border-radius: 4px;
 }
 
-
-/* Auth Page Layout Configuration */
+/* AUTHENTICATION (LOGIN & REGISTER) PAGE STYLES */
 .auth-main {
-    max-width: 600px; /* Slimmer layout specifically for forms */
+    max-width: 600px;
     margin: 40px auto;
 }
 
@@ -203,27 +211,7 @@ footer a {
     padding: 20px 0;
 }
 
-/* Auth Footer specific rules to clear validation errors */
-.auth-footer {
-    margin-top: 50px;
-    padding: 20px 0;
-    border-top: 1px solid #eee;
-    text-align: center;
-    font-size: 0.9em;
-    color: gray;
-}
-
-.auth-footer .footer-link {
-    color: gray;
-    margin: 0 10px;
-    text-decoration: none;
-}
-
-.auth-footer .footer-link:hover {
-    text-decoration: underline;
-}
-
-/* About Page Specific Layout Rules */
+/* ABOUT US & CONTACT PAGE STYLES */
 .about-main {
     max-width: 800px;
     margin: 40px auto;
@@ -233,7 +221,6 @@ footer a {
     width: 100%;
 }
 
-/* Contact Form Button Styling */
 .contact-form .contact-submit-btn {
     margin-top: 10px;
     background-color: #6f4e37;
@@ -250,7 +237,6 @@ footer a {
     background-color: #523928;
 }
 
-/* Direct Contact Info Positioning */
 .direct-contact-info {
     margin-top: 20px;
     font-size: 0.9em;
@@ -258,28 +244,7 @@ footer a {
     text-align: left;
 }
 
-/* About Page Footer Styles to maintain visual design */
-.about-footer {
-    margin-top: 50px;
-    padding: 20px 0;
-    border-top: 1px solid #eee;
-    text-align: center;
-    font-size: 0.9em;
-    color: gray;
-    width: 100%;
-}
-
-.about-footer .footer-link {
-    color: gray;
-    margin: 0 10px;
-    text-decoration: none;
-}
-
-.about-footer .footer-link:hover {
-    text-decoration: underline;
-}
-
-/* Cafe Details Page Layout */
+/* CAFE DETAILS PAGE STYLES */
 .cafe-details-main {
     max-width: 800px;
     margin: 40px auto;
@@ -299,7 +264,6 @@ footer a {
     margin-top: 15px;
 }
 
-/* Rating Summary Styles */
 .cafe-rating-summary {
     margin: 15px 0;
     font-size: 1.1em;
@@ -313,7 +277,6 @@ footer a {
     font-size: 0.9em;
 }
 
-/* Bookmark Button Styling */
 .cafe-bookmark-action .bookmark-btn {
     cursor: pointer;
     padding: 5px 10px;
@@ -330,12 +293,10 @@ footer a {
     color: #ffffff;
 }
 
-/* Social Share Block */
 .share-links {
     margin: 15px 0;
 }
 
-/* Review Features Selection Form Box */
 .cafe-features-selection {
     margin: 20px 0;
 }
@@ -362,7 +323,6 @@ footer a {
     background-color: #523928;
 }
 
-/* Dynamic User Comments Block */
 .user-comment-box {
     margin-top: 20px;
     padding: 15px;
@@ -377,30 +337,7 @@ footer a {
     color: #6f4e37;
 }
 
-/* Cafe Details Footer Custom Rules */
-.cafe-details-footer {
-    margin-top: 50px;
-    padding: 20px 0;
-    border-top: 1px solid #eee;
-    text-align: center;
-    font-size: 0.9em;
-    color: gray;
-    width: 100%;
-}
-
-.cafe-details-footer .footer-link {
-    color: gray;
-    margin: 0 10px;
-    text-decoration: none;
-}
-
-.cafe-details-footer .footer-link:hover {
-    text-decoration: underline;
-}
-
-/* ==========================================================================
-   12. Search Results Page Layout & Modern Grid (Screenshot Design)
-   ========================================================================== */
+/* SEARCH RESULTS PAGE STYLES (MODERN CARDS & MAP) */
 .results-main {
     max-width: 1200px;
     margin: 30px auto;
@@ -413,7 +350,6 @@ footer a {
     margin-bottom: 20px;
 }
 
-/* Wide Map View styling */
 .map-container {
     width: 100%;
     margin-bottom: 40px;
@@ -432,7 +368,6 @@ footer a {
     color: #666;
 }
 
-/* Grid Layout for modern image-overlay cards */
 .modern-cafes-grid {
     display: flex;
     flex-wrap: wrap;
@@ -441,7 +376,6 @@ footer a {
     width: 100%;
 }
 
-/* Modern Photo Card Architecture */
 .modern-cafe-card {
     position: relative;
     width: 300px;
@@ -465,12 +399,10 @@ footer a {
     transition: transform 0.3s ease;
 }
 
-/* Hover effect: Subtle zoom on image */
 .modern-cafe-card:hover img {
     transform: scale(1.05);
 }
 
-/* Text overlay on top of the image (Dark gradient effect) */
 .modern-cafe-card .card-overlay {
     position: absolute;
     bottom: 0;
@@ -494,30 +426,7 @@ footer a {
     text-align: center;
 }
 
-/* Search Results Footer */
-.results-footer {
-    margin-top: 50px;
-    padding: 20px 0;
-    border-top: 1px solid #eee;
-    text-align: center;
-    font-size: 0.9em;
-    color: gray;
-    width: 100%;
-}
-
-.results-footer .footer-link {
-    color: gray;
-    margin: 0 10px;
-    text-decoration: none;
-}
-
-.results-footer .footer-link:hover {
-    text-decoration: underline;
-}
-
-/* ==========================================================================
-   13. User Profile Page Styles
-   ========================================================================== */
+/* USER PROFILE PAGE STYLES */
 .profile-main {
     max-width: 800px;
     margin: 40px auto;
@@ -528,7 +437,6 @@ footer a {
     width: 100%;
 }
 
-/* Avatar layout properties replacing inline style */
 .profile-avatar {
     width: 150px;
     height: 150px;
@@ -563,7 +471,6 @@ footer a {
     color: #fff;
 }
 
-/* Lists and Action Buttons layout inside sections */
 .profile-data-section {
     width: 100%;
     text-align: left;
@@ -600,7 +507,6 @@ footer a {
     font-weight: bold;
 }
 
-/* Form Action Buttons specific styling */
 .action-edit-btn { color: #4a5d4e; }
 .action-view-btn { color: #6f4e37; }
 
@@ -618,26 +524,5 @@ footer a {
 .action-delete-btn:hover,
 .action-remove-btn:hover,
 .item-actions a:hover {
-    text-decoration: underline;
-}
-
-/* Profile Footer Configuration */
-.profile-footer {
-    margin-top: 50px;
-    padding: 20px 0;
-    border-top: 1px solid #eee;
-    text-align: center;
-    font-size: 0.9em;
-    color: gray;
-    width: 100%;
-}
-
-.profile-footer .footer-link {
-    color: gray;
-    margin: 0 10px;
-    text-decoration: none;
-}
-
-.profile-footer .footer-link:hover {
     text-decoration: underline;
 }
