@@ -834,6 +834,40 @@ footer a:hover, .footer-link:hover {
     color: #fdfbf7;
 }
 
+/* Active Tags Display inside Cafe Details Page */
+.cafe-active-tags-section {
+    margin: 20px 0 25px 0;
+    text-align: left;
+}
+
+.cafe-active-tags-section h4 {
+    color: #4a3f35;
+    font-size: 1.05em;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.active-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+}
+
+/* Styled like the Michelin badges but solid/read-only styling */
+.active-tag-badge {
+    display: inline-block;
+    background-color: #f5f0ea; /* Dynamic background to look distinct from form checkboxes */
+    border: 1px solid #e6dfd5;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #6f4e37;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
 /* ==========================================================================
    8. SEARCH RESULTS PAGE STYLES (MODERN CARDS & MAP)
    ========================================================================== */
