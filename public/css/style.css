@@ -529,11 +529,12 @@ footer a:hover, .footer-link:hover {
 }
 
 /* ==========================================================================
-   7. CAFE DETAILS PAGE STYLES
+   7. CAFE DETAILS PAGE STYLES (MODERN ACCENT & CAPSULE CHECKBOXES)
    ========================================================================== */
 .cafe-details-main {
-    max-width: 800px;
-    margin: 40px auto;
+    max-width: 850px; /* Optimal localized reading layout */
+    margin: 0 auto;
+    padding: 40px 20px;
 }
 
 .cafe-details-article,
@@ -542,17 +543,46 @@ footer a:hover, .footer-link:hover {
     text-align: left;
 }
 
+.cafe-meta-info {
+    font-size: 0.9em;
+    color: #8c7e74;
+    margin-bottom: 5px;
+}
+
+.cafe-location-info {
+    font-size: 1.1em;
+    color: #4a3f35;
+    margin-bottom: 15px;
+}
+
+.cafe-address-info {
+    font-size: 0.95em;
+    color: #555;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
 .cafe-main-img {
     width: 100%;
-    max-height: 400px;
+    max-height: 450px;
     object-fit: cover;
     border-radius: 8px;
-    margin-top: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+/* Action Row containing rating summary and bookmark button inline */
+.cafe-action-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
 }
 
 .cafe-rating-summary {
-    margin: 15px 0;
-    font-size: 1.1em;
+    font-size: 1.2em;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -560,17 +590,18 @@ footer a:hover, .footer-link:hover {
 
 .cafe-rating-summary .reviews-count {
     color: gray;
-    font-size: 0.9em;
+    font-size: 0.8em;
 }
 
 .cafe-bookmark-action .bookmark-btn {
     cursor: pointer;
-    padding: 5px 10px;
+    padding: 8px 18px;
     background-color: #ffffff;
     border: 1px solid #6f4e37;
     color: #6f4e37;
-    border-radius: 4px;
+    border-radius: 20px; /* Aligned with Michelin style capsules */
     font-weight: bold;
+    font-size: 0.9em;
     transition: all 0.2s ease;
 }
 
@@ -579,48 +610,228 @@ footer a:hover, .footer-link:hover {
     color: #ffffff;
 }
 
-.share-links {
-    margin: 15px 0;
+.cafe-description-box {
+    margin: 25px 0;
 }
 
+.cafe-description-box h3 {
+    color: #6f4e37;
+    margin-bottom: 8px;
+}
+
+.share-links {
+    font-size: 0.9em;
+    color: gray;
+}
+
+.share-links a {
+    color: #6f4e37;
+    text-decoration: none;
+    margin: 0 5px;
+    font-weight: 600;
+}
+
+.share-links a:hover {
+    text-decoration: underline;
+}
+
+/* Review Form Architecture */
+.review-form {
+    background-color: #ffffff;
+    border: 1px solid #e6dfd5;
+    border-radius: 8px;
+    padding: 25px;
+    margin: 20px 0 40px 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+}
+
+.rating-input-group input[type="number"] {
+    max-width: 100px;
+    padding: 8px;
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
+    outline: none;
+}
+
+.review-form textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 12px;
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
+    outline: none;
+    font-family: inherit;
+    resize: vertical;
+}
+
+.review-form input:focus,
+.review-form textarea:focus {
+    border-color: #6f4e37;
+}
+
+/* Modern Capsule Checkboxes Style */
 .cafe-features-selection {
-    margin: 20px 0;
+    margin: 25px 0;
+}
+
+.cafe-features-selection h4 {
+    color: #4a3f35;
+    margin-bottom: 4px;
 }
 
 .cafe-features-selection .features-tip {
     color: gray;
     font-size: 0.85em;
-    margin-top: -5px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.tags-flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+}
+
+.tag-checkbox-label {
+    cursor: pointer;
+}
+
+.tag-checkbox-label input[type="checkbox"] {
+    display: none; /* Hide old ugly square checkbox browser designs */
+}
+
+.tag-checkbox-label span {
+    display: inline-block;
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 0.88em;
+    font-weight: 500;
+    color: #4a3f35;
+    transition: all 0.2s ease;
+    
+    /* ADD THESE LINES TO FIX THE SAFARI COMPATIBILITY ERROR */
+    -webkit-user-select: none; /* Supports Safari and iOS Safari */
+    user-select: none;         /* Standard syntax for modern browsers */
+}
+
+/* Interactive feedback states for checkboxes toggles */
+.tag-checkbox-label input[type="checkbox"]:checked + span {
+    background-color: #fdfbf7;
+    border-color: #6f4e37;
+    color: #6f4e37;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(111, 78, 55, 0.08);
 }
 
 .review-form .review-submit-btn {
-    margin-top: 10px;
     background-color: #6f4e37;
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
+    padding: 10px 22px;
+    border-radius: 20px;
     font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
 .review-form .review-submit-btn:hover {
     background-color: #523928;
 }
 
+/* User Comments System Blocks */
+.user-comments-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 .user-comment-box {
-    margin-top: 20px;
-    padding: 15px;
+    padding: 20px;
     background-color: #fff;
     border: 1px solid #e6dfd5;
-    border-radius: 6px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+}
+
+.user-comment-box h4 {
+    color: #4a3f35;
+    margin-bottom: 5px;
 }
 
 .user-comment-box .comment-score {
     font-weight: normal;
-    font-size: 0.9em;
+    font-size: 0.85em;
     color: #6f4e37;
+    margin-left: 5px;
+}
+/* User Uploaded Photos Gallery Architecture */
+.cafe-user-gallery {
+    margin: 35px 0 10px 0;
+    width: 100%;
+}
+
+.cafe-user-gallery h3 {
+    color: #6f4e37;
+    margin-bottom: 2px;
+}
+
+.gallery-subtitle {
+    font-size: 0.9em;
+    color: gray;
+    margin-bottom: 15px;
+}
+
+/* Horizontal flex block for community pictures */
+.gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    width: 100%;
+}
+
+/* Mini Photo Card Setup */
+.gallery-item {
+    position: relative;
+    width: calc(33.333% - 10px); /* 3 columns on desktop views */
+    min-width: 230px; /* Safe wrapping trigger for tablets */
+    height: 180px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.04);
+}
+
+/* Elegant text overlay backdrop showing username attribution */
+.photo-meta {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.2) 80%, rgba(0, 0, 0, 0) 100%);
+    padding: 10px 12px;
+    box-sizing: border-box;
+}
+
+.photo-meta span {
+    color: #ffffff;
+    font-size: 0.82em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.photo-meta strong {
+    color: #fdfbf7;
 }
 
 /* ==========================================================================
