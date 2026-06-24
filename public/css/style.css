@@ -237,7 +237,7 @@ footer a:hover, .footer-link:hover {
 }
 
 /* ==========================================================================
-   4. HOME PAGE STYLES (PURE CSS GRID ARCHITECTURE)
+   4. HOME PAGE STYLES (PURE CSS GRID & MICHELIN CARD ARCHITECTURE)
    ========================================================================== */
 .home-grid-container {
     max-width: 1300px !important;
@@ -378,25 +378,31 @@ footer a:hover, .footer-link:hover {
 }
 
 /* ==========================================================================
-   DYNAMIC REPEAT GRIDS (THE PERFECT BALANCE REFACTOR)
+   DYNAMIC REPEAT GRIDS & CARDS SHOWCASE (REFACTORED)
    ========================================================================== */
-.city-cards-container, 
-.cafes-grid {
+.city-cards-container {
     display: grid !important;
-    
-    /* CRITICAL FIX: Automatically creates perfectly sized columns based on screen width */
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important; 
-    
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important; 
     gap: 25px !important; 
     width: 100% !important;
     margin-top: 15px !important;
     padding: 0 !important;
 }
 
+.cafes-grid {
+    display: grid !important;
+    /* Forces 4 columns on large views, auto-adjusting elegantly on smaller screens */
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important;
+    gap: 30px !important;
+    width: 100% !important;
+    margin-top: 25px !important;
+    padding: 0 !important;
+}
+
 .city-card-link {
     text-decoration: none;
     color: inherit;
-    width: 100%; /* Spans to fill grid column block */
+    width: 100%; 
 }
 
 /* Grid-Optimized City Card Frame */
@@ -407,7 +413,7 @@ footer a:hover, .footer-link:hover {
     text-align: center;
     background-color: #ffffff;
     box-shadow: 0 2px 8px rgba(0,0,0,0.01);
-    height: 100%; /* Matches height across rows uniformly */
+    height: 100%; 
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -430,75 +436,115 @@ footer a:hover, .footer-link:hover {
     color: #1a1a1a;
 }
 
-/* Grid-Optimized Cafe Card Frame */
-.add-cafe-btn {
-    display: inline-block;
-    color: #6f4e37;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.9em;
-    margin-bottom: 15px;
-}
-
+/* MICHELIN-INSPIRED MINIMALIST CAFE CARD */
 .cafe-card {
-    border: 1px solid #e6dfd5;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.01);
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    height: 100%; /* Self-stretches inside the grid matrix */
+    display: flex !important;
+    flex-direction: column !important;
+    background: transparent !important; /* Removes the heavy white block backdrop */
+    border: none !important;             /* Removes old borders for seamless integration */
+    box-shadow: none !important;         /* Removes block shadows */
+    width: 100% !important;              
+    padding: 0 !important;
+    text-align: left !important;
+    height: 100%; 
 }
 
-.cafe-card img {
+/* Image Wrapper with Floating Layout anchoring */
+.cafe-image-wrapper {
+    position: relative;
     width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 4px;
+    height: 190px;
+    border-radius: 4px; /* Crisp uniform corners matching the spec */
+    overflow: hidden;
     margin-bottom: 12px;
 }
 
+.cafe-image-wrapper img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    margin-bottom: 0 !important;
+    transition: transform 0.3s ease;
+}
+
+.cafe-card:hover img {
+    transform: scale(1.03);
+}
+
+/* FLOATING HEART BUTTON: Exact pixel match to the Michelin Guide UI */
+.cafe-heart-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #ffffff !important;
+    border: none !important;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15) !important;
+    font-size: 0.95em;
+    transition: transform 0.15s ease, background-color 0.15s ease;
+    z-index: 10;
+    padding: 0 !important;
+}
+
+.cafe-heart-btn:hover {
+    transform: scale(1.1);
+    background-color: #fdfbf7 !important;
+}
+
+.cafe-heart-btn:active {
+    transform: scale(0.92);
+}
+
+/* TYPOGRAPHY STRUCTURE */
 .cafe-card h3 {
-    font-size: 1.2em;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 4px;
+    font-size: 1.15em !important;
+    font-weight: 700 !important;
+    color: #1a1a1a !important;
+    margin: 0 0 4px 0 !important;
+    line-height: 1.3;
 }
 
 .cafe-card p {
-    font-size: 0.88em;
-    color: #444;
-    margin-bottom: 6px;
+    font-size: 0.88em !important;
+    color: #555 !important;
+    margin-bottom: 3px !important;
+    line-height: 1.4;
 }
 
 .cafe-card p strong {
-    color: #1a1a1a;
+    color: #1a1a1a !important;
 }
 
+/* Interactive Capsule Badges */
 .cafe-card p span {
-    background-color: #f5f0ea;
-    color: #6f4e37;
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 0.78em;
-    font-weight: 600;
+    background-color: #f5f0ea !important;
+    color: #6f4e37 !important;
+    padding: 2px 8px !important;
+    border-radius: 12px !important;
+    font-size: 0.8em !important;
+    font-weight: 600 !important;
     display: inline-block;
     margin-top: 2px;
 }
 
 .cafe-card a {
-    margin-top: auto; /* Forces link attachment to card footer edge boundary */
-    padding-top: 12px;
-    color: #6f4e37;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 0.88em;
+    margin-top: auto; /* Aligns details action link uniformly to card footer edge boundary */
+    padding-top: 10px;
+    color: #6f4e37 !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+    font-size: 0.88em !important;
+    align-self: flex-start;
 }
 
 .cafe-card a:hover {
-    text-decoration: underline;
+    text-decoration: underline !important;
 }
 
 /* ==========================================================================

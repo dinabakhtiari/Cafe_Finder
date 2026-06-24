@@ -151,72 +151,101 @@
 </section>
         <hr>
 
-        <section class="recommended-cafes-section">
-            <h2>Recommended Cafes</h2>
-            <a href="/cafes/new" class="add-cafe-btn">Add New Cafe</a>
+<section class="recommended-cafes-section">
+    <h2>Recommended Cafes</h2>
 
-            <div class="cafes-grid">
-                <article class="cafe-card">
-                    <img src="placeholder.jpg" alt="Cafe interior">
-                    <h3>Melu Cafe</h3>
-                    <p><strong>Location:</strong> Stuttgart</p>
-                    <p>⭐ <strong>4.5</strong> / 5 (12 reviews)</p>
-                    <p>A perfect place for programming and study sessions near campus.</p>
-                    <p>Tags: <span>⚡ Fast Wi-Fi</span>, <span>🔌 Power Outlets</span></p>
-                    <a href="/cafes/1">View Details</a>
-                </article>
-
-                <article class="cafe-card">
-                    <img src="placeholder.jpg" alt="Cafe interior">
-                    <h3>Paska.L Choux</h3>
-                    <p><strong>Location:</strong> Mannheim</p>
-                    <p>⭐ <strong>4.7</strong> / 5 (18 reviews)</p>
-                    <p>Quiet environment with excellent French pastries and big tables.</p>
-                    <p>Tags: <span>🤫 Quiet</span>, <span>🪑 Big Tables</span></p>
-                    <a href="/cafes/2">View Details</a>
-                </article>
-
-                <article class="cafe-card">
-                    <img src="placeholder.jpg" alt="Cafe interior">
-                    <h3>Ingwer Cafe</h3>
-                    <p><strong>Location:</strong> Heidelberg</p>
-                    <p>⭐ <strong>4.2</strong> / 5 (9 reviews)</p>
-                    <p>Cozy workspace setup with bright natural light and outdoor seating.</p>
-                    <p>Tags: <span>🌿 Outdoor</span>, <span>⚡ Fast Wi-Fi</span></p>
-                    <a href="/cafes/3">View Details</a>
-                </article>
-
-                <article class="cafe-card">
-                    <img src="placeholder.jpg" alt="Cafe interior">
-                    <h3>Green Wall Coffee</h3>
-                    <p><strong>Location:</strong> Stuttgart</p>
-                    <p>⭐ <strong>4.6</strong> / 5 (15 reviews)</p>
-                    <p>Modern design covered in plants, offering student discounts.</p>
-                    <p>Tags: <span>🎓 Discount</span>, <span>❄️ AC</span></p>
-                    <a href="/cafes/4">View Details</a>
-                </article>
-
-                <article class="cafe-card">
-                    <img src="placeholder.jpg" alt="Cafe interior">
-                    <h3>Kawa Roastery</h3>
-                    <p><strong>Location:</strong> Mannheim</p>
-                    <p>⭐ <strong>4.8</strong> / 5 (22 reviews)</p>
-                    <p>Specialty coffee destination with dedicated silent zones for remote work.</p>
-                    <p>Tags: <span>☕ Specialty</span>, <span>🤫 Quiet</span></p>
-                    <a href="/cafes/5">View Details</a>
-                </article>
-
-                <article class="cafe-card">
-                    <img src="placeholder.jpg" alt="Cafe interior">
-                    <h3>The Philosopher</h3>
-                    <p><strong>Location:</strong> Heidelberg</p>
-                    <p>⭐ <strong>4.4</strong> / 5 (14 reviews)</p>
-                    <p>Spacious historic location close to the library with massive study areas.</p>
-                    <p>Tags: <span>🪑 Big Tables</span>, <span>🚗 Parking</span></p>
-                    <a href="/cafes/6">View Details</a>
-                </article>
+    <div class="cafes-grid">
+        <article class="cafe-card">
+            <div class="cafe-image-wrapper">
+                <img src="placeholder.jpg" alt="Cafe interior">
+                <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 1)" aria-label="Like Melu Cafe">
+                    🤍
+                </button>
             </div>
-        </section>
+            <h3>Melu Cafe</h3>
+            <p><strong>Location:</strong> Stuttgart</p>
+            <p>⭐ <strong>4.5</strong> / 5 (12 reviews)</p>
+            <p>A perfect place for programming and study sessions near campus.</p>
+            <p>Tags: <span>⚡ Fast Wi-Fi</span>, <span>🔌 Power Outlets</span></p>
+            <a href="/cafes/1">View Details</a>
+        </article>
+
+        <article class="cafe-card">
+            <div class="cafe-image-wrapper">
+                <img src="placeholder.jpg" alt="Cafe interior">
+                <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 2)" aria-label="Like Paska.L Choux">
+                    🤍
+                </button>
+            </div>
+            <h3>Paska.L Choux</h3>
+            <p><strong>Location:</strong> Mannheim</p>
+            <p>⭐ <strong>4.7</strong> / 5 (18 reviews)</p>
+            <p>Quiet environment with excellent French pastries and big tables.</p>
+            <p>Tags: <span>🤫 Quiet</span>, <span>🪑 Big Tables</span></p>
+            <a href="/cafes/2">View Details</a>
+        </article>
+
+        <article class="cafe-card">
+            <div class="cafe-image-wrapper">
+                <img src="placeholder.jpg" alt="Cafe interior">
+                <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 3)" aria-label="Like Ingwer Cafe">
+                    🤍
+                </button>
+            </div>
+            <h3>Ingwer Cafe</h3>
+            <p><strong>Location:</strong> Heidelberg</p>
+            <p>⭐ <strong>4.2</strong> / 5 (9 reviews)</p>
+            <p>Cozy workspace setup with bright natural light and outdoor seating.</p>
+            <p>Tags: <span>🌿 Outdoor</span>, <span>⚡ Fast Wi-Fi</span></p>
+            <a href="/cafes/3">View Details</a>
+        </article>
+
+        <article class="cafe-card">
+            <div class="cafe-image-wrapper">
+                <img src="placeholder.jpg" alt="Cafe interior">
+                <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 4)" aria-label="Like Green Wall Coffee">
+                    🤍
+                </button>
+            </div>
+            <h3>Green Wall Coffee</h3>
+            <p><strong>Location:</strong> Stuttgart</p>
+            <p>⭐ <strong>4.6</strong> / 5 (15 reviews)</p>
+            <p>Modern design covered in plants, offering student discounts.</p>
+            <p>Tags: <span>🎓 Discount</span>, <span>❄️ AC</span></p>
+            <a href="/cafes/4">View Details</a>
+        </article>
+
+        <article class="cafe-card">
+            <div class="cafe-image-wrapper">
+                <img src="placeholder.jpg" alt="Cafe interior">
+                <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 5)" aria-label="Like Kawa Roastery">
+                    🤍
+                </button>
+            </div>
+            <h3>Kawa Roastery</h3>
+            <p><strong>Location:</strong> Mannheim</p>
+            <p>⭐ <strong>4.8</strong> / 5 (22 reviews)</p>
+            <p>Specialty coffee destination with dedicated silent zones for remote work.</p>
+            <p>Tags: <span>☕ Specialty</span>, <span>🤫 Quiet</span></p>
+            <a href="/cafes/5">View Details</a>
+        </article>
+
+        <article class="cafe-card">
+            <div class="cafe-image-wrapper">
+                <img src="placeholder.jpg" alt="Cafe interior">
+                <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 6)" aria-label="Like The Philosopher">
+                    🤍
+                </button>
+            </div>
+            <h3>The Philosopher</h3>
+            <p><strong>Location:</strong> Heidelberg</p>
+            <p>⭐ <strong>4.4</strong> / 5 (14 reviews)</p>
+            <p>Spacious historic location close to the library with massive study areas.</p>
+            <p>Tags: <span>🪑 Big Tables</span>, <span>🚗 Parking</span></p>
+            <a href="/cafes/6">View Details</a>
+        </article>
+    </div>
+</section>
     </main>
 
     <footer>
