@@ -9,64 +9,38 @@
 </head>
 <body>
     <header>
-<div class="header-container">
-        <div class="logo">
-            <a href="/home">☕ Cafe Finder</a>
-        </div>
-        
-        <nav>
-            <ul class="nav-links">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="about-us.html">About Us</a></li>
-            </ul>
+        <div class="header-container">
+            <div class="logo">
+                <a href="/home">☕ Cafe Finder</a>
+            </div>
             
-            <div class="profile-menu-container">
-                <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()" aria-label="Toggle profile menu">
-                    <span class="profile-avatar-icon">👤</span>
-                    <span class="hamburger-lines-icon">☰</span>
-                </button>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                </ul>
                 
-                <div class="profile-dropdown" id="profileDropdown">
-                    <ul>
+                <div class="profile-menu-container">
+                    <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()" aria-label="Toggle profile menu">
+                        <span class="profile-avatar-icon">👤</span>
+                        <span class="hamburger-lines-icon">☰</span>
+                    </button>
+                    
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <ul>
                             <li><a href="user-profile.html">👤 Profile</a></li>
                             <li><a href="/my-comments">💬 My Comments</a></li>
                             <li><a href="/liked-cafes">❤️ Saved Cafes</a></li>
                             <li class="dropdown-divider"></li>
                             <li><a href="/logout" class="logout-link">🚪 Logout</a></li>
                         </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </div>
-        
-        <nav>
-            <ul class="nav-links">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="about-us.html">About Us</a></li>
-            </ul>
-            
-            <div class="profile-menu-container">
-                <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()" aria-label="Toggle profile menu">
-                    <span class="profile-avatar-icon">👤</span>
-                    <span class="hamburger-lines-icon">☰</span>
-                </button>
-                
-                <div class="profile-dropdown" id="profileDropdown">
-                    <ul>
-                        <li><a href="user-profile.html">👤 Profile</a></li>
-                        <li><a href="/my-created-cafes">☕ My Created Cafes</a></li>
-                        <li><a href="/my-comments">💬 My Comments</a></li>
-                        <li><a href="/liked-cafes">❤️ Liked Cafes</a></li>
-                        <li class="dropdown-divider"></li>
-                        <li><a href="/logout" class="logout-link">🚪 Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-</header>
+            </nav>
+        </div>
+    </header>
 
-    <main>
+    <main class="home-grid-container">
         <section class="search-filter-section">
             <form action="/search" method="GET" class="michelin-form">
                 
@@ -114,33 +88,67 @@
         <hr>
 
         <section class="popular-cities-section">
-            <h2>Explore Cafes by City</h2>
-            <p>Click on a city to quickly discover its best study spots:</p>
-    
-            <div class="city-cards-container">
-                <a href="/search?city=Stuttgart" class="city-card-link">
-                    <div class="city-card">
-                        <img src="stuttgart.jpg" alt="Stuttgart Cityscape">
-                        <h3>Stuttgart</h3>
-                    </div>
-                </a>
+    <h2>Explore Cafes by City</h2>
+    <p>Click on a city to quickly discover its best study spots:</p>
 
-                <a href="/search?city=Mannheim" class="city-card-link">
-                    <div class="city-card">
-                        <img src="mannheim.jpg" alt="Mannheim Water Tower">
-                        <h3>Mannheim</h3>
-                    </div>
-                </a>
-
-                <a href="/search?city=Heidelberg" class="city-card-link">
-                    <div class="city-card">
-                        <img src="heidelberg.jpg" alt="Heidelberg Castle and Old Bridge">
-                        <h3>Heidelberg</h3>
-                    </div>
-                </a>
+    <div class="city-cards-container">
+        <a href="/search?city=Stuttgart" class="city-card-link">
+            <div class="city-card">
+                <img src="../public/images/Stuttgart.webp" alt="Stuttgart Cityscape">
+                <h3>Stuttgart</h3>
             </div>
-        </section>
+        </a>
 
+        <a href="/search?city=Mannheim" class="city-card-link">
+            <div class="city-card">
+                <img src="../public/images/mannheim.jpg" alt="Mannheim Water Tower">
+                <h3>Mannheim</h3>
+            </div>
+        </a>
+
+        <a href="/search?city=Heidelberg" class="city-card-link">
+            <div class="city-card">
+                <img src="../public/images/Heidelberg.jpg" alt="Heidelberg Castle and Old Bridge">
+                <h3>Heidelberg</h3>
+            </div>
+        </a>
+
+        <a href="/search?city=Frankfurt" class="city-card-link">
+            <div class="city-card">
+                <img src="../public/images/Frankfurt.jpg" alt="Frankfurt Skyline">
+                <h3>Frankfurt</h3>
+            </div>
+        </a>
+
+        <a href="/search?city=Munchen" class="city-card-link">
+            <div class="city-card">
+                <img src="../public/images/Munich.jpg" alt="München Marienplatz">
+                <h3>München</h3>
+            </div>
+        </a>
+
+        <a href="/search?city=Munchen" class="city-card-link">
+            <div class="city-card">
+                <img src="../public/images/Koblenz.jpg" alt="München Marienplatz">
+                <h3>Koblenz</h3>
+            </div>
+        </a>
+
+        <a href="/search?city=Munchen" class="city-card-link">
+            <div class="city-card">
+                <img src="../public/images/Karlsruhe.jpg" alt="München Marienplatz">
+                <h3>Karlsruhe</h3>
+            </div>
+        </a>
+
+        <a href="/search?city=Munchen" class="city-card-link">
+            <div class="city-card">
+                <img src="../public/images/Mosbach.jpg" alt="München Marienplatz">
+                <h3>Mosbach</h3>
+            </div>
+        </a>
+    </div>
+</section>
         <hr>
 
         <section class="recommended-cafes-section">

@@ -7,7 +7,6 @@
     box-sizing: border-box;
 }
 
-/* Updated body to push footer to the absolute bottom */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #fdfbf7;
@@ -15,20 +14,21 @@ body {
     line-height: 1.6;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Forces body to take full screen height */
+    min-height: 100vh;
 }
 
-/* Main expands to fill all available vertical workspace gap */
 main {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-width: 1200px;
-    margin: 0 auto; /* Removed top/bottom massive margins */
-    padding: 40px 20px;
+    align-items: flex-start;       
+    justify-content: flex-start;   
+    text-align: left;
+    max-width: 1400px; 
     width: 100%;
-    flex: 1; /* CRITICAL: Pushes footer down by taking all remaining space */
+    margin: 0 auto; 
+    padding: 40px 20px;
+    box-sizing: border-box;
+    flex: 1;
 }
 
 hr {
@@ -37,7 +37,6 @@ hr {
     background-color: #e6dfd5;
     margin: 40px 0;
     width: 100%;
-    max-width: 1100px;
 }
 
 /* ==========================================================================
@@ -53,12 +52,14 @@ header {
 }
 
 .header-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 1400px !important; /* دقیقاً هم‌اندازه با تگ main */
+    margin: 0 auto !important;
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .logo a {
@@ -233,24 +234,50 @@ footer a:hover, .footer-link:hover {
 }
 
 /* ==========================================================================
-   4. HOME PAGE STYLES (MICHELIN BAR & PERFECTLY UNIFIED GRIDS)
+   4. HOME PAGE STYLES (PURE CSS GRID ARCHITECTURE)
    ========================================================================== */
+.home-grid-container {
+    max-width: 1300px !important;
+    margin: 0 auto !important;
+    padding: 40px 24px !important;
+    width: 100% !important;
+    
+    /* GRID ROOT: Creates a structured vertical flow */
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+    box-sizing: border-box !important;
+}
+
+/* Base Sections layout spacing styling rules */
 .search-filter-section,
 .popular-cities-section,
 .recommended-cafes-section {
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    text-align: left !important;
 }
 
-/* Michelin Layout Form */
+.popular-cities-section h2,
+.recommended-cafes-section h2 {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+}
+
+.popular-cities-section p {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Michelin Layout Form Setup */
 .michelin-form {
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 15px;
 }
 
@@ -269,7 +296,7 @@ footer a:hover, .footer-link:hover {
     background-color: #ffffff;
     border: 1px solid #e1e1e1;
     border-radius: 6px;
-    padding: 8px 15px;
+    padding: 10px 15px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
@@ -300,11 +327,6 @@ footer a:hover, .footer-link:hover {
     text-decoration: none;
     font-size: 1.2em;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-    transition: background-color 0.2s ease;
-}
-
-.map-toggle-btn:hover {
-    background-color: #f5f5f5;
 }
 
 .filters-horizontal-row {
@@ -321,21 +343,13 @@ footer a:hover, .footer-link:hover {
     border-radius: 20px;
     padding: 6px 14px;
     cursor: pointer;
-    font-size: 0.9em;
 }
 
 .filter-badge-select {
-    position: relative;
     background-color: #ffffff;
     border: 1px solid #e1e1e1;
     border-radius: 20px;
     padding: 4px 12px;
-    transition: all 0.2s ease;
-}
-
-.filter-badge-select:hover {
-    border-color: #6f4e37;
-    background-color: #fdfbf7;
 }
 
 .filter-badge-select select {
@@ -346,7 +360,6 @@ footer a:hover, .footer-link:hover {
     font-weight: 500;
     color: #4a3f35;
     cursor: pointer;
-    padding-right: 5px;
 }
 
 .filter-submit-badge {
@@ -354,94 +367,135 @@ footer a:hover, .footer-link:hover {
     color: #ffffff;
     border: none;
     border-radius: 20px;
-    padding: 7px 18px;
+    padding: 8px 20px;
     font-size: 0.88em;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.2s ease;
     margin-left: auto;
 }
 
-.filter-submit-badge:hover {
-    background-color: #523928;
-}
-
-/* UNIFIED CONTAINER FOR GRIDS (Cities & Cafes share the exact structural limits) */
-.city-cards-container, .cafes-grid {
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    gap: 30px;
-    flex-wrap: wrap;
-    width: 100%;
-    max-width: 1100px;
-    margin-top: 25px;
+/* ==========================================================================
+   DYNAMIC REPEAT GRIDS (THE PERFECT BALANCE REFACTOR)
+   ========================================================================== */
+.city-cards-container, 
+.cafes-grid {
+    display: grid !important;
+    
+    /* CRITICAL FIX: Automatically creates perfectly sized columns based on screen width */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important; 
+    
+    gap: 25px !important; 
+    width: 100% !important;
+    margin-top: 15px !important;
+    padding: 0 !important;
 }
 
 .city-card-link {
     text-decoration: none;
     color: inherit;
+    width: 100%; /* Spans to fill grid column block */
 }
 
-/* Unified City Card Setup (Sized exactly like the Cafe Cards) */
+/* Grid-Optimized City Card Frame */
 .city-card {
-    border: 1px solid #ddd;
-    padding: 20px;
+    border: 1px solid #e6dfd5;
+    padding: 24px 15px;
     border-radius: 8px;
     text-align: center;
     background-color: #ffffff;
-    width: 320px; /* Set to exactly 320px matching cafe-card */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+    height: 100%; /* Matches height across rows uniformly */
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .city-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(111, 78, 55, 0.1);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(111, 78, 55, 0.08);
 }
 
 .city-card img {
-    width: 140px;
-    height: 140px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 15px;
 }
 
 .city-card h3 {
-    font-size: 1.3em;
-    color: #2c2520;
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #1a1a1a;
 }
 
-/* Unified Cafe Card Layout */
+/* Grid-Optimized Cafe Card Frame */
 .add-cafe-btn {
     display: inline-block;
-    margin-bottom: 20px;
     color: #6f4e37;
     text-decoration: none;
     font-weight: bold;
-}
-
-.cafes-grid {
-    margin-top: 10px;
+    font-size: 0.9em;
+    margin-bottom: 15px;
 }
 
 .cafe-card {
-    border: 1px solid #ddd;
+    border: 1px solid #e6dfd5;
     padding: 20px;
     border-radius: 8px;
-    width: 320px; /* Identical width match */
     background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+    display: flex;
+    flex-direction: column;
     text-align: left;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    height: 100%; /* Self-stretches inside the grid matrix */
 }
 
 .cafe-card img {
     width: 100%;
-    height: 200px;
+    height: 180px;
     object-fit: cover;
     border-radius: 4px;
     margin-bottom: 12px;
+}
+
+.cafe-card h3 {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+}
+
+.cafe-card p {
+    font-size: 0.88em;
+    color: #444;
+    margin-bottom: 6px;
+}
+
+.cafe-card p strong {
+    color: #1a1a1a;
+}
+
+.cafe-card p span {
+    background-color: #f5f0ea;
+    color: #6f4e37;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.78em;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 2px;
+}
+
+.cafe-card a {
+    margin-top: auto; /* Forces link attachment to card footer edge boundary */
+    padding-top: 12px;
+    color: #6f4e37;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.88em;
+}
+
+.cafe-card a:hover {
+    text-decoration: underline;
 }
 
 /* ==========================================================================

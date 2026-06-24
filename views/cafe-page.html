@@ -10,62 +10,36 @@
 <body>
     <!-- Shared Header Component -->
     <header>
-<div class="header-container">
-        <div class="logo">
-            <a href="/home">☕ Cafe Finder</a>
-        </div>
-        
-        <nav>
-            <ul class="nav-links">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="about-us.html">About Us</a></li>
-            </ul>
+        <div class="header-container">
+            <div class="logo">
+                <a href="/home">☕ Cafe Finder</a>
+            </div>
             
-            <div class="profile-menu-container">
-                <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()" aria-label="Toggle profile menu">
-                    <span class="profile-avatar-icon">👤</span>
-                    <span class="hamburger-lines-icon">☰</span>
-                </button>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                </ul>
                 
-                <div class="profile-dropdown" id="profileDropdown">
-                    <ul>
+                <div class="profile-menu-container">
+                    <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()" aria-label="Toggle profile menu">
+                        <span class="profile-avatar-icon">👤</span>
+                        <span class="hamburger-lines-icon">☰</span>
+                    </button>
+                    
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <ul>
                             <li><a href="user-profile.html">👤 Profile</a></li>
                             <li><a href="/my-comments">💬 My Comments</a></li>
                             <li><a href="/liked-cafes">❤️ Saved Cafes</a></li>
                             <li class="dropdown-divider"></li>
                             <li><a href="/logout" class="logout-link">🚪 Logout</a></li>
                         </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </div>
-        
-        <nav>
-            <ul class="nav-links">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="about-us.html">About Us</a></li>
-            </ul>
-            
-            <div class="profile-menu-container">
-                <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()" aria-label="Toggle profile menu">
-                    <span class="profile-avatar-icon">👤</span>
-                    <span class="hamburger-lines-icon">☰</span>
-                </button>
-                
-                <div class="profile-dropdown" id="profileDropdown">
-                    <ul>
-                        <li><a href="user-profile.html">👤 Profile</a></li>
-                        <li><a href="/my-created-cafes">☕ My Created Cafes</a></li>
-                        <li><a href="/my-comments">💬 My Comments</a></li>
-                        <li><a href="/liked-cafes">❤️ Liked Cafes</a></li>
-                        <li class="dropdown-divider"></li>
-                        <li><a href="/logout" class="logout-link">🚪 Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-</header>
+            </nav>
+        </div>
+    </header>
 
     <main class="cafe-details-main">
         <!-- Main Cafe Article Info -->
