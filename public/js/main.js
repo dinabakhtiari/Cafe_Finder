@@ -33,3 +33,26 @@ function toggleAuthPages() {
         loginCard.classList.add('id-active');
     }
 }
+
+/**
+ * Toggles the visibility of the Michelin profile dropdown menu
+ */
+function toggleProfileDropdown() {
+    const dropdown = document.getElementById('profileDropdown');
+    if (dropdown) {
+        dropdown.classList.toggle('show-menu');
+    }
+}
+
+// Automatically closes the dropdown if the user clicks anywhere outside of it
+window.addEventListener('click', function(event) {
+    const dropdown = document.getElementById('profileDropdown');
+    const menuBtn = document.querySelector('.profile-menu-btn');
+    
+    // Check if dropdown is currently active and the click was outside the container elements
+    if (dropdown && dropdown.classList.contains('show-menu')) {
+        if (!menuBtn.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.classList.remove('show-menu');
+        }
+    }
+});
