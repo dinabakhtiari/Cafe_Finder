@@ -1149,104 +1149,233 @@ footer a:hover, .footer-link:hover {
 }
 
 /* ==========================================================================
-   9. USER PROFILE PAGE STYLES
-   ========================================================================== */
-.profile-main {
-    max-width: 800px;
-    margin: 40px auto;
-}
-
-.profile-info-section {
-    text-align: center;
+   9. USER PROFILE PAGE STYLES (SCREENSHOT-INSPIRED GRID LAYOUT)
+   ========================================================================= */
+.profile-main-container {
+    max-width: 950px !important; 
+    margin: 0 auto !important;
+    padding: 40px 20px !important;
     width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;   
+    justify-content: flex-start !important; 
+    gap: 35px;
 }
 
-.profile-avatar {
-    width: 150px;
-    height: 150px;
+/* TOP SECTION: Main Horizontal Layout Grid Frame */
+.user-profile-bio-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 45px; /* Spacious separation between image and info */
+    background-color: #ffffff;
+    border: 1px solid #e6dfd5;
+    border-radius: 8px;
+    padding: 40px;
+    text-align: left;
+    width: 100%; 
+    box-sizing: border-box;
+    position: relative; /* Allows action corner button pinning */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+}
+
+/* Extra Large Avatar Wrapper Spec */
+.bio-avatar-wrapper {
+    width: 170px; /* Enhanced diameter scale up */
+    height: 170px;
     border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #6f4e37;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    flex-shrink: 0; 
+}
+
+.profile-avatar-large {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    margin-bottom: 15px;
 }
 
-.profile-username {
-    color: #6f4e37;
+/* Structured Key-Value Fields Rows */
+.bio-info-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Vertical gap between fields */
+    margin-top: 5px;
+}
+
+.meta-field-row {
+    display: flex;
+    align-items: flex-start;
+    font-size: 0.98em;
+    line-height: 1.4;
+}
+
+.field-label {
+    width: 100px; /* Fixed column width for tags like Label: */
     font-weight: 600;
+    color: #555;
+    flex-shrink: 0;
 }
 
-.profile-bio {
-    margin: 10px 0;
-    color: #555;
+.field-value {
+    color: #1a1a1a;
+    font-weight: 500;
+}
+
+.user-important-name {
+    font-size: 1.5em; /* Name is distinctly larger like the sample */
+    font-weight: 700 !important;
+    color: #1a1a1a;
+}
+
+.bio-text-multiline {
+    color: #444;
+    max-width: 500px;
+}
+
+/* Absolute Top Right Actions Button anchoring limits */
+.bio-action-corner {
+    position: absolute;
+    top: 35px;
+    right: 35px;
 }
 
 .profile-edit-link {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid #6f4e37;
     color: #6f4e37;
     text-decoration: none;
     font-weight: bold;
-    border: 1px solid #6f4e37;
-    padding: 5px 15px;
-    border-radius: 4px;
-    margin-top: 5px;
+    font-size: 0.88em;
+    padding: 8px 20px;
+    border-radius: 4px; /* Structured square-ish look matching the bounding teal box placeholder */
+    transition: all 0.2s ease;
+    background-color: #ffffff;
 }
 
 .profile-edit-link:hover {
     background-color: #6f4e37;
-    color: #fff;
+    color: #ffffff;
 }
 
-.profile-data-section {
+/* BOTTOM SECTION: Stacking Activity Tables Blocks */
+.profile-bottom-content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
     width: 100%;
+}
+
+.profile-data-card {
+    background-color: #ffffff;
+    border: 1px solid #e6dfd5;
+    border-radius: 8px;
+    padding: 25px;
     text-align: left;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+    width: 100%; 
+    box-sizing: border-box;
+}
+
+.profile-data-card h3 {
+    color: #4a3f35;
+    font-size: 1.2em;
+    margin: 0 0 15px 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
 }
 
 .profile-list {
     list-style: none;
-    margin-top: 15px;
+    padding: 0;
+    margin: 0;
+    width: 100%;
 }
 
 .profile-list-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #fff;
-    padding: 15px;
-    border: 1px solid #e6dfd5;
-    border-radius: 6px;
-    margin-bottom: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f9f9f9;
+    font-size: 0.95em;
+    gap: 15px;
+    width: 100%;
+}
+
+.profile-list-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.review-score-badge {
+    color: #6f4e37;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.item-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
 }
 
 .inline-form {
     display: inline;
 }
 
-.item-actions {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.item-actions a {
+.action-view-btn, .action-delete-btn {
     text-decoration: none;
+    font-size: 0.85em;
     font-weight: bold;
-}
-
-.action-edit-btn { color: #4a5d4e; }
-.action-view-btn { color: #6f4e37; }
-
-.action-delete-btn,
-.action-remove-btn {
-    background: none;
-    border: none;
-    color: #c0392b;
-    font-weight: bold;
+    padding: 5px 14px;
+    border-radius: 14px;
     cursor: pointer;
-    font-family: inherit;
-    font-size: 1em;
+    border: none;
+    transition: all 0.15s ease;
 }
 
-.action-delete-btn:hover,
-.action-remove-btn:hover,
-.item-actions a:hover {
-    text-decoration: underline;
+.action-view-btn {
+    background-color: #f5f0ea;
+    color: #6f4e37;
+}
+
+.action-view-btn:hover {
+    background-color: #e6dfd5;
+}
+
+.action-delete-btn {
+    background-color: #fff5f5;
+    color: #c92a2a;
+}
+
+.action-delete-btn:hover {
+    background-color: #ffe3e3;
+}
+
+/* Responsive adjustments for mobile wrap triggers */
+@media (max-width: 650px) {
+    .user-profile-bio-header {
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;
+        gap: 20px;
+    }
+    .bio-action-corner {
+        position: static;
+        margin-top: 10px;
+        width: 100%;
+    }
+    .profile-edit-link {
+        justify-content: center;
+    }
+    .meta-field-row {
+        flex-direction: column;
+        gap: 2px;
+    }
 }
