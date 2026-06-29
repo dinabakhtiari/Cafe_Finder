@@ -86,3 +86,15 @@ function removeBookmark(cafeId) {
         }
     });
 }
+
+// Function to toggle the visibility of the inline Add Cafe form in User Profile
+function toggleAddCafeForm() {
+    const formContainer = document.getElementById('inline-add-cafe-container');
+    
+    // Check the current display status and toggle it
+    if (formContainer.style.display === 'none' || formContainer.style.display === '') {
+        formContainer.style.display = 'block';
+    } else {
+        formContainer.style.display = 'none';
+    }
+}
