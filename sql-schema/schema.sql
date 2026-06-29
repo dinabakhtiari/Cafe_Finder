@@ -34,13 +34,19 @@ CREATE TABLE `cafes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `description` text,
+  `city` varchar(255) NOT NULL,
   `address` varchar(500) NOT NULL,
+  `tags` text,
   `food` int DEFAULT NULL,
   `coffee` int DEFAULT NULL,
   `service` int DEFAULT NULL,
   `wifi` int DEFAULT NULL,
   `ambience` int DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `cafes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   CONSTRAINT `cafes_chk_1` CHECK ((`food` between 1 and 5)),
   CONSTRAINT `cafes_chk_2` CHECK ((`coffee` between 1 and 5)),
   CONSTRAINT `cafes_chk_3` CHECK ((`service` between 1 and 5)),
@@ -66,12 +72,12 @@ DROP TABLE IF EXISTS `favorites`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `favorites` (
-  `user_id` int NOT NULL,
-  `cafe_id` int NOT NULL,
-  PRIMARY KEY (`user_id`,`cafe_id`),
-  KEY `cafe_id` (`cafe_id`),
-  CONSTRAINT `favorites_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `favorites_ibfk_2` FOREIGN KEY (`cafe_id`) REFERENCES `cafes` (`id`)
+    `user_id` int NOT NULL,
+    `cafe_id` int NOT NULL,
+    PRIMARY KEY (`user_id`,`cafe_id`),
+    KEY `cafe_id` (`cafe_id`),
+    CONSTRAINT `favorites_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+    CONSTRAINT `favorites_ibfk_2` FOREIGN KEY (`cafe_id`) REFERENCES `cafes` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -92,13 +98,13 @@ DROP TABLE IF EXISTS `photos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `photos` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `cafe_id` int NOT NULL,
-  `url` varchar(500) NOT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `cafe_id` (`cafe_id`),
-  CONSTRAINT `photos_ibfk_1` FOREIGN KEY (`cafe_id`) REFERENCES `cafes` (`id`)
+    `id` int NOT NULL AUTO_INCREMENT,
+    `cafe_id` int NOT NULL,
+    `url` varchar(500) NOT NULL,
+    `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    KEY `cafe_id` (`cafe_id`),
+    CONSTRAINT `photos_ibfk_1` FOREIGN KEY (`cafe_id`) REFERENCES `cafes` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -119,19 +125,19 @@ DROP TABLE IF EXISTS `reviews`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reviews` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `cafe_id` int NOT NULL,
-  `rating` int NOT NULL,
-  `comment` text,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `cafe_id` (`cafe_id`),
-  CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`cafe_id`) REFERENCES `cafes` (`id`),
-  CONSTRAINT `reviews_chk_1` CHECK ((`rating` between 1 and 5))
+    `id` int NOT NULL AUTO_INCREMENT,
+    `user_id` int NOT NULL,
+    `cafe_id` int NOT NULL,
+    `rating` int NOT NULL,
+    `comment` text,
+    `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    KEY `user_id` (`user_id`),
+    KEY `cafe_id` (`cafe_id`),
+    CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+    CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`cafe_id`) REFERENCES `cafes` (`id`),
+    CONSTRAINT `reviews_chk_1` CHECK ((`rating` between 1 and 5))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -152,13 +158,13 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `bio` text,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`)
+    `id` int NOT NULL AUTO_INCREMENT,
+    `name` varchar(255) NOT NULL,
+    `email` varchar(255) NOT NULL,
+    `password` varchar(255) NOT NULL,
+    `bio` text,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
