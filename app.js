@@ -4,12 +4,12 @@ const connection = require("./middleware/connectionDB.js");
 
 // start connection to database
 connection.connect((err) => {
-  if (err) {
-    console.log("Error connecting to the database: " + err.stack);
-    return;
-  }
+    if (err) {
+        console.log("Error connecting to the database: " + err.stack);
+        return;
+    }
 
-  console.log("Connected to the database as id " + connection.threadId);
+    console.log("Connected to the database as id " + connection.threadId);
 });
 
 // start app
@@ -23,21 +23,22 @@ app.use(express.static("views"));
 
 // Session middleware
 app.use(
-  session({
-    secret: "lady hear me tonight",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      secure: false, // true if using HTTPS in production
-      maxAge: 1000 * 60 * 60 * 3, // 3 hours (milliseconds)
-    },
-  }),
+    session({
+        secret: "lady hear me tonight",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            secure: false, // true if using HTTPS in production
+            maxAge: 1000 * 60 * 60 * 3, // 3 hours (milliseconds)
+        },
+    }),
 );
 
 app.use("/auth", require("./routes/auth.js"));
+app.use("/cafes", require("./routes/cafes.js"));
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on port ${port}`);
 });
 
 // close connection to database
