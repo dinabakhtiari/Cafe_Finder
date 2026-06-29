@@ -1661,3 +1661,26 @@ footer a:hover, .footer-link:hover {
 .direct-contact-info p {
     margin: 4px 0;
 }
+
+
+/* Styling for the detail page bookmark action button */
+.bookmark-btn {
+    padding: 10px 20px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    min-width: 180px; /* Ensures the button width stays stable when text changes */
+    text-align: center;
+}
+
+.bookmark-btn:hover {
+    background-color: #222222;
+}
+
+.bookmark-btn:active {
+    transform: scale(0.98);
+}

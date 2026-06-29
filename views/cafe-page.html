@@ -8,7 +8,7 @@
     <title>Cafe Finder - Cafe Details</title>
 </head>
 <body>
-    <!-- Shared Header Component -->
+    <!-- Global Header Component -->
     <header>
         <div class="header-container">
             <div class="logo">
@@ -21,6 +21,7 @@
                     <li><a href="about-us.html">About Us</a></li>
                 </ul>
                 
+                <!-- Profile and Navigation Dropdown Menu -->
                 <div class="profile-menu-container">
                     <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()" aria-label="Toggle profile menu">
                         <span class="profile-avatar-icon">👤</span>
@@ -45,6 +46,8 @@
         <!-- Main Cafe Article Info -->
         <article class="cafe-details-article">
             <h1>Melu Cafe</h1>
+            
+            <!-- Dynamic Meta Info: Now tracking which user submitted this cafe -->
             <p class="cafe-meta-info">Added by: <strong class="cafe-author">username</strong> | Date: <span id="current-date">Loading date...</span></p>
             <p class="cafe-location-info"><strong>City:</strong> Stuttgart</p>
             <p class="cafe-address-info"><strong>Address:</strong> Theodor-Heuss-Straße 26, 70174 Stuttgart</p>
@@ -58,19 +61,21 @@
                     <span class="reviews-count">(based on 12 reviews)</span>
                 </div>
 
+                <!-- Modern AJAX Bookmark Button (connected to the global JavaScript handler) -->
                 <div class="cafe-bookmark-action">
-                    <form action="/cafes/1/bookmark" method="POST">
-                        <button type="submit" class="bookmark-btn">🔖 Add to Favorites</button>
-                    </form>
+                    <button type="button" class="bookmark-btn" onclick="toggleLikeCafe(this, 1)">
+                        🔖 Add to Favorites
+                    </button>
                 </div>
             </div>
 
-            <!-- Description -->
+            <!-- Description Box -->
             <div class="cafe-description-box">
                 <h3>Description</h3>
                 <p>This cafe provides great seating, quiet background music, and stable internet for long working hours.</p>
             </div>
 
+            <!-- Active Feature Badges -->
             <div class="cafe-active-tags-section">
                 <h4>Available Features</h4>
                 <div class="active-tags-container">
@@ -127,6 +132,7 @@
         <section class="reviews-section">
             <h2>Comments & Reviews</h2>
             
+            <!-- Form to Submit a New Review and Update Cafe Feature Status -->
             <form action="/cafes/1/comments" method="POST" class="review-form">
                 
                 <div class="form-group rating-input-group">
@@ -193,15 +199,20 @@
 
             <!-- Rendered Comments Container -->
             <div class="user-comments-container">
+                <!-- 
+                  Backend Integration Note:
+                  This block will be looped over using backend templates (e.g., EJS) 
+                  to display reviews dynamically from the comments database table.
+                -->
                 <div class="user-comment-box">
-                    <h4>Dina <span class="comment-score">(Score: 5/5)</span></h4>
+                    <h4>Dina <span class="comment-score">(Score: 5/5 ⭐)</span></h4>
                     <p>Loved the atmosphere! Definitely coming back next week.</p>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Shared Unified Footer -->
+    <!-- Shared Unified Footer Component -->
     <footer class="cafe-details-footer">
         <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
         <p>

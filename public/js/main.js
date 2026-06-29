@@ -56,3 +56,33 @@ window.addEventListener('click', function(event) {
         }
     }
 });
+
+function toggleLikeCafe(button, cafeId) {
+    const isLiking = button.innerText.trim() === '🤍' || button.innerText.includes('Add to Favorites');
+    
+    if(button.classList.contains('bookmark-btn')) {
+        button.innerText = isLiking ? '🔖 Saved in Favorites' : '🔖 Add to Favorites';
+    } else {
+        button.innerText = isLiking ? '❤️' : '🤍';
+    }
+
+    const url = isLiking ? `/cafes/${cafeId}/bookmark` : `/cafes/${cafeId}/unbookmark`;
+
+    fetch(url, { method: 'POST' })
+    .then(res => {
+        if (!res.ok) throw new Error();
+    })
+    .catch(() => {
+        button.innerText = isLiking ? '🤍' : '❤️';
+        alert('Action failed. Please make sure you are logged in.');
+    });
+}
+
+function removeBookmark(cafeId) {
+    fetch(`/cafes/${cafeId}/unbookmark`, { method: 'POST' })
+    .then(res => {
+        if (res.ok) {
+            document.getElementById(`saved-cafe-${cafeId}`).remove();
+        }
+    });
+}

@@ -8,6 +8,7 @@
     <title>Cafe Finder - User Profile</title>
 </head>
 <body>
+    <!-- Global Header Component -->
     <header>
         <div class="header-container">
             <div class="logo">
@@ -20,6 +21,7 @@
                     <li><a href="about-us.html">About Us</a></li>
                 </ul>
                 
+                <!-- Profile and Navigation Dropdown Menu -->
                 <div class="profile-menu-container">
                     <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()" aria-label="Toggle profile menu">
                         <span class="profile-avatar-icon">👤</span>
@@ -42,6 +44,7 @@
 
     <main class="profile-main-container">
         
+        <!-- Minimalist Biography Header Layout -->
         <header class="user-profile-bio-header">
             
             <div class="bio-avatar-wrapper">
@@ -67,31 +70,69 @@
                 </div>
             </div>
 
+            <!-- Profile Modification Action -->
             <div class="bio-action-corner">
                 <a href="/profile/edit" class="profile-edit-link">Edit 📝</a>
             </div>
         </header>
 
+        <!-- Dynamic User-Generated Content Section -->
         <div class="profile-bottom-content">
             
+            <!-- Bookmarked Locations Section -->
             <section class="profile-data-card">
                 <h3>My Saved Cafes</h3>
                 <ul class="profile-list">
-                    <li class="profile-list-item">
+                    <!-- 
+                      Backend Integration Note:
+                      This row structure will be wrapped in a loop to render all cafes 
+                      saved by the specific authenticated user from the database.
+                    -->
+                    <li class="profile-list-item" id="saved-cafe-2">
                         <span class="item-details"><strong>Schloss Cafe</strong> - Stuttgart (Königstraße 18)</span>
                         <div class="item-actions">
                             <a href="/cafes/2" class="action-view-btn">View Details</a>
-                            <form action="/cafes/2/bookmark" method="POST" class="inline-form">
-                                <button type="submit" class="action-delete-btn">💔 Remove</button>
+                            <!-- Modern AJAX handler to remove bookmarks without full-page reloads -->
+                            <button type="button" class="action-delete-btn" onclick="removeBookmark(2)">💔 Remove</button>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- New Section: Cafes Added by This User -->
+            <section class="profile-data-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 style="margin: 0;">My Contributed Cafes</h3>
+                    <!-- Minimalist action button to open the creation form page -->
+                    <a href="/cafes/new" class="filter-submit-badge" style="text-decoration: none; font-size: 0.85em; padding: 6px 12px;">➕ Add a New Cafe</a>
+                </div>
+                <ul class="profile-list">
+                    <!-- 
+                      Backend Integration Note:
+                      This block will loop over the cafes table where creator_id matches current user.
+                      It includes edit and delete capabilities matching Henrique's new CRUD backend.
+                    -->
+                    <li class="profile-list-item">
+                        <span class="item-details"><strong>Melu Cafe</strong> - Stuttgart (Theodor-Heuss-Straße 26)</span>
+                        <div class="item-actions">
+                            <a href="/cafes/1/edit" class="action-view-btn">Edit 📝</a>
+                            <form action="/cafes/1/delete" method="POST" class="inline-form" onsubmit="return confirm('Are you sure you want to delete this cafe permanently?');">
+                                <button type="submit" class="action-delete-btn">Delete</button>
                             </form>
                         </div>
                     </li>
                 </ul>
             </section>
 
+            <!-- User Comments and Reviews History Section -->
             <section class="profile-data-card">
                 <h3>My Comments & Reviews</h3>
                 <ul class="profile-list">
+                    <!-- 
+                      Backend Integration Note:
+                      This block will dynamically list previous comment submissions 
+                      linked to the active user's ID via MySQL relationships.
+                    -->
                     <li class="profile-list-item">
                         <span class="item-details">Commented on <strong>Melu Cafe</strong>: "Loved the atmosphere! Definitely coming back next week." <span class="review-score-badge">5/5 ⭐</span></span>
                         <div class="item-actions">
@@ -106,6 +147,7 @@
         </div>
     </main>
 
+    <!-- Global Layout Footer Component -->
     <footer class="profile-footer">
         <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
         <p>

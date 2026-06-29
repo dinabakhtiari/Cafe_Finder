@@ -8,6 +8,7 @@
     <title>Cafe Finder - Home</title>
 </head>
 <body>
+    <!-- Global Header Component -->
     <header>
         <div class="header-container">
             <div class="logo">
@@ -20,6 +21,7 @@
                     <li><a href="about-us.html">About Us</a></li>
                 </ul>
                 
+                <!-- Profile and Navigation Dropdown Menu -->
                 <div class="profile-menu-container">
                     <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()" aria-label="Toggle profile menu">
                         <span class="profile-avatar-icon">👤</span>
@@ -41,9 +43,11 @@
     </header>
 
     <main>
+        <!-- Michelin-Style Search and Filter Section -->
         <section class="search-filter-section">
             <form action="/search" method="GET" class="michelin-form">
                 
+                <!-- Main Search Bar Row -->
                 <div class="search-main-row">
                     <div class="search-input-wrapper">
                         <span class="search-icon">🔍</span>
@@ -52,202 +56,223 @@
                     <a href="/search" class="map-toggle-btn" title="Show Map View">🗺️</a>
                 </div>
                 
+                <!-- Horizontal Filter Badges -->
                 <div class="filters-horizontal-row">
-    
                     <button type="button" class="filter-icon-btn" aria-label="Quick Filters">⚡</button>
     
+                    <!-- Features Select Filter -->
+                    <div class="filter-badge-select">
+                        <select name="tag" id="tag-select" aria-label="Filter by Cafe Features">
+                            <option value="">All Features</option>
+                            <option value="wifi">⚡ Fast Wi-Fi</option>
+                            <option value="outlets">🔌 Power Outlets</option>
+                            <option value="quiet">🤫 Quiet Environment</option>
+                            <option value="tables">🪑 Big Tables</option>
+                            <option value="outdoor">🌿 Outdoor Seating</option>
+                            <option value="ac">❄️ Air Conditioning</option>
+                            <option value="parking">🚗 Parking Available</option>
+                            <option value="student-discount">🎓 Student Discount</option>
+                            <option value="specialty-coffee">☕ Specialty Coffee</option>
+                            <option value="snacks">🥐 Bakery & Snacks</option>
+                        </select>
+                    </div>
 
-                 <div class="filter-badge-select">
-                    <select name="tag" id="tag-select" aria-label="Filter by Cafe Features">
-                        <option value="">All Features</option>
-                        <option value="wifi">⚡ Fast Wi-Fi</option>
-                        <option value="outlets">🔌 Power Outlets</option>
-                        <option value="quiet">🤫 Quiet Environment</option>
-                        <option value="tables">🪑 Big Tables</option>
-                        <option value="outdoor">🌿 Outdoor Seating</option>
-                        <option value="ac">❄️ Air Conditioning</option>
-                        <option value="parking">🚗 Parking Available</option>
-                        <option value="student-discount">🎓 Student Discount</option>
-                        <option value="specialty-coffee">☕ Specialty Coffee</option>
-                        <option value="snacks">🥐 Bakery & Snacks</option>
-                    </select>
+                    <!-- Sorting Filter -->
+                    <div class="filter-badge-select">
+                        <select name="sort" id="sort-filter" aria-label="Sort Cafes">
+                            <option value="newest">Sort: Newest First</option>
+                            <option value="highest-rated">Sort: Highest Rated</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="filter-submit-badge">Apply & Search</button>
                 </div>
-
-                <div class="filter-badge-select">
-                    <select name="sort" id="sort-filter" aria-label="Sort Cafes">
-                        <option value="newest">Sort: Newest First</option>
-                        <option value="highest-rated">Sort: Highest Rated</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="filter-submit-badge">Apply & Search</button>
-            </div>
             </form>
         </section>
 
         <hr>
 
+        <!-- Popular Cities Navigation Section -->
         <section class="popular-cities-section">
-    <h2>Explore Cafes by City</h2>
-    <p>Click on a city to quickly discover its best study spots:</p>
+            <h2>Explore Cafes by City</h2>
+            <p>Click on a city to quickly discover its best study spots:</p>
 
-    <div class="city-cards-container">
-        <a href="/search?city=Stuttgart" class="city-card-link">
-            <div class="city-card">
-                <img src="../public/images/Stuttgart.webp" alt="Stuttgart Cityscape">
-                <h3>Stuttgart</h3>
-            </div>
-        </a>
+            <div class="city-cards-container">
+                <a href="/search?city=Stuttgart" class="city-card-link">
+                    <div class="city-card">
+                        <img src="../public/images/Stuttgart.webp" alt="Stuttgart Cityscape">
+                        <h3>Stuttgart</h3>
+                    </div>
+                </a>
 
-        <a href="/search?city=Mannheim" class="city-card-link">
-            <div class="city-card">
-                <img src="../public/images/mannheim.jpg" alt="Mannheim Water Tower">
-                <h3>Mannheim</h3>
-            </div>
-        </a>
+                <a href="/search?city=Mannheim" class="city-card-link">
+                    <div class="city-card">
+                        <img src="../public/images/mannheim.jpg" alt="Mannheim Water Tower">
+                        <h3>Mannheim</h3>
+                    </div>
+                </a>
 
-        <a href="/search?city=Heidelberg" class="city-card-link">
-            <div class="city-card">
-                <img src="../public/images/Heidelberg.jpg" alt="Heidelberg Castle and Old Bridge">
-                <h3>Heidelberg</h3>
-            </div>
-        </a>
+                <a href="/search?city=Heidelberg" class="city-card-link">
+                    <div class="city-card">
+                        <img src="../public/images/Heidelberg.jpg" alt="Heidelberg Castle and Old Bridge">
+                        <h3>Heidelberg</h3>
+                    </div>
+                </a>
 
-        <a href="/search?city=Frankfurt" class="city-card-link">
-            <div class="city-card">
-                <img src="../public/images/Frankfurt.jpg" alt="Frankfurt Skyline">
-                <h3>Frankfurt</h3>
-            </div>
-        </a>
+                <a href="/search?city=Frankfurt" class="city-card-link">
+                    <div class="city-card">
+                        <img src="../public/images/Frankfurt.jpg" alt="Frankfurt Skyline">
+                        <h3>Frankfurt</h3>
+                    </div>
+                </a>
 
-        <a href="/search?city=Munchen" class="city-card-link">
-            <div class="city-card">
-                <img src="../public/images/Munich.jpg" alt="München Marienplatz">
-                <h3>München</h3>
-            </div>
-        </a>
+                <a href="/search?city=Munchen" class="city-card-link">
+                    <div class="city-card">
+                        <img src="../public/images/Munich.jpg" alt="München Marienplatz">
+                        <h3>München</h3>
+                    </div>
+                </a>
 
-        <a href="/search?city=Munchen" class="city-card-link">
-            <div class="city-card">
-                <img src="../public/images/Koblenz.jpg" alt="München Marienplatz">
-                <h3>Koblenz</h3>
-            </div>
-        </a>
+                <a href="/search?city=Koblenz" class="city-card-link">
+                    <div class="city-card">
+                        <img src="../public/images/Koblenz.jpg" alt="Deutsches Eck Koblenz">
+                        <h3>Koblenz</h3>
+                    </div>
+                </a>
 
-        <a href="/search?city=Munchen" class="city-card-link">
-            <div class="city-card">
-                <img src="../public/images/Karlsruhe.jpg" alt="München Marienplatz">
-                <h3>Karlsruhe</h3>
-            </div>
-        </a>
+                <a href="/search?city=Karlsruhe" class="city-card-link">
+                    <div class="city-card">
+                        <img src="../public/images/Karlsruhe.jpg" alt="Karlsruhe Palace">
+                        <h3>Karlsruhe</h3>
+                    </div>
+                </a>
 
-        <a href="/search?city=Munchen" class="city-card-link">
-            <div class="city-card">
-                <img src="../public/images/Mosbach.jpg" alt="München Marienplatz">
-                <h3>Mosbach</h3>
+                <a href="/search?city=Mosbach" class="city-card-link">
+                    <div class="city-card">
+                        <img src="../public/images/Mosbach.jpg" alt="Historic Mosbach Market Square">
+                        <h3>Mosbach</h3>
+                    </div>
+                </a>
             </div>
-        </a>
-    </div>
-</section>
+        </section>
+        
         <hr>
 
-<section class="recommended-cafes-section">
-    <h2>Recommended Cafes</h2>
-
-    <div class="cafes-grid">
-        <article class="cafe-card">
-            <div class="cafe-image-wrapper">
-                <img src="placeholder.jpg" alt="Cafe interior">
-                <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 1)" aria-label="Like Melu Cafe">
-                    🤍
-                </button>
+        <!-- Recommended Cafes Grid Section -->
+        <section class="recommended-cafes-section">
+            <div class="section-header-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2>Recommended Cafes</h2>
+                <!-- New Feature: Button allowing users to submit new cafe locations -->
+                <a href="/cafes/new" class="filter-submit-badge" style="text-decoration: none; font-size: 0.9em; padding: 10px 16px;">➕ Add Cafe</a>
             </div>
-            <h3>Melu Cafe</h3>
-            <p><strong>Location:</strong> Stuttgart</p>
-            <p>⭐ <strong>4.5</strong> / 5 (12 reviews)</p>
-            <p>A perfect place for programming and study sessions near campus.</p>
-            <p>Tags: <span>⚡ Fast Wi-Fi</span>, <span>🔌 Power Outlets</span></p>
-            <a href="/cafes/1">View Details</a>
-        </article>
 
-        <article class="cafe-card">
-            <div class="cafe-image-wrapper">
-                <img src="placeholder.jpg" alt="Cafe interior">
-                <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 2)" aria-label="Like Paska.L Choux">
-                    🤍
-                </button>
-            </div>
-            <h3>Paska.L Choux</h3>
-            <p><strong>Location:</strong> Mannheim</p>
-            <p>⭐ <strong>4.7</strong> / 5 (18 reviews)</p>
-            <p>Quiet environment with excellent French pastries and big tables.</p>
-            <p>Tags: <span>🤫 Quiet</span>, <span>🪑 Big Tables</span></p>
-            <a href="/cafes/2">View Details</a>
-        </article>
+            <div class="cafes-grid">
+                <!-- 
+                  Backend Integration Note:
+                  Once Henrique merges the backend branch, the hardcoded cards below will be completely replaced 
+                  by a loop (e.g., <% cafes.forEach(cafe => { %> ... <% }) %>) to render dynamically from MySQL.
+                -->
+                
+                <!-- Cafe Card 1 -->
+                <article class="cafe-card">
+                    <div class="cafe-image-wrapper">
+                        <img src="placeholder.jpg" alt="Cafe interior">
+                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 1)" aria-label="Like Melu Cafe">
+                            🤍
+                        </button>
+                    </div>
+                    <h3>Melu Cafe</h3>
+                    <p><strong>Location:</strong> Stuttgart</p>
+                    <p>⭐ <strong>4.5</strong> / 5 (12 reviews)</p>
+                    <p>A perfect place for programming and study sessions near campus.</p>
+                    <p>Tags: <span>⚡ Fast Wi-Fi</span>, <span>🔌 Power Outlets</span></p>
+                    <a href="/cafes/1">View Details</a>
+                </article>
 
-        <article class="cafe-card">
-            <div class="cafe-image-wrapper">
-                <img src="placeholder.jpg" alt="Cafe interior">
-                <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 3)" aria-label="Like Ingwer Cafe">
-                    🤍
-                </button>
-            </div>
-            <h3>Ingwer Cafe</h3>
-            <p><strong>Location:</strong> Heidelberg</p>
-            <p>⭐ <strong>4.2</strong> / 5 (9 reviews)</p>
-            <p>Cozy workspace setup with bright natural light and outdoor seating.</p>
-            <p>Tags: <span>🌿 Outdoor</span>, <span>⚡ Fast Wi-Fi</span></p>
-            <a href="/cafes/3">View Details</a>
-        </article>
+                <!-- Cafe Card 2 -->
+                <article class="cafe-card">
+                    <div class="cafe-image-wrapper">
+                        <img src="placeholder.jpg" alt="Cafe interior">
+                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 2)" aria-label="Like Paska.L Choux">
+                            🤍
+                        </button>
+                    </div>
+                    <h3>Paska.L Choux</h3>
+                    <p><strong>Location:</strong> Mannheim</p>
+                    <p>⭐ <strong>4.7</strong> / 5 (18 reviews)</p>
+                    <p>Quiet environment with excellent French pastries and big tables.</p>
+                    <p>Tags: <span>🤫 Quiet</span>, <span>🪑 Big Tables</span></p>
+                    <a href="/cafes/2">View Details</a>
+                </article>
 
-        <article class="cafe-card">
-            <div class="cafe-image-wrapper">
-                <img src="placeholder.jpg" alt="Cafe interior">
-                <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 4)" aria-label="Like Green Wall Coffee">
-                    🤍
-                </button>
-            </div>
-            <h3>Green Wall Coffee</h3>
-            <p><strong>Location:</strong> Stuttgart</p>
-            <p>⭐ <strong>4.6</strong> / 5 (15 reviews)</p>
-            <p>Modern design covered in plants, offering student discounts.</p>
-            <p>Tags: <span>🎓 Discount</span>, <span>❄️ AC</span></p>
-            <a href="/cafes/4">View Details</a>
-        </article>
+                <!-- Cafe Card 3 -->
+                <article class="cafe-card">
+                    <div class="cafe-image-wrapper">
+                        <img src="placeholder.jpg" alt="Cafe interior">
+                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 3)" aria-label="Like Ingwer Cafe">
+                            🤍
+                        </button>
+                    </div>
+                    <h3>Ingwer Cafe</h3>
+                    <p><strong>Location:</strong> Heidelberg</p>
+                    <p>⭐ <strong>4.2</strong> / 5 (9 reviews)</p>
+                    <p>Cozy workspace setup with bright natural light and outdoor seating.</p>
+                    <p>Tags: <span>🌿 Outdoor</span>, <span>⚡ Fast Wi-Fi</span></p>
+                    <a href="/cafes/3">View Details</a>
+                </article>
 
-        <article class="cafe-card">
-            <div class="cafe-image-wrapper">
-                <img src="placeholder.jpg" alt="Cafe interior">
-                <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 5)" aria-label="Like Kawa Roastery">
-                    🤍
-                </button>
-            </div>
-            <h3>Kawa Roastery</h3>
-            <p><strong>Location:</strong> Mannheim</p>
-            <p>⭐ <strong>4.8</strong> / 5 (22 reviews)</p>
-            <p>Specialty coffee destination with dedicated silent zones for remote work.</p>
-            <p>Tags: <span>☕ Specialty</span>, <span>🤫 Quiet</span></p>
-            <a href="/cafes/5">View Details</a>
-        </article>
+                <!-- Cafe Card 4 -->
+                <article class="cafe-card">
+                    <div class="cafe-image-wrapper">
+                        <img src="placeholder.jpg" alt="Cafe interior">
+                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 4)" aria-label="Like Green Wall Coffee">
+                            🤍
+                        </button>
+                    </div>
+                    <h3>Green Wall Coffee</h3>
+                    <p><strong>Location:</strong> Stuttgart</p>
+                    <p>⭐ <strong>4.6</strong> / 5 (15 reviews)</p>
+                    <p>Modern design covered in plants, offering student discounts.</p>
+                    <p>Tags: <span>🎓 Discount</span>, <span>❄️ AC</span></p>
+                    <a href="/cafes/4">View Details</a>
+                </article>
 
-        <article class="cafe-card">
-            <div class="cafe-image-wrapper">
-                <img src="placeholder.jpg" alt="Cafe interior">
-                <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 6)" aria-label="Like The Philosopher">
-                    🤍
-                </button>
+                <!-- Cafe Card 5 -->
+                <article class="cafe-card">
+                    <div class="cafe-image-wrapper">
+                        <img src="placeholder.jpg" alt="Cafe interior">
+                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 5)" aria-label="Like Kawa Roastery">
+                            🤍
+                        </button>
+                    </div>
+                    <h3>Kawa Roastery</h3>
+                    <p><strong>Location:</strong> Mannheim</p>
+                    <p>⭐ <strong>4.8</strong> / 5 (22 reviews)</p>
+                    <p>Specialty coffee destination with dedicated silent zones for remote work.</p>
+                    <p>Tags: <span>☕ Specialty</span>, <span>🤫 Quiet</span></p>
+                    <a href="/cafes/5">View Details</a>
+                </article>
+
+                <!-- Cafe Card 6 -->
+                <article class="cafe-card">
+                    <div class="cafe-image-wrapper">
+                        <img src="placeholder.jpg" alt="Cafe interior">
+                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 6)" aria-label="Like The Philosopher">
+                            🤍
+                        </button>
+                    </div>
+                    <h3>The Philosopher</h3>
+                    <p><strong>Location:</strong> Heidelberg</p>
+                    <p>⭐ <strong>4.4</strong> / 5 (14 reviews)</p>
+                    <p>Spacious historic location close to the library with massive study areas.</p>
+                    <p>Tags: <span>🪑 Big Tables</span>, <span>🚗 Parking</span></p>
+                    <a href="/cafes/6">View Details</a>
+                </article>
             </div>
-            <h3>The Philosopher</h3>
-            <p><strong>Location:</strong> Heidelberg</p>
-            <p>⭐ <strong>4.4</strong> / 5 (14 reviews)</p>
-            <p>Spacious historic location close to the library with massive study areas.</p>
-            <p>Tags: <span>🪑 Big Tables</span>, <span>🚗 Parking</span></p>
-            <a href="/cafes/6">View Details</a>
-        </article>
-    </div>
-</section>
+        </section>
     </main>
 
+    <!-- Unified Footer Component -->
     <footer>
         <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
         <p>
