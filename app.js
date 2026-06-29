@@ -36,6 +36,7 @@ app.use(
 
 app.use("/auth", require("./routes/auth.js"));
 app.use("/cafes", require("./routes/cafes.js"));
+app.use("/users", require("./routes/users.js"));
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
