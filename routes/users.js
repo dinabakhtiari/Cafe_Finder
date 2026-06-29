@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const connection = require("../middleware/connectionDB.js");
 const bcryptjs = require('bcryptjs');
+const requireLogin = require('../middleware/authMiddleware.js');
 
 router.get('/:id', (req, res) => {
     connection.query(
@@ -20,9 +21,15 @@ router.get('/:id', (req, res) => {
 });
 
 // Update user info
-router.put('/:id', async (req, res) => {
-    const { name, email, password, confirm_password, bio } = req.body;
+router.put('/:id', requireLogin, async (req, res) => {
     const userId = req.params.id;
+    const sessionId = req.session.userId;
+
+    if (userId != sessionId) {
+        return res.status(403).json({ error: "Forbidden" });
+    }
+
+    const { name, email, password, confirm_password, bio } = req.body;
 
 
     if (!password) {
@@ -65,8 +72,13 @@ router.put('/:id', async (req, res) => {
 });
 
 // Delete user account
-router.delete('/:id', (req, res) => {
+router.delete('/:id', requireLogin, (req, res) => {
     const userId = req.params.id;
+    const sessionId = req.session.userId;
+
+    if (userId != sessionId) {
+        return res.status(403).json({ error: "Forbidden" });
+    }
 
     connection.query(
         "DELETE FROM users WHERE id = ?",
