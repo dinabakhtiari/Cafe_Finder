@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const connection = require("../middleware/connectionDB.js");
+const requireLogin = require('../middleware/authMiddleware.js');
 
 // Get cafes
 router.get("/", (req, res) => {
@@ -33,12 +34,13 @@ router.get("/:id", (req, res) => {
 });
 
 // Add cafe
-router.post("/", (req, res) => {
+router.post("/", requireLogin, (req, res) => {
+    const user_id = req.session.userId;
     const { name, description, city, address, tags, food, coffee, service, wifi, ambience } = req.body;
 
     connection.query(
-        "INSERT INTO cafes (name, description, city, address, tags, food, coffee, service, wifi, ambience) VALUES (?,?,?,?,?,?,?,?,?,?)",
-        [name, description, city, address, tags, food, coffee, service, wifi, ambience],
+        "INSERT INTO cafes (name, description, city, address, tags, food, coffee, service, wifi, ambience, user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+        [name, description, city, address, tags, food, coffee, service, wifi, ambience, user_id],
         (err, result) => {
             if (err) {
                 return res.status(500).json({ error: err.message });
@@ -49,45 +51,87 @@ router.post("/", (req, res) => {
 });
 
 // Delete cafe
-router.delete('/:id', (req, res) => {
+router.delete('/:id', requireLogin, (req, res) => {
     const idDelete = Number(req.params.id);
+    const sessionUserId = req.session.userId;
 
     connection.query(
-        "DELETE FROM cafes WHERE id = ?",
+        "SELECT * FROM cafes WHERE id=?",
         [idDelete],
         (err, result) => {
             if (err) {
                 return res.status(500).json({ error: err.message });
             }
-
-            if (result.affectedRows === 0) {
-                return res.status(404).json({ error: "Cafe not found" });
+            if (result.length === 0) {
+                return res.status(404).send("Cafe not found");
             }
 
-            return res.status(204).send();
+            const cafeUserId = result[0].user_id;
+
+            if (sessionUserId === cafeUserId) {
+                connection.query(
+                    "DELETE FROM cafes WHERE id = ?",
+                    [idDelete],
+                    (err, result) => {
+                        if (err) {
+                            return res.status(500).json({ error: err.message });
+                        }
+
+                        if (result.affectedRows === 0) {
+                            return res.status(404).json({ error: "Cafe not found" });
+                        }
+                        return res.status(204).send();
+                    }
+                );
+
+            } else {
+                return res.status(403).json({ error: "Forbidden" })
+            }
         }
     );
+
 });
 
 // Update cafe
-router.put("/:id", (req, res) => {
+router.put("/:id", requireLogin, (req, res) => {
     const { name, description, city, address, tags, food, coffee, service, wifi, ambience } = req.body;
     const cafeId = req.params.id;
+    const sessionUserId = req.session.userId;
+
     connection.query(
-        "UPDATE cafes SET name = ?, description = ?, city = ?, address = ?, tags = ?, food = ?, coffee = ?, service = ?, wifi = ?, ambience = ? WHERE id = ?",
-        [name, description, city, address, tags, food, coffee, service, wifi, ambience, cafeId],
+        "SELECT * FROM cafes WHERE id=?",
+        [cafeId],
         (err, result) => {
             if (err) {
                 return res.status(500).json({ error: err.message });
             }
-
-            if (result.affectedRows === 0) {
-                return res.status(404).json({ error: "Cafe not found" });
+            if (result.length === 0) {
+                return res.status(404).send("Cafe not found");
             }
 
-            return res.status(204).send();
+            const cafeUserId = result[0].user_id;
+
+            if (sessionUserId === cafeUserId) {
+                connection.query(
+                    "UPDATE cafes SET name = ?, description = ?, city = ?, address = ?, tags = ?, food = ?, coffee = ?, service = ?, wifi = ?, ambience = ? WHERE id = ?",
+                    [name, description, city, address, tags, food, coffee, service, wifi, ambience, cafeId],
+                    (err, result) => {
+                        if (err) {
+                            return res.status(500).json({ error: err.message });
+                        }
+
+                        if (result.affectedRows === 0) {
+                            return res.status(404).json({ error: "Cafe not found" });
+                        }
+
+                        return res.status(204).send();
+                    }
+                );
+            } else {
+                return res.status(403).json({ error: "Forbidden" })
+            }
         }
-    )
-})
+    );
+});
 
 module.exports = router;
