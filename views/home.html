@@ -8,7 +8,6 @@
     <title>Cafe Finder - Home</title>
 </head>
 <body>
-    <!-- Global Header Component -->
     <header>
         <div class="header-container">
             <div class="logo">
@@ -21,7 +20,6 @@
                     <li><a href="about-us.html">About Us</a></li>
                 </ul>
                 
-                <!-- Profile and Navigation Dropdown Menu -->
                 <div class="profile-menu-container">
                     <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()" aria-label="Toggle profile menu">
                         <span class="profile-avatar-icon">👤</span>
@@ -43,11 +41,9 @@
     </header>
 
     <main>
-        <!-- Michelin-Style Search and Filter Section -->
         <section class="search-filter-section">
             <form action="/search" method="GET" class="michelin-form">
                 
-                <!-- Main Search Bar Row -->
                 <div class="search-main-row">
                     <div class="search-input-wrapper">
                         <span class="search-icon">🔍</span>
@@ -55,11 +51,9 @@
                     </div>
                 </div>
                 
-                <!-- Horizontal Filter Badges -->
                 <div class="filters-horizontal-row">
                     <button type="button" class="filter-icon-btn" aria-label="Quick Filters">⚡</button>
     
-                    <!-- Features Select Filter -->
                     <div class="filter-badge-select">
                         <select name="tag" id="tag-select" aria-label="Filter by Cafe Features">
                             <option value="">All Features</option>
@@ -76,14 +70,6 @@
                         </select>
                     </div>
 
-                    <!-- Sorting Filter -->
-                    <div class="filter-badge-select">
-                        <select name="sort" id="sort-filter" aria-label="Sort Cafes">
-                            <option value="newest">Sort: Newest First</option>
-                            <option value="highest-rated">Sort: Highest Rated</option>
-                        </select>
-                    </div>
-
                     <button type="submit" class="filter-submit-badge">Apply & Search</button>
                 </div>
             </form>
@@ -91,7 +77,6 @@
 
         <hr>
 
-        <!-- Popular Cities Navigation Section -->
         <section class="popular-cities-section">
             <h2>Explore Cafes by City</h2>
             <p>Click on a city to quickly discover its best study spots:</p>
@@ -157,21 +142,12 @@
         
         <hr>
 
-        <!-- Recommended Cafes Grid Section -->
         <section class="recommended-cafes-section">
-            <div class="section-header-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2>Recommended Cafes</h2>
-                <!-- New Feature: Button allowing users to submit new cafe locations -->
+            <div class="section-header-row" style="margin-bottom: 20px;">
+                <h2>Recently added Cafes</h2>
             </div>
 
             <div class="cafes-grid">
-                <!-- 
-                  Backend Integration Note:
-                  Once Henrique merges the backend branch, the hardcoded cards below will be completely replaced 
-                  by a loop (e.g., <% cafes.forEach(cafe => { %> ... <% }) %>) to render dynamically from MySQL.
-                -->
-                
-                <!-- Cafe Card 1 -->
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
                         <img src="placeholder.jpg" alt="Cafe interior">
@@ -187,7 +163,6 @@
                     <a href="/cafes/1">View Details</a>
                 </article>
 
-                <!-- Cafe Card 2 -->
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
                         <img src="placeholder.jpg" alt="Cafe interior">
@@ -203,7 +178,6 @@
                     <a href="/cafes/2">View Details</a>
                 </article>
 
-                <!-- Cafe Card 3 -->
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
                         <img src="placeholder.jpg" alt="Cafe interior">
@@ -219,7 +193,6 @@
                     <a href="/cafes/3">View Details</a>
                 </article>
 
-                <!-- Cafe Card 4 -->
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
                         <img src="placeholder.jpg" alt="Cafe interior">
@@ -235,7 +208,6 @@
                     <a href="/cafes/4">View Details</a>
                 </article>
 
-                <!-- Cafe Card 5 -->
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
                         <img src="placeholder.jpg" alt="Cafe interior">
@@ -251,7 +223,6 @@
                     <a href="/cafes/5">View Details</a>
                 </article>
 
-                <!-- Cafe Card 6 -->
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
                         <img src="placeholder.jpg" alt="Cafe interior">
@@ -270,19 +241,18 @@
         </section>
     </main>
 
-    <!-- Unified Footer Component -->
-   <footer class="cafe-details-footer">
-    <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
-    <p>
-        <a href="about-us.html">About Us & Contact</a> | 
-        <a href="#top">Home</a>
-    </p>
-    
-    <div>
-        <a href="https://instagram.com" class="footer-link" target="_blank">Instagram</a>
-        <a href="https://x.com" class="footer-link" target="_blank">Twitter / X</a>
-        <a href="https://facebook.com" class="footer-link" target="_blank">Facebook</a>
-    </div>
-</footer>
+    <footer class="cafe-details-footer">
+        <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
+        <p>
+            <a href="about-us.html">About Us & Contact</a> | 
+            <a href="#top">Home</a>
+        </p>
+        
+        <div>
+            <a href="https://instagram.com" class="footer-link" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://x.com" class="footer-link" target="_blank" rel="noopener">Twitter / X</a>
+            <a href="https://facebook.com" class="footer-link" target="_blank" rel="noopener">Facebook</a>
+        </div>
+    </footer>
 </body>
 </html>
