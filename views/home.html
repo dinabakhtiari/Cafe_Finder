@@ -8,6 +8,7 @@
     <title>Cafe Finder - Home</title>
 </head>
 <body>
+    <!-- Global Header Component -->
     <header>
         <div class="header-container">
             <div class="logo">
@@ -20,6 +21,7 @@
                     <li><a href="about-us.html">About Us</a></li>
                 </ul>
                 
+                <!-- Profile and Navigation Dropdown Menu -->
                 <div class="profile-menu-container">
                     <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()" aria-label="Toggle profile menu">
                         <span class="profile-avatar-icon">👤</span>
@@ -41,9 +43,11 @@
     </header>
 
     <main>
+        <!-- Michelin-Style Search and Filter Section -->
         <section class="search-filter-section">
             <form action="/search" method="GET" class="michelin-form">
                 
+                <!-- Main Search Bar Row -->
                 <div class="search-main-row">
                     <div class="search-input-wrapper">
                         <span class="search-icon">🔍</span>
@@ -51,9 +55,11 @@
                     </div>
                 </div>
                 
+                <!-- Horizontal Filter Badges -->
                 <div class="filters-horizontal-row">
                     <button type="button" class="filter-icon-btn" aria-label="Quick Filters">⚡</button>
     
+                    <!-- Features Select Filter -->
                     <div class="filter-badge-select">
                         <select name="tag" id="tag-select" aria-label="Filter by Cafe Features">
                             <option value="">All Features</option>
@@ -77,6 +83,7 @@
 
         <hr>
 
+        <!-- Popular Cities Navigation Section -->
         <section class="popular-cities-section">
             <h2>Explore Cafes by City</h2>
             <p>Click on a city to quickly discover its best study spots:</p>
@@ -137,17 +144,35 @@
                         <h3>Mosbach</h3>
                     </div>
                 </a>
+
+                <!-- City Card 9 (New Spot) -->
+                <a href="/search?city=Dresden" class="city-card-link">
+                    <div class="city-card">
+                        <img src="../public/images/Dresden.jpg" alt="Dresden Frauenkirche Historic Center">
+                        <h3>Dresden</h3>
+                    </div>
+                </a>
+
+                <!-- City Card 10 (New Spot) -->
+                <a href="/search?city=Konstanz" class="city-card-link">
+                    <div class="city-card">
+                        <img src="../public/images/Konstanz.jpg" alt="Konstanz Lakefront Harbor Promenade">
+                        <h3>Konstanz</h3>
+                    </div>
+                </a>
             </div>
         </section>
         
         <hr>
 
+        <!-- Recommended Cafes Grid Section -->
         <section class="recommended-cafes-section">
             <div class="section-header-row" style="margin-bottom: 20px;">
                 <h2>Recently added Cafes</h2>
             </div>
 
             <div class="cafes-grid">
+                <!-- Cafe Card 1 -->
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
                         <img src="placeholder.jpg" alt="Cafe interior">
@@ -163,6 +188,7 @@
                     <a href="/cafes/1">View Details</a>
                 </article>
 
+                <!-- Cafe Card 2 -->
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
                         <img src="placeholder.jpg" alt="Cafe interior">
@@ -178,6 +204,7 @@
                     <a href="/cafes/2">View Details</a>
                 </article>
 
+                <!-- Cafe Card 3 -->
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
                         <img src="placeholder.jpg" alt="Cafe interior">
@@ -193,6 +220,7 @@
                     <a href="/cafes/3">View Details</a>
                 </article>
 
+                <!-- Cafe Card 4 -->
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
                         <img src="placeholder.jpg" alt="Cafe interior">
@@ -208,6 +236,7 @@
                     <a href="/cafes/4">View Details</a>
                 </article>
 
+                <!-- Cafe Card 5 -->
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
                         <img src="placeholder.jpg" alt="Cafe interior">
@@ -223,6 +252,7 @@
                     <a href="/cafes/5">View Details</a>
                 </article>
 
+                <!-- Cafe Card 6 -->
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
                         <img src="placeholder.jpg" alt="Cafe interior">
@@ -237,10 +267,43 @@
                     <p>Tags: <span>🪑 Big Tables</span>, <span>🚗 Parking</span></p>
                     <a href="/cafes/6">View Details</a>
                 </article>
+
+                <!-- Cafe Card 7 -->
+                <article class="cafe-card">
+                    <div class="cafe-image-wrapper">
+                        <img src="placeholder.jpg" alt="Cafe interior">
+                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 7)" aria-label="Like Urban Lab Cafe">
+                            🤍
+                        </button>
+                    </div>
+                    <h3>Urban Lab Cafe</h3>
+                    <p><strong>Location:</strong> Frankfurt</p>
+                    <p>⭐ <strong>4.6</strong> / 5 (8 reviews)</p>
+                    <p>Industrial design workspace equipped with ultra-fast internet and standing desks.</p>
+                    <p>Tags: <span>⚡ Fast Wi-Fi</span>, <span>🥐 Bakery & Snacks</span></p>
+                    <a href="/cafes/7">View Details</a>
+                </article>
+
+                <!-- Cafe Card 8 -->
+                <article class="cafe-card">
+                    <div class="cafe-image-wrapper">
+                        <img src="placeholder.jpg" alt="Cafe interior">
+                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 8)" aria-label="Like Library Lounge">
+                            🤍
+                        </button>
+                    </div>
+                    <h3>Library Lounge</h3>
+                    <p><strong>Location:</strong> Karlsruhe</p>
+                    <p>⭐ <strong>4.9</strong> / 5 (31 reviews)</p>
+                    <p>A premium silent study environment located right next to the city library.</p>
+                    <p>Tags: <span>🤫 Quiet</span>, <span>🔌 Power Outlets</span></p>
+                    <a href="/cafes/8">View Details</a>
+                </article>
             </div>
         </section>
     </main>
 
+    <!-- Unified Footer Component -->
     <footer class="cafe-details-footer">
         <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
         <p>
