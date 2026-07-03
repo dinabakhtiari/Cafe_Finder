@@ -98,3 +98,24 @@ function toggleAddCafeForm() {
         formContainer.style.display = 'none';
     }
 }
+
+// Toggle Forgot Password Card View
+function showForgotPassword() {
+    const loginCard = document.getElementById('login-card');
+    const forgotCard = document.getElementById('forgot-card');
+    
+    if (loginCard && forgotCard) {
+        loginCard.classList.replace('id-active', 'id-hidden');
+        forgotCard.classList.replace('id-hidden', 'id-active');
+    }
+}
+
+function hideForgotPassword() {
+    const loginCard = document.getElementById('login-card');
+    const forgotCard = document.getElementById('forgot-card');
+    
+    if (loginCard && forgotCard) {
+        forgotCard.classList.replace('id-active', 'id-hidden');
+        loginCard.classList.replace('id-hidden', 'id-active');
+    }
+}

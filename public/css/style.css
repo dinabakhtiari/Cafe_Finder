@@ -134,10 +134,10 @@ nav {
 
 /* Dropdown Content Box Container Floating Window */
 .profile-dropdown {
-    display: block; /* Changed from none to block so transition can animate */
+    display: block;
     position: absolute;
     right: 0;
-    top: calc(100% + 15px); /* Starts slightly lower for a gentle slide-up effect */
+    top: calc(100% + 15px);
     background-color: #ffffff;
     min-width: 220px;
     border: 1px solid #e6dfd5;
@@ -146,21 +146,18 @@ nav {
     overflow: hidden;
     z-index: 1010;
     
-    /* CRITICAL FOR SMOOTH EFFECT: Hide by default using opacity and scale */
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px) scale(0.95); /* Slides down and scales up slightly */
+    transform: translateY(-10px) scale(0.95);
     transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
                 transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
                 visibility 0.2s;
 }
 
-/* Toggle visibility state class trigger */
-/* Active state trigger that plays the animation smoothly */
 .profile-dropdown.show-menu {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0) scale(1); /* Snaps beautifully into its original position */
+    transform: translateY(0) scale(1);
 }
 
 .profile-dropdown ul {
@@ -185,7 +182,6 @@ nav {
     color: #6f4e37;
 }
 
-/* Clean Divider for dangerous actions like Logout */
 .dropdown-divider {
     height: 1px;
     background-color: #eee;
@@ -193,7 +189,7 @@ nav {
 }
 
 .profile-dropdown .logout-link {
-    color: #c92a2a; /* Soft warning red color for logout safety */
+    color: #c92a2a;
 }
 
 .profile-dropdown .logout-link:hover {
@@ -212,7 +208,7 @@ footer, .auth-footer, .about-footer, .cafe-details-footer, .results-footer, .pro
     color: #8c7e74;
     font-size: 0.9em;
     width: 100%;
-    background-color: #fdfbf7; /* Prevents background leaking */
+    background-color: #fdfbf7;
 }
 
 footer a, .footer-link {
@@ -244,15 +240,12 @@ footer a:hover, .footer-link:hover {
     margin: 0 auto !important;
     padding: 40px 24px !important;
     width: 100% !important;
-    
-    /* GRID ROOT: Creates a structured vertical flow */
     display: grid !important;
     grid-template-columns: 1fr !important;
     gap: 40px !important;
     box-sizing: border-box !important;
 }
 
-/* Base Sections layout spacing styling rules */
 .search-filter-section,
 .popular-cities-section,
 .recommended-cafes-section {
@@ -276,7 +269,6 @@ footer a:hover, .footer-link:hover {
     margin-bottom: 20px;
 }
 
-/* Michelin Layout Form Setup */
 .michelin-form {
     width: 100%;
     display: grid;
@@ -378,7 +370,7 @@ footer a:hover, .footer-link:hover {
 }
 
 /* ==========================================================================
-   DYNAMIC REPEAT GRIDS & CARDS SHOWCASE (REFACTORED)
+   DYNAMIC REPEAT GRIDS & CARDS SHOWCASE
    ========================================================================== */
 .city-cards-container {
     display: grid !important;
@@ -391,7 +383,6 @@ footer a:hover, .footer-link:hover {
 
 .cafes-grid {
     display: grid !important;
-    /* Forces 4 columns on large views, auto-adjusting elegantly on smaller screens */
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important;
     gap: 30px !important;
     width: 100% !important;
@@ -405,7 +396,6 @@ footer a:hover, .footer-link:hover {
     width: 100%; 
 }
 
-/* Grid-Optimized City Card Frame */
 .city-card {
     border: 1px solid #e6dfd5;
     padding: 24px 15px;
@@ -436,25 +426,23 @@ footer a:hover, .footer-link:hover {
     color: #1a1a1a;
 }
 
-/* MICHELIN-INSPIRED MINIMALIST CAFE CARD */
 .cafe-card {
     display: flex !important;
     flex-direction: column !important;
-    background: transparent !important; /* Removes the heavy white block backdrop */
-    border: none !important;             /* Removes old borders for seamless integration */
-    box-shadow: none !important;         /* Removes block shadows */
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
     width: 100% !important;              
     padding: 0 !important;
     text-align: left !important;
     height: 100%; 
 }
 
-/* Image Wrapper with Floating Layout anchoring */
 .cafe-image-wrapper {
     position: relative;
     width: 100%;
     height: 190px;
-    border-radius: 4px; /* Crisp uniform corners matching the spec */
+    border-radius: 4px;
     overflow: hidden;
     margin-bottom: 12px;
 }
@@ -471,7 +459,6 @@ footer a:hover, .footer-link:hover {
     transform: scale(1.03);
 }
 
-/* FLOATING HEART BUTTON: Exact pixel match to the Michelin Guide UI */
 .cafe-heart-btn {
     position: absolute;
     top: 12px;
@@ -501,7 +488,6 @@ footer a:hover, .footer-link:hover {
     transform: scale(0.92);
 }
 
-/* TYPOGRAPHY STRUCTURE */
 .cafe-card h3 {
     font-size: 1.15em !important;
     font-weight: 700 !important;
@@ -521,7 +507,6 @@ footer a:hover, .footer-link:hover {
     color: #1a1a1a !important;
 }
 
-/* Interactive Capsule Badges */
 .cafe-card p span {
     background-color: #f5f0ea !important;
     color: #6f4e37 !important;
@@ -534,7 +519,7 @@ footer a:hover, .footer-link:hover {
 }
 
 .cafe-card a {
-    margin-top: auto; /* Aligns details action link uniformly to card footer edge boundary */
+    margin-top: auto;
     padding-top: 10px;
     color: #6f4e37 !important;
     text-decoration: none !important;
@@ -548,14 +533,14 @@ footer a:hover, .footer-link:hover {
 }
 
 /* ==========================================================================
-   5. AUTHENTICATION (LOGIN & REGISTER) PAGE STYLES
+   5. AUTHENTICATION (LOGIN & REGISTER & RESET) PAGE STYLES
    ========================================================================= */
 .auth-main {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    align-items: center; /* Vertical center alignment */
-    justify-content: center; /* Horizontal center alignment */
+    align-items: center;
+    justify-content: center;
 }
 
 .auth-wrapper {
@@ -566,7 +551,6 @@ footer a:hover, .footer-link:hover {
     padding: 20px 0;
 }
 
-/* Base style for auth containers */
 .auth-card {
     background-color: #ffffff;
     border: 1px solid #ddd;
@@ -579,13 +563,13 @@ footer a:hover, .footer-link:hover {
     transition: opacity 0.25s ease-in-out;
 }
 
-/* Control visibility states without causing layout shifting */
-.id-hidden {
+/* Control visibility states strictly via CSS Classes without UI shifting */
+.auth-card.id-hidden {
     display: none;
     opacity: 0;
 }
 
-.id-active {
+.auth-card.id-active {
     display: block;
     opacity: 1;
 }
@@ -658,7 +642,6 @@ footer a:hover, .footer-link:hover {
     background-color: #523928;
 }
 
-/* Prompt container and toggle button styling text */
 .auth-switch-prompt {
     margin-top: 25px;
     text-align: center;
@@ -684,22 +667,27 @@ footer a:hover, .footer-link:hover {
     color: #523928;
 }
 
-/* Forgot Password Layout Alignment */
 .forgot-password-container {
     text-align: right;
-    margin-top: -10px; /* Pulls it slightly closer to the password input field above */
+    margin-top: -10px;
     margin-bottom: 5px;
 }
 
-.forgot-link {
+/* Redesigned Button Trigger for Forgot Password to avoid linter anchor issues */
+.forgot-link-btn {
+    background: none;
+    border: none;
     color: #6f4e37;
     font-size: 0.85em;
     font-weight: 600;
     text-decoration: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
     transition: color 0.2s ease;
 }
 
-.forgot-link:hover {
+.forgot-link-btn:hover {
     color: #523928;
     text-decoration: underline;
 }
@@ -708,42 +696,184 @@ footer a:hover, .footer-link:hover {
    6. ABOUT US & CONTACT PAGE STYLES
    ========================================================================== */
 .about-main {
-    max-width: 800px;
-    margin: 40px auto;
+    max-width: 900px !important;
+    margin: 0 auto !important;
+    padding: 40px 20px !important;
+    width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
 }
 
 .about-section {
     width: 100%;
+    text-align: left;
 }
 
-.contact-form .contact-submit-btn {
-    margin-top: 10px;
-    background-color: #6f4e37;
-    color: white;
+.about-section h1 {
+    font-size: 2.4em;
+    color: #1a1a1a;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.about-section h2 {
+    font-size: 1.6em;
+    color: #1a1a1a;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.about-description, .contact-subtext {
+    font-size: 1.02em;
+    color: #444;
+    line-height: 1.6;
+    max-width: 750px;
+}
+
+.section-divider {
+    width: 100%;
     border: none;
-    padding: 10px 20px;
+    border-top: 1px solid #eee;
+    margin: 35px 0;
+}
+
+.team-profiles-grid {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.team-member-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: calc(33.333% - 20px);
+    min-width: 220px;
+}
+
+.member-image-wrapper {
+    width: 100%;
+    height: 240px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #e6dfd5;
+    background-color: #f5f2eb;
+    margin-bottom: 12px;
+}
+
+.member-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+}
+
+.team-member-card:hover img {
+    transform: scale(1.02);
+}
+
+.team-member-card h3 {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 4px 0;
+}
+
+.member-role {
+    font-size: 0.9em;
+    color: #6f4e37;
+    font-weight: 600;
+    margin: 0;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    max-width: 700px;
+    margin-top: 25px;
+}
+
+.form-group-row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.form-field.full-width {
+    width: 100%;
+}
+
+.contact-form label {
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #4a3f35;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 14px;
+    border: 1px solid #e6dfd5;
     border-radius: 4px;
+    background-color: #ffffff;
+    font-size: 0.95em;
+    color: #1a1a1a;
+    font-family: inherit;
+    transition: border-color 0.2s ease;
+}
+
+.contact-form input:focus, .contact-form textarea:focus {
+    outline: none;
+    border-color: #6f4e37;
+}
+
+.contact-submit-btn {
+    align-self: flex-start;
+    background-color: #6f4e37;
+    color: #ffffff;
+    border: none;
     font-weight: bold;
+    font-size: 0.9em;
+    padding: 10px 24px;
+    border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    box-shadow: 0 2px 6px rgba(111, 78, 55, 0.1);
 }
 
-.contact-form .contact-submit-btn:hover {
+.contact-submit-btn:hover {
     background-color: #523928;
 }
 
 .direct-contact-info {
-    margin-top: 20px;
-    font-size: 0.9em;
+    margin-top: 30px;
+    font-size: 0.95em;
     color: #555;
     text-align: left;
+}
+
+.direct-contact-info p {
+    margin: 4px 0;
 }
 
 /* ==========================================================================
    7. CAFE DETAILS PAGE STYLES (MODERN ACCENT & CAPSULE CHECKBOXES)
    ========================================================================== */
 .cafe-details-main {
-    max-width: 850px; /* Optimal localized reading layout */
+    max-width: 850px;
     margin: 0 auto;
     padding: 40px 20px;
 }
@@ -781,7 +911,6 @@ footer a:hover, .footer-link:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
-/* Action Row containing rating summary and bookmark button inline */
 .cafe-action-row {
     display: flex;
     justify-content: space-between;
@@ -806,19 +935,23 @@ footer a:hover, .footer-link:hover {
 
 .cafe-bookmark-action .bookmark-btn {
     cursor: pointer;
-    padding: 8px 18px;
-    background-color: #ffffff;
-    border: 1px solid #6f4e37;
-    color: #6f4e37;
-    border-radius: 20px; /* Aligned with Michelin style capsules */
-    font-weight: bold;
-    font-size: 0.9em;
-    transition: all 0.2s ease;
+    padding: 10px 20px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95em;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    min-width: 180px;
+    text-align: center;
 }
 
 .cafe-bookmark-action .bookmark-btn:hover {
-    background-color: #6f4e37;
-    color: #ffffff;
+    background-color: #222222;
+}
+
+.cafe-bookmark-action .bookmark-btn:active {
+    transform: scale(0.98);
 }
 
 .cafe-description-box {
@@ -830,20 +963,66 @@ footer a:hover, .footer-link:hover {
     margin-bottom: 8px;
 }
 
+/* Requirement 7.2 Capsule Social Media Sharing Component Rules */
 .share-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    padding: 10px 0;
     font-size: 0.9em;
     color: gray;
 }
 
-.share-links a {
-    color: #6f4e37;
-    text-decoration: none;
-    margin: 0 5px;
-    font-weight: 600;
+.share-links span {
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #666;
 }
 
-.share-links a:hover {
-    text-decoration: underline;
+.share-links .footer-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    font-size: 0.85em;
+    font-weight: 500;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin: 0;
+}
+
+.share-links .footer-link[href*="facebook.com"] {
+    background-color: #f1f1f1;
+    color: #1877f2;
+    border: 1px solid #1877f2;
+}
+
+.share-links .footer-link[href*="facebook.com"]:hover {
+    background-color: #1877f2;
+    color: #ffffff;
+}
+
+.share-links .footer-link[href*="instagram.com"] {
+    background-color: #f1f1f1;
+    color: #e4405f;
+    border: 1px solid #e4405f;
+}
+
+.share-links .footer-link[href*="instagram.com"]:hover {
+    background-color: #e4405f;
+    color: #ffffff;
+}
+
+.share-links .footer-link[href*="x.com"] {
+    background-color: #f1f1f1;
+    color: #1da1f2;
+    border: 1px solid #1da1f2;
+}
+
+.share-links .footer-link[href*="x.com"]:hover {
+    background-color: #1da1f2;
+    color: #ffffff;
 }
 
 /* Review Form Architecture */
@@ -880,7 +1059,6 @@ footer a:hover, .footer-link:hover {
     border-color: #6f4e37;
 }
 
-/* Modern Capsule Checkboxes Style */
 .cafe-features-selection {
     margin: 25px 0;
 }
@@ -908,7 +1086,7 @@ footer a:hover, .footer-link:hover {
 }
 
 .tag-checkbox-label input[type="checkbox"] {
-    display: none; /* Hide old ugly square checkbox browser designs */
+    display: none;
 }
 
 .tag-checkbox-label span {
@@ -921,13 +1099,10 @@ footer a:hover, .footer-link:hover {
     font-weight: 500;
     color: #4a3f35;
     transition: all 0.2s ease;
-    
-    /* ADD THESE LINES TO FIX THE SAFARI COMPATIBILITY ERROR */
-    -webkit-user-select: none; /* Supports Safari and iOS Safari */
-    user-select: none;         /* Standard syntax for modern browsers */
+    -webkit-user-select: none;
+    user-select: none;
 }
 
-/* Interactive feedback states for checkboxes toggles */
 .tag-checkbox-label input[type="checkbox"]:checked + span {
     background-color: #fdfbf7;
     border-color: #6f4e37;
@@ -951,7 +1126,6 @@ footer a:hover, .footer-link:hover {
     background-color: #523928;
 }
 
-/* User Comments System Blocks */
 .user-comments-container {
     display: flex;
     flex-direction: column;
@@ -977,7 +1151,7 @@ footer a:hover, .footer-link:hover {
     color: #6f4e37;
     margin-left: 5px;
 }
-/* User Uploaded Photos Gallery Architecture */
+
 .cafe-user-gallery {
     margin: 35px 0 10px 0;
     width: 100%;
@@ -994,7 +1168,6 @@ footer a:hover, .footer-link:hover {
     margin-bottom: 15px;
 }
 
-/* Horizontal flex block for community pictures */
 .gallery-grid {
     display: flex;
     flex-wrap: wrap;
@@ -1002,11 +1175,10 @@ footer a:hover, .footer-link:hover {
     width: 100%;
 }
 
-/* Mini Photo Card Setup */
 .gallery-item {
     position: relative;
-    width: calc(33.333% - 10px); /* 3 columns on desktop views */
-    min-width: 230px; /* Safe wrapping trigger for tablets */
+    width: calc(33.333% - 10px);
+    min-width: 230px;
     height: 180px;
     border-radius: 6px;
     overflow: hidden;
@@ -1024,7 +1196,6 @@ footer a:hover, .footer-link:hover {
     transform: scale(1.04);
 }
 
-/* Elegant text overlay backdrop showing username attribution */
 .photo-meta {
     position: absolute;
     bottom: 0;
@@ -1045,7 +1216,6 @@ footer a:hover, .footer-link:hover {
     color: #fdfbf7;
 }
 
-/* Active Tags Display inside Cafe Details Page */
 .cafe-active-tags-section {
     margin: 20px 0 25px 0;
     text-align: left;
@@ -1065,10 +1235,9 @@ footer a:hover, .footer-link:hover {
     width: 100%;
 }
 
-/* Styled like the Michelin badges but solid/read-only styling */
 .active-tag-badge {
     display: inline-block;
-    background-color: #f5f0ea; /* Dynamic background to look distinct from form checkboxes */
+    background-color: #f5f0ea;
     border: 1px solid #e6dfd5;
     border-radius: 20px;
     padding: 5px 12px;
@@ -1087,12 +1256,10 @@ footer a:hover, .footer-link:hover {
     margin: 0 auto !important;
     padding: 40px 20px !important;
     width: 100%;
-    
-    /* FIXES THE CENTERING PROBLEM: Forces alignment to top-left */
     display: flex !important;
     flex-direction: column !important;
-    align-items: flex-start !important;   /* Pushes everything to the left side */
-    justify-content: flex-start !important; /* Pushes everything to the top of the screen */
+    align-items: flex-start !important;   
+    justify-content: flex-start !important; 
 }
 
 .city-header {
@@ -1102,7 +1269,7 @@ footer a:hover, .footer-link:hover {
 }
 
 .city-header h1 {
-    font-size: 2.5em; /* Sharper and bigger heading */
+    font-size: 2.5em;
     color: #1a1a1a;
     font-weight: 700;
     margin: 0;
@@ -1118,7 +1285,6 @@ footer a:hover, .footer-link:hover {
     margin-top: 6px;
 }
 
-/* Results Content Grid Section */
 .results-section-wrapper {
     width: 100%;
     text-align: left;
@@ -1137,21 +1303,19 @@ footer a:hover, .footer-link:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 30px; 
-    justify-content: flex-start; /* Ensures grid items flow from left to right naturally */
+    justify-content: flex-start;
     width: 100%;
 }
 
-/* Clean White Minimalist Card Setup */
 .michelin-cafe-card {
     display: flex;
     flex-direction: column;
-    width: calc(25% - 22.5px); /* Elegant 4-column breakdown grid */
+    width: calc(25% - 22.5px);
     min-width: 260px; 
     background: transparent;
     overflow: hidden;
 }
 
-/* Top Image Container */
 .card-image-wrapper {
     position: relative;
     width: 100%;
@@ -1171,7 +1335,6 @@ footer a:hover, .footer-link:hover {
     transform: scale(1.03); 
 }
 
-/* Floating Heart Bookmark Button */
 .floating-heart-btn {
     position: absolute;
     top: 12px;
@@ -1194,7 +1357,6 @@ footer a:hover, .footer-link:hover {
     transform: scale(1.1);
 }
 
-/* Under-Photo Typography Blocks */
 .card-info-link {
     display: block;
     text-decoration: none;
@@ -1202,7 +1364,6 @@ footer a:hover, .footer-link:hover {
     width: 100%;
 }
 
-/* Rating and Features Tagline Row */
 .card-michelin-meta {
     display: flex;
     align-items: center;
@@ -1226,7 +1387,6 @@ footer a:hover, .footer-link:hover {
     font-weight: 600;
 }
 
-/* Headings info blocks */
 .michelin-title {
     font-size: 1.15em;
     font-weight: 700;
@@ -1266,11 +1426,10 @@ footer a:hover, .footer-link:hover {
     gap: 35px;
 }
 
-/* TOP SECTION: Main Horizontal Layout Grid Frame */
 .user-profile-bio-header {
     display: flex;
     align-items: flex-start;
-    gap: 45px; /* Spacious separation between image and info */
+    gap: 45px;
     background-color: #ffffff;
     border: 1px solid #e6dfd5;
     border-radius: 8px;
@@ -1278,13 +1437,12 @@ footer a:hover, .footer-link:hover {
     text-align: left;
     width: 100%; 
     box-sizing: border-box;
-    position: relative; /* Allows action corner button pinning */
+    position: relative;
     box-shadow: 0 2px 8px rgba(0,0,0,0.01);
 }
 
-/* Extra Large Avatar Wrapper Spec */
 .bio-avatar-wrapper {
-    width: 170px; /* Enhanced diameter scale up */
+    width: 170px;
     height: 170px;
     border-radius: 50%;
     overflow: hidden;
@@ -1299,12 +1457,11 @@ footer a:hover, .footer-link:hover {
     object-fit: cover;
 }
 
-/* Structured Key-Value Fields Rows */
 .bio-info-details {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 8px; /* Vertical gap between fields */
+    gap: 8px;
     margin-top: 5px;
 }
 
@@ -1316,7 +1473,7 @@ footer a:hover, .footer-link:hover {
 }
 
 .field-label {
-    width: 100px; /* Fixed column width for tags like Label: */
+    width: 100px;
     font-weight: 600;
     color: #555;
     flex-shrink: 0;
@@ -1328,7 +1485,7 @@ footer a:hover, .footer-link:hover {
 }
 
 .user-important-name {
-    font-size: 1.5em; /* Name is distinctly larger like the sample */
+    font-size: 1.5em;
     font-weight: 700 !important;
     color: #1a1a1a;
 }
@@ -1338,7 +1495,6 @@ footer a:hover, .footer-link:hover {
     max-width: 500px;
 }
 
-/* Absolute Top Right Actions Button anchoring limits */
 .bio-action-corner {
     position: absolute;
     top: 35px;
@@ -1355,7 +1511,7 @@ footer a:hover, .footer-link:hover {
     font-weight: bold;
     font-size: 0.88em;
     padding: 8px 20px;
-    border-radius: 4px; /* Structured square-ish look matching the bounding teal box placeholder */
+    border-radius: 4px;
     transition: all 0.2s ease;
     background-color: #ffffff;
 }
@@ -1365,7 +1521,6 @@ footer a:hover, .footer-link:hover {
     color: #ffffff;
 }
 
-/* BOTTOM SECTION: Stacking Activity Tables Blocks */
 .profile-bottom-content {
     display: flex;
     flex-direction: column;
@@ -1394,8 +1549,8 @@ footer a:hover, .footer-link:hover {
 
 .profile-list {
     list-style: none;
-    padding: 0;
     margin: 0;
+    padding: 0;
     width: 100%;
 }
 
@@ -1461,29 +1616,6 @@ footer a:hover, .footer-link:hover {
     background-color: #ffe3e3;
 }
 
-/* Responsive adjustments for mobile wrap triggers */
-@media (max-width: 650px) {
-    .user-profile-bio-header {
-        flex-direction: column;
-        align-items: center;
-        padding: 30px;
-        gap: 20px;
-    }
-    .bio-action-corner {
-        position: static;
-        margin-top: 10px;
-        width: 100%;
-    }
-    .profile-edit-link {
-        justify-content: center;
-    }
-    .meta-field-row {
-        flex-direction: column;
-        gap: 2px;
-    }
-}
-
-/* --- Profile Inline Add Cafe Form Styles --- */
 .contributed-cafes-section {
     grid-column: span 2;
 }
@@ -1507,7 +1639,7 @@ footer a:hover, .footer-link:hover {
 }
 
 .inline-form-wrapper {
-    display: none; /* Controlled via JS toggleAddCafeForm */
+    display: none;
     margin-bottom: 25px;
     padding: 20px;
     background: #fafafa;
@@ -1598,203 +1730,25 @@ footer a:hover, .footer-link:hover {
 }
 
 /* ==========================================================================
-   10. ABOUT US PAGE STYLES (TEAM PROFILE GRID & CLEAN CONTACT FORM)
-   ========================================================================= */
-.about-main {
-    max-width: 900px !important;
-    margin: 0 auto !important;
-    padding: 40px 20px !important;
-    width: 100%;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    justify-content: flex-start !important;
-}
-
-.about-section {
-    width: 100%;
-    text-align: left;
-}
-
-.about-section h1 {
-    font-size: 2.4em;
-    color: #1a1a1a;
-    font-weight: 700;
-    margin-bottom: 12px;
-}
-
-.about-section h2 {
-    font-size: 1.6em;
-    color: #1a1a1a;
-    font-weight: 700;
-    margin-bottom: 25px;
-}
-
-.about-description, .contact-subtext {
-    font-size: 1.02em;
-    color: #444;
-    line-height: 1.6;
-    max-width: 750px;
-}
-
-.section-divider {
-    width: 100%;
-    border: none;
-    border-top: 1px solid #eee;
-    margin: 35px 0;
-}
-
-/* Team Grid Architecture Layout */
-.team-profiles-grid {
-    display: flex;
-    gap: 30px;
-    width: 100%;
-    flex-wrap: wrap;
-    margin-top: 10px;
-}
-
-.team-member-card {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Clean Left Alignment */
-    width: calc(33.333% - 20px);
-    min-width: 220px;
-}
-
-/* Image Wrapper Layout Frame */
-.member-image-wrapper {
-    width: 100%;
-    height: 240px; /* Uniform height for professional profile showcase */
-    border-radius: 6px;
-    overflow: hidden;
-    border: 1px solid #e6dfd5;
-    background-color: #f5f2eb;
-    margin-bottom: 12px;
-}
-
-.member-image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.2s ease;
-}
-
-.team-member-card:hover img {
-    transform: scale(1.02);
-}
-
-.team-member-card h3 {
-    font-size: 1.2em;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin: 0 0 4px 0;
-}
-
-.member-role {
-    font-size: 0.9em;
-    color: #6f4e37;
-    font-weight: 600;
-    margin: 0;
-}
-
-/* Refactored Clean Contact Form Styles */
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    width: 100%;
-    max-width: 700px;
-    margin-top: 25px;
-}
-
-.form-group-row {
-    display: flex;
-    gap: 20px;
-    width: 100%;
-}
-
-.form-field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    flex: 1;
-}
-
-.form-field.full-width {
-    width: 100%;
-}
-
-.contact-form label {
-    font-size: 0.9em;
-    font-weight: 600;
-    color: #4a3f35;
-}
-
-.contact-form input, .contact-form textarea {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 10px 14px;
-    border: 1px solid #e6dfd5;
-    border-radius: 4px;
-    background-color: #ffffff;
-    font-size: 0.95em;
-    color: #1a1a1a;
-    font-family: inherit;
-    transition: border-color 0.2s ease;
-}
-
-.contact-form input:focus, .contact-form textarea:focus {
-    outline: none;
-    border-color: #6f4e37;
-}
-
-.contact-submit-btn {
-    align-self: flex-start;
-    background-color: #6f4e37;
-    color: #ffffff;
-    border: none;
-    font-weight: bold;
-    font-size: 0.9em;
-    padding: 10px 24px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    box-shadow: 0 2px 6px rgba(111, 78, 55, 0.1);
-}
-
-.contact-submit-btn:hover {
-    background-color: #523928;
-}
-
-.direct-contact-info {
-    margin-top: 30px;
-    font-size: 0.95em;
-    color: #555;
-}
-
-.direct-contact-info p {
-    margin: 4px 0;
-}
-
-
-/* Styling for the detail page bookmark action button */
-.bookmark-btn {
-    padding: 10px 20px;
-    background-color: #000000;
-    color: #ffffff;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.95em;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-    min-width: 180px; /* Ensures the button width stays stable when text changes */
-    text-align: center;
-}
-
-.bookmark-btn:hover {
-    background-color: #222222;
-}
-
-.bookmark-btn:active {
-    transform: scale(0.98);
+   10. RESPONSIVE MEDIA QUERIES (BREAKPOINTS)
+   ========================================================================== */
+@media (max-width: 650px) {
+    .user-profile-bio-header {
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;
+        gap: 20px;
+    }
+    .bio-action-corner {
+        position: static;
+        margin-top: 10px;
+        width: 100%;
+    }
+    .profile-edit-link {
+        justify-content: center;
+    }
+    .meta-field-row {
+        flex-direction: column;
+        gap: 2px;
+    }
 }
