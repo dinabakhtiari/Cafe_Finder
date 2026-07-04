@@ -6,15 +6,33 @@ const upload = require("../middleware/upload.js");
 
 // Get cafes
 router.get("/", (req, res) => {
-    connection.query(
-        "SELECT * FROM cafes",
-        (err, result) => {
-            if (err) {
-                return res.status(500).json({ error: err.message });
-            }
-            res.json(result);
+    let conditions = [];
+    let values = [];
+
+    if (req.query.city) {
+        conditions.push("cafes.city = ?");
+        values.push(req.query.city);
+    }
+
+    const tags = ["wifi", "outlets", "quiet", "tables", "outdoor", "ac", "parking", "student_discount", "specialty_coffee", "snacks"];
+    tags.forEach(tag => {
+        if (req.query[tag]) {
+            conditions.push(`reviews.${tag} = ?`);
+            values.push(true);
         }
-    );
+    });
+
+    let query = "SELECT DISTINCT cafes.* FROM cafes LEFT JOIN reviews ON cafes.id = reviews.cafe_id";
+    if (conditions.length > 0) {
+        query += " WHERE " + conditions.join(" AND ");
+    }
+
+    connection.query(query, values, (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.json(result);
+    });
 });
 
 // Get most receent
