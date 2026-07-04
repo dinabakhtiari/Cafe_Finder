@@ -118,7 +118,7 @@ router.delete('/:id', requireLogin, (req, res) => {
 
             const cafeUserId = result[0].user_id;
 
-            if (sessionUserId === cafeUserId) {
+            if (sessionUserId == cafeUserId) {
                 connection.query(
                     "DELETE FROM cafes WHERE id = ?",
                     [idDelete],
@@ -143,7 +143,7 @@ router.delete('/:id', requireLogin, (req, res) => {
 
 // Update cafe
 router.patch("/:id", requireLogin, (req, res) => {
-    const { name, description, city, address, tags, food, coffee, service, wifi, ambience } = req.body;
+    const { name, description, city, address } = req.body;
     const cafeId = req.params.id;
     const sessionUserId = req.session.userId;
 
@@ -160,10 +160,10 @@ router.patch("/:id", requireLogin, (req, res) => {
 
             const cafeUserId = result[0].user_id;
 
-            if (sessionUserId === cafeUserId) {
+            if (sessionUserId == cafeUserId) {
                 connection.query(
-                    "UPDATE cafes SET name = ?, description = ?, city = ?, address = ?, tags = ?, food = ?, coffee = ?, service = ?, wifi = ?, ambience = ? WHERE id = ?",
-                    [name, description, city, address, tags, food, coffee, service, wifi, ambience, cafeId],
+                    "UPDATE cafes SET name = ?, description = ?, city = ?, address = ? WHERE id = ?",
+                    [name, description, city, address, cafeId],
                     (err, result) => {
                         if (err) {
                             return res.status(500).json({ error: err.message });

@@ -38,6 +38,9 @@ router.post("/", requireLogin, upload.array("photos", 5), (req, res) => {
 
 router.get("/", (req, res) => {
     const cafe_id = req.query.cafe_id;
+    if (!cafe_id) {
+        return res.status(400).json({ error: "cafe_id is required" });
+    }
 
     connection.query(
         "SELECT * FROM reviews WHERE cafe_id = ?",
@@ -63,13 +66,13 @@ router.patch("/:id", requireLogin, (req, res) => {
             if (err) {
                 return res.status(500).json({ error: err.message });
             }
-            if (result.length === 0) {
+            if (result.length == 0) {
                 return res.status(404).send("Review not found");
             }
 
             const reviewsUserId = result[0].user_id;
 
-            if (sessionUserId === reviewsUserId) {
+            if (sessionUserId == reviewsUserId) {
                 connection.query(
                     "UPDATE reviews SET rating = ?, wifi = ?, outlets = ?, quiet = ?, tables = ?, outdoor = ?, ac = ?, parking = ?, student_discount = ?, specialty_coffee = ?, snacks = ?, comment = ? WHERE id = ?",
                     [rating, wifi, outlets, quiet, tables, outdoor, ac, parking, student_discount, specialty_coffee, snacks, comment, reviewId],
@@ -107,7 +110,7 @@ router.delete('/:id', requireLogin, (req, res) => {
 
             const reviewUserId = result[0].user_id;
 
-            if (sessionUserId === reviewUserId) {
+            if (sessionUserId == reviewUserId) {
                 connection.query(
                     "DELETE FROM reviews WHERE id = ?",
                     [idDelete],

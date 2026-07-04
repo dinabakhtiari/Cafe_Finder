@@ -47,7 +47,7 @@ router.patch('/:id', requireLogin, upload.single("photo"), async (req, res) => {
                 return res.status(204).send();
             }
         );
-    } else if (password !== confirm_password) {
+    } else if (password != confirm_password) {
         return res.status(400).json({ error: "Passwords don't match" });
     } else {
         const hashedPwd = await bcryptjs.hash(password, 10);
