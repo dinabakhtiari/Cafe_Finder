@@ -17,6 +17,22 @@ router.get("/", (req, res) => {
     );
 });
 
+// Get most receent
+router.get("/recent", (req, res) => {
+    connection.query(
+        "SELECT * FROM cafes ORDER BY created_at DESC LIMIT 5",
+        (err, result) => {
+            if (err) {
+                return res.status(500).json({ error: err.message });
+            }
+            if (result.length === 0) {
+                return res.status(404).send("No cafes added yet");
+            }
+            return res.json(result);
+        }
+    )
+});
+
 // Get specific cafe
 router.get("/:id", (req, res) => {
     connection.query(
@@ -148,5 +164,6 @@ router.patch("/:id", requireLogin, (req, res) => {
         }
     );
 });
+
 
 module.exports = router;
