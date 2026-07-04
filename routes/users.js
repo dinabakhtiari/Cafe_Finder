@@ -3,10 +3,11 @@ const router = express.Router();
 const connection = require("../middleware/connectionDB.js");
 const bcryptjs = require('bcryptjs');
 const requireLogin = require('../middleware/authMiddleware.js');
+const upload = require("../middleware/upload.js");
 
 router.get('/:id', (req, res) => {
     connection.query(
-        "SELECT name, email, bio FROM users WHERE id = ?",
+        "SELECT name, email, bio, photo_url FROM users WHERE id = ?",
         [req.params.id],
         (err, result) => {
             if (err) {
@@ -21,7 +22,7 @@ router.get('/:id', (req, res) => {
 });
 
 // Update user info
-router.put('/:id', requireLogin, async (req, res) => {
+router.patch('/:id', requireLogin, upload.single("photo"), async (req, res) => {
     const userId = req.params.id;
     const sessionId = req.session.userId;
 
@@ -30,41 +31,36 @@ router.put('/:id', requireLogin, async (req, res) => {
     }
 
     const { name, email, password, confirm_password, bio } = req.body;
-
+    const photo_url = req.file ? req.file.path : null;
 
     if (!password) {
         connection.query(
-            "UPDATE users SET name = ?, email = ?, bio = ? WHERE id = ?",
-            [name, email, bio, userId],
+            "UPDATE users SET name = ?, email = ?, bio = ?, photo_url = ? WHERE id = ?",
+            [name, email, bio, photo_url, userId],
             (err, result) => {
                 if (err) {
                     return res.status(500).json({ error: err.message });
                 }
-
                 if (result.affectedRows === 0) {
                     return res.status(404).json({ error: "User not found" });
                 }
-
                 return res.status(204).send();
             }
         );
     } else if (password !== confirm_password) {
-        res.status(400).json({ error: "Passwords don't match" })
+        return res.status(400).json({ error: "Passwords don't match" });
     } else {
-        const hashedPwd = await bcryptjs.hash(req.body.password, 10);
-
+        const hashedPwd = await bcryptjs.hash(password, 10);
         connection.query(
-            "UPDATE users SET name = ?, email = ?, password = ?, bio = ? WHERE id = ?",
-            [name, email, hashedPwd, bio, userId],
+            "UPDATE users SET name = ?, email = ?, password = ?, bio = ?, photo_url = ? WHERE id = ?",
+            [name, email, hashedPwd, bio, photo_url, userId],
             (err, result) => {
                 if (err) {
                     return res.status(500).json({ error: err.message });
                 }
-
                 if (result.affectedRows === 0) {
                     return res.status(404).json({ error: "User not found" });
                 }
-
                 return res.status(204).send();
             }
         );
