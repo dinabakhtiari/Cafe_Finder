@@ -15,17 +15,18 @@ router.post("/register", async (req, res) => {
         });
     }
     const hashedPwd = await bcryptjs.hash(req.body.password, 10);
+    const { username, name, email } = req.body
 
     connection.query(
-        "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
-        [req.body.name, req.body.email, hashedPwd],
+        "INSERT INTO users (username, name, email, password) VALUES (?, ?, ?, ?)",
+        [username, name, email, hashedPwd],
         (err, result) => {
             if (err) {
                 return res.render("register", {
-                    message: "Email already in use",
+                    message: "Username or email already in use",
                 });
             }
-            req.session.userId = result.inserId;
+            req.session.userId = result.insertId;
             res.redirect("/dashboard");
         },
     );
