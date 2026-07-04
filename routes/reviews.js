@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const connection = require("../middleware/connectionDB.js");
 const requireLogin = require('../middleware/authMiddleware.js');
+const upload = require("../middleware/upload.js");
 
-router.post("/", requireLogin, (req, res) => {
+router.post("/", requireLogin, upload.array("photos", 5), (req, res) => {
     const user_id = req.session.userId;
     const { rating, cafe_id, wifi, outlets, quiet, tables, outdoor, ac, parking, student_discount, specialty_coffee, snacks, comment } = req.body;
 
@@ -14,7 +15,23 @@ router.post("/", requireLogin, (req, res) => {
             if (err) {
                 return res.status(500).json({ error: err.message });
             }
-            return res.status(201).json({ id: result.insertId });
+            if (req.files && req.files.length > 0) {
+                const review_id = result.insertId;
+                req.files.forEach(file => {
+                    connection.query(
+                        "INSERT INTO review_photos (review_id, url) VALUES (?, ?)",
+                        [review_id, file.path],
+                        (err) => {
+                            if (err) {
+                                return res.status(500).json({ error: err.message });
+                            }
+                        }
+                    );
+                });
+                return res.status(201).json({ id: review_id });
+            } else {
+                return res.status(201).json({ id: result.insertId });
+            }
         }
     );
 });
