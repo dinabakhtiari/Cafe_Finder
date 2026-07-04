@@ -196,7 +196,6 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Henrique','123@123.com','$2b$10$PjSOeovLAYH1J//ZZ5uRjO.iajY4/9SLjGsDPxdK173O4tQMAnYk2',NULL),(6,'h','h@hc.com','$2b$10$sH3MrlvkR2NAsBvKpUw35usv0Edotjt8r8ZpQUPlf2wEXYdUIlC4S',NULL),(7,'hc','hc@hc.com','$2b$10$6mLfTMEdG2oQc2l5go8cjeteBWyvdrJpyVst0pAoRfRlfufLxdef6',NULL),(8,'admin','admin@admin.com','$2b$10$OTbnxXsnaw4ghurYcKG58OTzLzRDmuQcCWVhW42FJVlhM291l3qle',NULL),(9,'hc','something@wtv.com','$2b$10$zQlqbWmB/RlpE3HzGYOIuOzLiS74MqJPb3znzKhn.DFDsTl3lDc6m',NULL),(10,'sup','sup@sup.com','$2b$10$OA95Ss7EPFMs8VcSM0Hn3uXKSVhiPYVNUpEpcr2F3xMBEyjR.3cuW',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
