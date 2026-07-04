@@ -184,6 +184,7 @@ CREATE TABLE `users` (
     `email` varchar(255) NOT NULL,
     `password` varchar(255) NOT NULL,
     `bio` text,
+    `photo_url` varchar(500) DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
