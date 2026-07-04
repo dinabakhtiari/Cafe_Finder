@@ -20,6 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.set("view engine", "ejs");
 app.use(express.static("views"));
+app.use(express.static("public")); // so that frontend can display pictures statically as well
 
 // Session middleware
 app.use(
