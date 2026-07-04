@@ -105,11 +105,10 @@ router.delete('/:id', requireLogin, (req, res) => {
             }
         }
     );
-
 });
 
 // Update cafe
-router.put("/:id", requireLogin, (req, res) => {
+router.patch("/:id", requireLogin, (req, res) => {
     const { name, description, city, address, tags, food, coffee, service, wifi, ambience } = req.body;
     const cafeId = req.params.id;
     const sessionUserId = req.session.userId;
