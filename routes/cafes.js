@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const connection = require("../middleware/connectionDB.js");
-const requireLogin = require('../middleware/authMiddleware.js');
+const requireLogin = require("../middleware/authMiddleware.js");
+const upload = require("../middleware/upload.js");
 
 // Get cafes
 router.get("/", (req, res) => {
@@ -34,18 +35,33 @@ router.get("/:id", (req, res) => {
 });
 
 // Add cafe
-router.post("/", requireLogin, (req, res) => {
+router.post("/", requireLogin, upload.single("photo"), (req, res) => {
     const user_id = req.session.userId;
-    const { name, description, city, address, tags, food, coffee, service, wifi, ambience } = req.body;
+    const { name, description, city, address } = req.body;
 
     connection.query(
-        "INSERT INTO cafes (name, description, city, address, tags, food, coffee, service, wifi, ambience, user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
-        [name, description, city, address, tags, food, coffee, service, wifi, ambience, user_id],
+        "INSERT INTO cafes (name, description, city, address, user_id) VALUES (?,?,?,?,?)",
+        [name, description, city, address, user_id],
         (err, result) => {
             if (err) {
                 return res.status(500).json({ error: err.message });
             }
-            return res.status(201).json({ id: result.insertId });
+            if (req.file) {
+                const cafe_id = result.insertId;
+                const url = req.file.path;
+                connection.query(
+                    "INSERT INTO photos (cafe_id, url) VALUES (?, ?)",
+                    [cafe_id, url],
+                    (err) => {
+                        if (err) {
+                            return res.status(500).json({ error: err.message });
+                        }
+                        return res.status(201).json({ id: cafe_id });
+                    }
+                );
+            } else {
+                return res.status(201).json({ id: result.insertId });
+            }
         }
     );
 });

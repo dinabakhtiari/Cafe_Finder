@@ -36,22 +36,11 @@ CREATE TABLE `cafes` (
   `description` text,
   `city` varchar(255) NOT NULL,
   `address` varchar(500) NOT NULL,
-  `tags` text,
-  `food` int DEFAULT NULL,
-  `coffee` int DEFAULT NULL,
-  `service` int DEFAULT NULL,
-  `wifi` int DEFAULT NULL,
-  `ambience` int DEFAULT NULL,
   `user_id` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `cafes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `cafes_chk_1` CHECK ((`food` between 1 and 5)),
-  CONSTRAINT `cafes_chk_2` CHECK ((`coffee` between 1 and 5)),
-  CONSTRAINT `cafes_chk_3` CHECK ((`service` between 1 and 5)),
-  CONSTRAINT `cafes_chk_4` CHECK ((`wifi` between 1 and 5)),
-  CONSTRAINT `cafes_chk_5` CHECK ((`ambience` between 1 and 5))
+  CONSTRAINT `cafes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -112,6 +101,28 @@ CREATE TABLE `photos` (
 -- Dumping data for table `photos`
 --
 
+--
+-- Table structure for table `review_photos`
+--
+
+DROP TABLE IF EXISTS `review_photos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `review_photos` (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `review_id` int NOT NULL,
+    `url` varchar(500) NOT NULL,
+    `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    KEY `review_id` (`review_id`),
+CONSTRAINT `review_photos_ibfk_1` FOREIGN KEY (`review_id`) REFERENCES `reviews` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table review_photos`
+--
+
 LOCK TABLES `photos` WRITE;
 /*!40000 ALTER TABLE `photos` DISABLE KEYS */;
 /*!40000 ALTER TABLE `photos` ENABLE KEYS */;
@@ -129,6 +140,16 @@ CREATE TABLE `reviews` (
     `user_id` int NOT NULL,
     `cafe_id` int NOT NULL,
     `rating` int NOT NULL,
+    `wifi` BOOLEAN DEFAULT FALSE,
+    `outlets` BOOLEAN DEFAULT FALSE,
+    `quiet` BOOLEAN DEFAULT FALSE,
+    `tables` BOOLEAN DEFAULT FALSE,
+    `outdoor` BOOLEAN DEFAULT FALSE,
+    `ac` BOOLEAN DEFAULT FALSE,
+    `parking` BOOLEAN DEFAULT FALSE,
+    `student_discount` BOOLEAN DEFAULT FALSE,
+    `specialty_coffee` BOOLEAN DEFAULT FALSE,
+    `snacks` BOOLEAN DEFAULT FALSE,
     `comment` text,
     `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
