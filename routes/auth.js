@@ -27,7 +27,7 @@ router.post("/register", async (req, res) => {
                 });
             }
             req.session.userId = result.insertId;
-            res.redirect("/dashboard");
+            res.redirect("/");
         },
     );
 });
@@ -44,7 +44,7 @@ router.post("/login", async (req, res) => {
         "SELECT * FROM users WHERE email = ?",
         [email],
         async (err, result) => {
-            if (result.length === 0 || err) {
+            if (err || result.length === 0) {
                 return res.render("login", {
                     message: "Email or password is incorrect",
                 });
