@@ -3,7 +3,7 @@ const router = express.Router();
 const bcryptjs = require('bcryptjs');
 const requireLogin = require('../middleware/authMiddleware.js');
 const upload = require("../middleware/upload.js");
-const userModel = require("../models/user.js");
+const userModel = require("../models/users.js");
 
 router.get('/:id', (req, res) => {
     userModel.getUserById(req.params.id, (err, result) => {

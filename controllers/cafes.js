@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const requireLogin = require("../middleware/authMiddleware.js");
 const upload = require("../middleware/upload.js");
-const cafeModel = require("../models/cafe.js");
+const cafeModel = require("../models/cafes.js");
 
 // Get cafes
 router.get("/", (req, res) => {

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const requireLogin = require('../middleware/authMiddleware.js');
 const upload = require("../middleware/upload.js");
-const reviewModel = require("../models/review.js");
+const reviewModel = require("../models/reviews.js");
 
 router.post("/", requireLogin, upload.array("photos", 5), (req, res) => {
     const data = { ...req.body, user_id: req.session.userId };
