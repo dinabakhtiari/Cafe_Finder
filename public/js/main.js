@@ -119,3 +119,15 @@ function hideForgotPassword() {
         loginCard.classList.replace('id-hidden', 'id-active');
     }
 }
+
+// Toggle Inline Edit Cafe Form Row View
+function toggleEditCafeForm(cafeId) {
+    const editFormContainer = document.getElementById(`inline-edit-cafe-${cafeId}`);
+    if (editFormContainer) {
+        if (editFormContainer.classList.contains('id-hidden')) {
+            editFormContainer.classList.replace('id-hidden', 'id-active');
+        } else {
+            editFormContainer.classList.replace('id-active', 'id-hidden');
+        }
+    }
+}
