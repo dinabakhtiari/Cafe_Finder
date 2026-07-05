@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/main.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/main.js"></script>
     <title>Cafe Finder - Login & Register</title>
 </head>
 
@@ -33,7 +33,7 @@
                         <ul>
                             <li><a href="user-profile.html">👤 Profile</a></li>
                             <li><a href="/my-comments">💬 My Comments</a></li>
-                            <li><a href="/liked-cafes">❤️ Saved Cafes</a></li>
+                            <li><a href="saved-cafes.html">❤️ Saved Cafes</a></li>
                             <li class="dropdown-divider"></li>
                             <li><a href="login-register.html" class="logout-link">🚪 Logout</a></li>
                         </ul>
@@ -84,26 +84,26 @@
                         <label for="reg-username">Username</label>
                         <input type="text" id="reg-username" name="username" placeholder="e.g. dinab96" required>
                     </div>
+                    
                     <div class="form-group">
-                        <label for="reg-firstname">First Name</label>
-                        <input type="text" id="reg-firstname" name="firstname" placeholder="Your Firstname" required>
+                        <label for="reg-fullname">Full Name</label>
+                        <input type="text" id="reg-fullname" name="name" placeholder="Your Full Name" required>
                     </div>
-                    <div class="form-group">
-                        <label for="reg-lastname">Last Name</label>
-                        <input type="text" id="reg-lastname" name="lastname" placeholder="Your Lastname" required>
-                    </div>
+                    
                     <div class="form-group">
                         <label for="reg-email">Email Address</label>
                         <input type="email" id="reg-email" name="email" placeholder="example@email.com" required>
                     </div>
+                    
                     <div class="form-group">
                         <label for="reg-password">Password</label>
                         <input type="password" id="reg-password" name="password" placeholder="Min. 8 characters"
                             required>
                     </div>
+                    
                     <div class="form-group">
                         <label for="reg-confirm-password">Confirm Password</label>
-                        <input type="password" id="reg-confirm-password" name="confirmPassword"
+                        <input type="password" id="reg-confirm-password" name="confirm_password"
                             placeholder="Min. 8 characters" required>
                     </div>
                     <button type="submit" class="auth-submit-btn">Sign Up</button>

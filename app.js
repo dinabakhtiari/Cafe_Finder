@@ -19,9 +19,10 @@ const port = 3000;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.set("view engine", "ejs");
-app.use(express.static("views"));
-app.use(express.static("public")); // so that frontend can display pictures statically as well
+const path = require("path");
 
+app.use(express.static(path.join(__dirname, "views")));
+app.use(express.static(path.join(__dirname, "public")));
 // Session middleware
 app.use(
     session({
@@ -43,6 +44,10 @@ app.use("/favorites", require("./controllers/favorites.js"));
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
+});
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "views", "login-register.html"));
 });
 
 // close connection to database

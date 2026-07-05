@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
     const today = new Date();
-    
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const formattedDate = today.toLocaleDateString("en-US", options);
     
@@ -18,24 +17,20 @@ function toggleAuthPages() {
     const registerCard = document.getElementById('register-card');
 
     if (loginCard.classList.contains('id-active')) {
-        // Hide Login, Show Register
         loginCard.classList.remove('id-active');
         loginCard.classList.add('id-hidden');
-        
         registerCard.classList.remove('id-hidden');
         registerCard.classList.add('id-active');
     } else {
-        // Hide Register, Show Login
         registerCard.classList.remove('id-active');
         registerCard.classList.add('id-hidden');
-        
         loginCard.classList.remove('id-hidden');
         loginCard.classList.add('id-active');
     }
 }
 
 /**
- * Toggles the visibility of the Michelin profile dropdown menu
+ * Toggles the visibility of the profile dropdown menu
  */
 function toggleProfileDropdown() {
     const dropdown = document.getElementById('profileDropdown');
@@ -44,12 +39,11 @@ function toggleProfileDropdown() {
     }
 }
 
-// Automatically closes the dropdown if the user clicks anywhere outside of it
+// Automatically closes the dropdown if clicked outside
 window.addEventListener('click', function(event) {
     const dropdown = document.getElementById('profileDropdown');
     const menuBtn = document.querySelector('.profile-menu-btn');
     
-    // Check if dropdown is currently active and the click was outside the container elements
     if (dropdown && dropdown.classList.contains('show-menu')) {
         if (!menuBtn.contains(event.target) && !dropdown.contains(event.target)) {
             dropdown.classList.remove('show-menu');
@@ -57,6 +51,9 @@ window.addEventListener('click', function(event) {
     }
 });
 
+/**
+ * Syncs bookmark logic with Henrique's favorites.js routing (POST/DELETE)
+ */
 function toggleLikeCafe(button, cafeId) {
     const isLiking = button.innerText.trim() === '🤍' || button.innerText.includes('Add to Favorites');
     
@@ -66,9 +63,11 @@ function toggleLikeCafe(button, cafeId) {
         button.innerText = isLiking ? '❤️' : '🤍';
     }
 
-    const url = isLiking ? `/cafes/${cafeId}/bookmark` : `/cafes/${cafeId}/unbookmark`;
-
-    fetch(url, { method: 'POST' })
+    fetch('/favorites', { 
+        method: isLiking ? 'POST' : 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cafe_id: cafeId })
+    })
     .then(res => {
         if (!res.ok) throw new Error();
     })
@@ -78,20 +77,9 @@ function toggleLikeCafe(button, cafeId) {
     });
 }
 
-function removeBookmark(cafeId) {
-    fetch(`/cafes/${cafeId}/unbookmark`, { method: 'POST' })
-    .then(res => {
-        if (res.ok) {
-            document.getElementById(`saved-cafe-${cafeId}`).remove();
-        }
-    });
-}
-
-// Function to toggle the visibility of the inline Add Cafe form in User Profile
+// Function to toggle the visibility of the inline Add Cafe form
 function toggleAddCafeForm() {
     const formContainer = document.getElementById('inline-add-cafe-container');
-    
-    // Check the current display status and toggle it
     if (formContainer.style.display === 'none' || formContainer.style.display === '') {
         formContainer.style.display = 'block';
     } else {
@@ -132,36 +120,63 @@ function toggleEditCafeForm(cafeId) {
     }
 }
 
-// Remove Cafe from Saved List smoothly (AJAX-like interaction)
+/**
+ * Handles smooth AJAX removal of bookmarks from saved-cafes.html using favorites.js endpoint
+ */
 function removeBookmark(cafeId) {
-    // Elegant native confirmation box
     const confirmRemove = confirm("Are you sure you want to remove this cafe from your saved favorites?");
     
     if (confirmRemove) {
-        // Find the specific cafe card item in the DOM using its ID
         const cafeCard = document.getElementById(`saved-cafe-${cafeId}`);
-        
         if (cafeCard) {
-            // Apply a smooth fade-out effect via CSS transition
             cafeCard.style.opacity = '0';
             cafeCard.style.transform = 'scale(0.95)';
             cafeCard.style.transition = 'all 0.3s ease';
             
-            // Wait for the animation to finish, then completely remove from layout
             setTimeout(() => {
                 cafeCard.remove();
-                
-                // Optional: If no cafes are left, display an empty state message
                 const grid = document.querySelector('.modern-cafes-grid');
                 if (grid && grid.children.length === 0) {
                     grid.innerHTML = '<p class="results-count-text" style="grid-column: 1/-1; text-align: center; padding: 40px 0;">No saved cafes yet. Start exploring from the home page!</p>';
                 }
             }, 300);
             
-            /* Backend Integration Note:
-              Henrique will add the fetch/axios API call here later:
-              fetch(`/cafes/${cafeId}/unlike`, { method: 'POST' });
-            */
+            fetch('/favorites', { 
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ cafe_id: cafeId })
+            });
         }
     }
+}
+
+/**
+ * Captures edit form updates and asynchronously sends them via standard HTTP PATCH to the MVC backend
+ */
+function submitEditCafeForm(event, cafeId) {
+    event.preventDefault();
+
+    const formElement = document.getElementById(`edit-cafe-form-${cafeId}`);
+    if (!formElement) return;
+
+    // Collects files and texts seamlessly
+    const formData = new FormData(formElement);
+
+    fetch(`/cafes/${cafeId}`, {
+        method: 'PATCH',
+        body: formData
+    })
+    .then(res => {
+        if (res.status === 204 || res.ok) {
+            alert('Cafe updated successfully! 💾');
+            toggleEditCafeForm(cafeId);
+            window.location.reload(); // Refreshes page to view latest content changes
+        } else {
+            return res.json().then(data => { throw new Error(data.error || 'Failed to update') });
+        }
+    })
+    .catch(err => {
+        console.error('Update operation error:', err);
+        alert(`Error: ${err.message || 'Could not update cafe details.'}`);
+    });
 }
