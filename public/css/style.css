@@ -1752,3 +1752,46 @@ footer a:hover, .footer-link:hover {
         gap: 2px;
     }
 }
+
+/* ==========================================================================
+   11. SAVED CAFES PAGE SPECIALIZATIONS (Requirement 7.1.3)
+   ========================================================================== */
+.results-main .modern-cafes-grid {
+    display: grid !important;
+    /* Creates a responsive 4-column layout that scales down smoothly on tablets and mobile */
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important;
+    gap: 30px !important;
+    width: 100% !important;
+    margin-top: 25px !important;
+}
+
+/* Specific red pulsing override for active heart button on saved page */
+.floating-heart-btn {
+    color: #c92a2a; /* Warning Red for saved state */
+    font-size: 1.05em;
+    background: #ffffff;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.floating-heart-btn:hover {
+    transform: scale(1.1);
+    background-color: #fff5f5;
+}
+
+/* Adjusting Card Info layout to prevent any text leakage */
+.michelin-cafe-card .card-info-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/css/style.css">
+    <script src="../public/js/main.js"></script>
+    <title>Cafe Finder - Saved Cafes</title>
+</head>
+<body>
+    <!-- Global Header Component -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="home.html">☕ Cafe Finder</a>
+            </div>
+            
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                </ul>
+                
+                <!-- Profile and Navigation Dropdown Menu -->
+                <div class="profile-menu-container">
+                    <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()" aria-label="Toggle profile menu">
+                        <span class="profile-avatar-icon">👤</span>
+                        <span class="hamburger-lines-icon">☰</span>
+                    </button>
+                    
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <ul>
+                            <li><a href="user-profile.html">👤 Profile</a></li>
+                            <li><a href="/my-comments">💬 My Comments</a></li>
+                            <li><a href="saved-cafes.html">❤️ Saved Cafes</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li><a href="login-register.html" class="logout-link">🚪 Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="results-main">
+        <div class="city-header">
+            <h1>My <span class="highlight-city">Saved Cafes</span></h1>
+            <p class="results-count-text">Your curated list of favorite remote work and study spots.</p>
+        </div>
+
+        <section class="results-section-wrapper">
+            <!-- Grid Layout optimized automatically via style.css -->
+            <div class="modern-cafes-grid">
+                
+                <!-- Saved Cafe Item 1 -->
+                <article class="michelin-cafe-card" id="saved-cafe-2">
+                    <div class="card-image-wrapper">
+                        <img src="placeholder.jpg" alt="Interior of Schloss Cafe">
+                        <!-- Modern AJAX handler to remove bookmarks with confirmation -->
+                        <button type="button" class="floating-heart-btn" onclick="removeBookmark(2)" aria-label="Remove Schloss Cafe from favorites">
+                            ❤️
+                        </button>
+                    </div>
+                    
+                    <a href="/cafes/2" class="card-info-link">
+                        <div class="card-michelin-meta">
+                            <span class="michelin-rating">⭐ 4.7</span>
+                            <span class="michelin-divider">|</span>
+                            <span class="michelin-tag">Stuttgart</span>
+                        </div>
+                        <h3 class="michelin-title">Schloss Cafe</h3>
+                        <p class="michelin-location">Königstraße 18, Stuttgart</p>
+                    </a>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Global Layout Footer Component -->
+    <footer class="cafe-details-footer">
+        <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
+        <p>
+            <a href="about-us.html">About Us & Contact</a> | 
+            <a href="home.html">Home</a>
+        </p>
+        
+        <div>
+            <a href="https://instagram.com" class="footer-link" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://x.com" class="footer-link" target="_blank" rel="noopener">Twitter / X</a>
+            <a href="https://facebook.com" class="footer-link" target="_blank" rel="noopener">Facebook</a>
+        </div>
+    </footer>
+</body>
+</html>

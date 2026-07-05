@@ -131,3 +131,37 @@ function toggleEditCafeForm(cafeId) {
         }
     }
 }
+
+// Remove Cafe from Saved List smoothly (AJAX-like interaction)
+function removeBookmark(cafeId) {
+    // Elegant native confirmation box
+    const confirmRemove = confirm("Are you sure you want to remove this cafe from your saved favorites?");
+    
+    if (confirmRemove) {
+        // Find the specific cafe card item in the DOM using its ID
+        const cafeCard = document.getElementById(`saved-cafe-${cafeId}`);
+        
+        if (cafeCard) {
+            // Apply a smooth fade-out effect via CSS transition
+            cafeCard.style.opacity = '0';
+            cafeCard.style.transform = 'scale(0.95)';
+            cafeCard.style.transition = 'all 0.3s ease';
+            
+            // Wait for the animation to finish, then completely remove from layout
+            setTimeout(() => {
+                cafeCard.remove();
+                
+                // Optional: If no cafes are left, display an empty state message
+                const grid = document.querySelector('.modern-cafes-grid');
+                if (grid && grid.children.length === 0) {
+                    grid.innerHTML = '<p class="results-count-text" style="grid-column: 1/-1; text-align: center; padding: 40px 0;">No saved cafes yet. Start exploring from the home page!</p>';
+                }
+            }, 300);
+            
+            /* Backend Integration Note:
+              Henrique will add the fetch/axios API call here later:
+              fetch(`/cafes/${cafeId}/unlike`, { method: 'POST' });
+            */
+        }
+    }
+}
