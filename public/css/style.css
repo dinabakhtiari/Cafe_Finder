@@ -134,10 +134,10 @@ nav {
 
 /* Dropdown Content Box Container Floating Window */
 .profile-dropdown {
-    display: block; /* Changed from none to block so transition can animate */
+    display: block;
     position: absolute;
     right: 0;
-    top: calc(100% + 15px); /* Starts slightly lower for a gentle slide-up effect */
+    top: calc(100% + 15px);
     background-color: #ffffff;
     min-width: 220px;
     border: 1px solid #e6dfd5;
@@ -146,21 +146,18 @@ nav {
     overflow: hidden;
     z-index: 1010;
     
-    /* CRITICAL FOR SMOOTH EFFECT: Hide by default using opacity and scale */
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px) scale(0.95); /* Slides down and scales up slightly */
+    transform: translateY(-10px) scale(0.95);
     transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
                 transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
                 visibility 0.2s;
 }
 
-/* Toggle visibility state class trigger */
-/* Active state trigger that plays the animation smoothly */
 .profile-dropdown.show-menu {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0) scale(1); /* Snaps beautifully into its original position */
+    transform: translateY(0) scale(1);
 }
 
 .profile-dropdown ul {
@@ -185,7 +182,6 @@ nav {
     color: #6f4e37;
 }
 
-/* Clean Divider for dangerous actions like Logout */
 .dropdown-divider {
     height: 1px;
     background-color: #eee;
@@ -193,7 +189,7 @@ nav {
 }
 
 .profile-dropdown .logout-link {
-    color: #c92a2a; /* Soft warning red color for logout safety */
+    color: #c92a2a;
 }
 
 .profile-dropdown .logout-link:hover {
@@ -212,7 +208,7 @@ footer, .auth-footer, .about-footer, .cafe-details-footer, .results-footer, .pro
     color: #8c7e74;
     font-size: 0.9em;
     width: 100%;
-    background-color: #fdfbf7; /* Prevents background leaking */
+    background-color: #fdfbf7;
 }
 
 footer a, .footer-link {
@@ -244,15 +240,12 @@ footer a:hover, .footer-link:hover {
     margin: 0 auto !important;
     padding: 40px 24px !important;
     width: 100% !important;
-    
-    /* GRID ROOT: Creates a structured vertical flow */
     display: grid !important;
     grid-template-columns: 1fr !important;
     gap: 40px !important;
     box-sizing: border-box !important;
 }
 
-/* Base Sections layout spacing styling rules */
 .search-filter-section,
 .popular-cities-section,
 .recommended-cafes-section {
@@ -276,7 +269,6 @@ footer a:hover, .footer-link:hover {
     margin-bottom: 20px;
 }
 
-/* Michelin Layout Form Setup */
 .michelin-form {
     width: 100%;
     display: grid;
@@ -378,7 +370,7 @@ footer a:hover, .footer-link:hover {
 }
 
 /* ==========================================================================
-   DYNAMIC REPEAT GRIDS & CARDS SHOWCASE (REFACTORED)
+   DYNAMIC REPEAT GRIDS & CARDS SHOWCASE
    ========================================================================== */
 .city-cards-container {
     display: grid !important;
@@ -391,7 +383,6 @@ footer a:hover, .footer-link:hover {
 
 .cafes-grid {
     display: grid !important;
-    /* Forces 4 columns on large views, auto-adjusting elegantly on smaller screens */
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important;
     gap: 30px !important;
     width: 100% !important;
@@ -405,7 +396,6 @@ footer a:hover, .footer-link:hover {
     width: 100%; 
 }
 
-/* Grid-Optimized City Card Frame */
 .city-card {
     border: 1px solid #e6dfd5;
     padding: 24px 15px;
@@ -436,25 +426,23 @@ footer a:hover, .footer-link:hover {
     color: #1a1a1a;
 }
 
-/* MICHELIN-INSPIRED MINIMALIST CAFE CARD */
 .cafe-card {
     display: flex !important;
     flex-direction: column !important;
-    background: transparent !important; /* Removes the heavy white block backdrop */
-    border: none !important;             /* Removes old borders for seamless integration */
-    box-shadow: none !important;         /* Removes block shadows */
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
     width: 100% !important;              
     padding: 0 !important;
     text-align: left !important;
     height: 100%; 
 }
 
-/* Image Wrapper with Floating Layout anchoring */
 .cafe-image-wrapper {
     position: relative;
     width: 100%;
     height: 190px;
-    border-radius: 4px; /* Crisp uniform corners matching the spec */
+    border-radius: 4px;
     overflow: hidden;
     margin-bottom: 12px;
 }
@@ -471,7 +459,6 @@ footer a:hover, .footer-link:hover {
     transform: scale(1.03);
 }
 
-/* FLOATING HEART BUTTON: Exact pixel match to the Michelin Guide UI */
 .cafe-heart-btn {
     position: absolute;
     top: 12px;
@@ -501,7 +488,6 @@ footer a:hover, .footer-link:hover {
     transform: scale(0.92);
 }
 
-/* TYPOGRAPHY STRUCTURE */
 .cafe-card h3 {
     font-size: 1.15em !important;
     font-weight: 700 !important;
@@ -521,7 +507,6 @@ footer a:hover, .footer-link:hover {
     color: #1a1a1a !important;
 }
 
-/* Interactive Capsule Badges */
 .cafe-card p span {
     background-color: #f5f0ea !important;
     color: #6f4e37 !important;
@@ -534,7 +519,7 @@ footer a:hover, .footer-link:hover {
 }
 
 .cafe-card a {
-    margin-top: auto; /* Aligns details action link uniformly to card footer edge boundary */
+    margin-top: auto;
     padding-top: 10px;
     color: #6f4e37 !important;
     text-decoration: none !important;
@@ -548,14 +533,14 @@ footer a:hover, .footer-link:hover {
 }
 
 /* ==========================================================================
-   5. AUTHENTICATION (LOGIN & REGISTER) PAGE STYLES
+   5. AUTHENTICATION (LOGIN & REGISTER & RESET) PAGE STYLES
    ========================================================================= */
 .auth-main {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    align-items: center; /* Vertical center alignment */
-    justify-content: center; /* Horizontal center alignment */
+    align-items: center;
+    justify-content: center;
 }
 
 .auth-wrapper {
@@ -566,7 +551,6 @@ footer a:hover, .footer-link:hover {
     padding: 20px 0;
 }
 
-/* Base style for auth containers */
 .auth-card {
     background-color: #ffffff;
     border: 1px solid #ddd;
@@ -579,13 +563,13 @@ footer a:hover, .footer-link:hover {
     transition: opacity 0.25s ease-in-out;
 }
 
-/* Control visibility states without causing layout shifting */
-.id-hidden {
+/* Control visibility states strictly via CSS Classes without UI shifting */
+.auth-card.id-hidden {
     display: none;
     opacity: 0;
 }
 
-.id-active {
+.auth-card.id-active {
     display: block;
     opacity: 1;
 }
@@ -658,7 +642,6 @@ footer a:hover, .footer-link:hover {
     background-color: #523928;
 }
 
-/* Prompt container and toggle button styling text */
 .auth-switch-prompt {
     margin-top: 25px;
     text-align: center;
@@ -684,22 +667,27 @@ footer a:hover, .footer-link:hover {
     color: #523928;
 }
 
-/* Forgot Password Layout Alignment */
 .forgot-password-container {
     text-align: right;
-    margin-top: -10px; /* Pulls it slightly closer to the password input field above */
+    margin-top: -10px;
     margin-bottom: 5px;
 }
 
-.forgot-link {
+/* Redesigned Button Trigger for Forgot Password to avoid linter anchor issues */
+.forgot-link-btn {
+    background: none;
+    border: none;
     color: #6f4e37;
     font-size: 0.85em;
     font-weight: 600;
     text-decoration: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
     transition: color 0.2s ease;
 }
 
-.forgot-link:hover {
+.forgot-link-btn:hover {
     color: #523928;
     text-decoration: underline;
 }
@@ -707,785 +695,6 @@ footer a:hover, .footer-link:hover {
 /* ==========================================================================
    6. ABOUT US & CONTACT PAGE STYLES
    ========================================================================== */
-.about-main {
-    max-width: 800px;
-    margin: 40px auto;
-}
-
-.about-section {
-    width: 100%;
-}
-
-.contact-form .contact-submit-btn {
-    margin-top: 10px;
-    background-color: #6f4e37;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.contact-form .contact-submit-btn:hover {
-    background-color: #523928;
-}
-
-.direct-contact-info {
-    margin-top: 20px;
-    font-size: 0.9em;
-    color: #555;
-    text-align: left;
-}
-
-/* ==========================================================================
-   7. CAFE DETAILS PAGE STYLES (MODERN ACCENT & CAPSULE CHECKBOXES)
-   ========================================================================== */
-.cafe-details-main {
-    max-width: 850px; /* Optimal localized reading layout */
-    margin: 0 auto;
-    padding: 40px 20px;
-}
-
-.cafe-details-article,
-.reviews-section {
-    width: 100%;
-    text-align: left;
-}
-
-.cafe-meta-info {
-    font-size: 0.9em;
-    color: #8c7e74;
-    margin-bottom: 5px;
-}
-
-.cafe-location-info {
-    font-size: 1.1em;
-    color: #4a3f35;
-    margin-bottom: 15px;
-}
-
-.cafe-address-info {
-    font-size: 0.95em;
-    color: #555;
-    margin-top: -10px;
-    margin-bottom: 20px;
-}
-
-.cafe-main-img {
-    width: 100%;
-    max-height: 450px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-}
-
-/* Action Row containing rating summary and bookmark button inline */
-.cafe-action-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 20px 0;
-    width: 100%;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 15px;
-}
-
-.cafe-rating-summary {
-    font-size: 1.2em;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.cafe-rating-summary .reviews-count {
-    color: gray;
-    font-size: 0.8em;
-}
-
-.cafe-bookmark-action .bookmark-btn {
-    cursor: pointer;
-    padding: 8px 18px;
-    background-color: #ffffff;
-    border: 1px solid #6f4e37;
-    color: #6f4e37;
-    border-radius: 20px; /* Aligned with Michelin style capsules */
-    font-weight: bold;
-    font-size: 0.9em;
-    transition: all 0.2s ease;
-}
-
-.cafe-bookmark-action .bookmark-btn:hover {
-    background-color: #6f4e37;
-    color: #ffffff;
-}
-
-.cafe-description-box {
-    margin: 25px 0;
-}
-
-.cafe-description-box h3 {
-    color: #6f4e37;
-    margin-bottom: 8px;
-}
-
-.share-links {
-    font-size: 0.9em;
-    color: gray;
-}
-
-.share-links a {
-    color: #6f4e37;
-    text-decoration: none;
-    margin: 0 5px;
-    font-weight: 600;
-}
-
-.share-links a:hover {
-    text-decoration: underline;
-}
-
-/* Review Form Architecture */
-.review-form {
-    background-color: #ffffff;
-    border: 1px solid #e6dfd5;
-    border-radius: 8px;
-    padding: 25px;
-    margin: 20px 0 40px 0;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.01);
-}
-
-.rating-input-group input[type="number"] {
-    max-width: 100px;
-    padding: 8px;
-    border: 1px solid #e1e1e1;
-    border-radius: 6px;
-    outline: none;
-}
-
-.review-form textarea {
-    width: 100%;
-    min-height: 100px;
-    padding: 12px;
-    border: 1px solid #e1e1e1;
-    border-radius: 6px;
-    outline: none;
-    font-family: inherit;
-    resize: vertical;
-}
-
-.review-form input:focus,
-.review-form textarea:focus {
-    border-color: #6f4e37;
-}
-
-/* Modern Capsule Checkboxes Style */
-.cafe-features-selection {
-    margin: 25px 0;
-}
-
-.cafe-features-selection h4 {
-    color: #4a3f35;
-    margin-bottom: 4px;
-}
-
-.cafe-features-selection .features-tip {
-    color: gray;
-    font-size: 0.85em;
-    margin-bottom: 15px;
-}
-
-.tags-flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    width: 100%;
-}
-
-.tag-checkbox-label {
-    cursor: pointer;
-}
-
-.tag-checkbox-label input[type="checkbox"] {
-    display: none; /* Hide old ugly square checkbox browser designs */
-}
-
-.tag-checkbox-label span {
-    display: inline-block;
-    background-color: #ffffff;
-    border: 1px solid #e1e1e1;
-    border-radius: 20px;
-    padding: 6px 14px;
-    font-size: 0.88em;
-    font-weight: 500;
-    color: #4a3f35;
-    transition: all 0.2s ease;
-    
-    /* ADD THESE LINES TO FIX THE SAFARI COMPATIBILITY ERROR */
-    -webkit-user-select: none; /* Supports Safari and iOS Safari */
-    user-select: none;         /* Standard syntax for modern browsers */
-}
-
-/* Interactive feedback states for checkboxes toggles */
-.tag-checkbox-label input[type="checkbox"]:checked + span {
-    background-color: #fdfbf7;
-    border-color: #6f4e37;
-    color: #6f4e37;
-    font-weight: bold;
-    box-shadow: 0 2px 6px rgba(111, 78, 55, 0.08);
-}
-
-.review-form .review-submit-btn {
-    background-color: #6f4e37;
-    color: white;
-    border: none;
-    padding: 10px 22px;
-    border-radius: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.review-form .review-submit-btn:hover {
-    background-color: #523928;
-}
-
-/* User Comments System Blocks */
-.user-comments-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.user-comment-box {
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #e6dfd5;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.01);
-}
-
-.user-comment-box h4 {
-    color: #4a3f35;
-    margin-bottom: 5px;
-}
-
-.user-comment-box .comment-score {
-    font-weight: normal;
-    font-size: 0.85em;
-    color: #6f4e37;
-    margin-left: 5px;
-}
-/* User Uploaded Photos Gallery Architecture */
-.cafe-user-gallery {
-    margin: 35px 0 10px 0;
-    width: 100%;
-}
-
-.cafe-user-gallery h3 {
-    color: #6f4e37;
-    margin-bottom: 2px;
-}
-
-.gallery-subtitle {
-    font-size: 0.9em;
-    color: gray;
-    margin-bottom: 15px;
-}
-
-/* Horizontal flex block for community pictures */
-.gallery-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    width: 100%;
-}
-
-/* Mini Photo Card Setup */
-.gallery-item {
-    position: relative;
-    width: calc(33.333% - 10px); /* 3 columns on desktop views */
-    min-width: 230px; /* Safe wrapping trigger for tablets */
-    height: 180px;
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.04);
-}
-
-/* Elegant text overlay backdrop showing username attribution */
-.photo-meta {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.2) 80%, rgba(0, 0, 0, 0) 100%);
-    padding: 10px 12px;
-    box-sizing: border-box;
-}
-
-.photo-meta span {
-    color: #ffffff;
-    font-size: 0.82em;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-}
-
-.photo-meta strong {
-    color: #fdfbf7;
-}
-
-/* Active Tags Display inside Cafe Details Page */
-.cafe-active-tags-section {
-    margin: 20px 0 25px 0;
-    text-align: left;
-}
-
-.cafe-active-tags-section h4 {
-    color: #4a3f35;
-    font-size: 1.05em;
-    margin-bottom: 10px;
-    font-weight: 600;
-}
-
-.active-tags-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    width: 100%;
-}
-
-/* Styled like the Michelin badges but solid/read-only styling */
-.active-tag-badge {
-    display: inline-block;
-    background-color: #f5f0ea; /* Dynamic background to look distinct from form checkboxes */
-    border: 1px solid #e6dfd5;
-    border-radius: 20px;
-    padding: 5px 12px;
-    font-size: 0.85em;
-    font-weight: 600;
-    color: #6f4e37;
-    user-select: none;
-    -webkit-user-select: none;
-}
-
-/* ==========================================================================
-   8. SEARCH RESULTS PAGE STYLES (MICHELIN GUIDE MINIMALIST TEMPLATE)
-   ========================================================================= */
-.results-main {
-    max-width: 1200px !important;
-    margin: 0 auto !important;
-    padding: 40px 20px !important;
-    width: 100%;
-    
-    /* FIXES THE CENTERING PROBLEM: Forces alignment to top-left */
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;   /* Pushes everything to the left side */
-    justify-content: flex-start !important; /* Pushes everything to the top of the screen */
-}
-
-.city-header {
-    text-align: left;
-    width: 100%;
-    margin-bottom: 35px;
-}
-
-.city-header h1 {
-    font-size: 2.5em; /* Sharper and bigger heading */
-    color: #1a1a1a;
-    font-weight: 700;
-    margin: 0;
-}
-
-.city-header .highlight-city {
-    color: #6f4e37;
-}
-
-.results-count-text {
-    font-size: 0.95em;
-    color: #555;
-    margin-top: 6px;
-}
-
-/* Results Content Grid Section */
-.results-section-wrapper {
-    width: 100%;
-    text-align: left;
-}
-
-.results-section-wrapper h2 {
-    color: #1a1a1a;
-    margin-bottom: 25px;
-    font-size: 1.6em;
-    font-weight: 700;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-}
-
-.modern-cafes-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px; 
-    justify-content: flex-start; /* Ensures grid items flow from left to right naturally */
-    width: 100%;
-}
-
-/* Clean White Minimalist Card Setup */
-.michelin-cafe-card {
-    display: flex;
-    flex-direction: column;
-    width: calc(25% - 22.5px); /* Elegant 4-column breakdown grid */
-    min-width: 260px; 
-    background: transparent;
-    overflow: hidden;
-}
-
-/* Top Image Container */
-.card-image-wrapper {
-    position: relative;
-    width: 100%;
-    height: 190px; 
-    border-radius: 4px; 
-    overflow: hidden;
-}
-
-.michelin-cafe-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.michelin-cafe-card:hover img {
-    transform: scale(1.03); 
-}
-
-/* Floating Heart Bookmark Button */
-.floating-heart-btn {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: #ffffff;
-    border: none;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    font-size: 0.95em;
-    transition: transform 0.15s ease;
-}
-
-.floating-heart-btn:hover {
-    transform: scale(1.1);
-}
-
-/* Under-Photo Typography Blocks */
-.card-info-link {
-    display: block;
-    text-decoration: none;
-    margin-top: 12px;
-    width: 100%;
-}
-
-/* Rating and Features Tagline Row */
-.card-michelin-meta {
-    display: flex;
-    align-items: center;
-    font-size: 0.85em;
-    color: #1a1a1a;
-    margin-bottom: 4px;
-}
-
-.michelin-rating {
-    font-weight: 700;
-    color: #2c2520;
-}
-
-.michelin-divider {
-    margin: 0 6px;
-    color: #ccc;
-}
-
-.michelin-tag {
-    color: #6f4e37; 
-    font-weight: 600;
-}
-
-/* Headings info blocks */
-.michelin-title {
-    font-size: 1.15em;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin: 2px 0;
-    line-height: 1.3;
-}
-
-.michelin-title:hover {
-    text-decoration: underline; 
-}
-
-.michelin-location {
-    font-size: 0.85em;
-    color: #555;
-    margin: 1px 0;
-}
-
-.michelin-address {
-    font-size: 0.82em;
-    color: gray;
-    margin-top: 2px;
-}
-
-/* ==========================================================================
-   9. USER PROFILE PAGE STYLES (SCREENSHOT-INSPIRED GRID LAYOUT)
-   ========================================================================= */
-.profile-main-container {
-    max-width: 950px !important; 
-    margin: 0 auto !important;
-    padding: 40px 20px !important;
-    width: 100%;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;   
-    justify-content: flex-start !important; 
-    gap: 35px;
-}
-
-/* TOP SECTION: Main Horizontal Layout Grid Frame */
-.user-profile-bio-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 45px; /* Spacious separation between image and info */
-    background-color: #ffffff;
-    border: 1px solid #e6dfd5;
-    border-radius: 8px;
-    padding: 40px;
-    text-align: left;
-    width: 100%; 
-    box-sizing: border-box;
-    position: relative; /* Allows action corner button pinning */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.01);
-}
-
-/* Extra Large Avatar Wrapper Spec */
-.bio-avatar-wrapper {
-    width: 170px; /* Enhanced diameter scale up */
-    height: 170px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid #6f4e37;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    flex-shrink: 0; 
-}
-
-.profile-avatar-large {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Structured Key-Value Fields Rows */
-.bio-info-details {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 8px; /* Vertical gap between fields */
-    margin-top: 5px;
-}
-
-.meta-field-row {
-    display: flex;
-    align-items: flex-start;
-    font-size: 0.98em;
-    line-height: 1.4;
-}
-
-.field-label {
-    width: 100px; /* Fixed column width for tags like Label: */
-    font-weight: 600;
-    color: #555;
-    flex-shrink: 0;
-}
-
-.field-value {
-    color: #1a1a1a;
-    font-weight: 500;
-}
-
-.user-important-name {
-    font-size: 1.5em; /* Name is distinctly larger like the sample */
-    font-weight: 700 !important;
-    color: #1a1a1a;
-}
-
-.bio-text-multiline {
-    color: #444;
-    max-width: 500px;
-}
-
-/* Absolute Top Right Actions Button anchoring limits */
-.bio-action-corner {
-    position: absolute;
-    top: 35px;
-    right: 35px;
-}
-
-.profile-edit-link {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    border: 1px solid #6f4e37;
-    color: #6f4e37;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.88em;
-    padding: 8px 20px;
-    border-radius: 4px; /* Structured square-ish look matching the bounding teal box placeholder */
-    transition: all 0.2s ease;
-    background-color: #ffffff;
-}
-
-.profile-edit-link:hover {
-    background-color: #6f4e37;
-    color: #ffffff;
-}
-
-/* BOTTOM SECTION: Stacking Activity Tables Blocks */
-.profile-bottom-content {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    width: 100%;
-}
-
-.profile-data-card {
-    background-color: #ffffff;
-    border: 1px solid #e6dfd5;
-    border-radius: 8px;
-    padding: 25px;
-    text-align: left;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.01);
-    width: 100%; 
-    box-sizing: border-box;
-}
-
-.profile-data-card h3 {
-    color: #4a3f35;
-    font-size: 1.2em;
-    margin: 0 0 15px 0;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 8px;
-}
-
-.profile-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-}
-
-.profile-list-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid #f9f9f9;
-    font-size: 0.95em;
-    gap: 15px;
-    width: 100%;
-}
-
-.profile-list-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-.review-score-badge {
-    color: #6f4e37;
-    font-weight: bold;
-    margin-left: 5px;
-}
-
-.item-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-}
-
-.inline-form {
-    display: inline;
-}
-
-.action-view-btn, .action-delete-btn {
-    text-decoration: none;
-    font-size: 0.85em;
-    font-weight: bold;
-    padding: 5px 14px;
-    border-radius: 14px;
-    cursor: pointer;
-    border: none;
-    transition: all 0.15s ease;
-}
-
-.action-view-btn {
-    background-color: #f5f0ea;
-    color: #6f4e37;
-}
-
-.action-view-btn:hover {
-    background-color: #e6dfd5;
-}
-
-.action-delete-btn {
-    background-color: #fff5f5;
-    color: #c92a2a;
-}
-
-.action-delete-btn:hover {
-    background-color: #ffe3e3;
-}
-
-/* Responsive adjustments for mobile wrap triggers */
-@media (max-width: 650px) {
-    .user-profile-bio-header {
-        flex-direction: column;
-        align-items: center;
-        padding: 30px;
-        gap: 20px;
-    }
-    .bio-action-corner {
-        position: static;
-        margin-top: 10px;
-        width: 100%;
-    }
-    .profile-edit-link {
-        justify-content: center;
-    }
-    .meta-field-row {
-        flex-direction: column;
-        gap: 2px;
-    }
-}
-
-/* ==========================================================================
-   10. ABOUT US PAGE STYLES (TEAM PROFILE GRID & CLEAN CONTACT FORM)
-   ========================================================================= */
 .about-main {
     max-width: 900px !important;
     margin: 0 auto !important;
@@ -1530,7 +739,6 @@ footer a:hover, .footer-link:hover {
     margin: 35px 0;
 }
 
-/* Team Grid Architecture Layout */
 .team-profiles-grid {
     display: flex;
     gap: 30px;
@@ -1542,15 +750,14 @@ footer a:hover, .footer-link:hover {
 .team-member-card {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Clean Left Alignment */
+    align-items: flex-start;
     width: calc(33.333% - 20px);
     min-width: 220px;
 }
 
-/* Image Wrapper Layout Frame */
 .member-image-wrapper {
     width: 100%;
-    height: 240px; /* Uniform height for professional profile showcase */
+    height: 240px;
     border-radius: 6px;
     overflow: hidden;
     border: 1px solid #e6dfd5;
@@ -1583,7 +790,6 @@ footer a:hover, .footer-link:hover {
     margin: 0;
 }
 
-/* Refactored Clean Contact Form Styles */
 .contact-form {
     display: flex;
     flex-direction: column;
@@ -1656,8 +862,893 @@ footer a:hover, .footer-link:hover {
     margin-top: 30px;
     font-size: 0.95em;
     color: #555;
+    text-align: left;
 }
 
 .direct-contact-info p {
     margin: 4px 0;
+}
+
+/* ==========================================================================
+   7. CAFE DETAILS PAGE STYLES (MODERN ACCENT & CAPSULE CHECKBOXES)
+   ========================================================================== */
+.cafe-details-main {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.cafe-details-article,
+.reviews-section {
+    width: 100%;
+    text-align: left;
+}
+
+.cafe-meta-info {
+    font-size: 0.9em;
+    color: #8c7e74;
+    margin-bottom: 5px;
+}
+
+.cafe-location-info {
+    font-size: 1.1em;
+    color: #4a3f35;
+    margin-bottom: 15px;
+}
+
+.cafe-address-info {
+    font-size: 0.95em;
+    color: #555;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+.cafe-main-img {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.cafe-action-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.cafe-rating-summary {
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cafe-rating-summary .reviews-count {
+    color: gray;
+    font-size: 0.8em;
+}
+
+.cafe-bookmark-action .bookmark-btn {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95em;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    min-width: 180px;
+    text-align: center;
+}
+
+.cafe-bookmark-action .bookmark-btn:hover {
+    background-color: #222222;
+}
+
+.cafe-bookmark-action .bookmark-btn:active {
+    transform: scale(0.98);
+}
+
+.cafe-description-box {
+    margin: 25px 0;
+}
+
+.cafe-description-box h3 {
+    color: #6f4e37;
+    margin-bottom: 8px;
+}
+
+/* Requirement 7.2 Capsule Social Media Sharing Component Rules */
+.share-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    padding: 10px 0;
+    font-size: 0.9em;
+    color: gray;
+}
+
+.share-links span {
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.share-links .footer-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    font-size: 0.85em;
+    font-weight: 500;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin: 0;
+}
+
+.share-links .footer-link[href*="facebook.com"] {
+    background-color: #f1f1f1;
+    color: #1877f2;
+    border: 1px solid #1877f2;
+}
+
+.share-links .footer-link[href*="facebook.com"]:hover {
+    background-color: #1877f2;
+    color: #ffffff;
+}
+
+.share-links .footer-link[href*="instagram.com"] {
+    background-color: #f1f1f1;
+    color: #e4405f;
+    border: 1px solid #e4405f;
+}
+
+.share-links .footer-link[href*="instagram.com"]:hover {
+    background-color: #e4405f;
+    color: #ffffff;
+}
+
+.share-links .footer-link[href*="x.com"] {
+    background-color: #f1f1f1;
+    color: #1da1f2;
+    border: 1px solid #1da1f2;
+}
+
+.share-links .footer-link[href*="x.com"]:hover {
+    background-color: #1da1f2;
+    color: #ffffff;
+}
+
+/* Review Form Architecture */
+.review-form {
+    background-color: #ffffff;
+    border: 1px solid #e6dfd5;
+    border-radius: 8px;
+    padding: 25px;
+    margin: 20px 0 40px 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+}
+
+.rating-input-group input[type="number"] {
+    max-width: 100px;
+    padding: 8px;
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
+    outline: none;
+}
+
+.review-form textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 12px;
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
+    outline: none;
+    font-family: inherit;
+    resize: vertical;
+}
+
+.review-form input:focus,
+.review-form textarea:focus {
+    border-color: #6f4e37;
+}
+
+.cafe-features-selection {
+    margin: 25px 0;
+}
+
+.cafe-features-selection h4 {
+    color: #4a3f35;
+    margin-bottom: 4px;
+}
+
+.cafe-features-selection .features-tip {
+    color: gray;
+    font-size: 0.85em;
+    margin-bottom: 15px;
+}
+
+.tags-flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+}
+
+.tag-checkbox-label {
+    cursor: pointer;
+}
+
+.tag-checkbox-label input[type="checkbox"] {
+    display: none;
+}
+
+.tag-checkbox-label span {
+    display: inline-block;
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 0.88em;
+    font-weight: 500;
+    color: #4a3f35;
+    transition: all 0.2s ease;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.tag-checkbox-label input[type="checkbox"]:checked + span {
+    background-color: #fdfbf7;
+    border-color: #6f4e37;
+    color: #6f4e37;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(111, 78, 55, 0.08);
+}
+
+.review-form .review-submit-btn {
+    background-color: #6f4e37;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.review-form .review-submit-btn:hover {
+    background-color: #523928;
+}
+
+.user-comments-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.user-comment-box {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #e6dfd5;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+}
+
+.user-comment-box h4 {
+    color: #4a3f35;
+    margin-bottom: 5px;
+}
+
+.user-comment-box .comment-score {
+    font-weight: normal;
+    font-size: 0.85em;
+    color: #6f4e37;
+    margin-left: 5px;
+}
+
+.cafe-user-gallery {
+    margin: 35px 0 10px 0;
+    width: 100%;
+}
+
+.cafe-user-gallery h3 {
+    color: #6f4e37;
+    margin-bottom: 2px;
+}
+
+.gallery-subtitle {
+    font-size: 0.9em;
+    color: gray;
+    margin-bottom: 15px;
+}
+
+.gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    width: 100%;
+}
+
+.gallery-item {
+    position: relative;
+    width: calc(33.333% - 10px);
+    min-width: 230px;
+    height: 180px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.04);
+}
+
+.photo-meta {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.2) 80%, rgba(0, 0, 0, 0) 100%);
+    padding: 10px 12px;
+    box-sizing: border-box;
+}
+
+.photo-meta span {
+    color: #ffffff;
+    font-size: 0.82em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.photo-meta strong {
+    color: #fdfbf7;
+}
+
+.cafe-active-tags-section {
+    margin: 20px 0 25px 0;
+    text-align: left;
+}
+
+.cafe-active-tags-section h4 {
+    color: #4a3f35;
+    font-size: 1.05em;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.active-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+}
+
+.active-tag-badge {
+    display: inline-block;
+    background-color: #f5f0ea;
+    border: 1px solid #e6dfd5;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #6f4e37;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* ==========================================================================
+   8. SEARCH RESULTS PAGE STYLES (MICHELIN GUIDE MINIMALIST TEMPLATE)
+   ========================================================================= */
+.results-main {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 40px 20px !important;
+    width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;   
+    justify-content: flex-start !important; 
+}
+
+.city-header {
+    text-align: left;
+    width: 100%;
+    margin-bottom: 35px;
+}
+
+.city-header h1 {
+    font-size: 2.5em;
+    color: #1a1a1a;
+    font-weight: 700;
+    margin: 0;
+}
+
+.city-header .highlight-city {
+    color: #6f4e37;
+}
+
+.results-count-text {
+    font-size: 0.95em;
+    color: #555;
+    margin-top: 6px;
+}
+
+.results-section-wrapper {
+    width: 100%;
+    text-align: left;
+}
+
+.results-section-wrapper h2 {
+    color: #1a1a1a;
+    margin-bottom: 25px;
+    font-size: 1.6em;
+    font-weight: 700;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.modern-cafes-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px; 
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.michelin-cafe-card {
+    display: flex;
+    flex-direction: column;
+    width: calc(25% - 22.5px);
+    min-width: 260px; 
+    background: transparent;
+    overflow: hidden;
+}
+
+.card-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 190px; 
+    border-radius: 4px; 
+    overflow: hidden;
+}
+
+.michelin-cafe-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.michelin-cafe-card:hover img {
+    transform: scale(1.03); 
+}
+
+.floating-heart-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #ffffff;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    font-size: 0.95em;
+    transition: transform 0.15s ease;
+}
+
+.floating-heart-btn:hover {
+    transform: scale(1.1);
+}
+
+.card-info-link {
+    display: block;
+    text-decoration: none;
+    margin-top: 12px;
+    width: 100%;
+}
+
+.card-michelin-meta {
+    display: flex;
+    align-items: center;
+    font-size: 0.85em;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+}
+
+.michelin-rating {
+    font-weight: 700;
+    color: #2c2520;
+}
+
+.michelin-divider {
+    margin: 0 6px;
+    color: #ccc;
+}
+
+.michelin-tag {
+    color: #6f4e37; 
+    font-weight: 600;
+}
+
+.michelin-title {
+    font-size: 1.15em;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 2px 0;
+    line-height: 1.3;
+}
+
+.michelin-title:hover {
+    text-decoration: underline; 
+}
+
+.michelin-location {
+    font-size: 0.85em;
+    color: #555;
+    margin: 1px 0;
+}
+
+.michelin-address {
+    font-size: 0.82em;
+    color: gray;
+    margin-top: 2px;
+}
+
+/* ==========================================================================
+   9. USER PROFILE PAGE STYLES (SCREENSHOT-INSPIRED GRID LAYOUT)
+   ========================================================================= */
+.profile-main-container {
+    max-width: 950px !important; 
+    margin: 0 auto !important;
+    padding: 40px 20px !important;
+    width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;   
+    justify-content: flex-start !important; 
+    gap: 35px;
+}
+
+.user-profile-bio-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 45px;
+    background-color: #ffffff;
+    border: 1px solid #e6dfd5;
+    border-radius: 8px;
+    padding: 40px;
+    text-align: left;
+    width: 100%; 
+    box-sizing: border-box;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+}
+
+.bio-avatar-wrapper {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #6f4e37;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    flex-shrink: 0; 
+}
+
+.profile-avatar-large {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bio-info-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.meta-field-row {
+    display: flex;
+    align-items: flex-start;
+    font-size: 0.98em;
+    line-height: 1.4;
+}
+
+.field-label {
+    width: 100px;
+    font-weight: 600;
+    color: #555;
+    flex-shrink: 0;
+}
+
+.field-value {
+    color: #1a1a1a;
+    font-weight: 500;
+}
+
+.user-important-name {
+    font-size: 1.5em;
+    font-weight: 700 !important;
+    color: #1a1a1a;
+}
+
+.bio-text-multiline {
+    color: #444;
+    max-width: 500px;
+}
+
+.bio-action-corner {
+    position: absolute;
+    top: 35px;
+    right: 35px;
+}
+
+.profile-edit-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid #6f4e37;
+    color: #6f4e37;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.88em;
+    padding: 8px 20px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    background-color: #ffffff;
+}
+
+.profile-edit-link:hover {
+    background-color: #6f4e37;
+    color: #ffffff;
+}
+
+.profile-bottom-content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+.profile-data-card {
+    background-color: #ffffff;
+    border: 1px solid #e6dfd5;
+    border-radius: 8px;
+    padding: 25px;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+    width: 100%; 
+    box-sizing: border-box;
+}
+
+.profile-data-card h3 {
+    color: #4a3f35;
+    font-size: 1.2em;
+    margin: 0 0 15px 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+
+.profile-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.profile-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f9f9f9;
+    font-size: 0.95em;
+    gap: 15px;
+    width: 100%;
+}
+
+.profile-list-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.review-score-badge {
+    color: #6f4e37;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.item-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.inline-form {
+    display: inline;
+}
+
+.action-view-btn, .action-delete-btn {
+    text-decoration: none;
+    font-size: 0.85em;
+    font-weight: bold;
+    padding: 5px 14px;
+    border-radius: 14px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s ease;
+}
+
+.action-view-btn {
+    background-color: #f5f0ea;
+    color: #6f4e37;
+}
+
+.action-view-btn:hover {
+    background-color: #e6dfd5;
+}
+
+.action-delete-btn {
+    background-color: #fff5f5;
+    color: #c92a2a;
+}
+
+.action-delete-btn:hover {
+    background-color: #ffe3e3;
+}
+
+.contributed-cafes-section {
+    grid-column: span 2;
+}
+
+.contributed-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.contributed-header-row h3 {
+    margin: 0;
+}
+
+.add-cafe-toggle-btn {
+    border: none;
+    font-size: 0.85em;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.inline-form-wrapper {
+    display: none;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: #fafafa;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+}
+
+.form-inner-title {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.form-field-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.form-text-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.form-row-flex {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.flex-2 {
+    flex: 2;
+}
+
+.form-file-input {
+    width: 100%;
+    padding: 5px 0;
+}
+
+.contributed-cafes-section .cafe-features-selection {
+    margin-bottom: 15px;
+}
+
+.contributed-cafes-section .features-tip {
+    margin-bottom: 10px;
+    font-size: 0.85em;
+}
+
+.form-textarea-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: inherit;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.form-actions-flex {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.cancel-form-btn, .submit-form-btn {
+    margin: 0;
+}
+
+.cancel-form-btn {
+    padding: 8px 15px;
+}
+
+.submit-form-btn {
+    padding: 8px 20px;
+}
+
+.form-divider {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #eaeaea;
+}
+
+/* ==========================================================================
+   10. RESPONSIVE MEDIA QUERIES (BREAKPOINTS)
+   ========================================================================== */
+@media (max-width: 650px) {
+    .user-profile-bio-header {
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;
+        gap: 20px;
+    }
+    .bio-action-corner {
+        position: static;
+        margin-top: 10px;
+        width: 100%;
+    }
+    .profile-edit-link {
+        justify-content: center;
+    }
+    .meta-field-row {
+        flex-direction: column;
+        gap: 2px;
+    }
 }

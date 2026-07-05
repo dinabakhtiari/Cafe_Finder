@@ -32,7 +32,7 @@
                             <li><a href="/my-comments">💬 My Comments</a></li>
                             <li><a href="/liked-cafes">❤️ Saved Cafes</a></li>
                             <li class="dropdown-divider"></li>
-                            <li><a href="/auth/logout" class="logout-link">🚪 Logout</a></li>
+                            <li><a href="login-register.html" class="logout-link">🚪 Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -49,19 +49,19 @@
     
                 <form action="/auth/login" method="POST" class="auth-form">
                     <div class="form-group">
-                    <label for="login-email">Email Address</label>
-                    <input type="email" id="login-email" name="email" placeholder="example@email.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="login-password">Password</label>
-                    <input type="password" id="login-password" name="password" placeholder="Enter your password" required>
-                </div>
-        
-                <div class="forgot-password-container">
-                    <a href="/forgot-password" class="forgot-link">Forgot password?</a>
-                </div>
-        
-                <button type="submit" class="auth-submit-btn">Log In</button>
+                        <label for="login-email">Email Address</label>
+                        <input type="email" id="login-email" name="email" placeholder="example@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" placeholder="Enter your password" required>
+                    </div>
+            
+                    <div class="forgot-password-container">
+                        <button type="button" class="forgot-link-btn" onclick="showForgotPassword()">Forgot password?</button>
+                    </div>
+            
+                    <button type="submit" class="auth-submit-btn">Log In</button>
                 </form>
 
                 <div class="auth-switch-prompt">
@@ -94,6 +94,10 @@
                         <label for="reg-password">Password</label>
                         <input type="password" id="reg-password" name="password" placeholder="Min. 8 characters" required>
                     </div>
+                     <div class="form-group">
+                        <label for="reg-confirm-password">Confirm Password</label>
+                        <input type="password" id="reg-confirm-password" name="confirmPassword" placeholder="Min. 8 characters" required>
+                    </div>
                     <button type="submit" class="auth-submit-btn">Sign Up</button>
                 </form>
 
@@ -102,16 +106,38 @@
                 </div>
             </section>
 
+            <section class="auth-card id-hidden" id="forgot-card">
+                <h2>Reset Password</h2>
+                <p class="auth-subtitle">Enter your email address and we'll send you a recovery link.</p>
+                
+                <form action="/auth/forgot-password" method="POST" class="auth-form">
+                    <div class="form-group">
+                        <label for="forgot-email">Email Address</label>
+                        <input type="email" id="forgot-email" name="email" placeholder="example@email.com" required>
+                    </div>
+                    <button type="submit" class="auth-submit-btn">Send Recovery Link</button>
+                </form>
+
+                <div class="auth-switch-prompt">
+                    <p>Remembered your password? <button type="button" class="switch-link-btn" onclick="hideForgotPassword()">Back to Login</button></p>
+                </div>
+            </section>
+
         </div>
     </main>
 
-    <footer class="auth-footer">
+    <footer class="cafe-details-footer">
         <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
         <p>
-            <a href="about-us.html"class="footer-link">About Us & Contact</a> | 
-            <a href="home.html" class="footer-link">Home</a>
+            <a href="about-us.html">About Us & Contact</a> | 
+            <a href="home.html">Home</a>
         </p>
+        
+        <div>
+            <a href="https://instagram.com" class="footer-link" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://x.com" class="footer-link" target="_blank" rel="noopener">Twitter / X</a>
+            <a href="https://facebook.com" class="footer-link" target="_blank" rel="noopener">Facebook</a>
+        </div>
     </footer>
-
 </body>
 </html>

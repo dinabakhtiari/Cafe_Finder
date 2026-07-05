@@ -56,3 +56,66 @@ window.addEventListener('click', function(event) {
         }
     }
 });
+
+function toggleLikeCafe(button, cafeId) {
+    const isLiking = button.innerText.trim() === '🤍' || button.innerText.includes('Add to Favorites');
+    
+    if(button.classList.contains('bookmark-btn')) {
+        button.innerText = isLiking ? '🔖 Saved in Favorites' : '🔖 Add to Favorites';
+    } else {
+        button.innerText = isLiking ? '❤️' : '🤍';
+    }
+
+    const url = isLiking ? `/cafes/${cafeId}/bookmark` : `/cafes/${cafeId}/unbookmark`;
+
+    fetch(url, { method: 'POST' })
+    .then(res => {
+        if (!res.ok) throw new Error();
+    })
+    .catch(() => {
+        button.innerText = isLiking ? '🤍' : '❤️';
+        alert('Action failed. Please make sure you are logged in.');
+    });
+}
+
+function removeBookmark(cafeId) {
+    fetch(`/cafes/${cafeId}/unbookmark`, { method: 'POST' })
+    .then(res => {
+        if (res.ok) {
+            document.getElementById(`saved-cafe-${cafeId}`).remove();
+        }
+    });
+}
+
+// Function to toggle the visibility of the inline Add Cafe form in User Profile
+function toggleAddCafeForm() {
+    const formContainer = document.getElementById('inline-add-cafe-container');
+    
+    // Check the current display status and toggle it
+    if (formContainer.style.display === 'none' || formContainer.style.display === '') {
+        formContainer.style.display = 'block';
+    } else {
+        formContainer.style.display = 'none';
+    }
+}
+
+// Toggle Forgot Password Card View
+function showForgotPassword() {
+    const loginCard = document.getElementById('login-card');
+    const forgotCard = document.getElementById('forgot-card');
+    
+    if (loginCard && forgotCard) {
+        loginCard.classList.replace('id-active', 'id-hidden');
+        forgotCard.classList.replace('id-hidden', 'id-active');
+    }
+}
+
+function hideForgotPassword() {
+    const loginCard = document.getElementById('login-card');
+    const forgotCard = document.getElementById('forgot-card');
+    
+    if (loginCard && forgotCard) {
+        forgotCard.classList.replace('id-active', 'id-hidden');
+        loginCard.classList.replace('id-hidden', 'id-active');
+    }
+}
