@@ -42,12 +42,12 @@ app.use("/users", require("./controllers/users.js"));
 app.use("/reviews", require("./controllers/reviews.js"));
 app.use("/favorites", require("./controllers/favorites.js"));
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "views", "home.html"));
 });
 
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "views", "login-register.html"));
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });
 
 // close connection to database
