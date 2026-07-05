@@ -1,31 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/style.css">
-    <script src="../public/js/main.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js"></script>
     <title>Cafe Finder - Login & Register</title>
 </head>
+
 <body>
     <header>
         <div class="header-container">
             <div class="logo">
                 <a href="home.html">☕ Cafe Finder</a>
             </div>
-            
+
             <nav>
                 <ul class="nav-links">
                     <li><a href="home.html">Home</a></li>
                     <li><a href="about-us.html">About Us</a></li>
                 </ul>
-                
+
                 <div class="profile-menu-container">
-                    <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()" aria-label="Toggle profile menu">
+                    <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()"
+                        aria-label="Toggle profile menu">
                         <span class="profile-avatar-icon">👤</span>
                         <span class="hamburger-lines-icon">☰</span>
                     </button>
-                    
+
                     <div class="profile-dropdown" id="profileDropdown">
                         <ul>
                             <li><a href="user-profile.html">👤 Profile</a></li>
@@ -42,11 +45,11 @@
 
     <main class="auth-main">
         <div class="auth-wrapper">
-            
+
             <section class="auth-card id-active" id="login-card">
                 <h2>Login</h2>
                 <p class="auth-subtitle">Welcome back! Log in to access your profile.</p>
-    
+
                 <form action="/auth/login" method="POST" class="auth-form">
                     <div class="form-group">
                         <label for="login-email">Email Address</label>
@@ -54,25 +57,28 @@
                     </div>
                     <div class="form-group">
                         <label for="login-password">Password</label>
-                        <input type="password" id="login-password" name="password" placeholder="Enter your password" required>
+                        <input type="password" id="login-password" name="password" placeholder="Enter your password"
+                            required>
                     </div>
-            
+
                     <div class="forgot-password-container">
-                        <button type="button" class="forgot-link-btn" onclick="showForgotPassword()">Forgot password?</button>
+                        <button type="button" class="forgot-link-btn" onclick="showForgotPassword()">Forgot
+                            password?</button>
                     </div>
-            
+
                     <button type="submit" class="auth-submit-btn">Log In</button>
                 </form>
 
                 <div class="auth-switch-prompt">
-                    <p>New to Cafe Finder? <button type="button" class="switch-link-btn" onclick="toggleAuthPages()">Create an account</button></p>
+                    <p>New to Cafe Finder? <button type="button" class="switch-link-btn"
+                            onclick="toggleAuthPages()">Create an account</button></p>
                 </div>
             </section>
 
             <section class="auth-card id-hidden" id="register-card">
                 <h2>Register</h2>
                 <p class="auth-subtitle">Create an account to discover and bookmark study spots.</p>
-                
+
                 <form action="/auth/register" method="POST" class="auth-form">
                     <div class="form-group">
                         <label for="reg-username">Username</label>
@@ -92,24 +98,27 @@
                     </div>
                     <div class="form-group">
                         <label for="reg-password">Password</label>
-                        <input type="password" id="reg-password" name="password" placeholder="Min. 8 characters" required>
+                        <input type="password" id="reg-password" name="password" placeholder="Min. 8 characters"
+                            required>
                     </div>
-                     <div class="form-group">
+                    <div class="form-group">
                         <label for="reg-confirm-password">Confirm Password</label>
-                        <input type="password" id="reg-confirm-password" name="confirmPassword" placeholder="Min. 8 characters" required>
+                        <input type="password" id="reg-confirm-password" name="confirmPassword"
+                            placeholder="Min. 8 characters" required>
                     </div>
                     <button type="submit" class="auth-submit-btn">Sign Up</button>
                 </form>
 
                 <div class="auth-switch-prompt">
-                    <p>Already have an account? <button type="button" class="switch-link-btn" onclick="toggleAuthPages()">Back to Login</button></p>
+                    <p>Already have an account? <button type="button" class="switch-link-btn"
+                            onclick="toggleAuthPages()">Back to Login</button></p>
                 </div>
             </section>
 
             <section class="auth-card id-hidden" id="forgot-card">
                 <h2>Reset Password</h2>
                 <p class="auth-subtitle">Enter your email address and we'll send you a recovery link.</p>
-                
+
                 <form action="/auth/forgot-password" method="POST" class="auth-form">
                     <div class="form-group">
                         <label for="forgot-email">Email Address</label>
@@ -119,7 +128,8 @@
                 </form>
 
                 <div class="auth-switch-prompt">
-                    <p>Remembered your password? <button type="button" class="switch-link-btn" onclick="hideForgotPassword()">Back to Login</button></p>
+                    <p>Remembered your password? <button type="button" class="switch-link-btn"
+                            onclick="hideForgotPassword()">Back to Login</button></p>
                 </div>
             </section>
 
@@ -129,10 +139,10 @@
     <footer class="cafe-details-footer">
         <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
         <p>
-            <a href="about-us.html">About Us & Contact</a> | 
+            <a href="about-us.html">About Us & Contact</a> |
             <a href="home.html">Home</a>
         </p>
-        
+
         <div>
             <a href="https://instagram.com" class="footer-link" target="_blank" rel="noopener">Instagram</a>
             <a href="https://x.com" class="footer-link" target="_blank" rel="noopener">Twitter / X</a>
@@ -140,4 +150,5 @@
         </div>
     </footer>
 </body>
+
 </html>

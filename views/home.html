@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/style.css">
-    <script src="../public/js/main.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js"></script>
     <title>Cafe Finder - Home</title>
 </head>
+
 <body>
     <!-- Global Header Component -->
     <header>
@@ -14,20 +16,21 @@
             <div class="logo">
                 <a href="home.html">☕ Cafe Finder</a>
             </div>
-            
+
             <nav>
                 <ul class="nav-links">
                     <li><a href="home.html">Home</a></li>
                     <li><a href="about-us.html">About Us</a></li>
                 </ul>
-                
+
                 <!-- Profile and Navigation Dropdown Menu -->
                 <div class="profile-menu-container">
-                    <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()" aria-label="Toggle profile menu">
+                    <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()"
+                        aria-label="Toggle profile menu">
                         <span class="profile-avatar-icon">👤</span>
                         <span class="hamburger-lines-icon">☰</span>
                     </button>
-                    
+
                     <div class="profile-dropdown" id="profileDropdown">
                         <ul>
                             <li><a href="user-profile.html">👤 Profile</a></li>
@@ -46,7 +49,7 @@
         <!-- Michelin-Style Search and Filter Section -->
         <section class="search-filter-section">
             <form action="/search" method="GET" class="michelin-form">
-                
+
                 <!-- Main Search Bar Row -->
                 <div class="search-main-row">
                     <div class="search-input-wrapper">
@@ -54,11 +57,11 @@
                         <input type="text" name="search" placeholder="e. g. City, Cafe, Adresse...">
                     </div>
                 </div>
-                
+
                 <!-- Horizontal Filter Badges -->
                 <div class="filters-horizontal-row">
                     <button type="button" class="filter-icon-btn" aria-label="Quick Filters">⚡</button>
-    
+
                     <!-- Features Select Filter -->
                     <div class="filter-badge-select">
                         <select name="tag" id="tag-select" aria-label="Filter by Cafe Features">
@@ -162,7 +165,7 @@
                 </a>
             </div>
         </section>
-        
+
         <hr>
 
         <!-- Recommended Cafes Grid Section -->
@@ -176,7 +179,8 @@
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
                         <img src="placeholder.jpg" alt="Cafe interior">
-                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 1)" aria-label="Like Melu Cafe">
+                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 1)"
+                            aria-label="Like Melu Cafe">
                             🤍
                         </button>
                     </div>
@@ -192,7 +196,8 @@
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
                         <img src="placeholder.jpg" alt="Cafe interior">
-                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 2)" aria-label="Like Paska.L Choux">
+                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 2)"
+                            aria-label="Like Paska.L Choux">
                             🤍
                         </button>
                     </div>
@@ -208,7 +213,8 @@
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
                         <img src="placeholder.jpg" alt="Cafe interior">
-                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 3)" aria-label="Like Ingwer Cafe">
+                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 3)"
+                            aria-label="Like Ingwer Cafe">
                             🤍
                         </button>
                     </div>
@@ -224,7 +230,8 @@
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
                         <img src="placeholder.jpg" alt="Cafe interior">
-                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 4)" aria-label="Like Green Wall Coffee">
+                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 4)"
+                            aria-label="Like Green Wall Coffee">
                             🤍
                         </button>
                     </div>
@@ -240,7 +247,8 @@
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
                         <img src="placeholder.jpg" alt="Cafe interior">
-                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 5)" aria-label="Like Kawa Roastery">
+                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 5)"
+                            aria-label="Like Kawa Roastery">
                             🤍
                         </button>
                     </div>
@@ -256,7 +264,8 @@
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
                         <img src="placeholder.jpg" alt="Cafe interior">
-                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 6)" aria-label="Like The Philosopher">
+                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 6)"
+                            aria-label="Like The Philosopher">
                             🤍
                         </button>
                     </div>
@@ -272,7 +281,8 @@
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
                         <img src="placeholder.jpg" alt="Cafe interior">
-                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 7)" aria-label="Like Urban Lab Cafe">
+                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 7)"
+                            aria-label="Like Urban Lab Cafe">
                             🤍
                         </button>
                     </div>
@@ -288,7 +298,8 @@
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
                         <img src="placeholder.jpg" alt="Cafe interior">
-                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 8)" aria-label="Like Library Lounge">
+                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 8)"
+                            aria-label="Like Library Lounge">
                             🤍
                         </button>
                     </div>
@@ -307,10 +318,10 @@
     <footer class="cafe-details-footer">
         <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
         <p>
-            <a href="about-us.html">About Us & Contact</a> | 
+            <a href="about-us.html">About Us & Contact</a> |
             <a href="#top">Home</a>
         </p>
-        
+
         <div>
             <a href="https://instagram.com" class="footer-link" target="_blank" rel="noopener">Instagram</a>
             <a href="https://x.com" class="footer-link" target="_blank" rel="noopener">Twitter / X</a>
@@ -318,4 +329,5 @@
         </div>
     </footer>
 </body>
+
 </html>

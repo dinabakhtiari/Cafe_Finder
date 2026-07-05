@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/style.css">
-    <script src="../public/js/main.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js"></script>
     <title>Cafe Finder - Cafe Details</title>
 </head>
+
 <body>
     <!-- Global Header Component -->
     <header>
@@ -14,20 +16,21 @@
             <div class="logo">
                 <a href="home.html">☕ Cafe Finder</a>
             </div>
-            
+
             <nav>
                 <ul class="nav-links">
                     <li><a href="home.html">Home</a></li>
                     <li><a href="about-us.html">About Us</a></li>
                 </ul>
-                
+
                 <!-- Profile and Navigation Dropdown Menu -->
                 <div class="profile-menu-container">
-                    <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()" aria-label="Toggle profile menu">
+                    <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()"
+                        aria-label="Toggle profile menu">
                         <span class="profile-avatar-icon">👤</span>
                         <span class="hamburger-lines-icon">☰</span>
                     </button>
-                    
+
                     <div class="profile-dropdown" id="profileDropdown">
                         <ul>
                             <li><a href="user-profile.html">👤 Profile</a></li>
@@ -46,14 +49,15 @@
         <!-- Main Cafe Article Info -->
         <article class="cafe-details-article">
             <h1>Melu Cafe</h1>
-            
+
             <!-- Dynamic Meta Info: Now tracking which user submitted this cafe -->
-            <p class="cafe-meta-info">Added by: <strong class="cafe-author">username</strong> | Date: <span id="current-date">Loading date...</span></p>
+            <p class="cafe-meta-info">Added by: <strong class="cafe-author">username</strong> | Date: <span
+                    id="current-date">Loading date...</span></p>
             <p class="cafe-location-info"><strong>City:</strong> Stuttgart</p>
             <p class="cafe-address-info"><strong>Address:</strong> Theodor-Heuss-Straße 26, 70174 Stuttgart</p>
-            
+
             <img src="cafe-detailed.jpg" alt="Spacious workspace inside Melu Cafe" class="cafe-main-img">
-            
+
             <!-- Ratings and Bookmark Row -->
             <div class="cafe-action-row">
                 <div class="cafe-rating-summary">
@@ -72,7 +76,8 @@
             <!-- Description Box -->
             <div class="cafe-description-box">
                 <h3>Description</h3>
-                <p>This cafe provides great seating, quiet background music, and stable internet for long working hours.</p>
+                <p>This cafe provides great seating, quiet background music, and stable internet for long working hours.
+                </p>
             </div>
 
             <!-- Active Feature Badges -->
@@ -85,11 +90,11 @@
                     <span class="active-tag-badge">☕ Specialty Coffee</span>
                 </div>
             </div>
-            
+
             <!-- Social Share Links -->
             <div class="share-links">
                 <span>Share:</span>
-                <a href="#">Facebook</a> | 
+                <a href="#">Facebook</a> |
                 <a href="#">Instagram</a>
             </div>
 
@@ -97,7 +102,7 @@
             <div class="cafe-user-gallery">
                 <h3>User Photos</h3>
                 <p class="gallery-subtitle">Real photos shared by our community remote-workers:</p>
-                
+
                 <div class="gallery-grid">
                     <!-- Photo Item 1 -->
                     <div class="gallery-item">
@@ -131,19 +136,20 @@
         <!-- Comments & Reviews Form/List Section -->
         <section class="reviews-section">
             <h2>Comments & Reviews</h2>
-            
+
             <!-- Form to Submit a New Review and Update Cafe Feature Status -->
             <form action="/cafes/1/comments" method="POST" class="review-form">
-                
+
                 <div class="form-group rating-input-group">
                     <label for="rating">Rating (1-5):</label>
-                    <input type="number" id="rating" name="rating" min="1" max="5" step="0.1" placeholder="4.5" required required class="form-text-input">
+                    <input type="number" id="rating" name="rating" min="1" max="5" step="0.1" placeholder="4.5" required
+                        required class="form-text-input">
                 </div>
-                
+
                 <div class="cafe-features-selection">
                     <h4>What features did you experience here?</h4>
                     <p class="features-tip">Select all options that apply to this cafe location:</p>
-                    
+
                     <!-- Modern Capsule Checkboxes Container -->
                     <div class="tags-flex-container">
                         <label class="tag-checkbox-label">
@@ -191,9 +197,11 @@
 
                 <div class="form-group">
                     <label for="comment-text">Your Review:</label>
-                    <textarea id="comment-text" name="commentText" rows="4" placeholder="Tell others about your study or remote work experience here..." required></textarea>
+                    <textarea id="comment-text" name="commentText" rows="4"
+                        placeholder="Tell others about your study or remote work experience here..."
+                        required></textarea>
                 </div>
-                
+
                 <button type="submit" class="review-submit-btn">Submit Review & Features</button>
             </form>
 
@@ -213,18 +221,19 @@
     </main>
 
     <!-- Shared Unified Footer Component -->
-      <footer class="cafe-details-footer">
-    <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
-    <p>
-        <a href="about-us.html">About Us & Contact</a> | 
-        <a href="home.html">Home</a>
-    </p>
-    
-    <div>
-        <a href="https://instagram.com" class="footer-link" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://x.com" class="footer-link" target="_blank" rel="noopener">Twitter / X</a>
-        <a href="https://facebook.com" class="footer-link" target="_blank" rel="noopener">Facebook</a>
-    </div>
-</footer>
+    <footer class="cafe-details-footer">
+        <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
+        <p>
+            <a href="about-us.html">About Us & Contact</a> |
+            <a href="home.html">Home</a>
+        </p>
+
+        <div>
+            <a href="https://instagram.com" class="footer-link" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://x.com" class="footer-link" target="_blank" rel="noopener">Twitter / X</a>
+            <a href="https://facebook.com" class="footer-link" target="_blank" rel="noopener">Facebook</a>
+        </div>
+    </footer>
 </body>
+
 </html>
