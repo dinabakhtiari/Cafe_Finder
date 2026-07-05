@@ -10,9 +10,7 @@ router.get("/register", (req, res) => {
 
 router.post("/register", async (req, res) => {
     if (req.body.password !== req.body.confirm_password) {
-        return res.render("register", {
-            message: "Passwords don't match",
-        });
+        return res.redirect("/login-register.html?error=passwordmatch");
     }
     const hashedPwd = await bcryptjs.hash(req.body.password, 10);
     const { username, name, email } = req.body
@@ -22,9 +20,7 @@ router.post("/register", async (req, res) => {
         [username, name, email, hashedPwd],
         (err, result) => {
             if (err) {
-                return res.render("register", {
-                    message: "Username or email already in use",
-                });
+                return res.redirect("/login-register.html?error=duplicate");
             }
             req.session.userId = result.insertId;
             res.redirect("/");
@@ -45,9 +41,7 @@ router.post("/login", async (req, res) => {
         [email],
         async (err, result) => {
             if (err || result.length === 0) {
-                return res.render("login", {
-                    message: "Email or password is incorrect",
-                });
+                return res.redirect("/login-register.html?error=invalid");
             }
             const hashedPwd = result[0].password;
             const pwdMatch = await bcryptjs.compare(password, hashedPwd);
@@ -55,9 +49,7 @@ router.post("/login", async (req, res) => {
                 req.session.userId = result[0].id;
                 return res.redirect("/");
             } else {
-                return res.render("login", {
-                    message: "Email or password is incorrect",
-                });
+                return res.redirect("/login-register.html?error=invalid");
             }
         },
     );
@@ -67,9 +59,9 @@ router.post("/login", async (req, res) => {
 router.get("/logout", (req, res) => {
     req.session.destroy((err) => {
         if (err) {
-            return res.render("login", { message: "Could not logout" });
+            return res.redirect("/login-register.html?error=logout");
         }
-        res.redirect("/auth/login");
+        return res.redirect("/login-register.html");
     });
 });
 
