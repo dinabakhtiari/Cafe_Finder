@@ -50,6 +50,12 @@
                 <h2>Login</h2>
                 <p class="auth-subtitle">Welcome back! Log in to access your profile.</p>
 
+                <% if (typeof message !== 'undefined' && message && (message.includes('Email') || message.includes('incorrect'))) { %>
+                    <div class="auth-error-alert" style="background-color: #fff5f5; color: #c92a2a; border: 1px solid #ffe3e3; padding: 12px; border-radius: 6px; margin-bottom: 15px; font-size: 0.9em; font-weight: 600; text-align: center;">
+                        ⚠️ <%= message %>
+                    </div>
+                <% } %>
+
                 <form action="/auth/login" method="POST" class="auth-form">
                     <div class="form-group">
                         <label for="login-email">Email Address</label>
@@ -78,6 +84,12 @@
             <section class="auth-card id-hidden" id="register-card">
                 <h2>Register</h2>
                 <p class="auth-subtitle">Create an account to discover and bookmark study spots.</p>
+
+                <% if (typeof message !== 'undefined' && message && (message.includes('Password') || message.includes('use') || message.includes('already'))) { %>
+                    <div class="auth-error-alert" style="background-color: #fff5f5; color: #c92a2a; border: 1px solid #ffe3e3; padding: 12px; border-radius: 6px; margin-bottom: 15px; font-size: 0.9em; font-weight: 600; text-align: center;">
+                        ⚠️ <%= message %>
+                    </div>
+                <% } %>
 
                 <form action="/auth/register" method="POST" class="auth-form">
                     <div class="form-group">
@@ -149,6 +161,14 @@
             <a href="https://facebook.com" class="footer-link" target="_blank" rel="noopener">Facebook</a>
         </div>
     </footer>
+
+    <% if (typeof message !== 'undefined' && message && (message.includes('Password') || message.includes('use') || message.includes('already'))) { %>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                toggleAuthPages();
+            });
+        </script>
+    <% } %>
 </body>
 
 </html>

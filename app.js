@@ -1,6 +1,9 @@
+require('dotenv').config();
+
 const express = require("express");
 const session = require("express-session");
 const connection = require("./middleware/connectionDB.js");
+const path = require("path");
 
 // start connection to database
 connection.connect((err) => {
@@ -19,10 +22,11 @@ const port = 3000;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.set("view engine", "ejs");
-const path = require("path");
 
+// Serve static files
 app.use(express.static(path.join(__dirname, "views")));
 app.use(express.static(path.join(__dirname, "public")));
+
 // Session middleware
 app.use(
     session({
@@ -36,18 +40,20 @@ app.use(
     }),
 );
 
+// Routes configuration
 app.use("/auth", require("./controllers/auth.js"));
 app.use("/cafes", require("./controllers/cafes.js"));
 app.use("/users", require("./controllers/users.js"));
 app.use("/reviews", require("./controllers/reviews.js"));
 app.use("/favorites", require("./controllers/favorites.js"));
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+// Root Route updated to support EJS rendering with flash messages
+app.get("/", (req, res) => {
+    res.render("login-register", { message: null });
 });
 
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "views", "login-register.html"));
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });
 
 // close connection to database
