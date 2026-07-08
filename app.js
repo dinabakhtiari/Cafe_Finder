@@ -34,7 +34,33 @@ app.use(
   }),
 );
 
+<<<<<<< Updated upstream
 app.use("/auth", require("./routes/auth.js"));
+=======
+// Routes configuration
+app.use("/auth", require("./controllers/auth.js"));
+app.use("/cafes", require("./controllers/cafes.js"));
+app.use("/users", require("./controllers/users.js"));
+app.use("/reviews", require("./controllers/reviews.js"));
+app.use("/favorites", require("./controllers/favorites.js"));
+
+// Routes configuration
+app.use("/auth", require("./controllers/auth.js"));
+app.use("/cafes", require("./controllers/cafes.js"));
+app.use("/users", require("./controllers/users.js"));
+app.use("/reviews", require("./controllers/reviews.js"));
+app.use("/favorites", require("./controllers/favorites.js"));
+
+// Updated route serving the dynamic EJS file
+app.get("/home", (req, res) => {
+    res.render("home");
+});
+
+// The updated route supporting EJS rendering
+app.get("/", (req, res) => {
+    res.render("login-register", { message: null });
+});
+>>>>>>> Stashed changes
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
@@ -49,3 +75,24 @@ app.listen(port, () => {
 //
 //     console.log('Database connection closed.');
 // });
+<<<<<<< Updated upstream
+=======
+
+// Render User Profile
+app.get("/profile", (req, res) => {
+    res.render("user-profile"); 
+});
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
+
+// close connection to database
+// connection.end((err) => {
+//     if (err) {
+//         console.log('Error closing the database connection: ' + err.stack);
+//         return;
+//     };
+//
+//     console.log('Database connection closed.');
+// });
+>>>>>>> Stashed changes
