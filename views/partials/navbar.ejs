@@ -1,0 +1,32 @@
+<header>
+    <div class="header-container">
+        <div class="logo">
+            <a href="/home">☕ Cafe Finder</a>
+        </div>
+
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about-us.html">About Us</a></li>
+            </ul>
+
+            <div class="profile-menu-container">
+                <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()"
+                    aria-label="Toggle profile menu">
+                    <span class="profile-avatar-icon">👤</span>
+                    <span class="hamburger-lines-icon">☰</span>
+                </button>
+
+                <div class="profile-dropdown" id="profileDropdown">
+                    <ul>
+                        <li><a href="/profile">👤 Profile</a></li>
+                        <li><a href="/my-comments">💬 My Comments</a></li>
+                        <li><a href="/liked-cafes">❤️ Saved Cafes</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a href="/auth/logout" class="logout-link">🚪 Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>

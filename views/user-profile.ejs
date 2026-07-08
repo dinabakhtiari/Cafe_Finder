@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/main.js"></script>
+    <title>Cafe Finder - User Profile</title>
+</head>
+
+<body>
+    <!-- Clean Dynamic Navbar -->
+    <%- include('partials/navbar') %>
+
+    <main class="profile-main-container">
+
+        <header class="user-profile-bio-header">
+            <div class="bio-avatar-wrapper">
+                <img src="avatar.jpg" alt="Profile picture" class="profile-avatar-large">
+            </div>
+
+            <div class="bio-info-details">
+                <div class="meta-field-row">
+                    <span class="field-label">Name:</span>
+                    <!-- Hardcoded for now, we can make this dynamic later! -->
+                    <span class="field-value user-important-name">Dina Bakhtiari</span>
+                </div>
+                <div class="meta-field-row">
+                    <span class="field-label">Username:</span>
+                    <span class="field-value">@dina_b</span>
+                </div>
+                <div class="meta-field-row">
+                    <span class="field-label">Email:</span>
+                    <span class="field-value">dina.bakhtiari@example.com</span>
+                </div>
+                <div class="meta-field-row">
+                    <span class="field-label">Bio:</span>
+                    <span class="field-value bio-text-multiline">Computer Science Student | Passionate about discovering quiet study spots and productive workspaces.</span>
+                </div>
+            </div>
+
+            <div class="bio-action-corner">
+                <a href="/profile/edit" class="profile-edit-link">Edit 📝</a>
+            </div>
+        </header>
+
+        <div class="profile-bottom-content">
+
+            <section class="profile-data-card contributed-cafes-section">
+                <div class="contributed-header-row">
+                    <h3>My Contributed Cafes</h3>
+                    <button type="button" class="filter-submit-badge add-cafe-toggle-btn" onclick="toggleAddCafeForm()">➕ Add a New Cafe</button>
+                </div>
+
+                <div id="inline-add-cafe-container" class="inline-form-wrapper">
+                    <h4 class="form-inner-title">Enter Cafe Details</h4>
+                    
+                    <!-- THE CRITICAL FORM -->
+                    <form action="/cafes" method="POST" enctype="multipart/form-data" class="review-form">
+                        <div class="form-group">
+                            <label for="cafe-title" class="form-field-label">Cafe Name:</label>
+                            <!-- FIXED: Changed name="title" to name="name" to match MySQL -->
+                            <input type="text" id="cafe-title" name="name" placeholder="e.g. Melu Cafe" required class="form-text-input">
+                        </div>
+
+                        <div class="form-row-flex">
+                            <div class="form-group flex-1">
+                                <label for="cafe-city" class="form-field-label">City:</label>
+                                <input type="text" id="cafe-city" name="city" placeholder="e.g. Stuttgart" required class="form-text-input">
+                            </div>
+                            <div class="form-group flex-2">
+                                <label for="cafe-address" class="form-field-label">Full Address:</label>
+                                <input type="text" id="cafe-address" name="address" placeholder="e.g. Theodor-Heuss-Straße 26" required class="form-text-input">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cafe-image" class="form-field-label">Cafe Cover Photo:</label>
+                            <input type="file" id="cafe-image" name="photo" accept="image/*" required class="form-file-input">
+                        </div>
+
+                        <div class="cafe-features-selection">
+                            <p class="features-tip">Select all available features that apply to this location:</p>
+                            <div class="tags-flex-container">
+                                <label class="tag-checkbox-label"><input type="checkbox" name="tags" value="wifi"><span>⚡ Fast Wi-Fi</span></label>
+                                <label class="tag-checkbox-label"><input type="checkbox" name="tags" value="outlets"><span>🔌 Power Outlets</span></label>
+                                <label class="tag-checkbox-label"><input type="checkbox" name="tags" value="quiet"><span>🤫 Quiet Environment</span></label>
+                                <label class="tag-checkbox-label"><input type="checkbox" name="tags" value="tables"><span>🪑 Big Tables</span></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cafe-description" class="form-field-label">Short Description:</label>
+                            <textarea id="cafe-description" name="description" rows="3" placeholder="Describe the study environment..." required class="form-textarea-input"></textarea>
+                        </div>
+
+                        <div class="form-actions-flex">
+                            <button type="button" class="action-delete-btn cancel-form-btn" onclick="toggleAddCafeForm()">Cancel</button>
+                            <button type="submit" class="review-submit-btn submit-form-btn">Publish Cafe ☕</button>
+                        </div>
+                    </form>
+                    <hr class="form-divider">
+                </div>
+
+                <ul class="profile-list">
+                    <li class="profile-list-item">
+                        <span class="item-details"><strong>Melu Cafe</strong> - Stuttgart (Theodor-Heuss-Straße 26)</span>
+                        <div class="item-actions">
+                            <button type="button" class="action-view-btn" onclick="toggleEditCafeForm('1')">Edit 📝</button>
+                            <form action="/cafes/1/delete" method="POST" class="inline-form" onsubmit="return confirm('Are you sure you want to delete this cafe permanently?');">
+                                <button type="submit" class="action-delete-btn">Delete</button>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <!-- Clean Dynamic Footer -->
+    <%- include('partials/footer') %>
+</body>
+
+</html>
