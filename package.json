@@ -2,7 +2,7 @@
   "name": "cafe_finder",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
@@ -28,6 +28,7 @@
     "ejs": "^6.0.1",
     "express": "^5.2.1",
     "express-session": "^1.19.0",
+    "multer": "^2.2.0",
     "mysql2": "^3.22.5"
   }
 }

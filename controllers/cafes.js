@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
     cafeModel.getAllCafes(req.query, (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
         
-        // Changed this line to render the EJS page and pass the data!
+        // Render the EJS page and pass the data!
         res.render("cafes", { allCafes: result });
     });
 });
@@ -33,6 +33,7 @@ router.get("/:id", (req, res) => {
         res.render("cafe", { cafe: result[0] });
     });
 });
+
 // Add cafe
 router.post("/", requireLogin, upload.single("photo"), (req, res) => {
     const data = { ...req.body, user_id: req.session.userId };
