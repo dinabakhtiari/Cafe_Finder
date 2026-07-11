@@ -4,13 +4,28 @@ const requireLogin = require("../middleware/authMiddleware.js");
 const upload = require("../middleware/upload.js");
 const cafeModel = require("../models/cafes.js");
 
-// Get cafes
+// Get cafes (Standard list)
 router.get("/", (req, res) => {
     cafeModel.getAllCafes(req.query, (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
-        
-        // Render the EJS page and pass the data!
         res.render("cafes", { allCafes: result });
+    });
+});
+
+// SEARCH ROUTE (Must be ABOVE /recent and /:id)
+router.get("/search", (req, res) => {
+    // Grab the city the user searched for, or default to 'Any'
+    const searchTerm = req.query.city || "Any";
+    
+    // Pass req.query directly to Henrique's model so it applies the filters!
+    cafeModel.getAllCafes(req.query, (err, result) => {
+        if (err) {
+            console.error("Search error:", err);
+            return res.render("search-results", { city: searchTerm, cafes: [] });
+        }
+        
+        // Render your dynamic EJS search page
+        res.render("search-results", { city: searchTerm, cafes: result });
     });
 });
 
@@ -23,14 +38,20 @@ router.get("/recent", (req, res) => {
     });
 });
 
-// Get specific cafe
+// Get specific cafe (Connects to cafe.ejs)
 router.get("/:id", (req, res) => {
     cafeModel.getCafeById(req.params.id, (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
-        if (result.length === 0) return res.status(404).send("No cafe found");
         
-        // DYNAMIC FIX: Render the EJS page and pass the single cafe object to it
-        res.render("cafe", { cafe: result[0] });
+        if (result.length === 0) {
+            // Safely render the page without a cafe if it isn't found
+            return res.render("cafe", { cafe: null, comments: [] });
+        }
+        
+        // Render the single cafe page! 
+        // Note: I added `comments: []` as a placeholder so your EJS file doesn't crash 
+        // until we build the actual comments database logic.
+        res.render("cafe", { cafe: result[0], comments: [] });
     });
 });
 

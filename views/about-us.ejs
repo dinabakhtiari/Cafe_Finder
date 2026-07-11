@@ -10,38 +10,8 @@
 </head>
 
 <body>
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <a href="home.html">☕ Cafe Finder</a>
-            </div>
-
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="home.html">Home</a></li>
-                    <li><a href="about-us.html">About Us</a></li>
-                </ul>
-
-                <div class="profile-menu-container">
-                    <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()"
-                        aria-label="Toggle profile menu">
-                        <span class="profile-avatar-icon">👤</span>
-                        <span class="hamburger-lines-icon">☰</span>
-                    </button>
-
-                    <div class="profile-dropdown" id="profileDropdown">
-                        <ul>
-                            <li><a href="user-profile.html">👤 Profile</a></li>
-                            <li><a href="/my-comments">💬 My Comments</a></li>
-                            <li><a href="/liked-cafes">❤️ Saved Cafes</a></li>
-                            <li class="dropdown-divider"></li>
-                            <li><a href="login-register.html" class="logout-link">🚪 Logout</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </header>
+    <!-- Global Header Component -->
+    <%- include('partials/navbar') %>
 
     <main class="about-main">
         <section class="about-section">
@@ -122,19 +92,8 @@
         </section>
     </main>
 
-    <footer class="cafe-details-footer">
-        <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
-        <p>
-            <a href="#top">About Us & Contact</a> |
-            <a href="home.html">Home</a>
-        </p>
-
-        <div>
-            <a href="https://instagram.com" class="footer-link" target="_blank" rel="noopener">Instagram</a>
-            <a href="https://x.com" class="footer-link" target="_blank" rel="noopener">Twitter / X</a>
-            <a href="https://facebook.com" class="footer-link" target="_blank" rel="noopener">Facebook</a>
-        </div>
-    </footer>
+    <!-- Global Layout Footer Component -->
+    <%- include('partials/footer') %>
 </body>
 
 </html>

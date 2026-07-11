@@ -2,6 +2,8 @@ const express = require("express");
 const session = require("express-session");
 const connection = require("./middleware/connectionDB.js");
 const path = require("path");
+// Added the auth middleware so we can protect the profile route
+const requireLogin = require("./middleware/authMiddleware.js");
 
 // start connection to database
 connection.connect((err) => {
@@ -52,8 +54,24 @@ app.get("/home", (req, res) => {
     res.render("home");
 });
 
-app.get("/profile", (req, res) => {
-    res.render("user-profile"); 
+app.get("/about-us", (req, res) => {
+    res.render("about-us");
+});
+
+// Dynamic Profile Route!
+app.get("/profile", requireLogin, (req, res) => {
+    const userId = req.session.userId;
+    const query = "SELECT name, username, email FROM users WHERE id = ?";
+    
+    connection.query(query, [userId], (err, results) => {
+        if (err || results.length === 0) {
+            console.error("Error fetching user profile:", err);
+            return res.render("user-profile", { user: null });
+        }
+
+        // Render the page and pass the specific logged-in user's data!
+        res.render("user-profile", { user: results[0] });
+    });
 });
 
 // Start Server

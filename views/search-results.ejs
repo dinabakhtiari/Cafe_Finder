@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/main.js"></script>
+    <title>Cafe Finder - Search Results</title>
+</head>
+
+<body>
+    <!-- Global Header Component -->
+    <%- include('partials/navbar') %>
+
+    <main class="results-main">
+        <div class="city-header">
+            <!-- Dynamically display the searched city, or a generic fallback -->
+            <h1>Study Spots in <span class="highlight-city"><%= typeof city !== 'undefined' ? city : 'Your Search' %></span></h1>
+            <p class="results-count-text">
+                <% if (typeof cafes !== 'undefined' && cafes.length > 0) { %>
+                    Found <%= cafes.length %> premium cafe<%= cafes.length === 1 ? '' : 's' %> matching your filters
+                <% } else { %>
+                    No cafes found matching your search.
+                <% } %>
+            </p>
+        </div>
+
+        <section class="results-section-wrapper">
+            <h2>Available Cafes</h2>
+
+            <div class="modern-cafes-grid">
+                <% if (typeof cafes !== 'undefined' && cafes.length > 0) { %>
+                    <!-- Loop through the search results from the database -->
+                    <% cafes.forEach(cafe => { %>
+                        <div class="michelin-cafe-card">
+                            <div class="card-image-wrapper">
+                                <img src="<%= cafe.photo_url ? '/' + cafe.photo_url : '/placeholder.jpg' %>" alt="<%= cafe.name %> Exterior">
+                                <!-- Triggers your JS function to add to favorites -->
+                                <button type="button" class="floating-heart-btn" onclick="toggleLikeCafe(this, <%= cafe.id %>)" aria-label="Add to Favorites">🤍</button>
+                            </div>
+
+                            <a href="/cafes/<%= cafe.id %>" class="card-info-link">
+                                <div class="card-michelin-meta">
+                                    <span class="michelin-rating">⭐ <%= cafe.rating || 'New' %></span>
+                                    <span class="michelin-divider">•</span>
+                                    <span class="michelin-tag">⚡ Wi-Fi & Power</span>
+                                </div>
+                                <h3 class="michelin-title"><%= cafe.name %></h3>
+                                <p class="michelin-location"><%= cafe.city %></p>
+                                <p class="michelin-address"><%= cafe.address %></p>
+                            </a>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <!-- Fallback message if the search returned zero results -->
+                    <div class="no-results-message" style="text-align: center; grid-column: 1 / -1; padding: 40px;">
+                        <p>Try adjusting your search filters or exploring a different city.</p>
+                        <br>
+                        <a href="/home" class="auth-submit-btn" style="display: inline-block; text-decoration: none; max-width: 200px;">Back to Home</a>
+                    </div>
+                <% } %>
+            </div>
+        </section>
+    </main>
+
+    <!-- Global Layout Footer Component -->
+    <%- include('partials/footer') %>
+</body>
+
+</html>

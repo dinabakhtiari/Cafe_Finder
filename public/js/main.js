@@ -54,6 +54,9 @@ window.addEventListener('click', function(event) {
 /**
  * Syncs bookmark logic with Henrique's favorites.js routing (POST/DELETE)
  */
+/**
+ * Syncs bookmark logic with Henrique's favorites.js routing (POST/DELETE)
+ */
 function toggleLikeCafe(button, cafeId) {
     const isLiking = button.innerText.trim() === '🤍' || button.innerText.includes('Add to Favorites');
     
@@ -121,32 +124,43 @@ function toggleEditCafeForm(cafeId) {
 }
 
 /**
- * Handles smooth AJAX removal of bookmarks from saved-cafes.html using favorites.js endpoint
+ * Handles smooth AJAX removal of bookmarks using the favorites.js endpoint
  */
-function removeBookmark(cafeId) {
+async function removeBookmark(cafeId) {
     const confirmRemove = confirm("Are you sure you want to remove this cafe from your saved favorites?");
     
-    if (confirmRemove) {
-        const cafeCard = document.getElementById(`saved-cafe-${cafeId}`);
-        if (cafeCard) {
-            cafeCard.style.opacity = '0';
-            cafeCard.style.transform = 'scale(0.95)';
-            cafeCard.style.transition = 'all 0.3s ease';
-            
-            setTimeout(() => {
-                cafeCard.remove();
-                const grid = document.querySelector('.modern-cafes-grid');
-                if (grid && grid.children.length === 0) {
-                    grid.innerHTML = '<p class="results-count-text" style="grid-column: 1/-1; text-align: center; padding: 40px 0;">No saved cafes yet. Start exploring from the home page!</p>';
-                }
-            }, 300);
-            
-            fetch('/favorites', { 
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ cafe_id: cafeId })
-            });
+    if (!confirmRemove) return;
+
+    try {
+        const response = await fetch('/favorites', { 
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ cafe_id: cafeId })
+        });
+
+        if (response.ok) {
+            const cafeCard = document.getElementById(`saved-cafe-${cafeId}`);
+            if (cafeCard) {
+                // Keep the smooth animation!
+                cafeCard.style.opacity = '0';
+                cafeCard.style.transform = 'scale(0.95)';
+                cafeCard.style.transition = 'all 0.3s ease';
+                
+                setTimeout(() => {
+                    cafeCard.remove();
+                    const grid = document.querySelector('.modern-cafes-grid');
+                    // If that was the last cafe, reload the page to trigger the EJS empty state template
+                    if (grid && grid.children.length === 0) {
+                        window.location.reload();
+                    }
+                }, 300);
+            }
+        } else {
+            alert("Failed to remove the cafe. Please try again.");
         }
+    } catch (error) {
+        console.error("Error removing bookmark:", error);
+        alert("A network error occurred. Please check your connection.");
     }
 }
 
