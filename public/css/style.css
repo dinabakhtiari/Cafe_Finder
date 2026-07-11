@@ -1765,6 +1765,30 @@ footer a:hover, .footer-link:hover {
     margin-top: 25px !important;
 }
 
+/* Toast Notification Containers */
+.toast-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #2ecc71; /* Success green color */
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Class to trigger entry animation and visibility */
+.toast-notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* Specific red pulsing override for active heart button on saved page */
 .floating-heart-btn {
     color: #c92a2a; /* Warning Red for saved state */

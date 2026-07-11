@@ -194,3 +194,39 @@ function submitEditCafeForm(event, cafeId) {
         alert(`Error: ${err.message || 'Could not update cafe details.'}`);
     });
 }
+
+function showToastMessage(message) {
+    // Dynamically create the toast notification element
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.innerText = message;
+    
+    document.body.appendChild(toast);
+    
+    // Apply entry animation
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 100);
+    
+    // Automatically remove the notification after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+            toast.remove();
+        }, 400); // Wait for the fade-out animation to complete
+    }, 3000);
+}
+
+// Function to handle bookmarking/unbookmarking a cafe
+function toggleLikeCafe(button, cafeId) {
+    // Current database integration logic from your teammate goes here...
+    
+    // Handle the visual toggle and display the appropriate toast message
+    if (button.innerText === '🤍') {
+        button.innerText = '❤️';
+        showToastMessage("Cafe bookmarked successfully! Added to your Saved Cafes.");
+    } else {
+        button.innerText = '🤍';
+        showToastMessage("Removed from your Saved Cafes.");
+    }
+}
