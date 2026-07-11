@@ -230,3 +230,79 @@ function toggleLikeCafe(button, cafeId) {
         showToastMessage("Removed from your Saved Cafes.");
     }
 }
+
+// Handle password recovery form submission with a toast message
+document.addEventListener("DOMContentLoaded", () => {
+    // Find the forgot password form inside the forgot-card section
+    const forgotCard = document.getElementById("forgot-card");
+    if (!forgotCard) return;
+
+    const forgotForm = forgotCard.querySelector("form");
+
+    if (forgotForm) {
+        forgotForm.addEventListener("submit", async (event) => {
+            // 1. Prevent the page from reloading traditionally
+            event.preventDefault();
+
+            // 2. Get the email value and the submit button
+            const emailInput = document.getElementById("forgot-email");
+            const submitBtn = forgotForm.querySelector(".auth-submit-btn");
+            
+            if (!emailInput || !emailInput.value) return;
+
+            // Optional: Disable button and show loading status
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = "Sending...";
+            submitBtn.disabled = true;
+
+            try {
+                // 3. Send the request to the backend dynamically via Fetch
+                const response = await fetch("/auth/forgot-password", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: new URLSearchParams({ email: emailInput.value })
+                });
+
+                // 4. Trigger the toast message on the frontend
+                showToastMessage("Recovery link sent successfully! Please check your email inbox.");
+                
+                // Clear the input field after success
+                emailInput.value = "";
+
+            } catch (error) {
+                console.error("Error sending recovery email:", error);
+                showToastMessage("An error occurred. Please try again later.");
+            } finally {
+                // Restore button state
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        });
+    }
+});
+
+function showToastMessage(message) {
+    // Dynamically create the toast notification element
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    
+    // Add a premium coffee icon before the text message
+    toast.innerHTML = `<span>☕</span> <span>${message}</span>`;
+    
+    document.body.appendChild(toast);
+    
+    // Apply entry animation
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 100);
+    
+    // Automatically remove the notification after 3.5 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+            toast.remove();
+        }, 400); // Wait for the fade-out animation to complete
+    }, 3500);
+}
