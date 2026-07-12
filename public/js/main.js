@@ -116,6 +116,58 @@ async function removeBookmark(cafeId) {
     }
 }
 
+function toggleEditReviewForm(reviewId) {
+    const form = document.getElementById(`edit-review-${reviewId}`);
+    if (!form) return;
+    if (form.classList.contains('id-hidden')) {
+        form.classList.replace('id-hidden', 'id-active');
+    } else {
+        form.classList.replace('id-active', 'id-hidden');
+    }
+}
+
+function submitEditReviewForm(event, reviewId) {
+    event.preventDefault();
+    const formElement = document.getElementById(`edit-review-form-${reviewId}`);
+    if (!formElement) return;
+
+    const formData = new FormData(formElement);
+    const body = {};
+    formData.forEach((value, key) => body[key] = value);
+    ['wifi','outlets','quiet','tables','outdoor','ac','parking','student_discount','specialty_coffee','snacks']
+        .forEach(tag => { if (!body[tag]) body[tag] = 0; });
+
+    fetch(`/reviews/${reviewId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    })
+    .then(res => {
+        if (res.ok) {
+            window.location.reload();
+        } else {
+            showToastMessage('Failed to update the review.');
+        }
+    })
+    .catch(() => showToastMessage('A network error occurred. Please try again.'));
+}
+
+async function deleteReview(reviewId) {
+    if (!confirm('Are you sure you want to delete this review?')) return;
+
+    try {
+        const response = await fetch(`/reviews/${reviewId}`, { method: 'DELETE' });
+        if (response.ok) {
+            showToastMessage('Review deleted.');
+            window.location.reload();
+        } else {
+            showToastMessage('Failed to delete the review.');
+        }
+    } catch (error) {
+        showToastMessage('A network error occurred. Please try again.');
+    }
+}
+
 async function deleteCafe(cafeId) {
     if (!confirm('Are you sure you want to delete this cafe permanently?')) return;
 

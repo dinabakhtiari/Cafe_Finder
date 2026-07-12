@@ -83,6 +83,44 @@
                                 </div>
                                 <% } %>
                                 <p class="review-comment"><%= review.comment %></p>
+                                <% if (user && review.user_id == user) { %>
+                                <div class="review-actions">
+                                    <button type="button" class="action-view-btn" onclick="toggleEditReviewForm(<%= review.id %>)">Edit</button>
+                                    <button type="button" class="action-delete-btn" onclick="deleteReview(<%= review.id %>)">Delete</button>
+                                </div>
+                                <div id="edit-review-<%= review.id %>" class="inline-form-wrapper auth-card id-hidden"
+                                    style="margin-top: 12px; border-inline-start: 4px solid #6f4e37;">
+                                    <form id="edit-review-form-<%= review.id %>" class="review-form"
+                                        style="background: transparent; border: none; padding: 0; box-shadow: none;"
+                                        onsubmit="submitEditReviewForm(event, <%= review.id %>)">
+                                        <div class="form-group rating-input-group">
+                                            <label class="form-field-label">Rating (1-5):</label>
+                                            <input type="number" name="rating" min="1" max="5" step="0.1"
+                                                value="<%= review.rating %>" required class="form-text-input">
+                                        </div>
+                                        <div class="cafe-features-selection">
+                                            <div class="tags-flex-container">
+                                                <% const allTags = ['wifi','outlets','quiet','tables','outdoor','ac','parking','student_discount','specialty_coffee','snacks'];
+                                                   const tagNames = { wifi:'🛜 Fast Wi-Fi', outlets:'🔌 Power Outlets', quiet:'🤫 Quiet', tables:'🪑 Big Tables', outdoor:'🌿 Outdoor', ac:'❄️ AC', parking:'🚗 Parking', student_discount:'🎓 Student Discount', specialty_coffee:'☕ Specialty Coffee', snacks:'🥐 Snacks' }; %>
+                                                <% allTags.forEach(tag => { %>
+                                                <label class="tag-checkbox-label">
+                                                    <input type="checkbox" name="<%= tag %>" value="1" <%= review[tag] == 1 ? 'checked' : '' %>>
+                                                    <span><%= tagNames[tag] %></span>
+                                                </label>
+                                                <% }) %>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-field-label">Your Review:</label>
+                                            <textarea name="comment" rows="3" required class="form-textarea-input"><%= review.comment %></textarea>
+                                        </div>
+                                        <div class="form-actions-flex">
+                                            <button type="button" class="action-delete-btn" onclick="toggleEditReviewForm(<%= review.id %>)">Cancel</button>
+                                            <button type="submit" class="review-submit-btn" style="background-color: #2b8a3e;">Save Changes 💾</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <% } %>
                             </div>
                             <% }) %>
                         <% } %>

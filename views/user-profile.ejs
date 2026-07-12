@@ -157,15 +157,22 @@
             <section class="profile-data-card">
                 <h3>My Comments & Reviews</h3>
                 <ul class="profile-list">
-                    <li class="profile-list-item">
-                        <span class="item-details">Commented on <strong>Melu Cafe</strong>: "Loved the atmosphere!
-                            Definitely coming back next week." <span class="review-score-badge">5/5 ⭐</span></span>
-                        <div class="item-actions">
-                            <form action="/comments/1/delete" method="POST" class="inline-form">
-                                <button type="submit" class="action-delete-btn">Delete</button>
-                            </form>
-                        </div>
-                    </li>
+                    <% if (userReviews.length === 0) { %>
+                        <li class="profile-list-item" style="color: #888; font-style: italic;">You haven't written any reviews yet.</li>
+                    <% } else { %>
+                        <% userReviews.forEach(review => { %>
+                        <li class="profile-list-item">
+                            <span class="item-details">
+                                Reviewed <a href="/cafes/<%= review.cafe_id %>"><strong><%= review.cafe_name %></strong></a>:
+                                "<%= review.comment %>"
+                                <span class="review-score-badge"><%= review.rating %>/5 ⭐</span>
+                            </span>
+                            <div class="item-actions">
+                                <button type="button" class="action-delete-btn" onclick="deleteReview(<%= review.id %>)">Delete</button>
+                            </div>
+                        </li>
+                        <% }) %>
+                    <% } %>
                 </ul>
             </section>
         </div>

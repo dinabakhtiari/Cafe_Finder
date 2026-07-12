@@ -7,6 +7,7 @@ const path = require("path");
 const requireLogin = require("./middleware/authMiddleware.js");
 const cafeModel = require("./models/cafes.js");
 const favoritesModel = require("./models/favorites.js");
+const reviewModel = require("./models/reviews.js");
 
 // start connection to database
 connection.connect((err) => {
@@ -72,7 +73,10 @@ app.get("/user-profile", requireLogin, (req, res) => {
         if (err || userResults.length === 0) return res.redirect("/");
         connection.query("SELECT * FROM cafes WHERE user_id = ?", [userId], (err, contributedCafes) => {
             if (err) contributedCafes = [];
-            res.render("user-profile", { user: userResults[0], contributedCafes });
+            reviewModel.getReviewsByUser(userId, (err, userReviews) => {
+                if (err) userReviews = [];
+                res.render("user-profile", { user: userResults[0], contributedCafes, userReviews });
+            });
         });
     });
 });
