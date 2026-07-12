@@ -1,0 +1,1968 @@
+/* ==========================================================================
+   1. GLOBAL RESET & BASE STYLES
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Enables elegant smooth scrolling site-wide */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fdfbf7;
+    color: #2c2520;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    max-width: 1300px !important;
+    margin: 0 auto !important;
+    padding: 40px 24px !important;
+    width: 100% !important;
+    
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+    box-sizing: border-box !important;
+    flex: 1;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #e6dfd5;
+    margin: 20px 0;
+    width: 100%;
+}
+
+/* ==========================================================================
+   2. SHARED HEADER COMPONENT & MICHELIN DROPDOWN
+   ========================================================================= */
+header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e6dfd5;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+.header-container {
+    max-width: 1400px !important; /* دقیقاً هم‌اندازه با تگ main */
+    margin: 0 auto !important;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.logo a {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #6f4e37;
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: #4a3f35;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95em;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #6f4e37;
+}
+
+/* Profile Menu Wrapper */
+.profile-menu-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Combined Avatar + Hamburger Button exactly like the Michelin UI */
+.profile-menu-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 24px; /* Capsule outline */
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.profile-menu-btn:hover {
+    border-color: #6f4e37;
+    box-shadow: 0 2px 8px rgba(111, 78, 55, 0.08);
+}
+
+.profile-avatar-icon {
+    font-size: 1.1em;
+    color: #555;
+}
+
+.hamburger-lines-icon {
+    font-size: 1em;
+    color: #1a1a1a;
+}
+
+/* Dropdown Content Box Container Floating Window */
+.profile-dropdown {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 15px);
+    background-color: #ffffff;
+    min-width: 220px;
+    border: 1px solid #e6dfd5;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    z-index: 1010;
+    
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px) scale(0.95);
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.2s;
+}
+
+.profile-dropdown.show-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.profile-dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 6px 0;
+}
+
+.profile-dropdown li a {
+    display: block;
+    padding: 10px 16px;
+    color: #2c2520;
+    text-decoration: none;
+    font-size: 0.92em;
+    font-weight: 500;
+    text-align: left;
+    transition: background-color 0.15s ease;
+}
+
+.profile-dropdown li a:hover {
+    background-color: #fdfbf7;
+    color: #6f4e37;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 6px 0;
+}
+
+.profile-dropdown .logout-link {
+    color: #c92a2a;
+}
+
+.profile-dropdown .logout-link:hover {
+    background-color: #fff5f5;
+    color: #c92a2a;
+}
+
+/* ==========================================================================
+   3. SHARED FOOTER COMPONENT
+   ========================================================================== */
+footer, .auth-footer, .about-footer, .cafe-details-footer, .results-footer, .profile-footer {
+    text-align: center;
+    padding: 30px 0;
+    margin-top: auto; /* CRITICAL: Automatically snaps footer to screen bottom */
+    border-top: 1px solid #e6dfd5;
+    color: #8c7e74;
+    font-size: 0.9em;
+    width: 100%;
+    background-color: #fdfbf7;
+}
+
+footer a, .footer-link {
+    color: #6f4e37;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer a:hover, .footer-link:hover {
+    text-decoration: underline;
+}
+
+.auth-footer, .about-footer, .cafe-details-footer, .results-footer, .profile-footer {
+    border-top: 1px solid #eee;
+    color: gray;
+}
+
+.auth-footer .footer-link, .about-footer .footer-link, 
+.cafe-details-footer .footer-link, .results-footer .footer-link, 
+.profile-footer .footer-link {
+    color: gray;
+}
+
+/* ==========================================================================
+   4. HOME PAGE STYLES (PURE CSS GRID & MICHELIN CARD ARCHITECTURE)
+   ========================================================================== */
+.home-grid-container {
+    max-width: 1300px !important;
+    margin: 0 auto !important;
+    padding: 40px 24px !important;
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+    box-sizing: border-box !important;
+}
+
+.search-filter-section,
+.popular-cities-section,
+.recommended-cafes-section {
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    text-align: left !important;
+}
+
+.popular-cities-section h2,
+.recommended-cafes-section h2 {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+}
+
+.popular-cities-section p {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.michelin-form {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.search-main-row {
+    width: 100%;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.search-input-wrapper {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
+    padding: 10px 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.search-icon {
+    font-size: 1.1em;
+    color: #999;
+    margin-right: 10px;
+}
+
+.search-input-wrapper input[type="text"] {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #2c2520;
+    background: transparent;
+}
+
+.map-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
+    width: 45px;
+    height: 45px;
+    text-decoration: none;
+    font-size: 1.2em;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.filters-horizontal-row {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-icon-btn {
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 20px;
+    padding: 6px 14px;
+    cursor: pointer;
+}
+
+.filter-badge-select {
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 20px;
+    padding: 4px 12px;
+}
+
+.filter-badge-select select {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 0.88em;
+    font-weight: 500;
+    color: #4a3f35;
+    cursor: pointer;
+}
+
+.filter-submit-badge {
+    background-color: #6f4e37;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 0.88em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+/* ==========================================================================
+   DYNAMIC REPEAT GRIDS & CARDS SHOWCASE
+   ========================================================================== */
+.city-cards-container {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important; 
+    gap: 25px !important; 
+    width: 100% !important;
+    margin-top: 15px !important;
+    padding: 0 !important;
+}
+
+.cafes-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important;
+    gap: 30px !important;
+    width: 100% !important;
+    margin-top: 25px !important;
+    padding: 0 !important;
+}
+
+.city-card-link {
+    text-decoration: none;
+    color: inherit;
+    width: 100%; 
+}
+
+.city-card {
+    border: 1px solid #e6dfd5;
+    padding: 24px 15px;
+    border-radius: 8px;
+    text-align: center;
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+    height: 100%; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.city-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(111, 78, 55, 0.08);
+}
+
+.city-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.city-card h3 {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.cafe-card {
+    display: flex !important;
+    flex-direction: column !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    width: 100% !important;              
+    padding: 0 !important;
+    text-align: left !important;
+    height: 100%; 
+}
+
+.cafe-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 190px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.cafe-image-wrapper img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    margin-bottom: 0 !important;
+    transition: transform 0.3s ease;
+}
+
+.cafe-card:hover img {
+    transform: scale(1.03);
+}
+
+.cafe-heart-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #ffffff !important;
+    border: none !important;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15) !important;
+    font-size: 0.95em;
+    transition: transform 0.15s ease, background-color 0.15s ease;
+    z-index: 10;
+    padding: 0 !important;
+}
+
+.cafe-heart-btn:hover {
+    transform: scale(1.1);
+    background-color: #fdfbf7 !important;
+}
+
+.cafe-heart-btn:active {
+    transform: scale(0.92);
+}
+
+.cafe-card h3 {
+    font-size: 1.15em !important;
+    font-weight: 700 !important;
+    color: #1a1a1a !important;
+    margin: 0 0 4px 0 !important;
+    line-height: 1.3;
+}
+
+.cafe-card p {
+    font-size: 0.88em !important;
+    color: #555 !important;
+    margin-bottom: 3px !important;
+    line-height: 1.4;
+}
+
+.cafe-card p strong {
+    color: #1a1a1a !important;
+}
+
+.cafe-card p span {
+    background-color: #f5f0ea !important;
+    color: #6f4e37 !important;
+    padding: 2px 8px !important;
+    border-radius: 12px !important;
+    font-size: 0.8em !important;
+    font-weight: 600 !important;
+    display: inline-block;
+    margin-top: 2px;
+}
+
+.cafe-card a {
+    margin-top: auto;
+    padding-top: 10px;
+    color: #6f4e37 !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+    font-size: 0.88em !important;
+    align-self: flex-start;
+}
+
+.cafe-card a:hover {
+    text-decoration: underline !important;
+}
+
+/* ==========================================================================
+   5. AUTHENTICATION (LOGIN & REGISTER & RESET) PAGE STYLES
+   ========================================================================= */
+.auth-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.auth-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 30px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    text-align: left;
+    transition: opacity 0.25s ease-in-out;
+}
+
+/* Control visibility states strictly via CSS Classes without UI shifting */
+.auth-card.id-hidden {
+    display: none;
+    opacity: 0;
+}
+
+.auth-card.id-active {
+    display: block;
+    opacity: 1;
+}
+
+.auth-card h2 {
+    font-size: 1.8em;
+    color: #6f4e37;
+    margin-bottom: 5px;
+}
+
+.auth-subtitle {
+    font-size: 0.9em;
+    color: gray;
+    margin-bottom: 25px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #4a3f35;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="email"],
+.auth-form input[type="password"] {
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
+    padding: 10px 15px;
+    font-size: 0.95em;
+    color: #2c2520;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.auth-form input:focus {
+    border-color: #6f4e37;
+    box-shadow: 0 0 0 3px rgba(111, 78, 55, 0.1);
+}
+
+.auth-submit-btn {
+    background-color: #6f4e37;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 100%;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.auth-submit-btn:hover {
+    background-color: #523928;
+}
+
+.auth-switch-prompt {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 0.92em;
+    color: #4a3f35;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+.switch-link-btn {
+    background: none;
+    border: none;
+    color: #6f4e37;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    text-decoration: underline;
+}
+
+.switch-link-btn:hover {
+    color: #523928;
+}
+
+.forgot-password-container {
+    text-align: right;
+    margin-top: -10px;
+    margin-bottom: 5px;
+}
+
+/* Redesigned Button Trigger for Forgot Password to avoid linter anchor issues */
+.forgot-link-btn {
+    background: none;
+    border: none;
+    color: #6f4e37;
+    font-size: 0.85em;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    transition: color 0.2s ease;
+}
+
+.forgot-link-btn:hover {
+    color: #523928;
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   6. ABOUT US & CONTACT PAGE STYLES
+   ========================================================================== */
+.about-main {
+    max-width: 900px !important;
+    margin: 0 auto !important;
+    padding: 40px 20px !important;
+    width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+}
+
+.about-section {
+    width: 100%;
+    text-align: left;
+}
+
+.about-section h1 {
+    font-size: 2.4em;
+    color: #1a1a1a;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.about-section h2 {
+    font-size: 1.6em;
+    color: #1a1a1a;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.about-description, .contact-subtext {
+    font-size: 1.02em;
+    color: #444;
+    line-height: 1.6;
+    max-width: 750px;
+}
+
+.section-divider {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 35px 0;
+}
+
+.team-profiles-grid {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.team-member-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: calc(33.333% - 20px);
+    min-width: 220px;
+}
+
+.member-image-wrapper {
+    width: 100%;
+    height: 240px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #e6dfd5;
+    background-color: #f5f2eb;
+    margin-bottom: 12px;
+}
+
+.member-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+}
+
+.team-member-card:hover img {
+    transform: scale(1.02);
+}
+
+.team-member-card h3 {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 4px 0;
+}
+
+.member-role {
+    font-size: 0.9em;
+    color: #6f4e37;
+    font-weight: 600;
+    margin: 0;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    max-width: 700px;
+    margin-top: 25px;
+}
+
+.form-group-row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.form-field.full-width {
+    width: 100%;
+}
+
+.contact-form label {
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #4a3f35;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 14px;
+    border: 1px solid #e6dfd5;
+    border-radius: 4px;
+    background-color: #ffffff;
+    font-size: 0.95em;
+    color: #1a1a1a;
+    font-family: inherit;
+    transition: border-color 0.2s ease;
+}
+
+.contact-form input:focus, .contact-form textarea:focus {
+    outline: none;
+    border-color: #6f4e37;
+}
+
+.contact-submit-btn {
+    align-self: flex-start;
+    background-color: #6f4e37;
+    color: #ffffff;
+    border: none;
+    font-weight: bold;
+    font-size: 0.9em;
+    padding: 10px 24px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    box-shadow: 0 2px 6px rgba(111, 78, 55, 0.1);
+}
+
+.contact-submit-btn:hover {
+    background-color: #523928;
+}
+
+.direct-contact-info {
+    margin-top: 30px;
+    font-size: 0.95em;
+    color: #555;
+    text-align: left;
+}
+
+.direct-contact-info p {
+    margin: 4px 0;
+}
+
+/* ==========================================================================
+   7. CAFE DETAILS PAGE STYLES (MODERN ACCENT & CAPSULE CHECKBOXES)
+   ========================================================================== */
+.cafe-details-main {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.cafe-details-article,
+.reviews-section {
+    width: 100%;
+    text-align: left;
+}
+
+.cafe-meta-info {
+    font-size: 0.9em;
+    color: #8c7e74;
+    margin-bottom: 5px;
+}
+
+.cafe-location-info {
+    font-size: 1.1em;
+    color: #4a3f35;
+    margin-bottom: 15px;
+}
+
+.cafe-address-info {
+    font-size: 0.95em;
+    color: #555;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+.cafe-main-img {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.cafe-action-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.cafe-rating-summary {
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cafe-rating-summary .reviews-count {
+    color: gray;
+    font-size: 0.8em;
+}
+
+.cafe-bookmark-action .bookmark-btn {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95em;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    min-width: 180px;
+    text-align: center;
+}
+
+.cafe-bookmark-action .bookmark-btn:hover {
+    background-color: #222222;
+}
+
+.cafe-bookmark-action .bookmark-btn:active {
+    transform: scale(0.98);
+}
+
+.cafe-description-box {
+    margin: 25px 0;
+}
+
+.cafe-description-box h3 {
+    color: #6f4e37;
+    margin-bottom: 8px;
+}
+
+/* Requirement 7.2 Capsule Social Media Sharing Component Rules */
+.share-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    padding: 10px 0;
+    font-size: 0.9em;
+    color: gray;
+}
+
+.share-links span {
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.share-links .footer-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    font-size: 0.85em;
+    font-weight: 500;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin: 0;
+}
+
+.share-links .footer-link[href*="facebook.com"] {
+    background-color: #f1f1f1;
+    color: #1877f2;
+    border: 1px solid #1877f2;
+}
+
+.share-links .footer-link[href*="facebook.com"]:hover {
+    background-color: #1877f2;
+    color: #ffffff;
+}
+
+.share-links .footer-link[href*="instagram.com"] {
+    background-color: #f1f1f1;
+    color: #e4405f;
+    border: 1px solid #e4405f;
+}
+
+.share-links .footer-link[href*="instagram.com"]:hover {
+    background-color: #e4405f;
+    color: #ffffff;
+}
+
+.share-links .footer-link[href*="x.com"] {
+    background-color: #f1f1f1;
+    color: #1da1f2;
+    border: 1px solid #1da1f2;
+}
+
+.share-links .footer-link[href*="x.com"]:hover {
+    background-color: #1da1f2;
+    color: #ffffff;
+}
+
+/* Review Form Architecture */
+.review-form {
+    background-color: #ffffff;
+    border: 1px solid #e6dfd5;
+    border-radius: 8px;
+    padding: 25px;
+    margin: 20px 0 40px 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+}
+
+.rating-input-group input[type="number"] {
+    max-width: 100px;
+    padding: 8px;
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
+    outline: none;
+}
+
+.review-form textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 12px;
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
+    outline: none;
+    font-family: inherit;
+    resize: vertical;
+}
+
+.review-form input:focus,
+.review-form textarea:focus {
+    border-color: #6f4e37;
+}
+
+.cafe-features-selection {
+    margin: 25px 0;
+}
+
+.cafe-features-selection h4 {
+    color: #4a3f35;
+    margin-bottom: 4px;
+}
+
+.cafe-features-selection .features-tip {
+    color: gray;
+    font-size: 0.85em;
+    margin-bottom: 15px;
+}
+
+.tags-flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+}
+
+.tag-checkbox-label {
+    cursor: pointer;
+}
+
+.tag-checkbox-label input[type="checkbox"] {
+    display: none;
+}
+
+.tag-checkbox-label span {
+    display: inline-block;
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 0.88em;
+    font-weight: 500;
+    color: #4a3f35;
+    transition: all 0.2s ease;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.tag-checkbox-label input[type="checkbox"]:checked + span {
+    background-color: #fdfbf7;
+    border-color: #6f4e37;
+    color: #6f4e37;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(111, 78, 55, 0.08);
+}
+
+.review-form .review-submit-btn {
+    background-color: #6f4e37;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.review-form .review-submit-btn:hover {
+    background-color: #523928;
+}
+
+.user-comments-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.user-comment-box {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #e6dfd5;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+}
+
+.user-comment-box h4 {
+    color: #4a3f35;
+    margin-bottom: 5px;
+}
+
+.user-comment-box .comment-score {
+    font-weight: normal;
+    font-size: 0.85em;
+    color: #6f4e37;
+    margin-left: 5px;
+}
+
+.cafe-user-gallery {
+    margin: 35px 0 10px 0;
+    width: 100%;
+}
+
+.cafe-user-gallery h3 {
+    color: #6f4e37;
+    margin-bottom: 2px;
+}
+
+.gallery-subtitle {
+    font-size: 0.9em;
+    color: gray;
+    margin-bottom: 15px;
+}
+
+.gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    width: 100%;
+}
+
+.gallery-item {
+    position: relative;
+    width: calc(33.333% - 10px);
+    min-width: 230px;
+    height: 180px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.04);
+}
+
+.photo-meta {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.2) 80%, rgba(0, 0, 0, 0) 100%);
+    padding: 10px 12px;
+    box-sizing: border-box;
+}
+
+.photo-meta span {
+    color: #ffffff;
+    font-size: 0.82em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.photo-meta strong {
+    color: #fdfbf7;
+}
+
+.cafe-active-tags-section {
+    margin: 20px 0 25px 0;
+    text-align: left;
+}
+
+.cafe-active-tags-section h4 {
+    color: #4a3f35;
+    font-size: 1.05em;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.active-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+}
+
+.active-tag-badge {
+    display: inline-block;
+    background-color: #f5f0ea;
+    border: 1px solid #e6dfd5;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #6f4e37;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* ==========================================================================
+   8. SEARCH RESULTS PAGE STYLES (MICHELIN GUIDE MINIMALIST TEMPLATE)
+   ========================================================================= */
+.results-main {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 40px 20px !important;
+    width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;   
+    justify-content: flex-start !important; 
+}
+
+.city-header {
+    text-align: left;
+    width: 100%;
+    margin-bottom: 35px;
+}
+
+.city-header h1 {
+    font-size: 2.5em;
+    color: #1a1a1a;
+    font-weight: 700;
+    margin: 0;
+}
+
+.city-header .highlight-city {
+    color: #6f4e37;
+}
+
+.results-count-text {
+    font-size: 0.95em;
+    color: #555;
+    margin-top: 6px;
+}
+
+.results-section-wrapper {
+    width: 100%;
+    text-align: left;
+}
+
+.results-section-wrapper h2 {
+    color: #1a1a1a;
+    margin-bottom: 25px;
+    font-size: 1.6em;
+    font-weight: 700;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.modern-cafes-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px; 
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.michelin-cafe-card {
+    display: flex;
+    flex-direction: column;
+    width: calc(25% - 22.5px);
+    min-width: 260px; 
+    background: transparent;
+    overflow: hidden;
+}
+
+.card-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 190px; 
+    border-radius: 4px; 
+    overflow: hidden;
+}
+
+.michelin-cafe-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.michelin-cafe-card:hover img {
+    transform: scale(1.03); 
+}
+
+.floating-heart-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #ffffff;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    font-size: 0.95em;
+    transition: transform 0.15s ease;
+}
+
+.floating-heart-btn:hover {
+    transform: scale(1.1);
+}
+
+.card-info-link {
+    display: block;
+    text-decoration: none;
+    margin-top: 12px;
+    width: 100%;
+}
+
+.card-michelin-meta {
+    display: flex;
+    align-items: center;
+    font-size: 0.85em;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+}
+
+.michelin-rating {
+    font-weight: 700;
+    color: #2c2520;
+}
+
+.michelin-divider {
+    margin: 0 6px;
+    color: #ccc;
+}
+
+.michelin-tag {
+    color: #6f4e37; 
+    font-weight: 600;
+}
+
+.michelin-title {
+    font-size: 1.15em;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 2px 0;
+    line-height: 1.3;
+}
+
+.michelin-title:hover {
+    text-decoration: underline; 
+}
+
+.michelin-location {
+    font-size: 0.85em;
+    color: #555;
+    margin: 1px 0;
+}
+
+.michelin-address {
+    font-size: 0.82em;
+    color: gray;
+    margin-top: 2px;
+}
+
+/* ==========================================================================
+   9. USER PROFILE PAGE STYLES (SCREENSHOT-INSPIRED GRID LAYOUT)
+   ========================================================================= */
+.profile-main-container {
+    max-width: 950px !important; 
+    margin: 0 auto !important;
+    padding: 40px 20px !important;
+    width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;   
+    justify-content: flex-start !important; 
+    gap: 35px;
+}
+
+.user-profile-bio-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 45px;
+    background-color: #ffffff;
+    border: 1px solid #e6dfd5;
+    border-radius: 8px;
+    padding: 40px;
+    text-align: left;
+    width: 100%; 
+    box-sizing: border-box;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+}
+
+.bio-avatar-wrapper {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #6f4e37;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    flex-shrink: 0; 
+}
+
+.profile-avatar-large {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bio-info-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.meta-field-row {
+    display: flex;
+    align-items: flex-start;
+    font-size: 0.98em;
+    line-height: 1.4;
+}
+
+.field-label {
+    width: 100px;
+    font-weight: 600;
+    color: #555;
+    flex-shrink: 0;
+}
+
+.field-value {
+    color: #1a1a1a;
+    font-weight: 500;
+}
+
+.user-important-name {
+    font-size: 1.5em;
+    font-weight: 700 !important;
+    color: #1a1a1a;
+}
+
+.bio-text-multiline {
+    color: #444;
+    max-width: 500px;
+}
+
+.bio-action-corner {
+    position: absolute;
+    top: 35px;
+    right: 35px;
+}
+
+.profile-edit-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid #6f4e37;
+    color: #6f4e37;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.88em;
+    padding: 8px 20px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    background-color: #ffffff;
+}
+
+.profile-edit-link:hover {
+    background-color: #6f4e37;
+    color: #ffffff;
+}
+
+.profile-bottom-content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+.profile-data-card {
+    background-color: #ffffff;
+    border: 1px solid #e6dfd5;
+    border-radius: 8px;
+    padding: 25px;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+    width: 100%; 
+    box-sizing: border-box;
+}
+
+.profile-data-card h3 {
+    color: #4a3f35;
+    font-size: 1.2em;
+    margin: 0 0 15px 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+
+.profile-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.profile-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f9f9f9;
+    font-size: 0.95em;
+    gap: 15px;
+    width: 100%;
+}
+
+.profile-list-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.review-score-badge {
+    color: #6f4e37;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.item-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.inline-form {
+    display: inline;
+}
+
+.action-view-btn, .action-delete-btn {
+    text-decoration: none;
+    font-size: 0.85em;
+    font-weight: bold;
+    padding: 5px 14px;
+    border-radius: 14px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s ease;
+}
+
+.action-view-btn {
+    background-color: #f5f0ea;
+    color: #6f4e37;
+}
+
+.action-view-btn:hover {
+    background-color: #e6dfd5;
+}
+
+.action-delete-btn {
+    background-color: #fff5f5;
+    color: #c92a2a;
+}
+
+.action-delete-btn:hover {
+    background-color: #ffe3e3;
+}
+
+.contributed-cafes-section {
+    grid-column: span 2;
+}
+
+.contributed-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.contributed-header-row h3 {
+    margin: 0;
+}
+
+.add-cafe-toggle-btn {
+    border: none;
+    font-size: 0.85em;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.inline-form-wrapper {
+    display: none;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: #fafafa;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+}
+
+.form-inner-title {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.form-field-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.form-text-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.form-row-flex {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.flex-2 {
+    flex: 2;
+}
+
+.form-file-input {
+    width: 100%;
+    padding: 5px 0;
+}
+
+.contributed-cafes-section .cafe-features-selection {
+    margin-bottom: 15px;
+}
+
+.contributed-cafes-section .features-tip {
+    margin-bottom: 10px;
+    font-size: 0.85em;
+}
+
+.form-textarea-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: inherit;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.form-actions-flex {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.cancel-form-btn, .submit-form-btn {
+    margin: 0;
+}
+
+.cancel-form-btn {
+    padding: 8px 15px;
+}
+
+.submit-form-btn {
+    padding: 8px 20px;
+}
+
+.form-divider {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #eaeaea;
+}
+
+/* ==========================================================================
+   10. RESPONSIVE MEDIA QUERIES (BREAKPOINTS)
+   ========================================================================== */
+@media (max-width: 650px) {
+    .user-profile-bio-header {
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;
+        gap: 20px;
+    }
+    .bio-action-corner {
+        position: static;
+        margin-top: 10px;
+        width: 100%;
+    }
+    .profile-edit-link {
+        justify-content: center;
+    }
+    .meta-field-row {
+        flex-direction: column;
+        gap: 2px;
+    }
+}
+
+/* ==========================================================================
+   11. SAVED CAFES PAGE SPECIALIZATIONS (Requirement 7.1.3)
+   ========================================================================== */
+.results-main .modern-cafes-grid {
+    display: grid !important;
+    /* Creates a responsive 4-column layout that scales down smoothly on tablets and mobile */
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important;
+    gap: 30px !important;
+    width: 100% !important;
+    margin-top: 25px !important;
+}
+
+
+/* Class to trigger entry animation and visibility */
+.toast-notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Specific red pulsing override for active heart button on saved page */
+.floating-heart-btn {
+    color: #c92a2a; /* Warning Red for saved state */
+    font-size: 1.05em;
+    background: #ffffff;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.floating-heart-btn:hover {
+    transform: scale(1.1);
+    background-color: #fff5f5;
+}
+
+/* Adjusting Card Info layout to prevent any text leakage */
+.michelin-cafe-card .card-info-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+/* ==========================================================================
+   12. ADVANCED MOBILE RESPONSIVE OPTIMIZATIONS
+   ========================================================================== */
+
+/* Tablet & Mobile Adaptive Rules (Breakpoints) */
+@media (max-width: 768px) {
+    /* 1. Form Rows Flexibility */
+    .form-group-row, 
+    .form-row-flex {
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+    
+    .form-row-flex .flex-1,
+    .form-row-flex .flex-2 {
+        width: 100% !important;
+    }
+
+    /* 2. Header Layout Adjustments */
+    .header-container {
+        padding: 10px 15px !important;
+    }
+
+    nav {
+        gap: 12px !important; /* Reduces gap so elements fit together */
+    }
+
+    .nav-links {
+        gap: 12px !important;
+    }
+
+    .nav-links a {
+        font-size: 0.88em !important;
+    }
+
+    /* 3. Community Photo Gallery Wrap */
+    .gallery-grid {
+        gap: 10px !important;
+    }
+
+    .gallery-item {
+        width: calc(50% - 5px) !important; /* Switches to 2 columns on tablets */
+        min-width: 140px !important;
+        height: 140px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* 4. Ultra-Mobile Adjustments */
+    main, 
+    .profile-main-container, 
+    .results-main, 
+    .about-main, 
+    .cafe-details-main {
+        padding: 20px 16px !important; /* Prevents huge padding on tiny screens */
+    }
+
+    .gallery-item {
+        width: 100% !important; /* Switches to full width on small smartphones */
+        height: 180px !important;
+    }
+
+    /* 5. Clean Wrap for Team Members in About Us */
+    .team-profiles-grid {
+        flex-direction: column !important;
+        gap: 25px !important;
+    }
+
+    .team-member-card {
+        width: 100% !important;
+    }
+
+    .member-image-wrapper {
+        height: 280px !important; /* Better image proportion on full-width mobile cards */
+    }
+
+    /* 6. Footer Layout Optimization */
+    footer div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 10px;
+    }
+}
+
+.review-card {
+    background-color: #ffffff;
+    border: 1px solid #e6dfd5;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.review-rating {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #2c2520;
+}
+
+.review-meta {
+    font-size: 0.82rem;
+    color: #888;
+}
+
+.review-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.review-tag-badge {
+    background-color: #f3ede4;
+    color: #6f4e37;
+    font-size: 0.78rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid #e0d5c5;
+}
+
+.review-comment {
+    font-size: 0.95rem;
+    color: #4a3f35;
+    line-height: 1.6;
+}
+
+.toast-notification {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    padding: 16px 28px;
+    border-radius: 12px;
+    border-left: 4px solid #d4a373;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateX(40px) scale(0.95);
+    transition: opacity 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toast-notification.show {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}

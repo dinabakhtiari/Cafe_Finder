@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/main.js"></script>
+    <title>Cafe Finder - <%= typeof cafe !=='undefined' && cafe ? cafe.name : 'Cafe Details' %>
+    </title>
+</head>
+
+<body>
+    <%- include('partials/navbar') %>
+
+        <main class="cafe-details-main">
+            <% if (typeof cafe !=='undefined' && cafe) { %>
+
+                <article class="cafe-details-article">
+                    <h1>
+                        <%= cafe.name %>
+                    </h1>
+
+                    <p class="cafe-location-info"><strong>City:</strong>
+                        <%= cafe.city %>
+                    </p>
+                    <p class="cafe-address-info"><strong>Address:</strong>
+                        <%= cafe.address %>
+                    </p>
+
+                    <img src="<%= cafe.photo_url ? cafe.photo_url : '/placeholder.jpg' %>" alt="<%= cafe.name %>"
+                        class="cafe-main-img">
+
+                    <div class="cafe-action-row">
+                        <div class="cafe-rating-summary">
+                            <span>⭐ <strong>New</strong></span>
+                        </div>
+                        <div class="cafe-bookmark-action">
+                            <button type="button" class="bookmark-btn"
+                                data-favorited="<%= isFavorited %>"
+                                onclick="toggleLikeCafe(this, <%= cafe.id %>)">
+                                <%= isFavorited ? '❤️ Saved' : '🤍 Save to Favorites' %>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="cafe-description-box">
+                        <h3>Description</h3>
+                        <p>
+                            <%= cafe.description || 'No description available.' %>
+                        </p>
+                    </div>
+
+                    <div class="share-links">
+                        <span>Share:</span>
+                        <a href="#">Facebook</a> |
+                        <a href="#">Instagram</a>
+                    </div>
+                </article>
+
+                <hr>
+
+                <section class="reviews-section">
+                    <h2>Comments & Reviews</h2>
+
+                    <div class="user-comments-container">
+                        <% if (reviews.length === 0) { %>
+                            <p style="color: #666; font-style: italic;">No reviews yet. Be the first to share your experience!</p>
+                        <% } else { %>
+                            <% reviews.forEach(review => { %>
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="review-rating">⭐ <%= review.rating %> / 5</span>
+                                    <span class="review-meta">@<%= review.username %> · <%= new Date(review.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) %></span>
+                                </div>
+                                <% const tagLabels = { wifi: '🛜 Fast Wi-Fi', outlets: '🔌 Power Outlets', quiet: '🤫 Quiet', tables: '🪑 Big Tables', outdoor: '🌿 Outdoor', ac: '❄️ AC', parking: '🚗 Parking', student_discount: '🎓 Student Discount', specialty_coffee: '☕ Specialty Coffee', snacks: '🥐 Snacks' };
+                                   const activeTags = Object.keys(tagLabels).filter(tag => review[tag] == 1); %>
+                                <% if (activeTags.length > 0) { %>
+                                <div class="review-tags">
+                                    <% activeTags.forEach(tag => { %>
+                                        <span class="review-tag-badge"><%= tagLabels[tag] %></span>
+                                    <% }) %>
+                                </div>
+                                <% } %>
+                                <p class="review-comment"><%= review.comment %></p>
+                                <% if (user && review.user_id == user) { %>
+                                <div class="review-actions">
+                                    <button type="button" class="action-view-btn" onclick="toggleEditReviewForm(<%= review.id %>)">Edit</button>
+                                    <button type="button" class="action-delete-btn" onclick="deleteReview(<%= review.id %>)">Delete</button>
+                                </div>
+                                <div id="edit-review-<%= review.id %>" class="inline-form-wrapper auth-card id-hidden"
+                                    style="margin-top: 12px; border-inline-start: 4px solid #6f4e37;">
+                                    <form id="edit-review-form-<%= review.id %>" class="review-form"
+                                        style="background: transparent; border: none; padding: 0; box-shadow: none;"
+                                        onsubmit="submitEditReviewForm(event, <%= review.id %>)">
+                                        <div class="form-group rating-input-group">
+                                            <label class="form-field-label">Rating (1-5):</label>
+                                            <input type="number" name="rating" min="1" max="5" step="0.1"
+                                                value="<%= review.rating %>" required class="form-text-input">
+                                        </div>
+                                        <div class="cafe-features-selection">
+                                            <div class="tags-flex-container">
+                                                <% const allTags = ['wifi','outlets','quiet','tables','outdoor','ac','parking','student_discount','specialty_coffee','snacks'];
+                                                   const tagNames = { wifi:'🛜 Fast Wi-Fi', outlets:'🔌 Power Outlets', quiet:'🤫 Quiet', tables:'🪑 Big Tables', outdoor:'🌿 Outdoor', ac:'❄️ AC', parking:'🚗 Parking', student_discount:'🎓 Student Discount', specialty_coffee:'☕ Specialty Coffee', snacks:'🥐 Snacks' }; %>
+                                                <% allTags.forEach(tag => { %>
+                                                <label class="tag-checkbox-label">
+                                                    <input type="checkbox" name="<%= tag %>" value="1" <%= review[tag] == 1 ? 'checked' : '' %>>
+                                                    <span><%= tagNames[tag] %></span>
+                                                </label>
+                                                <% }) %>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-field-label">Your Review:</label>
+                                            <textarea name="comment" rows="3" required class="form-textarea-input"><%= review.comment %></textarea>
+                                        </div>
+                                        <div class="form-actions-flex">
+                                            <button type="button" class="action-delete-btn" onclick="toggleEditReviewForm(<%= review.id %>)">Cancel</button>
+                                            <button type="submit" class="review-submit-btn" style="background-color: #2b8a3e;">Save Changes 💾</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <% } %>
+                            </div>
+                            <% }) %>
+                        <% } %>
+                    </div>
+
+                    <form action="/reviews" method="POST" class="review-form">
+                        <input type="hidden" name="cafe_id" value="<%= cafe.id %>">
+
+                        <div class="form-group rating-input-group">
+                            <label for="rating">Rating (1-5):</label>
+                            <input type="number" id="rating" name="rating" min="1" max="5" step="0.1" placeholder="4.5"
+                                required class="form-text-input">
+                        </div>
+
+                        <div class="cafe-features-selection">
+                            <h4>What features did you experience here?</h4>
+                            <p class="features-tip">Select all options that apply to this cafe location:</p>
+
+                            <div class="tags-flex-container">
+                                <label class="tag-checkbox-label"><input type="checkbox" name="wifi"
+                                        value="1"><span>🛜Fast Wi-Fi</span></label>
+                                <label class="tag-checkbox-label"><input type="checkbox" name="outlets"
+                                        value="1"><span>🔌 Power Outlets</span></label>
+                                <label class="tag-checkbox-label"><input type="checkbox" name="quiet" value="1"><span>🤫
+                                        Quiet Environment</span></label>
+                                <label class="tag-checkbox-label"><input type="checkbox" name="tables"
+                                        value="1"><span>🪑 Big Tables</span></label>
+                                <label class="tag-checkbox-label"><input type="checkbox" name="outdoor"
+                                        value="1"><span>🌿 Outdoor Seating</span></label>
+                                <label class="tag-checkbox-label"><input type="checkbox" name="ac" value="1"><span>❄️
+                                        Air Conditioning</span></label>
+                                <label class="tag-checkbox-label"><input type="checkbox" name="parking"
+                                        value="1"><span>🚗 Parking Available</span></label>
+                                <label class="tag-checkbox-label"><input type="checkbox" name="student_discount"
+                                        value="1"><span>🎓 Student Discount</span></label>
+                                <label class="tag-checkbox-label"><input type="checkbox" name="specialty_coffee"
+                                        value="1"><span>☕ Specialty Coffee</span></label>
+                                <label class="tag-checkbox-label"><input type="checkbox" name="snacks"
+                                        value="1"><span>🥐 Bakery & Snacks</span></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="comment-text">Your Review:</label>
+                            <textarea id="comment-text" name="comment" rows="4"
+                                placeholder="Tell others about your study or remote work experience here..."
+                                required></textarea>
+                        </div>
+
+                        <button type="submit" class="review-submit-btn">Submit Review & Features</button>
+                    </form>
+                </section>
+
+                <% } else { %>
+                    <div style="text-align: center; padding: 50px;">
+                        <h2>Cafe not found</h2>
+                        <a href="/" class="auth-submit-btn"
+                            style="display: inline-block; text-decoration: none; max-width: 200px;">Back to Home</a>
+                    </div>
+                    <% } %>
+        </main>
+
+        <%- include('partials/footer') %>
+</body>
+
+</html>

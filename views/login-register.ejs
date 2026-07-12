@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/main.js"></script>
+    <title>Cafe Finder - Login & Register</title>
+</head>
+
+<body>
+    <%- include('partials/navbar') %>
+
+    <main class="auth-main">
+        <div class="auth-wrapper">
+
+            <section class="auth-card id-active" id="login-card">
+                <h2>Login</h2>
+                <p class="auth-subtitle">Welcome back! Log in to access your profile.</p>
+
+                <% if (typeof message !== 'undefined' && message && (message.includes('Email') || message.includes('incorrect') || message.includes('logout'))) { %>
+                    <div class="auth-error-alert" style="background-color: #fff5f5; color: #c92a2a; border: 1px solid #ffe3e3; padding: 12px; border-radius: 6px; margin-bottom: 15px; font-size: 0.9em; font-weight: 600; text-align: center;">
+                        ⚠️ <%= message %>
+                    </div>
+                <% } %>
+
+                <form action="/auth/login" method="POST" class="auth-form">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" id="login-email" name="email" placeholder="example@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" placeholder="Enter your password"
+                            required>
+                    </div>
+
+                    <div class="forgot-password-container">
+                        <button type="button" class="forgot-link-btn" onclick="showForgotPassword()">Forgot
+                            password?</button>
+                    </div>
+
+                    <button type="submit" class="auth-submit-btn">Log In</button>
+                </form>
+
+                <div class="auth-switch-prompt">
+                    <p>New to Cafe Finder? <button type="button" class="switch-link-btn"
+                            onclick="toggleAuthPages()">Create an account</button></p>
+                </div>
+            </section>
+
+            <section class="auth-card id-hidden" id="register-card">
+                <h2>Register</h2>
+                <p class="auth-subtitle">Create an account to discover and bookmark study spots.</p>
+
+                <% if (typeof message !== 'undefined' && message && (message.includes('Password') || message.includes('use') || message.includes('already'))) { %>
+                    <div class="auth-error-alert" style="background-color: #fff5f5; color: #c92a2a; border: 1px solid #ffe3e3; padding: 12px; border-radius: 6px; margin-bottom: 15px; font-size: 0.9em; font-weight: 600; text-align: center;">
+                        ⚠️ <%= message %>
+                    </div>
+                <% } %>
+
+                <form action="/auth/register" method="POST" class="auth-form">
+                    <div class="form-group">
+                        <label for="reg-username">Username</label>
+                        <input type="text" id="reg-username" name="username" placeholder="e.g. dinab96" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-fullname">Full Name</label>
+                        <input type="text" id="reg-fullname" name="name" placeholder="Your Full Name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-email">Email Address</label>
+                        <input type="email" id="reg-email" name="email" placeholder="example@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-password">Password</label>
+                        <input type="password" id="reg-password" name="password" placeholder="Min. 8 characters"
+                            required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-confirm-password">Confirm Password</label>
+                        <input type="password" id="reg-confirm-password" name="confirm_password"
+                            placeholder="Min. 8 characters" required>
+                    </div>
+                    <button type="submit" class="auth-submit-btn">Sign Up</button>
+                </form>
+
+                <div class="auth-switch-prompt">
+                    <p>Already have an account? <button type="button" class="switch-link-btn"
+                            onclick="toggleAuthPages()">Back to Login</button></p>
+                </div>
+            </section>
+
+            <section class="auth-card id-hidden" id="forgot-card">
+                <h2>Reset Password</h2>
+                <p class="auth-subtitle">Enter your email address and we'll send you a recovery link.</p>
+
+                <form action="/auth/forgot-password" method="POST" class="auth-form">
+                    <div class="form-group">
+                        <label for="forgot-email">Email Address</label>
+                        <input type="email" id="forgot-email" name="email" placeholder="example@email.com" required>
+                    </div>
+                    <button type="submit" class="auth-submit-btn">Send Recovery Link</button>
+                </form>
+
+                <div class="auth-switch-prompt">
+                    <p>Remembered your password? <button type="button" class="switch-link-btn"
+                            onclick="hideForgotPassword()">Back to Login</button></p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <% if (typeof message !== 'undefined' && message && (message.includes('Password') || message.includes('use') || message.includes('already'))) { %>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                toggleAuthPages();
+            });
+        </script>
+    <% } %>
+</body>
+
+</html>
