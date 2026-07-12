@@ -141,143 +141,29 @@
                 <h2>Recently added Cafes</h2>
             </div>
 
+            <% if (recentCafes.length === 0) { %>
+                <p style="color: #666; font-style: italic; text-align: center; padding: 40px 0;">
+                    No cafes added yet. Be the first to <a href="/user-profile">add one</a>!
+                </p>
+            <% } else { %>
             <div class="cafes-grid">
-                <!-- Cafe Card 1 -->
+                <% recentCafes.forEach(cafe => { %>
                 <article class="cafe-card">
                     <div class="cafe-image-wrapper">
-                        <img src="placeholder.jpg" alt="Cafe interior">
-                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 1)"
-                            aria-label="Like Melu Cafe">
+                        <img src="<%= cafe.photo_url ? cafe.photo_url : '/placeholder.jpg' %>" alt="<%= cafe.name %>">
+                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, <%= cafe.id %>)"
+                            aria-label="Like <%= cafe.name %>">
                             🤍
                         </button>
                     </div>
-                    <h3>Melu Cafe</h3>
-                    <p><strong>Location:</strong> Stuttgart</p>
-                    <p>⭐ <strong>4.5</strong> / 5 (12 reviews)</p>
-                    <p>A perfect place for programming and study sessions near campus.</p>
-                    <p>Tags: <span>Fast Wi-Fi</span>, <span>🔌 Power Outlets</span></p>
-                    <a href="/cafes/1">View Details</a>
+                    <h3><%= cafe.name %></h3>
+                    <p><strong>Location:</strong> <%= cafe.city %></p>
+                    <p><%= cafe.description || '' %></p>
+                    <a href="/cafes/<%= cafe.id %>">View Details</a>
                 </article>
-
-                <!-- Cafe Card 2 -->
-                <article class="cafe-card">
-                    <div class="cafe-image-wrapper">
-                        <img src="placeholder.jpg" alt="Cafe interior">
-                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 2)"
-                            aria-label="Like Paska.L Choux">
-                            🤍
-                        </button>
-                    </div>
-                    <h3>Paska.L Choux</h3>
-                    <p><strong>Location:</strong> Mannheim</p>
-                    <p>⭐ <strong>4.7</strong> / 5 (18 reviews)</p>
-                    <p>Quiet environment with excellent French pastries and big tables.</p>
-                    <p>Tags: <span>🤫 Quiet</span>, <span>🪑 Big Tables</span></p>
-                    <a href="/cafes/2">View Details</a>
-                </article>
-
-                <!-- Cafe Card 3 -->
-                <article class="cafe-card">
-                    <div class="cafe-image-wrapper">
-                        <img src="placeholder.jpg" alt="Cafe interior">
-                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 3)"
-                            aria-label="Like Ingwer Cafe">
-                            🤍
-                        </button>
-                    </div>
-                    <h3>Ingwer Cafe</h3>
-                    <p><strong>Location:</strong> Heidelberg</p>
-                    <p>⭐ <strong>4.2</strong> / 5 (9 reviews)</p>
-                    <p>Cozy workspace setup with bright natural light and outdoor seating.</p>
-                    <p>Tags: <span>🌿 Outdoor</span>, <span>Fast Wi-Fi</span></p>
-                    <a href="/cafes/3">View Details</a>
-                </article>
-
-                <!-- Cafe Card 4 -->
-                <article class="cafe-card">
-                    <div class="cafe-image-wrapper">
-                        <img src="placeholder.jpg" alt="Cafe interior">
-                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 4)"
-                            aria-label="Like Green Wall Coffee">
-                            🤍
-                        </button>
-                    </div>
-                    <h3>Green Wall Coffee</h3>
-                    <p><strong>Location:</strong> Stuttgart</p>
-                    <p>⭐ <strong>4.6</strong> / 5 (15 reviews)</p>
-                    <p>Modern design covered in plants, offering student discounts.</p>
-                    <p>Tags: <span>🎓 Discount</span>, <span>❄️ AC</span></p>
-                    <a href="/cafes/4">View Details</a>
-                </article>
-
-                <!-- Cafe Card 5 -->
-                <article class="cafe-card">
-                    <div class="cafe-image-wrapper">
-                        <img src="placeholder.jpg" alt="Cafe interior">
-                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 5)"
-                            aria-label="Like Kawa Roastery">
-                            🤍
-                        </button>
-                    </div>
-                    <h3>Kawa Roastery</h3>
-                    <p><strong>Location:</strong> Mannheim</p>
-                    <p>⭐ <strong>4.8</strong> / 5 (22 reviews)</p>
-                    <p>Specialty coffee destination with dedicated silent zones for remote work.</p>
-                    <p>Tags: <span>☕ Specialty</span>, <span>🤫 Quiet</span></p>
-                    <a href="/cafes/5">View Details</a>
-                </article>
-
-                <!-- Cafe Card 6 -->
-                <article class="cafe-card">
-                    <div class="cafe-image-wrapper">
-                        <img src="placeholder.jpg" alt="Cafe interior">
-                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 6)"
-                            aria-label="Like The Philosopher">
-                            🤍
-                        </button>
-                    </div>
-                    <h3>The Philosopher</h3>
-                    <p><strong>Location:</strong> Heidelberg</p>
-                    <p>⭐ <strong>4.4</strong> / 5 (14 reviews)</p>
-                    <p>Spacious historic location close to the library with massive study areas.</p>
-                    <p>Tags: <span>🪑 Big Tables</span>, <span>🚗 Parking</span></p>
-                    <a href="/cafes/6">View Details</a>
-                </article>
-
-                <!-- Cafe Card 7 -->
-                <article class="cafe-card">
-                    <div class="cafe-image-wrapper">
-                        <img src="placeholder.jpg" alt="Cafe interior">
-                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 7)"
-                            aria-label="Like Urban Lab Cafe">
-                            🤍
-                        </button>
-                    </div>
-                    <h3>Urban Lab Cafe</h3>
-                    <p><strong>Location:</strong> Frankfurt</p>
-                    <p>⭐ <strong>4.6</strong> / 5 (8 reviews)</p>
-                    <p>Industrial design workspace equipped with ultra-fast internet and standing desks.</p>
-                    <p>Tags: <span>Fast Wi-Fi</span>, <span>🥐 Bakery & Snacks</span></p>
-                    <a href="/cafes/7">View Details</a>
-                </article>
-
-                <!-- Cafe Card 8 -->
-                <article class="cafe-card">
-                    <div class="cafe-image-wrapper">
-                        <img src="placeholder.jpg" alt="Cafe interior">
-                        <button type="button" class="cafe-heart-btn" onclick="toggleLikeCafe(this, 8)"
-                            aria-label="Like Library Lounge">
-                            🤍
-                        </button>
-                    </div>
-                    <h3>Library Lounge</h3>
-                    <p><strong>Location:</strong> Karlsruhe</p>
-                    <p>⭐ <strong>4.9</strong> / 5 (31 reviews)</p>
-                    <p>A premium silent study environment located right next to the city library.</p>
-                    <p>Tags: <span>🤫 Quiet</span>, <span>🔌 Power Outlets</span></p>
-                    <a href="/cafes/8">View Details</a>
-                </article>
+                <% }) %>
             </div>
+            <% } %>
         </section>
     </main>
 

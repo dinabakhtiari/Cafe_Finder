@@ -34,7 +34,7 @@ const getAllCafes = (filters, callback) => {
 
 const getRecentCafes = (callback) => {
     connection.query(
-        "SELECT cafes.*, photos.url AS photo_url FROM cafes LEFT JOIN photos ON cafes.id = photos.cafe_id ORDER BY cafes.created_at DESC LIMIT 5",
+        "SELECT cafes.*, photos.url AS photo_url FROM cafes LEFT JOIN photos ON cafes.id = photos.cafe_id ORDER BY cafes.created_at DESC LIMIT 4",
         callback
     );
 };

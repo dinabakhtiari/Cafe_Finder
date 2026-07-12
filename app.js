@@ -5,6 +5,7 @@ const session = require("express-session");
 const connection = require("./middleware/connectionDB.js");
 const path = require("path");
 const requireLogin = require("./middleware/authMiddleware.js");
+const cafeModel = require("./models/cafes.js");
 
 // start connection to database
 connection.connect((err) => {
@@ -49,7 +50,10 @@ app.use("/reviews", require("./controllers/reviews.js"));
 app.use("/favorites", require("./controllers/favorites.js"));
 
 app.get("/", (req, res) => {
-    res.render("home", { user: req.session.userId || null });
+    cafeModel.getRecentCafes((err, recentCafes) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.render("home", { user: req.session.userId || null, recentCafes });
+    });
 });
 
 app.get("/login-register", (req, res) => {
