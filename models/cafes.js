@@ -16,11 +16,19 @@ const getAllCafes = (filters, callback) => {
         values.push(term, term, term);
     }
 
-    const tags = ["wifi", "outlets", "quiet", "tables", "outdoor", "ac", "parking", "student_discount", "specialty_coffee", "snacks"];
-    tags.forEach(tag => {
+    const validTags = ["wifi", "outlets", "quiet", "tables", "outdoor", "ac", "parking", "student_discount", "specialty_coffee", "snacks"];
+
+    // Single tag from the home page <select name="tag">
+    if (filters.tag && validTags.includes(filters.tag)) {
+        conditions.push(`reviews.${filters.tag} = ?`);
+        values.push(1);
+    }
+
+    // Individual tag params (e.g. checkboxes sending ?wifi=1)
+    validTags.forEach(tag => {
         if (filters[tag]) {
             conditions.push(`reviews.${tag} = ?`);
-            values.push(true);
+            values.push(1);
         }
     });
 
