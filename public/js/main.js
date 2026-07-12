@@ -58,26 +58,29 @@ function showToastMessage(message) {
 }
 
 function toggleLikeCafe(button, cafeId) {
-    const isLiking = button.innerText.trim() === '🤍' || button.innerText.includes('Add to Favorites');
+    const isFavorited = button.dataset.favorited === 'true';
 
-    if (button.classList.contains('bookmark-btn')) {
-        button.innerText = isLiking ? '🔖 Saved in Favorites' : '🔖 Add to Favorites';
-    } else {
-        button.innerText = isLiking ? '❤️' : '🤍';
-    }
-
+    button.disabled = true;
     fetch('/favorites', {
-        method: isLiking ? 'POST' : 'DELETE',
+        method: isFavorited ? 'DELETE' : 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ cafe_id: cafeId })
     })
     .then(res => {
-        if (!res.ok) throw new Error();
-        showToastMessage(isLiking ? 'Added to your Saved Cafes!' : 'Removed from your Saved Cafes.');
+        if (!res.ok) throw new Error(res.status);
+        const nowFavorited = !isFavorited;
+        button.dataset.favorited = nowFavorited;
+        button.innerText = nowFavorited ? '❤️ Saved' : '🤍 Save to Favorites';
     })
-    .catch(() => {
-        button.innerText = isLiking ? '🤍' : '❤️';
-        showToastMessage('Action failed. Please make sure you are logged in.');
+    .catch((err) => {
+        if (err.message === '401') {
+            showToastMessage('Please log in to save cafes.');
+        } else {
+            showToastMessage('Something went wrong. Please try again.');
+        }
+    })
+    .finally(() => {
+        button.disabled = false;
     });
 }
 

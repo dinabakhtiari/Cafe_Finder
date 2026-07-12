@@ -4,6 +4,7 @@ const requireLogin = require("../middleware/authMiddleware.js");
 const upload = require("../middleware/upload.js");
 const cafeModel = require("../models/cafes.js");
 const reviewModel = require("../models/reviews.js");
+const favoritesModel = require("../models/favorites.js");
 
 // Get cafes
 router.get("/", (req, res) => {
@@ -35,11 +36,19 @@ router.get("/recent", (req, res) => {
 router.get("/:id", (req, res) => {
     cafeModel.getCafeById(req.params.id, (err, cafeResult) => {
         if (err) return res.status(500).json({ error: err.message });
-        if (cafeResult.length === 0) return res.render("cafe-page", { user: req.session.userId || null, cafe: null, reviews: [] });
+        if (cafeResult.length === 0) return res.render("cafe-page", { user: req.session.userId || null, cafe: null, reviews: [], isFavorited: false });
 
         reviewModel.getReviewsByCafe(req.params.id, (err, reviews) => {
             if (err) return res.status(500).json({ error: err.message });
-            return res.render("cafe-page", { user: req.session.userId || null, cafe: cafeResult[0], reviews });
+
+            const userId = req.session.userId;
+            if (!userId) {
+                return res.render("cafe-page", { user: null, cafe: cafeResult[0], reviews, isFavorited: false });
+            }
+
+            favoritesModel.isFavorite(userId, req.params.id, (err, isFavorited) => {
+                return res.render("cafe-page", { user: userId, cafe: cafeResult[0], reviews, isFavorited: isFavorited || false });
+            });
         });
     });
 });

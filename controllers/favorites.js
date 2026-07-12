@@ -20,7 +20,10 @@ router.get("/", requireLogin, (req, res) => {
 router.post("/", requireLogin, (req, res) => {
     const { cafe_id } = req.body;
     favoritesModel.addFavorite(req.session.userId, cafe_id, (err) => {
-        if (err) return res.status(500).json({ error: err.message });
+        if (err) {
+            if (err.code === 'ER_DUP_ENTRY') return res.status(200).send();
+            return res.status(500).json({ error: err.message });
+        }
         return res.status(201).send();
     });
 });
