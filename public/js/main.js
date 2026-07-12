@@ -113,6 +113,22 @@ async function removeBookmark(cafeId) {
     }
 }
 
+async function deleteCafe(cafeId) {
+    if (!confirm('Are you sure you want to delete this cafe permanently?')) return;
+
+    try {
+        const response = await fetch(`/cafes/${cafeId}`, { method: 'DELETE' });
+        if (response.ok) {
+            showToastMessage('Cafe deleted successfully.');
+            window.location.reload();
+        } else {
+            showToastMessage('Failed to delete the cafe. You may not have permission.');
+        }
+    } catch (error) {
+        showToastMessage('A network error occurred. Please try again.');
+    }
+}
+
 function toggleAddCafeForm() {
     const formContainer = document.getElementById('inline-add-cafe-container');
     if (formContainer.style.display === 'none' || formContainer.style.display === '') {

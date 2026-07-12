@@ -67,9 +67,13 @@ app.get("/about-us", (req, res) => {
 });
 
 app.get("/user-profile", requireLogin, (req, res) => {
-    connection.query("SELECT name, username, email FROM users WHERE id = ?", [req.session.userId], (err, results) => {
-        if (err || results.length === 0) return res.redirect("/");
-        res.render("user-profile", { user: results[0] });
+    const userId = req.session.userId;
+    connection.query("SELECT name, username, email FROM users WHERE id = ?", [userId], (err, userResults) => {
+        if (err || userResults.length === 0) return res.redirect("/");
+        connection.query("SELECT * FROM cafes WHERE user_id = ?", [userId], (err, contributedCafes) => {
+            if (err) contributedCafes = [];
+            res.render("user-profile", { user: userResults[0], contributedCafes });
+        });
     });
 });
 
