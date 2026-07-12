@@ -4,6 +4,7 @@ const express = require("express");
 const session = require("express-session");
 const connection = require("./middleware/connectionDB.js");
 const path = require("path");
+const requireLogin = require("./middleware/authMiddleware.js");
 
 // start connection to database
 connection.connect((err) => {
@@ -48,7 +49,31 @@ app.use("/reviews", require("./controllers/reviews.js"));
 app.use("/favorites", require("./controllers/favorites.js"));
 
 app.get("/", (req, res) => {
+    res.render("home");
+});
+
+app.get("/login-register", (req, res) => {
     res.render("login-register", { message: null });
+});
+
+app.get("/cafe-page", (req, res) => {
+    res.render("cafe-page");
+});
+
+app.get("/search-results", (req, res) => {
+    res.render("search-results");
+});
+
+app.get("/user-profile", requireLogin, (req, res) => {
+    res.render("user-profile");
+});
+
+app.get("/saved-cafes", requireLogin, (req, res) => {
+    res.render("saved-cafes");
+});
+
+app.get("/about-us", (req, res) => {
+    res.render("about-us");
 });
 
 app.listen(port, () => {

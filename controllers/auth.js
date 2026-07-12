@@ -61,7 +61,7 @@ router.post("/login", async (req, res) => {
 
             if (pwdMatch) {
                 req.session.userId = result[0].id;
-                return res.redirect("/home.html");
+                return res.redirect("/");
             } else {
                 return res.render("login-register", {
                     message: "Email or password is incorrect",
@@ -76,7 +76,7 @@ router.get("/logout", (req, res) => {
         if (err) {
             return res.render("login-register", { message: "Could not logout" });
         }
-        res.redirect("/");
+        res.redirect("/login-register");
     });
 });
 
