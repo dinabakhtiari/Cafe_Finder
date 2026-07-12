@@ -14,16 +14,15 @@
     <header>
         <div class="header-container">
             <div class="logo">
-                <a href="home.html">☕ Cafe Finder</a>
+                <a href="home.ejs">☕ Cafe Finder</a>
             </div>
 
             <nav>
                 <ul class="nav-links">
-                    <li><a href="home.html">Home</a></li>
-                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about-us">About Us</a></li>
                 </ul>
 
-                <!-- Profile and Navigation Dropdown Menu -->
                 <div class="profile-menu-container">
                     <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()"
                         aria-label="Toggle profile menu">
@@ -33,11 +32,17 @@
 
                     <div class="profile-dropdown" id="profileDropdown">
                         <ul>
-                            <li><a href="user-profile.html">👤 Profile</a></li>
-                            <li><a href="/my-comments">💬 My Comments</a></li>
-                            <li><a href="/liked-cafes">❤️ Saved Cafes</a></li>
-                            <li class="dropdown-divider"></li>
-                            <li><a href="login-register.html" class="logout-link">🚪 Logout</a></li>
+                            <% if (typeof user !== 'undefined' && user) { %>
+                            <!-- Display these navigation links only to authenticated users -->
+                                <li><a href="/user-profile">👤 Profile</a></li>
+                                <li><a href="/my-comments">💬 My Comments</a></li>
+                                <li><a href="/saved-cafes">❤️ Saved Cafes</a></li>
+                                <li class="dropdown-divider"></li>
+                                <li><a href="/auth/logout" class="logout-link">🚪 Logout</a></li>
+                            <% } else { %>
+                            <!-- Display this link only to guests/unauthenticated users -->
+                                <li><a href="/login-register">🔑 Login / Register</a></li>
+                            <% } %>
                         </ul>
                     </div>
                 </div>
@@ -84,7 +89,7 @@
             <div class="cafe-active-tags-section">
                 <h4>Available Features</h4>
                 <div class="active-tags-container">
-                    <span class="active-tag-badge">⚡ Fast Wi-Fi</span>
+                    <span class="active-tag-badge">Fast Wi-Fi</span>
                     <span class="active-tag-badge">🔌 Power Outlets</span>
                     <span class="active-tag-badge">🤫 Quiet Environment</span>
                     <span class="active-tag-badge">☕ Specialty Coffee</span>
@@ -153,7 +158,7 @@
                     <div class="tags-flex-container">
                         <label class="tag-checkbox-label">
                             <input type="checkbox" id="tag-wifi" name="wifi" value="1">
-                            <span>⚡ Fast Wi-Fi</span>
+                            <span>Fast Wi-Fi</span>
                         </label>
                         <label class="tag-checkbox-label">
                             <input type="checkbox" id="tag-outlets" name="outlets" value="1">
@@ -210,11 +215,6 @@
 
             <!-- Rendered Comments Container -->
             <div class="user-comments-container">
-                <!-- 
-                  Backend Integration Note:
-                  This block will be looped over using backend templates (e.g., EJS) 
-                  to display reviews dynamically from the comments database table.
-                -->
                 <div class="user-comment-box">
                     <h4>Dina <span class="comment-score">(Score: 5/5 ⭐)</span></h4>
                     <p>Loved the atmosphere! Definitely coming back next week.</p>
@@ -227,8 +227,8 @@
     <footer class="cafe-details-footer">
         <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
         <p>
-            <a href="about-us.html">About Us & Contact</a> |
-            <a href="home.html">Home</a>
+            <a href="/about-us">About Us & Contact</a> |
+            <a href="/">Home</a>
         </p>
 
         <div>

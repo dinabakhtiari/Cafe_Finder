@@ -13,13 +13,13 @@
     <header>
         <div class="header-container">
             <div class="logo">
-                <a href="home.html">☕ Cafe Finder</a>
+                <a href="/">☕ Cafe Finder</a>
             </div>
 
             <nav>
                 <ul class="nav-links">
-                    <li><a href="home.html">Home</a></li>
-                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about-us">About Us</a></li>
                 </ul>
 
                 <div class="profile-menu-container">
@@ -31,11 +31,17 @@
 
                     <div class="profile-dropdown" id="profileDropdown">
                         <ul>
-                            <li><a href="user-profile.html">👤 Profile</a></li>
-                            <li><a href="/my-comments">💬 My Comments</a></li>
-                            <li><a href="saved-cafes.html">❤️ Saved Cafes</a></li>
-                            <li class="dropdown-divider"></li>
-                            <li><a href="login-register.html" class="logout-link">🚪 Logout</a></li>
+                            <% if (typeof user !== 'undefined' && user) { %>
+                            <!-- Display these navigation links only to authenticated users -->
+                                <li><a href="/user-profile">👤 Profile</a></li>
+                                <li><a href="/my-comments">💬 My Comments</a></li>
+                                <li><a href="/saved-cafes">❤️ Saved Cafes</a></li>
+                                <li class="dropdown-divider"></li>
+                                <li><a href="/auth/logout" class="logout-link">🚪 Logout</a></li>
+                            <% } else { %>
+                            <!-- Display this link only to guests/unauthenticated users -->
+                                <li><a href="/login-register">🔑 Login / Register</a></li>
+                            <% } %>
                         </ul>
                     </div>
                 </div>
@@ -116,7 +122,7 @@
                             <p class="features-tip">Select all available features that apply to this location:</p>
                             <div class="tags-flex-container">
                                 <label class="tag-checkbox-label"><input type="checkbox" name="tags"
-                                        value="wifi"><span>⚡ Fast Wi-Fi</span></label>
+                                        value="wifi"><span>Fast Wi-Fi</span></label>
                                 <label class="tag-checkbox-label"><input type="checkbox" name="tags"
                                         value="outlets"><span>🔌 Power Outlets</span></label>
                                 <label class="tag-checkbox-label"><input type="checkbox" name="tags"
@@ -204,7 +210,7 @@
                                 <p class="features-tip">Update available features for this location:</p>
                                 <div class="tags-flex-container">
                                     <label class="tag-checkbox-label"><input type="checkbox" name="tags" value="wifi"
-                                            checked><span>⚡ Fast Wi-Fi</span></label>
+                                            checked><span>Fast Wi-Fi</span></label>
                                     <label class="tag-checkbox-label"><input type="checkbox" name="tags" value="outlets"
                                             checked><span>🔌 Power Outlets</span></label>
                                     <label class="tag-checkbox-label"><input type="checkbox" name="tags"
@@ -266,8 +272,8 @@
     <footer class="cafe-details-footer">
         <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
         <p>
-            <a href="about-us.html">About Us & Contact</a> |
-            <a href="home.html">Home</a>
+            <a href="/about-us">About Us & Contact</a> |
+            <a href="/">Home</a>
         </p>
 
         <div>
