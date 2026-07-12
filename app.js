@@ -47,14 +47,8 @@ app.use("/users", require("./controllers/users.js"));
 app.use("/reviews", require("./controllers/reviews.js"));
 app.use("/favorites", require("./controllers/favorites.js"));
 
-<<<<<<< HEAD
-// Root Route updated to support EJS rendering with flash messages
 app.get("/", (req, res) => {
     res.render("login-register", { message: null });
-=======
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "views", "home.html"));
->>>>>>> c1f9a70a8cbf5453b4c8d04c8d2d1348f7ce5968
 });
 
 app.listen(port, () => {

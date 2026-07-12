@@ -50,16 +50,11 @@
                 <h2>Login</h2>
                 <p class="auth-subtitle">Welcome back! Log in to access your profile.</p>
 
-<<<<<<< HEAD:views/login-register.ejs
                 <% if (typeof message !== 'undefined' && message && (message.includes('Email') || message.includes('incorrect'))) { %>
                     <div class="auth-error-alert" style="background-color: #fff5f5; color: #c92a2a; border: 1px solid #ffe3e3; padding: 12px; border-radius: 6px; margin-bottom: 15px; font-size: 0.9em; font-weight: 600; text-align: center;">
                         ⚠️ <%= message %>
                     </div>
                 <% } %>
-
-=======
-                <p id="login-error" style="color: red; display: none;"></p>
->>>>>>> c1f9a70a8cbf5453b4c8d04c8d2d1348f7ce5968:views/login-register.html
                 <form action="/auth/login" method="POST" class="auth-form">
                     <div class="form-group">
                         <label for="login-email">Email Address</label>
@@ -89,16 +84,11 @@
                 <h2>Register</h2>
                 <p class="auth-subtitle">Create an account to discover and bookmark study spots.</p>
 
-<<<<<<< HEAD:views/login-register.ejs
                 <% if (typeof message !== 'undefined' && message && (message.includes('Password') || message.includes('use') || message.includes('already'))) { %>
                     <div class="auth-error-alert" style="background-color: #fff5f5; color: #c92a2a; border: 1px solid #ffe3e3; padding: 12px; border-radius: 6px; margin-bottom: 15px; font-size: 0.9em; font-weight: 600; text-align: center;">
                         ⚠️ <%= message %>
                     </div>
                 <% } %>
-
-=======
-                <p id="register-error" style="color: red; display: none;"></p>
->>>>>>> c1f9a70a8cbf5453b4c8d04c8d2d1348f7ce5968:views/login-register.html
                 <form action="/auth/register" method="POST" class="auth-form">
                     <div class="form-group">
                         <label for="reg-username">Username</label>
@@ -169,7 +159,6 @@
             <a href="https://facebook.com" class="footer-link" target="_blank" rel="noopener">Facebook</a>
         </div>
     </footer>
-<<<<<<< HEAD:views/login-register.ejs
 
     <% if (typeof message !== 'undefined' && message && (message.includes('Password') || message.includes('use') || message.includes('already'))) { %>
         <script>
@@ -178,32 +167,6 @@
             });
         </script>
     <% } %>
-=======
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const error = params.get("error");
-
-        if (error === "invalid") {
-            const el = document.getElementById("login-error");
-            el.textContent = "Email or password is incorrect.";
-            el.style.display = "block";
-        } else if (error === "passwordmatch") {
-            const el = document.getElementById("register-error");
-            el.textContent = "Passwords don't match.";
-            el.style.display = "block";
-            toggleAuthPages();
-        } else if (error === "duplicate") {
-            const el = document.getElementById("register-error");
-            el.textContent = "Username or email already in use.";
-            el.style.display = "block";
-            toggleAuthPages();
-        } else if (error === "logout") {
-            const el = document.getElementById("login-error");
-            el.textContent = "Could not log out. Please try again.";
-            el.style.display = "block";
-        }
-    </script>
->>>>>>> c1f9a70a8cbf5453b4c8d04c8d2d1348f7ce5968:views/login-register.html
 </body>
 
 </html>
