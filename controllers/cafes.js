@@ -38,7 +38,7 @@ router.post("/", requireLogin, upload.single("photo"), (req, res) => {
         if (err) return res.status(500).json({ error: err.message });
 
         if (req.file) {
-            cafeModel.insertCafePhoto(result.insertId, req.file.path, (err) => {
+            cafeModel.insertCafePhoto(result.insertId, req.file.path.replace("public", ""), (err) => {
                 if (err) return res.status(500).json({ error: err.message });
                 return res.redirect(`/cafe-page.html?id=${result.insertId}`);
             });

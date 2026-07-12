@@ -19,7 +19,7 @@ router.post("/", requireLogin, upload.array("photos", 5), (req, res) => {
         if (req.files && req.files.length > 0) {
             const review_id = result.insertId;
             req.files.forEach(file => {
-                reviewModel.insertReviewPhoto(review_id, file.path, (err) => {
+                reviewModel.insertReviewPhoto(review_id, file.path.replace("public", ""), (err) => {
                     if (err) return res.status(500).json({ error: err.message });
                 });
             });
