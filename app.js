@@ -5,6 +5,9 @@ const session = require("express-session");
 const connection = require("./middleware/connectionDB.js");
 const path = require("path");
 const requireLogin = require("./middleware/authMiddleware.js");
+const cafeModel = require("./models/cafes.js");
+const favoritesModel = require("./models/favorites.js");
+const reviewModel = require("./models/reviews.js");
 
 // start connection to database
 connection.connect((err) => {
@@ -12,7 +15,6 @@ connection.connect((err) => {
         console.log("Error connecting to the database: " + err.stack);
         return;
     }
-
     console.log("Connected to the database as id " + connection.threadId);
 });
 
@@ -35,8 +37,8 @@ app.use(
         resave: false,
         saveUninitialized: false,
         cookie: {
-            secure: false, // true if using HTTPS in production
-            maxAge: 1000 * 60 * 60 * 3, // 3 hours (milliseconds)
+            secure: false,
+            maxAge: 1000 * 60 * 60 * 3,
         },
     }),
 );
@@ -48,44 +50,51 @@ app.use("/users", require("./controllers/users.js"));
 app.use("/reviews", require("./controllers/reviews.js"));
 app.use("/favorites", require("./controllers/favorites.js"));
 
+// Frontend EJS Routes
+
 app.get("/", (req, res) => {
-    res.render("home", { user: req.session.userId || null });
+    cafeModel.getRecentCafes((err, recentCafes) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.render("home", { user: req.session.userId || null, recentCafes });
+    });
 });
 
 app.get("/login-register", (req, res) => {
     res.render("login-register", { message: null, user: req.session.userId || null });
 });
 
-app.get("/cafe-page", (req, res) => {
-    res.render("cafe-page", { user: req.session.userId || null });
-});
-
-app.get("/search-results", (req, res) => {
-    res.render("search-results", { user: req.session.userId || null });
+app.get("/about-us", (req, res) => {
+    res.render("about-us", { user: req.session.userId || null });
 });
 
 app.get("/user-profile", requireLogin, (req, res) => {
-    res.render("user-profile", { user: req.session.userId || null });
+    const userId = req.session.userId;
+    connection.query("SELECT name, username, email FROM users WHERE id = ?", [userId], (err, userResults) => {
+        if (err || userResults.length === 0) return res.redirect("/");
+        connection.query("SELECT * FROM cafes WHERE user_id = ?", [userId], (err, contributedCafes) => {
+            if (err) contributedCafes = [];
+            reviewModel.getReviewsByUser(userId, (err, userReviews) => {
+                if (err) userReviews = [];
+                res.render("user-profile", { user: userResults[0], contributedCafes, userReviews });
+            });
+        });
+    });
+});
+
+app.get("/profile/edit", requireLogin, (req, res) => {
+    connection.query("SELECT name, username, email FROM users WHERE id = ?", [req.session.userId], (err, results) => {
+        if (err || results.length === 0) return res.redirect("/user-profile");
+        res.render("edit-profile", { user: results[0] });
+    });
 });
 
 app.get("/saved-cafes", requireLogin, (req, res) => {
-    res.render("saved-cafes", { user: req.session.userId || null });
-});
-
-app.get("/about-us", (req, res) => {
-    res.render("about-us", { user: req.session.userId || null });
+    favoritesModel.getFavoritesByUser(req.session.userId, (err, savedCafes) => {
+        if (err) return res.render("saved-cafes", { user: req.session.userId || null, savedCafes: [] });
+        res.render("saved-cafes", { user: req.session.userId || null, savedCafes });
+    });
 });
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
-
-// close connection to database
-// connection.end((err) => {
-//     if (err) {
-//         console.log('Error closing the database connection: ' + err.stack);
-//         return;
-//     };
-//
-//     console.log('Database connection closed.');
-// });

@@ -11,6 +11,11 @@ router.get("/login", (req, res) => {
     res.redirect("/");
 });
 
+router.get("/login", (req, res) => {
+    res.redirect("/");
+});
+
+// Register POST Route
 router.post("/register", async (req, res) => {
     if (req.body.password !== req.body.confirm_password) {
         return res.render("login-register", { user: null,
@@ -42,10 +47,10 @@ router.post("/register", async (req, res) => {
     }
 });
 
+// Login POST Route
 router.post("/login", async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-
     connection.query(
         "SELECT * FROM users WHERE email = ?",
         [email],

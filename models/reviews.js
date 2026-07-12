@@ -1,7 +1,17 @@
 const connection = require("../middleware/connectionDB.js");
 
+const getReviewsByUser = (user_id, callback) => {
+    connection.query(
+        "SELECT reviews.*, cafes.name AS cafe_name FROM reviews JOIN cafes ON reviews.cafe_id = cafes.id WHERE reviews.user_id = ? ORDER BY reviews.created_at DESC",
+        [user_id], callback
+    );
+};
+
 const getReviewsByCafe = (cafe_id, callback) => {
-    connection.query("SELECT * FROM reviews WHERE cafe_id = ?", [cafe_id], callback);
+    connection.query(
+        "SELECT reviews.*, users.username FROM reviews JOIN users ON reviews.user_id = users.id WHERE reviews.cafe_id = ? ORDER BY reviews.created_at DESC",
+        [cafe_id], callback
+    );
 };
 
 const createReview = (data, callback) => {
@@ -34,4 +44,4 @@ const deleteReview = (id, callback) => {
     connection.query("DELETE FROM reviews WHERE id = ?", [id], callback);
 };
 
-module.exports = { getReviewsByCafe, createReview, insertReviewPhoto, getReviewById, updateReview, deleteReview };
+module.exports = { getReviewsByUser, getReviewsByCafe, createReview, insertReviewPhoto, getReviewById, updateReview, deleteReview };

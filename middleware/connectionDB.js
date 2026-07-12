@@ -4,7 +4,7 @@ const mysql = require('mysql2');
 const connection = mysql.createConnection({
 host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || 'dina8080', 
+    password: process.env.DB_PASSWORD || 'taha8080', 
     database: process.env.DB_DATABASE || 'cafe_finder'
 });
 

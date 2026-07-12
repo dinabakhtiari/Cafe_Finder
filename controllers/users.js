@@ -4,6 +4,9 @@ const bcryptjs = require('bcryptjs');
 const requireLogin = require('../middleware/authMiddleware.js');
 const upload = require("../middleware/upload.js");
 const userModel = require("../models/users.js");
+const connection = require("../middleware/connectionDB.js"); // Added this so our form works!
+
+// --- HENRIQUE's EXISTING ROUTES ---
 
 router.get('/:id', (req, res) => {
     userModel.getUserById(req.params.id, (err, result) => {
@@ -50,6 +53,24 @@ router.delete('/:id', requireLogin, (req, res) => {
         if (err) return res.status(500).json({ error: err.message });
         if (result.affectedRows === 0) return res.status(404).json({ error: "User not found" });
         return res.status(204).send();
+    });
+});
+
+// --- YOUR NEW EJS FRONTEND ROUTE ---
+
+// POST route to handle profile updates from the HTML form
+router.post("/update", requireLogin, (req, res) => {
+    const userId = req.session.userId;
+    const { name, username, email } = req.body;
+
+    const query = "UPDATE users SET name = ?, username = ?, email = ? WHERE id = ?";
+
+    connection.query(query, [name, username, email, userId], (err, result) => {
+        if (err) {
+            console.error("Error updating user profile:", err);
+            return res.redirect("/profile/edit");
+        }
+        res.redirect("/user-profile");
     });
 });
 

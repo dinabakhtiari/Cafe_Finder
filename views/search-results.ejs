@@ -10,127 +10,80 @@
 </head>
 
 <body>
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <a href="/">☕ Cafe Finder</a>
-            </div>
-
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about-us">About Us</a></li>
-                </ul>
-
-                <div class="profile-menu-container">
-                    <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()"
-                        aria-label="Toggle profile menu">
-                        <span class="profile-avatar-icon">👤</span>
-                        <span class="hamburger-lines-icon">☰</span>
-                    </button>
-
-                    <div class="profile-dropdown" id="profileDropdown">
-                        <ul>
-                            <% if (typeof user !== 'undefined' && user) { %>
-                            <!-- Display these navigation links only to authenticated users -->
-                                <li><a href="/user-profile">👤 Profile</a></li>
-                                <li><a href="/my-comments">💬 My Comments</a></li>
-                                <li><a href="/saved-cafes">❤️ Saved Cafes</a></li>
-                                <li class="dropdown-divider"></li>
-                                <li><a href="/auth/logout" class="logout-link">🚪 Logout</a></li>
-                            <% } else { %>
-                            <!-- Display this link only to guests/unauthenticated users -->
-                                <li><a href="/login-register">🔑 Login / Register</a></li>
-                            <% } %>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </header>
+    <%- include('partials/navbar') %>
 
     <main class="results-main">
+        <section class="search-filter-section">
+            <form action="/cafes/search" method="GET" class="michelin-form">
+                <div class="search-main-row">
+                    <div class="search-input-wrapper">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" name="search" placeholder="e. g. City, Cafe, Adresse..." value="<%= searchTerm %>">
+                    </div>
+                </div>
+                <div class="filters-horizontal-row">
+                    <div class="filter-badge-select">
+                        <select name="tag" id="tag-select" aria-label="Filter by Cafe Features">
+                            <option value="">All Features</option>
+                            <option value="wifi">🛜 Fast Wi-Fi</option>
+                            <option value="outlets">🔌 Power Outlets</option>
+                            <option value="quiet">🤫 Quiet Environment</option>
+                            <option value="tables">🪑 Big Tables</option>
+                            <option value="outdoor">🌿 Outdoor Seating</option>
+                            <option value="ac">❄️ Air Conditioning</option>
+                            <option value="parking">🚗 Parking Available</option>
+                            <option value="student_discount">🎓 Student Discount</option>
+                            <option value="specialty_coffee">☕ Specialty Coffee</option>
+                            <option value="snacks">🥐 Bakery & Snacks</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="filter-submit-badge">Apply & Search</button>
+                </div>
+            </form>
+        </section>
+
         <div class="city-header">
-            <h1>Study Spots in <span class="highlight-city">Stuttgart</span></h1>
-            <p class="results-count-text">Found 3 premium cafes matching your filters</p>
+            <h1>
+                <% if (searchTerm) { %>
+                    Results for "<span class="highlight-city"><%= searchTerm %></span>"
+                <% } else { %>
+                    All Cafes
+                <% } %>
+            </h1>
+            <p class="results-count-text">Found <%= cafes.length %> cafe<%= cafes.length !== 1 ? 's' : '' %></p>
         </div>
 
         <section class="results-section-wrapper">
             <h2>Available Cafes</h2>
 
+            <% if (cafes.length === 0) { %>
+                <p style="color: #666; font-style: italic; text-align: center; padding: 40px 0;">
+                    No cafes found matching your search. Try a different term or browse all cafes.
+                </p>
+            <% } else { %>
             <div class="modern-cafes-grid">
-
+                <% cafes.forEach(cafe => { %>
                 <div class="michelin-cafe-card">
                     <div class="card-image-wrapper">
-                        <img src="cafe1.jpg" alt="Melu Cafe Exterior">
-                        <button type="button" class="floating-heart-btn" aria-label="Add to Favorites">🤍</button>
+                        <img src="<%= cafe.photo_url ? cafe.photo_url : '/placeholder.jpg' %>" alt="<%= cafe.name %>">
                     </div>
 
-                    <a href="/cafes/1" class="card-info-link">
+                    <a href="/cafes/<%= cafe.id %>" class="card-info-link">
                         <div class="card-michelin-meta">
-                            <span class="michelin-rating">⭐ 4.5</span>
-                            <span class="michelin-divider">•</span>
-                            <span class="michelin-tag">Fast Wi-Fi</span>
+                            <span class="michelin-tag"><%= cafe.city %></span>
                         </div>
-                        <h3 class="michelin-title">Melu Cafe</h3>
-                        <p class="michelin-location">Stuttgart</p>
-                        <p class="michelin-address">Theodor-Heuss-Straße 26, 70174 Stuttgart</p>
+                        <h3 class="michelin-title"><%= cafe.name %></h3>
+                        <p class="michelin-location"><%= cafe.city %></p>
+                        <p class="michelin-address"><%= cafe.address %></p>
                     </a>
                 </div>
-
-                <div class="michelin-cafe-card">
-                    <div class="card-image-wrapper">
-                        <img src="cafe2.jpg" alt="Schloss Cafe">
-                        <button type="button" class="floating-heart-btn" aria-label="Add to Favorites">🤍</button>
-                    </div>
-
-                    <a href="/cafes/2" class="card-info-link">
-                        <div class="card-michelin-meta">
-                            <span class="michelin-rating">⭐ 4.8</span>
-                            <span class="michelin-divider">•</span>
-                            <span class="michelin-tag">🔌 Power Outlets</span>
-                        </div>
-                        <h3 class="michelin-title">Schloss Cafe</h3>
-                        <p class="michelin-location">Stuttgart</p>
-                        <p class="michelin-address">Königstraße 18, 70173 Stuttgart</p>
-                    </a>
-                </div>
-
-                <div class="michelin-cafe-card">
-                    <div class="card-image-wrapper">
-                        <img src="cafe3.jpg" alt="Plaza Coffee">
-                        <button type="button" class="floating-heart-btn" aria-label="Add to Favorites">🤍</button>
-                    </div>
-
-                    <a href="/cafes/3" class="card-info-link">
-                        <div class="card-michelin-meta">
-                            <span class="michelin-rating">⭐ 4.2</span>
-                            <span class="michelin-divider">•</span>
-                            <span class="michelin-tag">🤫 Quiet Environment</span>
-                        </div>
-                        <h3 class="michelin-title">Plaza Coffee</h3>
-                        <p class="michelin-location">Stuttgart</p>
-                        <p class="michelin-address">Rotebühlplatz 2, 70178 Stuttgart</p>
-                    </a>
-                </div>
-
+                <% }) %>
             </div>
+            <% } %>
         </section>
     </main>
 
-    <footer class="cafe-details-footer">
-        <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
-        <p>
-            <a href="/about-us">About Us & Contact</a> |
-            <a href="/">Home</a>
-        </p>
-
-        <div>
-            <a href="https://instagram.com" class="footer-link" target="_blank" rel="noopener">Instagram</a>
-            <a href="https://x.com" class="footer-link" target="_blank" rel="noopener">Twitter / X</a>
-            <a href="https://facebook.com" class="footer-link" target="_blank" rel="noopener">Facebook</a>
-        </div>
-    </footer>
+    <%- include('partials/footer') %>
 </body>
 
 </html>

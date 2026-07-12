@@ -2,16 +2,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const today = new Date();
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const formattedDate = today.toLocaleDateString("en-US", options);
-    
+
     const dateElement = document.getElementById("current-date");
     if (dateElement) {
         dateElement.textContent = formattedDate;
     }
 });
 
-/**
- * Toggles visibility between the Login and Register cards
- */
 function toggleAuthPages() {
     const loginCard = document.getElementById('login-card');
     const registerCard = document.getElementById('register-card');
@@ -29,9 +26,6 @@ function toggleAuthPages() {
     }
 }
 
-/**
- * Toggles the visibility of the profile dropdown menu
- */
 function toggleProfileDropdown() {
     const dropdown = document.getElementById('profileDropdown');
     if (dropdown) {
@@ -39,11 +33,10 @@ function toggleProfileDropdown() {
     }
 }
 
-// Automatically closes the dropdown if clicked outside
 window.addEventListener('click', function(event) {
     const dropdown = document.getElementById('profileDropdown');
     const menuBtn = document.querySelector('.profile-menu-btn');
-    
+
     if (dropdown && dropdown.classList.contains('show-menu')) {
         if (!menuBtn.contains(event.target) && !dropdown.contains(event.target)) {
             dropdown.classList.remove('show-menu');
@@ -51,33 +44,146 @@ window.addEventListener('click', function(event) {
     }
 });
 
-/**
- * Syncs bookmark logic with Henrique's favorites.js routing (POST/DELETE)
- */
-function toggleLikeCafe(button, cafeId) {
-    const isLiking = button.innerText.trim() === '🤍' || button.innerText.includes('Add to Favorites');
-    
-    if(button.classList.contains('bookmark-btn')) {
-        button.innerText = isLiking ? '🔖 Saved in Favorites' : '🔖 Add to Favorites';
-    } else {
-        button.innerText = isLiking ? '❤️' : '🤍';
-    }
+function showToastMessage(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.innerHTML = `<span>☕</span> <span>${message}</span>`;
+    document.body.appendChild(toast);
 
-    fetch('/favorites', { 
-        method: isLiking ? 'POST' : 'DELETE',
+    setTimeout(() => toast.classList.add('show'), 100);
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 400);
+    }, 3500);
+}
+
+function toggleLikeCafe(button, cafeId) {
+    const isFavorited = button.dataset.favorited === 'true';
+
+    button.disabled = true;
+    fetch('/favorites', {
+        method: isFavorited ? 'DELETE' : 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ cafe_id: cafeId })
     })
     .then(res => {
-        if (!res.ok) throw new Error();
+        if (!res.ok) throw new Error(res.status);
+        const nowFavorited = !isFavorited;
+        button.dataset.favorited = nowFavorited;
+        button.innerText = nowFavorited ? '❤️ Saved' : '🤍 Save to Favorites';
     })
-    .catch(() => {
-        button.innerText = isLiking ? '🤍' : '❤️';
-        alert('Action failed. Please make sure you are logged in.');
+    .catch((err) => {
+        if (err.message === '401') {
+            showToastMessage('Please log in to save cafes.');
+        } else {
+            showToastMessage('Something went wrong. Please try again.');
+        }
+    })
+    .finally(() => {
+        button.disabled = false;
     });
 }
 
-// Function to toggle the visibility of the inline Add Cafe form
+async function removeBookmark(cafeId) {
+    const confirmRemove = confirm("Are you sure you want to remove this cafe from your saved favorites?");
+    if (!confirmRemove) return;
+
+    try {
+        const response = await fetch('/favorites', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ cafe_id: cafeId })
+        });
+
+        if (response.ok) {
+            const cafeCard = document.getElementById(`saved-cafe-${cafeId}`);
+            if (cafeCard) {
+                cafeCard.style.opacity = '0';
+                cafeCard.style.transform = 'scale(0.95)';
+                cafeCard.style.transition = 'all 0.3s ease';
+                setTimeout(() => {
+                    cafeCard.remove();
+                    const grid = document.querySelector('.modern-cafes-grid');
+                    if (grid && grid.children.length === 0) window.location.reload();
+                }, 300);
+            }
+            showToastMessage('Cafe removed from your Saved Cafes.');
+        } else {
+            showToastMessage('Failed to remove the cafe. Please try again.');
+        }
+    } catch (error) {
+        showToastMessage('A network error occurred. Please check your connection.');
+    }
+}
+
+function toggleEditReviewForm(reviewId) {
+    const form = document.getElementById(`edit-review-${reviewId}`);
+    if (!form) return;
+    if (form.classList.contains('id-hidden')) {
+        form.classList.replace('id-hidden', 'id-active');
+    } else {
+        form.classList.replace('id-active', 'id-hidden');
+    }
+}
+
+function submitEditReviewForm(event, reviewId) {
+    event.preventDefault();
+    const formElement = document.getElementById(`edit-review-form-${reviewId}`);
+    if (!formElement) return;
+
+    const formData = new FormData(formElement);
+    const body = {};
+    formData.forEach((value, key) => body[key] = value);
+    ['wifi','outlets','quiet','tables','outdoor','ac','parking','student_discount','specialty_coffee','snacks']
+        .forEach(tag => { if (!body[tag]) body[tag] = 0; });
+
+    fetch(`/reviews/${reviewId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    })
+    .then(res => {
+        if (res.ok) {
+            window.location.reload();
+        } else {
+            showToastMessage('Failed to update the review.');
+        }
+    })
+    .catch(() => showToastMessage('A network error occurred. Please try again.'));
+}
+
+async function deleteReview(reviewId) {
+    if (!confirm('Are you sure you want to delete this review?')) return;
+
+    try {
+        const response = await fetch(`/reviews/${reviewId}`, { method: 'DELETE' });
+        if (response.ok) {
+            showToastMessage('Review deleted.');
+            window.location.reload();
+        } else {
+            showToastMessage('Failed to delete the review.');
+        }
+    } catch (error) {
+        showToastMessage('A network error occurred. Please try again.');
+    }
+}
+
+async function deleteCafe(cafeId) {
+    if (!confirm('Are you sure you want to delete this cafe permanently?')) return;
+
+    try {
+        const response = await fetch(`/cafes/${cafeId}`, { method: 'DELETE' });
+        if (response.ok) {
+            showToastMessage('Cafe deleted successfully.');
+            window.location.reload();
+        } else {
+            showToastMessage('Failed to delete the cafe. You may not have permission.');
+        }
+    } catch (error) {
+        showToastMessage('A network error occurred. Please try again.');
+    }
+}
+
 function toggleAddCafeForm() {
     const formContainer = document.getElementById('inline-add-cafe-container');
     if (formContainer.style.display === 'none' || formContainer.style.display === '') {
@@ -87,11 +193,9 @@ function toggleAddCafeForm() {
     }
 }
 
-// Toggle Forgot Password Card View
 function showForgotPassword() {
     const loginCard = document.getElementById('login-card');
     const forgotCard = document.getElementById('forgot-card');
-    
     if (loginCard && forgotCard) {
         loginCard.classList.replace('id-active', 'id-hidden');
         forgotCard.classList.replace('id-hidden', 'id-active');
@@ -101,14 +205,12 @@ function showForgotPassword() {
 function hideForgotPassword() {
     const loginCard = document.getElementById('login-card');
     const forgotCard = document.getElementById('forgot-card');
-    
     if (loginCard && forgotCard) {
         forgotCard.classList.replace('id-active', 'id-hidden');
         loginCard.classList.replace('id-hidden', 'id-active');
     }
 }
 
-// Toggle Inline Edit Cafe Form Row View
 function toggleEditCafeForm(cafeId) {
     const editFormContainer = document.getElementById(`inline-edit-cafe-${cafeId}`);
     if (editFormContainer) {
@@ -120,63 +222,58 @@ function toggleEditCafeForm(cafeId) {
     }
 }
 
-/**
- * Handles smooth AJAX removal of bookmarks from saved-cafes.html using favorites.js endpoint
- */
-function removeBookmark(cafeId) {
-    const confirmRemove = confirm("Are you sure you want to remove this cafe from your saved favorites?");
-    
-    if (confirmRemove) {
-        const cafeCard = document.getElementById(`saved-cafe-${cafeId}`);
-        if (cafeCard) {
-            cafeCard.style.opacity = '0';
-            cafeCard.style.transform = 'scale(0.95)';
-            cafeCard.style.transition = 'all 0.3s ease';
-            
-            setTimeout(() => {
-                cafeCard.remove();
-                const grid = document.querySelector('.modern-cafes-grid');
-                if (grid && grid.children.length === 0) {
-                    grid.innerHTML = '<p class="results-count-text" style="grid-column: 1/-1; text-align: center; padding: 40px 0;">No saved cafes yet. Start exploring from the home page!</p>';
-                }
-            }, 300);
-            
-            fetch('/favorites', { 
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ cafe_id: cafeId })
-            });
-        }
-    }
-}
-
-/**
- * Captures edit form updates and asynchronously sends them via standard HTTP PATCH to the MVC backend
- */
 function submitEditCafeForm(event, cafeId) {
     event.preventDefault();
-
     const formElement = document.getElementById(`edit-cafe-form-${cafeId}`);
     if (!formElement) return;
 
-    // Collects files and texts seamlessly
     const formData = new FormData(formElement);
 
-    fetch(`/cafes/${cafeId}`, {
-        method: 'PATCH',
-        body: formData
-    })
+    fetch(`/cafes/${cafeId}`, { method: 'PATCH', body: formData })
     .then(res => {
         if (res.status === 204 || res.ok) {
-            alert('Cafe updated successfully! 💾');
+            showToastMessage('Cafe updated successfully!');
             toggleEditCafeForm(cafeId);
-            window.location.reload(); // Refreshes page to view latest content changes
+            window.location.reload();
         } else {
             return res.json().then(data => { throw new Error(data.error || 'Failed to update') });
         }
     })
     .catch(err => {
-        console.error('Update operation error:', err);
-        alert(`Error: ${err.message || 'Could not update cafe details.'}`);
+        showToastMessage(`Error: ${err.message || 'Could not update cafe details.'}`);
     });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const forgotCard = document.getElementById("forgot-card");
+    if (!forgotCard) return;
+
+    const forgotForm = forgotCard.querySelector("form");
+    if (forgotForm) {
+        forgotForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const emailInput = document.getElementById("forgot-email");
+            const submitBtn = forgotForm.querySelector(".auth-submit-btn");
+            if (!emailInput || !emailInput.value) return;
+
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = "Sending...";
+            submitBtn.disabled = true;
+
+            try {
+                await fetch("/auth/forgot-password", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: new URLSearchParams({ email: emailInput.value })
+                });
+                showToastMessage("Recovery link sent! Please check your email inbox.");
+                emailInput.value = "";
+            } catch (error) {
+                showToastMessage("An error occurred. Please try again later.");
+            } finally {
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        });
+    }
+});

@@ -25,7 +25,7 @@ router.post("/", requireLogin, upload.array("photos", 5), (req, res) => {
             });
         }
 
-        return res.redirect(`/cafe-page?id=${cafe_id}`);
+        return res.redirect(`/cafes/${cafe_id}`);
     });
 });
 
