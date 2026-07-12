@@ -6,145 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/main.js"></script>
-    <title>Cafe Finder - Cafe Details</title>
+    <title>Cafe Finder - <%= typeof cafe !== 'undefined' && cafe ? cafe.name : 'Cafe Details' %></title>
 </head>
 
 <body>
-    <!-- Global Header Component -->
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <a href="/">☕ Cafe Finder</a>
-            </div>
-
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about-us">About Us</a></li>
-                </ul>
-
-                <div class="profile-menu-container">
-                    <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()"
-                        aria-label="Toggle profile menu">
-                        <span class="profile-avatar-icon">👤</span>
-                        <span class="hamburger-lines-icon">☰</span>
-                    </button>
-
-                    <div class="profile-dropdown" id="profileDropdown">
-                        <ul>
-                            <% if (typeof user !== 'undefined' && user) { %>
-                            <!-- Display these navigation links only to authenticated users -->
-                                <li><a href="/user-profile">👤 Profile</a></li>
-                                <li><a href="/my-comments">💬 My Comments</a></li>
-                                <li><a href="/saved-cafes">❤️ Saved Cafes</a></li>
-                                <li class="dropdown-divider"></li>
-                                <li><a href="/auth/logout" class="logout-link">🚪 Logout</a></li>
-                            <% } else { %>
-                            <!-- Display this link only to guests/unauthenticated users -->
-                                <li><a href="/login-register">🔑 Login / Register</a></li>
-                            <% } %>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </header>
+    <%- include('partials/navbar') %>
 
     <main class="cafe-details-main">
-        <!-- Main Cafe Article Info -->
+        <% if (typeof cafe !== 'undefined' && cafe) { %>
+
         <article class="cafe-details-article">
-            <h1>Melu Cafe</h1>
+            <h1><%= cafe.name %></h1>
 
-            <!-- Dynamic Meta Info: Now tracking which user submitted this cafe -->
-            <p class="cafe-meta-info">Added by: <strong class="cafe-author">username</strong> | Date: <span
-                    id="current-date">Loading date...</span></p>
-            <p class="cafe-location-info"><strong>City:</strong> Stuttgart</p>
-            <p class="cafe-address-info"><strong>Address:</strong> Theodor-Heuss-Straße 26, 70174 Stuttgart</p>
+            <p class="cafe-location-info"><strong>City:</strong> <%= cafe.city %></p>
+            <p class="cafe-address-info"><strong>Address:</strong> <%= cafe.address %></p>
 
-            <img src="cafe-detailed.jpg" alt="Spacious workspace inside Melu Cafe" class="cafe-main-img">
+            <img src="<%= cafe.photo_url ? cafe.photo_url : '/placeholder.jpg' %>" alt="<%= cafe.name %>" class="cafe-main-img">
 
-            <!-- Ratings and Bookmark Row -->
             <div class="cafe-action-row">
                 <div class="cafe-rating-summary">
-                    <span>⭐ <strong>4.5</strong></span>
-                    <span class="reviews-count">(based on 12 reviews)</span>
+                    <span>⭐ <strong>New</strong></span>
                 </div>
-
-                <!-- Modern AJAX Bookmark Button (connected to the global JavaScript handler) -->
                 <div class="cafe-bookmark-action">
-                    <button type="button" class="bookmark-btn" onclick="toggleLikeCafe(this, 1)">
+                    <button type="button" class="bookmark-btn" onclick="toggleLikeCafe(this, <%= cafe.id %>)">
                         🔖 Add to Favorites
                     </button>
                 </div>
             </div>
 
-            <!-- Description Box -->
             <div class="cafe-description-box">
                 <h3>Description</h3>
-                <p>This cafe provides great seating, quiet background music, and stable internet for long working hours.
-                </p>
+                <p><%= cafe.description || 'No description available.' %></p>
             </div>
 
-            <!-- Active Feature Badges -->
-            <div class="cafe-active-tags-section">
-                <h4>Available Features</h4>
-                <div class="active-tags-container">
-                    <span class="active-tag-badge">Fast Wi-Fi</span>
-                    <span class="active-tag-badge">🔌 Power Outlets</span>
-                    <span class="active-tag-badge">🤫 Quiet Environment</span>
-                    <span class="active-tag-badge">☕ Specialty Coffee</span>
-                </div>
-            </div>
-
-            <!-- Social Share Links -->
             <div class="share-links">
                 <span>Share:</span>
                 <a href="#">Facebook</a> |
                 <a href="#">Instagram</a>
             </div>
-
-            <!-- User Uploaded Photos Gallery Section -->
-            <div class="cafe-user-gallery">
-                <h3>User Photos</h3>
-                <p class="gallery-subtitle">Real photos shared by our community remote-workers:</p>
-
-                <div class="gallery-grid">
-                    <!-- Photo Item 1 -->
-                    <div class="gallery-item">
-                        <img src="user-photo1.jpg" alt="Coffee and laptop on a big table">
-                        <div class="photo-meta">
-                            <span>By: <strong>@taha_j</strong></span>
-                        </div>
-                    </div>
-
-                    <!-- Photo Item 2 -->
-                    <div class="gallery-item">
-                        <img src="user-photo2.jpg" alt="Cozy seating area inside Melu Cafe">
-                        <div class="photo-meta">
-                            <span>By: <strong>@dina_b</strong></span>
-                        </div>
-                    </div>
-
-                    <!-- Photo Item 3 -->
-                    <div class="gallery-item">
-                        <img src="user-photo3.jpg" alt="Power outlets and working setup">
-                        <div class="photo-meta">
-                            <span>By: <strong>@henrique_c</strong></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </article>
 
         <hr>
 
-        <!-- Comments & Reviews Form/List Section -->
         <section class="reviews-section">
             <h2>Comments & Reviews</h2>
 
-            <!-- Form to Submit a New Review and Update Cafe Feature Status -->
             <form action="/reviews" method="POST" class="review-form">
-                <input type="hidden" id="cafe_id" name="cafe_id" value="">
+                <input type="hidden" name="cafe_id" value="<%= cafe.id %>">
 
                 <div class="form-group rating-input-group">
                     <label for="rating">Rating (1-5):</label>
@@ -156,46 +64,16 @@
                     <p class="features-tip">Select all options that apply to this cafe location:</p>
 
                     <div class="tags-flex-container">
-                        <label class="tag-checkbox-label">
-                            <input type="checkbox" id="tag-wifi" name="wifi" value="1">
-                            <span>Fast Wi-Fi</span>
-                        </label>
-                        <label class="tag-checkbox-label">
-                            <input type="checkbox" id="tag-outlets" name="outlets" value="1">
-                            <span>🔌 Power Outlets</span>
-                        </label>
-                        <label class="tag-checkbox-label">
-                            <input type="checkbox" id="tag-quiet" name="quiet" value="1">
-                            <span>🤫 Quiet Environment</span>
-                        </label>
-                        <label class="tag-checkbox-label">
-                            <input type="checkbox" id="tag-tables" name="tables" value="1">
-                            <span>🪑 Big Tables</span>
-                        </label>
-                        <label class="tag-checkbox-label">
-                            <input type="checkbox" id="tag-outdoor" name="outdoor" value="1">
-                            <span>🌿 Outdoor Seating</span>
-                        </label>
-                        <label class="tag-checkbox-label">
-                            <input type="checkbox" id="tag-ac" name="ac" value="1">
-                            <span>❄️ Air Conditioning</span>
-                        </label>
-                        <label class="tag-checkbox-label">
-                            <input type="checkbox" id="tag-parking" name="parking" value="1">
-                            <span>🚗 Parking Available</span>
-                        </label>
-                        <label class="tag-checkbox-label">
-                            <input type="checkbox" id="tag-discount" name="student_discount" value="1">
-                            <span>🎓 Student Discount</span>
-                        </label>
-                        <label class="tag-checkbox-label">
-                            <input type="checkbox" id="tag-coffee" name="specialty_coffee" value="1">
-                            <span>☕ Specialty Coffee</span>
-                        </label>
-                        <label class="tag-checkbox-label">
-                            <input type="checkbox" id="tag-snacks" name="snacks" value="1">
-                            <span>🥐 Bakery & Snacks</span>
-                        </label>
+                        <label class="tag-checkbox-label"><input type="checkbox" name="wifi" value="1"><span>Fast Wi-Fi</span></label>
+                        <label class="tag-checkbox-label"><input type="checkbox" name="outlets" value="1"><span>🔌 Power Outlets</span></label>
+                        <label class="tag-checkbox-label"><input type="checkbox" name="quiet" value="1"><span>🤫 Quiet Environment</span></label>
+                        <label class="tag-checkbox-label"><input type="checkbox" name="tables" value="1"><span>🪑 Big Tables</span></label>
+                        <label class="tag-checkbox-label"><input type="checkbox" name="outdoor" value="1"><span>🌿 Outdoor Seating</span></label>
+                        <label class="tag-checkbox-label"><input type="checkbox" name="ac" value="1"><span>❄️ Air Conditioning</span></label>
+                        <label class="tag-checkbox-label"><input type="checkbox" name="parking" value="1"><span>🚗 Parking Available</span></label>
+                        <label class="tag-checkbox-label"><input type="checkbox" name="student_discount" value="1"><span>🎓 Student Discount</span></label>
+                        <label class="tag-checkbox-label"><input type="checkbox" name="specialty_coffee" value="1"><span>☕ Specialty Coffee</span></label>
+                        <label class="tag-checkbox-label"><input type="checkbox" name="snacks" value="1"><span>🥐 Bakery & Snacks</span></label>
                     </div>
                 </div>
 
@@ -209,34 +87,20 @@
                 <button type="submit" class="review-submit-btn">Submit Review & Features</button>
             </form>
 
-            <script>
-                document.getElementById("cafe_id").value = new URLSearchParams(window.location.search).get("id");
-            </script>
-
-            <!-- Rendered Comments Container -->
             <div class="user-comments-container">
-                <div class="user-comment-box">
-                    <h4>Dina <span class="comment-score">(Score: 5/5 ⭐)</span></h4>
-                    <p>Loved the atmosphere! Definitely coming back next week.</p>
-                </div>
+                <p style="color: #666; font-style: italic;">No reviews yet. Be the first to share your experience!</p>
             </div>
         </section>
+
+        <% } else { %>
+        <div style="text-align: center; padding: 50px;">
+            <h2>Cafe not found</h2>
+            <a href="/" class="auth-submit-btn" style="display: inline-block; text-decoration: none; max-width: 200px;">Back to Home</a>
+        </div>
+        <% } %>
     </main>
 
-    <!-- Shared Unified Footer Component -->
-    <footer class="cafe-details-footer">
-        <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
-        <p>
-            <a href="/about-us">About Us & Contact</a> |
-            <a href="/">Home</a>
-        </p>
-
-        <div>
-            <a href="https://instagram.com" class="footer-link" target="_blank" rel="noopener">Instagram</a>
-            <a href="https://x.com" class="footer-link" target="_blank" rel="noopener">Twitter / X</a>
-            <a href="https://facebook.com" class="footer-link" target="_blank" rel="noopener">Facebook</a>
-        </div>
-    </footer>
+    <%- include('partials/footer') %>
 </body>
 
 </html>

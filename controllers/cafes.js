@@ -21,12 +21,21 @@ router.get("/recent", (req, res) => {
     });
 });
 
+// Search cafes
+router.get("/search", (req, res) => {
+    const searchTerm = req.query.search || req.query.city || "";
+    cafeModel.getAllCafes(req.query, (err, result) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.render("search-results", { user: req.session.userId || null, cafes: result, searchTerm });
+    });
+});
+
 // Get specific cafe
 router.get("/:id", (req, res) => {
     cafeModel.getCafeById(req.params.id, (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
-        if (result.length === 0) return res.status(404).send("No cafe found");
-        return res.json(result[0]);
+        if (result.length === 0) return res.render("cafe-page", { user: req.session.userId || null, cafe: null });
+        return res.render("cafe-page", { user: req.session.userId || null, cafe: result[0] });
     });
 });
 
@@ -40,10 +49,10 @@ router.post("/", requireLogin, upload.single("photo"), (req, res) => {
         if (req.file) {
             cafeModel.insertCafePhoto(result.insertId, req.file.path.replace("public", ""), (err) => {
                 if (err) return res.status(500).json({ error: err.message });
-                return res.redirect(`/cafe-page?id=${result.insertId}`);
+                return res.redirect(`/cafes/${result.insertId}`);
             });
         } else {
-            return res.redirect(`/cafe-page?id=${result.insertId}`);
+            return res.redirect(`/cafes/${result.insertId}`);
         }
     });
 });

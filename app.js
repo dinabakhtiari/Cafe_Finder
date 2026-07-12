@@ -56,12 +56,8 @@ app.get("/login-register", (req, res) => {
     res.render("login-register", { message: null, user: req.session.userId || null });
 });
 
-app.get("/cafe-page", (req, res) => {
-    res.render("cafe-page", { user: req.session.userId || null });
-});
-
 app.get("/search-results", (req, res) => {
-    res.render("search-results", { user: req.session.userId || null });
+    res.render("search-results", { user: req.session.userId || null, cafes: [], searchTerm: "" });
 });
 
 app.get("/user-profile", requireLogin, (req, res) => {
