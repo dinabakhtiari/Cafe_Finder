@@ -9,11 +9,10 @@ router.get("/", requireLogin, (req, res) => {
         if (err) {
             console.error("Error fetching favorites:", err);
             // If there's an error, render the page with an empty array so it doesn't crash
-            return res.render("saved-cafes", { savedCafes: [] });
+            return res.render("saved-cafes", { user: req.session.userId || null, savedCafes: [] });
         }
         
-        // DYNAMIC FIX: Render the EJS page and pass the database results!
-        res.render("saved-cafes", { savedCafes: result });
+        res.render("saved-cafes", { user: req.session.userId || null, savedCafes: result });
     });
 });
 

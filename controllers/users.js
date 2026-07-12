@@ -70,8 +70,7 @@ router.post("/update", requireLogin, (req, res) => {
             console.error("Error updating user profile:", err);
             return res.redirect("/profile/edit");
         }
-        // Success! Redirect them back to their newly updated profile page
-        res.redirect("/profile");
+        res.redirect("/user-profile");
     });
 });
 

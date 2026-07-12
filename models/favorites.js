@@ -2,7 +2,7 @@ const connection = require("../middleware/connectionDB.js");
 
 const getFavoritesByUser = (user_id, callback) => {
     connection.query(
-        "SELECT cafes.* FROM cafes JOIN favorites ON cafes.id = favorites.cafe_id WHERE favorites.user_id = ?",
+        "SELECT cafes.*, photos.url AS photo_url FROM cafes JOIN favorites ON cafes.id = favorites.cafe_id LEFT JOIN photos ON cafes.id = photos.cafe_id WHERE favorites.user_id = ?",
         [user_id],
         callback
     );
