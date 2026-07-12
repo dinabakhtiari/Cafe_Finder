@@ -66,7 +66,7 @@ router.post("/login", async (req, res) => {
 
             if (pwdMatch) {
                 req.session.userId = result[0].id;
-                return res.redirect("/home");
+                return res.redirect("/");
             } else {
                 return res.render("login-register", { user: null,
                     message: "Email or password is incorrect",
