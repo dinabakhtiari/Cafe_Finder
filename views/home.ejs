@@ -14,16 +14,15 @@
     <header>
         <div class="header-container">
             <div class="logo">
-                <a href="home.html">☕ Cafe Finder</a>
+                <a href="/">☕ Cafe Finder</a>
             </div>
 
             <nav>
                 <ul class="nav-links">
-                    <li><a href="home.html">Home</a></li>
-                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about-us">About Us</a></li>
                 </ul>
 
-                <!-- Profile and Navigation Dropdown Menu -->
                 <div class="profile-menu-container">
                     <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()"
                         aria-label="Toggle profile menu">
@@ -33,11 +32,17 @@
 
                     <div class="profile-dropdown" id="profileDropdown">
                         <ul>
-                            <li><a href="user-profile.html">👤 Profile</a></li>
-                            <li><a href="/my-comments">💬 My Comments</a></li>
-                            <li><a href="/liked-cafes">❤️ Saved Cafes</a></li>
-                            <li class="dropdown-divider"></li>
-                            <li><a href="login-register.html" class="logout-link">🚪 Logout</a></li>
+                            <% if (typeof user !== 'undefined' && user) { %>
+                            <!-- Display these navigation links only to authenticated users -->
+                                <li><a href="/user-profile">👤 Profile</a></li>
+                                <li><a href="/my-comments">💬 My Comments</a></li>
+                                <li><a href="/saved-cafes">❤️ Saved Cafes</a></li>
+                                <li class="dropdown-divider"></li>
+                                <li><a href="/auth/logout" class="logout-link">🚪 Logout</a></li>
+                            <% } else { %>
+                            <!-- Display this link only to guests/unauthenticated users -->
+                                <li><a href="/login-register">🔑 Login / Register</a></li>
+                            <% } %>
                         </ul>
                     </div>
                 </div>
@@ -48,7 +53,7 @@
     <main>
         <!-- Michelin-Style Search and Filter Section -->
         <section class="search-filter-section">
-            <form action="/search-results.html" method="GET" class="michelin-form">
+            <form action="/search" method="GET" class="michelin-form">
 
                 <!-- Main Search Bar Row -->
                 <div class="search-main-row">
@@ -318,8 +323,8 @@
     <footer class="cafe-details-footer">
         <p>&copy; 2026 Cafe Finder. All rights reserved.</p>
         <p>
-            <a href="about-us.html">About Us & Contact</a> |
-            <a href="#top">Home</a>
+            <a href="/about-us">About Us & Contact</a> |
+            <a href="/">Home</a>
         </p>
 
         <div>
