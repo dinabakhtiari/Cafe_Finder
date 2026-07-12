@@ -5,10 +5,16 @@ const upload = require("../middleware/upload.js");
 const reviewModel = require("../models/reviews.js");
 
 router.post("/", requireLogin, upload.array("photos", 5), (req, res) => {
-    const data = { ...req.body, user_id: req.session.userId };
+    const tags = ["wifi", "outlets", "quiet", "tables", "outdoor", "ac", "parking", "student_discount", "specialty_coffee", "snacks"];
+    const tagData = {};
+    tags.forEach(tag => tagData[tag] = req.body[tag] ? 1 : 0);
+
+    const data = { ...req.body, ...tagData, user_id: req.session.userId };
 
     reviewModel.createReview(data, (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
+
+        const cafe_id = req.body.cafe_id;
 
         if (req.files && req.files.length > 0) {
             const review_id = result.insertId;
@@ -17,10 +23,9 @@ router.post("/", requireLogin, upload.array("photos", 5), (req, res) => {
                     if (err) return res.status(500).json({ error: err.message });
                 });
             });
-            return res.status(201).json({ id: review_id });
-        } else {
-            return res.status(201).json({ id: result.insertId });
         }
+
+        return res.redirect(`/cafe-page.html?id=${cafe_id}`);
     });
 });
 
