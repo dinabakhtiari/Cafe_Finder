@@ -16,26 +16,21 @@
 
         <header class="user-profile-bio-header">
             <div class="bio-avatar-wrapper">
-                <img src="avatar.jpg" alt="Dina's profile picture" class="profile-avatar-large">
+                <img src="/placeholder-avatar.jpg" alt="Profile picture" class="profile-avatar-large">
             </div>
 
             <div class="bio-info-details">
                 <div class="meta-field-row">
                     <span class="field-label">Name:</span>
-                    <span class="field-value user-important-name">Dina Bakhtiari</span>
+                    <span class="field-value user-important-name"><%= user.name %></span>
                 </div>
                 <div class="meta-field-row">
                     <span class="field-label">Username:</span>
-                    <span class="field-value">@dina_b</span>
+                    <span class="field-value">@<%= user.username %></span>
                 </div>
                 <div class="meta-field-row">
                     <span class="field-label">Email:</span>
-                    <span class="field-value">dina.bakhtiari@example.com</span>
-                </div>
-                <div class="meta-field-row">
-                    <span class="field-label">Bio:</span>
-                    <span class="field-value bio-text-multiline">Computer Science Student | Passionate about discovering
-                        quiet study spots and productive workspaces.</span>
+                    <span class="field-value"><%= user.email %></span>
                 </div>
             </div>
 

@@ -65,7 +65,10 @@ app.get("/search-results", (req, res) => {
 });
 
 app.get("/user-profile", requireLogin, (req, res) => {
-    res.render("user-profile", { user: req.session.userId || null });
+    connection.query("SELECT name, username, email FROM users WHERE id = ?", [req.session.userId], (err, results) => {
+        if (err || results.length === 0) return res.redirect("/");
+        res.render("user-profile", { user: results[0] });
+    });
 });
 
 app.get("/saved-cafes", requireLogin, (req, res) => {
