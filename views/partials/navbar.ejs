@@ -1,12 +1,12 @@
 <header>
     <div class="header-container">
         <div class="logo">
-            <a href="/home">☕ Cafe Finder</a>
+            <a href="/">☕ Cafe Finder</a>
         </div>
 
         <nav>
             <ul class="nav-links">
-                <li><a href="/">Home</a></li>
+                <li><a href="/home">Home</a></li>
                 <li><a href="/about-us">About Us</a></li>
             </ul>
 
@@ -19,11 +19,17 @@
 
                 <div class="profile-dropdown" id="profileDropdown">
                     <ul>
-                        <li><a href="/profile">👤 Profile</a></li>
-                        <li><a href="/my-comments">💬 My Comments</a></li>
-                        <li><a href="/liked-cafes">❤️ Saved Cafes</a></li>
-                        <li class="dropdown-divider"></li>
-                        <li><a href="/auth/logout" class="logout-link">🚪 Logout</a></li>
+                        <% if (typeof user !== 'undefined' && user) { %>
+                        <!-- Display these navigation links only to authenticated users -->
+                            <li><a href="/profile">👤 Profile</a></li>
+                            <li><a href="/my-comments">💬 My Comments</a></li>
+                            <li><a href="/saved-cafes">❤️ Saved Cafes</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li><a href="/auth/logout" class="logout-link">🚪 Logout</a></li>
+                        <% } else { %>
+                        <!-- Display this link only to guests/unauthenticated users -->
+                            <li><a href="/login-register">🔑 Login / Register</a></li>
+                        <% } %>
                     </ul>
                 </div>
             </div>

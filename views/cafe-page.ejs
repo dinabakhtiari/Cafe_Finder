@@ -20,7 +20,7 @@
                 <h1><%= cafe.name %></h1>
 
                 <!-- Dynamic Meta Info -->
-                <p class="cafe-meta-info">Added by: <strong class="cafe-author">Community Member</strong> | Date: <span id="current-date">Loading date...</span></p>
+                <p class="cafe-meta-info">Added by: <strong class="cafe-author"><%= cafe.author || 'Community Member' %></strong> | Date: <span id="current-date">Loading date...</span></p>
                 <p class="cafe-location-info"><strong>City:</strong> <%= cafe.city %></p>
                 <p class="cafe-address-info"><strong>Address:</strong> <%= cafe.address %></p>
 
@@ -50,9 +50,10 @@
                 <div class="cafe-active-tags-section">
                     <h4>Available Features</h4>
                     <div class="active-tags-container">
-                        <span class="active-tag-badge">⚡ Fast Wi-Fi</span>
+                        <span class="active-tag-badge">Fast Wi-Fi</span>
                         <span class="active-tag-badge">🔌 Power Outlets</span>
                         <span class="active-tag-badge">🤫 Quiet Environment</span>
+                        <span class="active-tag-badge">☕ Specialty Coffee</span>
                     </div>
                 </div>
 
@@ -62,6 +63,33 @@
                     <a href="#">Facebook</a> |
                     <a href="#">Instagram</a>
                 </div>
+
+                <!-- User Uploaded Photos Gallery Section (From Development Branch) -->
+                <div class="cafe-user-gallery">
+                    <h3>User Photos</h3>
+                    <p class="gallery-subtitle">Real photos shared by our community remote-workers:</p>
+
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="/user-photo1.jpg" alt="Coffee and laptop on a big table">
+                            <div class="photo-meta">
+                                <span>By: <strong>@taha_j</strong></span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="/user-photo2.jpg" alt="Cozy seating area inside Cafe">
+                            <div class="photo-meta">
+                                <span>By: <strong>@dina_b</strong></span>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="/user-photo3.jpg" alt="Power outlets and working setup">
+                            <div class="photo-meta">
+                                <span>By: <strong>@henrique_c</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </article>
 
             <hr>
@@ -70,8 +98,11 @@
             <section class="reviews-section">
                 <h2>Comments & Reviews</h2>
 
-                <!-- Form to Submit a New Review dynamically links to this specific cafe's ID -->
-                <form action="/cafes/<%= cafe.id %>/comments" method="POST" class="review-form">
+                <!-- Form to Submit a New Review and Update Cafe Feature Status (Merged with Henrique's backend requirements) -->
+                <form action="/reviews" method="POST" class="review-form">
+                    <!-- Clean EJS injection instead of messy Javascript! -->
+                    <input type="hidden" id="cafe_id" name="cafe_id" value="<%= cafe.id %>">
+
                     <div class="form-group rating-input-group">
                         <label for="rating">Rating (1-5):</label>
                         <input type="number" id="rating" name="rating" min="1" max="5" step="0.1" placeholder="4.5" required class="form-text-input">
@@ -80,24 +111,30 @@
                     <div class="cafe-features-selection">
                         <h4>What features did you experience here?</h4>
                         <p class="features-tip">Select all options that apply to this cafe location:</p>
-                        <!-- Checkboxes container -->
+
                         <div class="tags-flex-container">
-                            <label class="tag-checkbox-label"><input type="checkbox" name="tags" value="wifi"><span>⚡ Fast Wi-Fi</span></label>
-                            <label class="tag-checkbox-label"><input type="checkbox" name="tags" value="outlets"><span>🔌 Power Outlets</span></label>
-                            <label class="tag-checkbox-label"><input type="checkbox" name="tags" value="quiet"><span>🤫 Quiet Environment</span></label>
-                            <label class="tag-checkbox-label"><input type="checkbox" name="tags" value="coffee"><span>☕ Specialty Coffee</span></label>
+                            <label class="tag-checkbox-label"><input type="checkbox" id="tag-wifi" name="wifi" value="1"><span>Fast Wi-Fi</span></label>
+                            <label class="tag-checkbox-label"><input type="checkbox" id="tag-outlets" name="outlets" value="1"><span>🔌 Power Outlets</span></label>
+                            <label class="tag-checkbox-label"><input type="checkbox" id="tag-quiet" name="quiet" value="1"><span>🤫 Quiet Environment</span></label>
+                            <label class="tag-checkbox-label"><input type="checkbox" id="tag-tables" name="tables" value="1"><span>🪑 Big Tables</span></label>
+                            <label class="tag-checkbox-label"><input type="checkbox" id="tag-outdoor" name="outdoor" value="1"><span>🌿 Outdoor Seating</span></label>
+                            <label class="tag-checkbox-label"><input type="checkbox" id="tag-ac" name="ac" value="1"><span>❄️ Air Conditioning</span></label>
+                            <label class="tag-checkbox-label"><input type="checkbox" id="tag-parking" name="parking" value="1"><span>🚗 Parking Available</span></label>
+                            <label class="tag-checkbox-label"><input type="checkbox" id="tag-discount" name="student_discount" value="1"><span>🎓 Student Discount</span></label>
+                            <label class="tag-checkbox-label"><input type="checkbox" id="tag-coffee" name="specialty_coffee" value="1"><span>☕ Specialty Coffee</span></label>
+                            <label class="tag-checkbox-label"><input type="checkbox" id="tag-snacks" name="snacks" value="1"><span>🥐 Bakery & Snacks</span></label>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="comment-text">Your Review:</label>
-                        <textarea id="comment-text" name="commentText" rows="4" placeholder="Tell others about your study or remote work experience here..." required></textarea>
+                        <textarea id="comment-text" name="comment" rows="4" placeholder="Tell others about your study or remote work experience here..." required></textarea>
                     </div>
 
-                    <button type="submit" class="review-submit-btn">Submit Review</button>
+                    <button type="submit" class="review-submit-btn">Submit Review & Features</button>
                 </form>
 
-                <!-- Rendered Comments Container -->
+                <!-- Rendered Comments Container (Your dynamic EJS loop) -->
                 <div class="user-comments-container">
                     <% if (typeof comments !== 'undefined' && comments.length > 0) { %>
                         <% comments.forEach(comment => { %>

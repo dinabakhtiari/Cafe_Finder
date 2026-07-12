@@ -3,8 +3,11 @@ const router = express.Router();
 const bcryptjs = require("bcryptjs");
 const connection = require("../middleware/connectionDB.js");
 
-// Redirect manual GET requests back to the main combined page
 router.get("/register", (req, res) => {
+    res.redirect("/");
+});
+
+router.get("/login", (req, res) => {
     res.redirect("/");
 });
 
@@ -15,11 +18,11 @@ router.get("/login", (req, res) => {
 // Register POST Route
 router.post("/register", async (req, res) => {
     if (req.body.password !== req.body.confirm_password) {
-        return res.render("login-register", {
+        return res.render("login-register", { user: null,
             message: "Passwords don't match",
         });
     }
-    
+
     try {
         const hashedPwd = await bcryptjs.hash(req.body.password, 10);
         const { username, name, email } = req.body;
@@ -29,7 +32,7 @@ router.post("/register", async (req, res) => {
             [username, name, email, hashedPwd],
             (err, result) => {
                 if (err) {
-                    return res.render("login-register", {
+                    return res.render("login-register", { user: null,
                         message: "Username or email already in use",
                     });
                 }
@@ -38,7 +41,7 @@ router.post("/register", async (req, res) => {
             },
         );
     } catch (error) {
-        return res.render("login-register", {
+        return res.render("login-register", { user: null,
             message: "An error occurred during registration. Please try again.",
         });
     }
@@ -48,25 +51,24 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    
     connection.query(
         "SELECT * FROM users WHERE email = ?",
         [email],
         async (err, result) => {
             if (err || result.length === 0) {
-                return res.render("login-register", {
+                return res.render("login-register", { user: null,
                     message: "Email or password is incorrect",
                 });
             }
-            
+
             const hashedPwd = result[0].password;
             const pwdMatch = await bcryptjs.compare(password, hashedPwd);
-            
+
             if (pwdMatch) {
                 req.session.userId = result[0].id;
                 return res.redirect("/home");
             } else {
-                return res.render("login-register", {
+                return res.render("login-register", { user: null,
                     message: "Email or password is incorrect",
                 });
             }
@@ -74,13 +76,12 @@ router.post("/login", async (req, res) => {
     );
 });
 
-// Logout Route
 router.get("/logout", (req, res) => {
     req.session.destroy((err) => {
         if (err) {
-            return res.render("login-register", { message: "Could not logout" });
+            return res.render("login-register", { user: null, message: "Could not logout" });
         }
-        res.redirect("/");
+        res.redirect("/login-register");
     });
 });
 

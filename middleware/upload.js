@@ -3,7 +3,7 @@ const path = require('path');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "public/uploads"); // requires that folder exists
+        cb(null, "public/uploads/"); // requires that folder exists
     },
     filename: (req, file, cb) => {
         cb(null, `${Date.now()}-${Math.random()}${path.extname(file.originalname)}`);

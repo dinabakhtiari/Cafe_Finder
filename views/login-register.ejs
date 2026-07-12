@@ -10,38 +10,8 @@
 </head>
 
 <body>
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <a href="/home">☕ Cafe Finder</a>
-            </div>
-
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="/home">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                </ul>
-
-                <div class="profile-menu-container">
-                    <button type="button" class="profile-menu-btn" onclick="toggleProfileDropdown()"
-                        aria-label="Toggle profile menu">
-                        <span class="profile-avatar-icon">👤</span>
-                        <span class="hamburger-lines-icon">☰</span>
-                    </button>
-
-                    <div class="profile-dropdown" id="profileDropdown">
-                        <ul>
-                            <li><a href="/profile">👤 Profile</a></li>
-                            <li><a href="#">💬 My Comments</a></li>
-                            <li><a href="#">❤️ Saved Cafes</a></li>
-                            <li class="dropdown-divider"></li>
-                            <li><a href="/auth/logout" class="logout-link">🚪 Logout</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </header>
+    <!-- Global Header Component -->
+    <%- include('partials/navbar') %>
 
     <main class="auth-main">
         <div class="auth-wrapper">
@@ -148,6 +118,7 @@
         </div>
     </main>
 
+    <!-- Global Layout Footer Component -->
     <%- include('partials/footer') %>
 
     <% if (typeof message !== 'undefined' && message && (message.includes('Password') || message.includes('use') || message.includes('already'))) { %>
