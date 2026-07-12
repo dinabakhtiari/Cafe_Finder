@@ -2,16 +2,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const today = new Date();
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const formattedDate = today.toLocaleDateString("en-US", options);
-    
+
     const dateElement = document.getElementById("current-date");
     if (dateElement) {
         dateElement.textContent = formattedDate;
     }
 });
 
-/**
- * Toggles visibility between the Login and Register cards
- */
 function toggleAuthPages() {
     const loginCard = document.getElementById('login-card');
     const registerCard = document.getElementById('register-card');
@@ -29,9 +26,6 @@ function toggleAuthPages() {
     }
 }
 
-/**
- * Toggles the visibility of the profile dropdown menu
- */
 function toggleProfileDropdown() {
     const dropdown = document.getElementById('profileDropdown');
     if (dropdown) {
@@ -39,11 +33,10 @@ function toggleProfileDropdown() {
     }
 }
 
-// Automatically closes the dropdown if clicked outside
 window.addEventListener('click', function(event) {
     const dropdown = document.getElementById('profileDropdown');
     const menuBtn = document.querySelector('.profile-menu-btn');
-    
+
     if (dropdown && dropdown.classList.contains('show-menu')) {
         if (!menuBtn.contains(event.target) && !dropdown.contains(event.target)) {
             dropdown.classList.remove('show-menu');
@@ -51,36 +44,75 @@ window.addEventListener('click', function(event) {
     }
 });
 
-/**
- * Syncs bookmark logic with Henrique's favorites.js routing (POST/DELETE)
- */
-/**
- * Syncs bookmark logic with Henrique's favorites.js routing (POST/DELETE)
- */
+function showToastMessage(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.innerHTML = `<span>☕</span> <span>${message}</span>`;
+    document.body.appendChild(toast);
+
+    setTimeout(() => toast.classList.add('show'), 100);
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 400);
+    }, 3500);
+}
+
 function toggleLikeCafe(button, cafeId) {
     const isLiking = button.innerText.trim() === '🤍' || button.innerText.includes('Add to Favorites');
-    
-    if(button.classList.contains('bookmark-btn')) {
+
+    if (button.classList.contains('bookmark-btn')) {
         button.innerText = isLiking ? '🔖 Saved in Favorites' : '🔖 Add to Favorites';
     } else {
         button.innerText = isLiking ? '❤️' : '🤍';
     }
 
-    fetch('/favorites', { 
+    fetch('/favorites', {
         method: isLiking ? 'POST' : 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ cafe_id: cafeId })
     })
     .then(res => {
         if (!res.ok) throw new Error();
+        showToastMessage(isLiking ? 'Added to your Saved Cafes!' : 'Removed from your Saved Cafes.');
     })
     .catch(() => {
         button.innerText = isLiking ? '🤍' : '❤️';
-        alert('Action failed. Please make sure you are logged in.');
+        showToastMessage('Action failed. Please make sure you are logged in.');
     });
 }
 
-// Function to toggle the visibility of the inline Add Cafe form
+async function removeBookmark(cafeId) {
+    const confirmRemove = confirm("Are you sure you want to remove this cafe from your saved favorites?");
+    if (!confirmRemove) return;
+
+    try {
+        const response = await fetch('/favorites', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ cafe_id: cafeId })
+        });
+
+        if (response.ok) {
+            const cafeCard = document.getElementById(`saved-cafe-${cafeId}`);
+            if (cafeCard) {
+                cafeCard.style.opacity = '0';
+                cafeCard.style.transform = 'scale(0.95)';
+                cafeCard.style.transition = 'all 0.3s ease';
+                setTimeout(() => {
+                    cafeCard.remove();
+                    const grid = document.querySelector('.modern-cafes-grid');
+                    if (grid && grid.children.length === 0) window.location.reload();
+                }, 300);
+            }
+            showToastMessage('Cafe removed from your Saved Cafes.');
+        } else {
+            showToastMessage('Failed to remove the cafe. Please try again.');
+        }
+    } catch (error) {
+        showToastMessage('A network error occurred. Please check your connection.');
+    }
+}
+
 function toggleAddCafeForm() {
     const formContainer = document.getElementById('inline-add-cafe-container');
     if (formContainer.style.display === 'none' || formContainer.style.display === '') {
@@ -90,11 +122,9 @@ function toggleAddCafeForm() {
     }
 }
 
-// Toggle Forgot Password Card View
 function showForgotPassword() {
     const loginCard = document.getElementById('login-card');
     const forgotCard = document.getElementById('forgot-card');
-    
     if (loginCard && forgotCard) {
         loginCard.classList.replace('id-active', 'id-hidden');
         forgotCard.classList.replace('id-hidden', 'id-active');
@@ -104,14 +134,12 @@ function showForgotPassword() {
 function hideForgotPassword() {
     const loginCard = document.getElementById('login-card');
     const forgotCard = document.getElementById('forgot-card');
-    
     if (loginCard && forgotCard) {
         forgotCard.classList.replace('id-active', 'id-hidden');
         loginCard.classList.replace('id-hidden', 'id-active');
     }
 }
 
-// Toggle Inline Edit Cafe Form Row View
 function toggleEditCafeForm(cafeId) {
     const editFormContainer = document.getElementById(`inline-edit-cafe-${cafeId}`);
     if (editFormContainer) {
@@ -123,186 +151,58 @@ function toggleEditCafeForm(cafeId) {
     }
 }
 
-/**
- * Handles smooth AJAX removal of bookmarks using the favorites.js endpoint
- */
-async function removeBookmark(cafeId) {
-    const confirmRemove = confirm("Are you sure you want to remove this cafe from your saved favorites?");
-    
-    if (!confirmRemove) return;
-
-    try {
-        const response = await fetch('/favorites', { 
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ cafe_id: cafeId })
-        });
-
-        if (response.ok) {
-            const cafeCard = document.getElementById(`saved-cafe-${cafeId}`);
-            if (cafeCard) {
-                // Keep the smooth animation!
-                cafeCard.style.opacity = '0';
-                cafeCard.style.transform = 'scale(0.95)';
-                cafeCard.style.transition = 'all 0.3s ease';
-                
-                setTimeout(() => {
-                    cafeCard.remove();
-                    const grid = document.querySelector('.modern-cafes-grid');
-                    // If that was the last cafe, reload the page to trigger the EJS empty state template
-                    if (grid && grid.children.length === 0) {
-                        window.location.reload();
-                    }
-                }, 300);
-            }
-        } else {
-            alert("Failed to remove the cafe. Please try again.");
-        }
-    } catch (error) {
-        console.error("Error removing bookmark:", error);
-        alert("A network error occurred. Please check your connection.");
-    }
-}
-
-/**
- * Captures edit form updates and asynchronously sends them via standard HTTP PATCH to the MVC backend
- */
 function submitEditCafeForm(event, cafeId) {
     event.preventDefault();
-
     const formElement = document.getElementById(`edit-cafe-form-${cafeId}`);
     if (!formElement) return;
 
-    // Collects files and texts seamlessly
     const formData = new FormData(formElement);
 
-    fetch(`/cafes/${cafeId}`, {
-        method: 'PATCH',
-        body: formData
-    })
+    fetch(`/cafes/${cafeId}`, { method: 'PATCH', body: formData })
     .then(res => {
         if (res.status === 204 || res.ok) {
-            alert('Cafe updated successfully! 💾');
+            showToastMessage('Cafe updated successfully!');
             toggleEditCafeForm(cafeId);
-            window.location.reload(); // Refreshes page to view latest content changes
+            window.location.reload();
         } else {
             return res.json().then(data => { throw new Error(data.error || 'Failed to update') });
         }
     })
     .catch(err => {
-        console.error('Update operation error:', err);
-        alert(`Error: ${err.message || 'Could not update cafe details.'}`);
+        showToastMessage(`Error: ${err.message || 'Could not update cafe details.'}`);
     });
 }
 
-function showToastMessage(message) {
-    // Dynamically create the toast notification element
-    const toast = document.createElement('div');
-    toast.className = 'toast-notification';
-    toast.innerText = message;
-    
-    document.body.appendChild(toast);
-    
-    // Apply entry animation
-    setTimeout(() => {
-        toast.classList.add('show');
-    }, 100);
-    
-    // Automatically remove the notification after 3 seconds
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => {
-            toast.remove();
-        }, 400); // Wait for the fade-out animation to complete
-    }, 3000);
-}
-
-// Function to handle bookmarking/unbookmarking a cafe
-function toggleLikeCafe(button, cafeId) {
-    // Current database integration logic from your teammate goes here...
-    
-    // Handle the visual toggle and display the appropriate toast message
-    if (button.innerText === '🤍') {
-        button.innerText = '❤️';
-        showToastMessage("Cafe bookmarked successfully! Added to your Saved Cafes.");
-    } else {
-        button.innerText = '🤍';
-        showToastMessage("Removed from your Saved Cafes.");
-    }
-}
-
-// Handle password recovery form submission with a toast message
 document.addEventListener("DOMContentLoaded", () => {
-    // Find the forgot password form inside the forgot-card section
     const forgotCard = document.getElementById("forgot-card");
     if (!forgotCard) return;
 
     const forgotForm = forgotCard.querySelector("form");
-
     if (forgotForm) {
         forgotForm.addEventListener("submit", async (event) => {
-            // 1. Prevent the page from reloading traditionally
             event.preventDefault();
-
-            // 2. Get the email value and the submit button
             const emailInput = document.getElementById("forgot-email");
             const submitBtn = forgotForm.querySelector(".auth-submit-btn");
-            
             if (!emailInput || !emailInput.value) return;
 
-            // Optional: Disable button and show loading status
             const originalBtnText = submitBtn.innerText;
             submitBtn.innerText = "Sending...";
             submitBtn.disabled = true;
 
             try {
-                // 3. Send the request to the backend dynamically via Fetch
-                const response = await fetch("/auth/forgot-password", {
+                await fetch("/auth/forgot-password", {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
-                    },
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
                     body: new URLSearchParams({ email: emailInput.value })
                 });
-
-                // 4. Trigger the toast message on the frontend
-                showToastMessage("Recovery link sent successfully! Please check your email inbox.");
-                
-                // Clear the input field after success
+                showToastMessage("Recovery link sent! Please check your email inbox.");
                 emailInput.value = "";
-
             } catch (error) {
-                console.error("Error sending recovery email:", error);
                 showToastMessage("An error occurred. Please try again later.");
             } finally {
-                // Restore button state
                 submitBtn.innerText = originalBtnText;
                 submitBtn.disabled = false;
             }
         });
     }
 });
-
-function showToastMessage(message) {
-    // Dynamically create the toast notification element
-    const toast = document.createElement('div');
-    toast.className = 'toast-notification';
-    
-    // Add a premium coffee icon before the text message
-    toast.innerHTML = `<span>☕</span> <span>${message}</span>`;
-    
-    document.body.appendChild(toast);
-    
-    // Apply entry animation
-    setTimeout(() => {
-        toast.classList.add('show');
-    }, 100);
-    
-    // Automatically remove the notification after 3.5 seconds
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => {
-            toast.remove();
-        }, 400); // Wait for the fade-out animation to complete
-    }, 3500);
-}
