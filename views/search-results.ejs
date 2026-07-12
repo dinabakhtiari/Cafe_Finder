@@ -14,70 +14,44 @@
 
     <main class="results-main">
         <div class="city-header">
-            <h1>Study Spots in <span class="highlight-city">Stuttgart</span></h1>
-            <p class="results-count-text">Found 3 premium cafes matching your filters</p>
+            <h1>
+                <% if (searchTerm) { %>
+                    Results for "<span class="highlight-city"><%= searchTerm %></span>"
+                <% } else { %>
+                    All Cafes
+                <% } %>
+            </h1>
+            <p class="results-count-text">Found <%= cafes.length %> cafe<%= cafes.length !== 1 ? 's' : '' %></p>
         </div>
 
         <section class="results-section-wrapper">
             <h2>Available Cafes</h2>
 
+            <% if (cafes.length === 0) { %>
+                <p style="color: #666; font-style: italic; text-align: center; padding: 40px 0;">
+                    No cafes found matching your search. Try a different term or browse all cafes.
+                </p>
+            <% } else { %>
             <div class="modern-cafes-grid">
-
+                <% cafes.forEach(cafe => { %>
                 <div class="michelin-cafe-card">
                     <div class="card-image-wrapper">
-                        <img src="cafe1.jpg" alt="Melu Cafe Exterior">
+                        <img src="<%= cafe.photo_url ? cafe.photo_url : '/placeholder.jpg' %>" alt="<%= cafe.name %>">
                         <button type="button" class="floating-heart-btn" aria-label="Add to Favorites">🤍</button>
                     </div>
 
-                    <a href="/cafes/1" class="card-info-link">
+                    <a href="/cafes/<%= cafe.id %>" class="card-info-link">
                         <div class="card-michelin-meta">
-                            <span class="michelin-rating">⭐ 4.5</span>
-                            <span class="michelin-divider">•</span>
-                            <span class="michelin-tag">Fast Wi-Fi</span>
+                            <span class="michelin-tag"><%= cafe.city %></span>
                         </div>
-                        <h3 class="michelin-title">Melu Cafe</h3>
-                        <p class="michelin-location">Stuttgart</p>
-                        <p class="michelin-address">Theodor-Heuss-Straße 26, 70174 Stuttgart</p>
+                        <h3 class="michelin-title"><%= cafe.name %></h3>
+                        <p class="michelin-location"><%= cafe.city %></p>
+                        <p class="michelin-address"><%= cafe.address %></p>
                     </a>
                 </div>
-
-                <div class="michelin-cafe-card">
-                    <div class="card-image-wrapper">
-                        <img src="cafe2.jpg" alt="Schloss Cafe">
-                        <button type="button" class="floating-heart-btn" aria-label="Add to Favorites">🤍</button>
-                    </div>
-
-                    <a href="/cafes/2" class="card-info-link">
-                        <div class="card-michelin-meta">
-                            <span class="michelin-rating">⭐ 4.8</span>
-                            <span class="michelin-divider">•</span>
-                            <span class="michelin-tag">🔌 Power Outlets</span>
-                        </div>
-                        <h3 class="michelin-title">Schloss Cafe</h3>
-                        <p class="michelin-location">Stuttgart</p>
-                        <p class="michelin-address">Königstraße 18, 70173 Stuttgart</p>
-                    </a>
-                </div>
-
-                <div class="michelin-cafe-card">
-                    <div class="card-image-wrapper">
-                        <img src="cafe3.jpg" alt="Plaza Coffee">
-                        <button type="button" class="floating-heart-btn" aria-label="Add to Favorites">🤍</button>
-                    </div>
-
-                    <a href="/cafes/3" class="card-info-link">
-                        <div class="card-michelin-meta">
-                            <span class="michelin-rating">⭐ 4.2</span>
-                            <span class="michelin-divider">•</span>
-                            <span class="michelin-tag">🤫 Quiet Environment</span>
-                        </div>
-                        <h3 class="michelin-title">Plaza Coffee</h3>
-                        <p class="michelin-location">Stuttgart</p>
-                        <p class="michelin-address">Rotebühlplatz 2, 70178 Stuttgart</p>
-                    </a>
-                </div>
-
+                <% }) %>
             </div>
+            <% } %>
         </section>
     </main>
 

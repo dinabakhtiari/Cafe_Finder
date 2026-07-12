@@ -24,7 +24,7 @@ const getAllCafes = (filters, callback) => {
         }
     });
 
-    let query = "SELECT DISTINCT cafes.* FROM cafes LEFT JOIN reviews ON cafes.id = reviews.cafe_id";
+    let query = "SELECT DISTINCT cafes.*, photos.url AS photo_url FROM cafes LEFT JOIN reviews ON cafes.id = reviews.cafe_id LEFT JOIN photos ON cafes.id = photos.cafe_id";
     if (conditions.length > 0) {
         query += " WHERE " + conditions.join(" AND ");
     }
@@ -33,11 +33,17 @@ const getAllCafes = (filters, callback) => {
 };
 
 const getRecentCafes = (callback) => {
-    connection.query("SELECT * FROM cafes ORDER BY created_at DESC LIMIT 5", callback);
+    connection.query(
+        "SELECT cafes.*, photos.url AS photo_url FROM cafes LEFT JOIN photos ON cafes.id = photos.cafe_id ORDER BY cafes.created_at DESC LIMIT 5",
+        callback
+    );
 };
 
 const getCafeById = (id, callback) => {
-    connection.query("SELECT * FROM cafes WHERE id = ?", [id], callback);
+    connection.query(
+        "SELECT cafes.*, photos.url AS photo_url FROM cafes LEFT JOIN photos ON cafes.id = photos.cafe_id WHERE cafes.id = ?",
+        [id], callback
+    );
 };
 
 const createCafe = (data, callback) => {
