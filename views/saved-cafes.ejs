@@ -17,29 +17,41 @@
         </div>
 
         <section class="results-section-wrapper">
-            <!-- Grid Layout optimized automatically via style.css -->
             <div class="modern-cafes-grid">
                 
-                <!-- Saved Cafe Item 1 -->
-                <article class="michelin-cafe-card" id="saved-cafe-2">
-                    <div class="card-image-wrapper">
-                        <img src="placeholder.jpg" alt="Interior of Schloss Cafe">
-                        <!-- Modern AJAX handler to remove bookmarks with confirmation -->
-                        <button type="button" class="floating-heart-btn" onclick="removeBookmark(2)" aria-label="Remove Schloss Cafe from favorites">
-                            ❤️
-                        </button>
+                <% if (typeof savedCafes !== 'undefined' && savedCafes.length > 0) { %>
+                    <!-- Loop through all the user's saved cafes from the database -->
+                    <% savedCafes.forEach(cafe => { %>
+                        <article class="michelin-cafe-card" id="saved-cafe-<%= cafe.id %>">
+                            <div class="card-image-wrapper">
+                                <!-- Dynamically load the cafe image or a placeholder -->
+                                <img src="<%= cafe.photo_url ? cafe.photo_url : '/placeholder.jpg' %>" alt="Interior of <%= cafe.name %>">
+                                
+                                <button type="button" class="floating-heart-btn" onclick="removeBookmark(<%= cafe.id %>)" aria-label="Remove <%= cafe.name %> from favorites">
+                                    ❤️
+                                </button>
+                            </div>
+                            
+                            <a href="/cafes/<%= cafe.id %>" class="card-info-link">
+                                <div class="card-michelin-meta">
+                                    <span class="michelin-rating">⭐ <%= cafe.rating || 'New' %></span>
+                                    <span class="michelin-divider">|</span>
+                                    <span class="michelin-tag"><%= cafe.city %></span>
+                                </div>
+                                <h3 class="michelin-title"><%= cafe.name %></h3>
+                                <p class="michelin-location"><%= cafe.address %>, <%= cafe.city %></p>
+                            </a>
+                        </article>
+                    <% }) %>
+                <% } else { %>
+                    <!-- What to show if the user hasn't saved any cafes yet -->
+                    <div class="no-results-message" style="text-align: center; grid-column: 1 / -1; padding: 40px;">
+                        <h3>You haven't saved any cafes yet!</h3>
+                        <p>Go explore some cafes and click the heart icon to save them here.</p>
+                        <br>
+                        <a href="/cafes" class="auth-submit-btn" style="display: inline-block; text-decoration: none; max-width: 200px;">Explore Cafes</a>
                     </div>
-                    
-                    <a href="/cafes/2" class="card-info-link">
-                        <div class="card-michelin-meta">
-                            <span class="michelin-rating">⭐ 4.7</span>
-                            <span class="michelin-divider">|</span>
-                            <span class="michelin-tag">Stuttgart</span>
-                        </div>
-                        <h3 class="michelin-title">Schloss Cafe</h3>
-                        <p class="michelin-location">Königstraße 18, Stuttgart</p>
-                    </a>
-                </article>
+                <% } %>
 
             </div>
         </section>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/main.js"></script>
+    <title>Cafe Finder - Edit Profile</title>
+</head>
+
+<body>
+    <!-- Global Header Component -->
+    <%- include('partials/navbar') %>
+
+    <main class="auth-main">
+        <div class="auth-wrapper">
+            <section class="auth-card id-active">
+                <h2>Edit Profile</h2>
+                <p class="auth-subtitle">Update your personal information below.</p>
+
+                <!-- This form will POST to our update route (which we will build next!) -->
+                <form action="/users/update" method="POST" class="auth-form">
+                    <div class="form-group">
+                        <label for="edit-username">Username</label>
+                        <input type="text" id="edit-username" name="username" value="<%= user.username %>" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit-fullname">Full Name</label>
+                        <input type="text" id="edit-fullname" name="name" value="<%= user.name %>" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit-email">Email Address</label>
+                        <input type="email" id="edit-email" name="email" value="<%= user.email %>" required>
+                    </div>
+                    
+                    <button type="submit" class="auth-submit-btn">Save Changes</button>
+                    <a href="/profile" class="switch-link-btn" style="display: block; text-align: center; margin-top: 15px; text-decoration: none;">Cancel</a>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <!-- Global Layout Footer Component -->
+    <%- include('partials/footer') %>
+</body>
+
+</html>

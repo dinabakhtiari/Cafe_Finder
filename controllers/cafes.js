@@ -13,21 +13,21 @@ router.get("/", (req, res) => {
     });
 });
 
-// Get most recent
-router.get("/recent", (req, res) => {
-    cafeModel.getRecentCafes((err, result) => {
-        if (err) return res.status(500).json({ error: err.message });
-        if (result.length === 0) return res.status(404).send("No cafes added yet");
-        return res.json(result);
-    });
-});
-
 // Search cafes
 router.get("/search", (req, res) => {
     const searchTerm = req.query.search || req.query.city || "";
     cafeModel.getAllCafes(req.query, (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
         res.render("search-results", { user: req.session.userId || null, cafes: result, searchTerm });
+    });
+});
+
+// Get most recent
+router.get("/recent", (req, res) => {
+    cafeModel.getRecentCafes((err, result) => {
+        if (err) return res.status(500).json({ error: err.message });
+        if (result.length === 0) return res.status(404).send("No cafes added yet");
+        return res.json(result);
     });
 });
 

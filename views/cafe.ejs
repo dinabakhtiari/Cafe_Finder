@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/main.js"></script>
+    <title><%= cafe.name %> - Cafe Finder</title>
+</head>
+
+<body>
+    <%- include('partials/navbar') %>
+    <main class="cafe-detailsy-main">
+        <article class="cafe-details-article">
+            <h1><%= cafe.name %></h1>
+
+            <p class="cafe-meta-info">Added by User ID: <strong class="cafe-author"><%= cafe.user_id %></strong></p>
+            
+            <p class="cafe-address-info"><strong>Address:</strong> <%= cafe.address %></p>
+
+            <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1000" alt="Workspace inside <%= cafe.name %>" class="cafe-main-img">
+
+            <div class="cafe-action-row">
+                <div class="cafe-rating-summary">
+                    <span>⭐ <strong><%= cafe.rating || 'New' %></strong></span>
+                </div>
+
+                <div class="cafe-bookmark-action">
+                    <button type="button" class="bookmark-btn" onclick="toggleLikeCafe(this, <%= cafe.id %>)">
+                        🔖 Add to Favorites
+                    </button>
+                </div>
+            </div>
+
+            <div class="cafe-description-box">
+                <h3>Description</h3>
+                <p><%= cafe.description || 'A great place for remote work and studying!' %></p>
+            </div>
+
+            <div class="cafe-active-tags-section">
+                <h4>Available Features</h4>
+                <div class="active-tags-container">
+                    <span class="active-tag-badge">⚡ Fast Wi-Fi</span>
+                    <span class="active-tag-badge">🔌 Power Outlets</span>
+                </div>
+            </div>
+        </article>
+
+        <hr>
+
+        <section class="reviews-section">
+            <h2>Comments & Reviews</h2>
+
+            <form action="/cafes/<%= cafe.id %>/comments" method="POST" class="review-form">
+
+                <div class="form-group rating-input-group">
+                    <label for="rating">Rating (1-5):</label>
+                    <input type="number" id="rating" name="rating" min="1" max="5" step="0.1" placeholder="4.5" required class="form-text-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="comment-text">Your Review:</label>
+                    <textarea id="comment-text" name="commentText" rows="4"
+                        placeholder="Tell others about your study or remote work experience here..."
+                        required></textarea>
+                </div>
+
+                <button type="submit" class="review-submit-btn">Submit Review</button>
+            </form>
+        </section>
+    </main>
+</body>
+<%- include('partials/footer') %>
+</html>

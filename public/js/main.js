@@ -54,6 +54,9 @@ window.addEventListener('click', function(event) {
 /**
  * Syncs bookmark logic with Henrique's favorites.js routing (POST/DELETE)
  */
+/**
+ * Syncs bookmark logic with Henrique's favorites.js routing (POST/DELETE)
+ */
 function toggleLikeCafe(button, cafeId) {
     const isLiking = button.innerText.trim() === '🤍' || button.innerText.includes('Add to Favorites');
     
@@ -121,32 +124,43 @@ function toggleEditCafeForm(cafeId) {
 }
 
 /**
- * Handles smooth AJAX removal of bookmarks from saved-cafes.html using favorites.js endpoint
+ * Handles smooth AJAX removal of bookmarks using the favorites.js endpoint
  */
-function removeBookmark(cafeId) {
+async function removeBookmark(cafeId) {
     const confirmRemove = confirm("Are you sure you want to remove this cafe from your saved favorites?");
     
-    if (confirmRemove) {
-        const cafeCard = document.getElementById(`saved-cafe-${cafeId}`);
-        if (cafeCard) {
-            cafeCard.style.opacity = '0';
-            cafeCard.style.transform = 'scale(0.95)';
-            cafeCard.style.transition = 'all 0.3s ease';
-            
-            setTimeout(() => {
-                cafeCard.remove();
-                const grid = document.querySelector('.modern-cafes-grid');
-                if (grid && grid.children.length === 0) {
-                    grid.innerHTML = '<p class="results-count-text" style="grid-column: 1/-1; text-align: center; padding: 40px 0;">No saved cafes yet. Start exploring from the home page!</p>';
-                }
-            }, 300);
-            
-            fetch('/favorites', { 
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ cafe_id: cafeId })
-            });
+    if (!confirmRemove) return;
+
+    try {
+        const response = await fetch('/favorites', { 
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ cafe_id: cafeId })
+        });
+
+        if (response.ok) {
+            const cafeCard = document.getElementById(`saved-cafe-${cafeId}`);
+            if (cafeCard) {
+                // Keep the smooth animation!
+                cafeCard.style.opacity = '0';
+                cafeCard.style.transform = 'scale(0.95)';
+                cafeCard.style.transition = 'all 0.3s ease';
+                
+                setTimeout(() => {
+                    cafeCard.remove();
+                    const grid = document.querySelector('.modern-cafes-grid');
+                    // If that was the last cafe, reload the page to trigger the EJS empty state template
+                    if (grid && grid.children.length === 0) {
+                        window.location.reload();
+                    }
+                }, 300);
+            }
+        } else {
+            alert("Failed to remove the cafe. Please try again.");
         }
+    } catch (error) {
+        console.error("Error removing bookmark:", error);
+        alert("A network error occurred. Please check your connection.");
     }
 }
 
@@ -179,4 +193,116 @@ function submitEditCafeForm(event, cafeId) {
         console.error('Update operation error:', err);
         alert(`Error: ${err.message || 'Could not update cafe details.'}`);
     });
+}
+
+function showToastMessage(message) {
+    // Dynamically create the toast notification element
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.innerText = message;
+    
+    document.body.appendChild(toast);
+    
+    // Apply entry animation
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 100);
+    
+    // Automatically remove the notification after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+            toast.remove();
+        }, 400); // Wait for the fade-out animation to complete
+    }, 3000);
+}
+
+// Function to handle bookmarking/unbookmarking a cafe
+function toggleLikeCafe(button, cafeId) {
+    // Current database integration logic from your teammate goes here...
+    
+    // Handle the visual toggle and display the appropriate toast message
+    if (button.innerText === '🤍') {
+        button.innerText = '❤️';
+        showToastMessage("Cafe bookmarked successfully! Added to your Saved Cafes.");
+    } else {
+        button.innerText = '🤍';
+        showToastMessage("Removed from your Saved Cafes.");
+    }
+}
+
+// Handle password recovery form submission with a toast message
+document.addEventListener("DOMContentLoaded", () => {
+    // Find the forgot password form inside the forgot-card section
+    const forgotCard = document.getElementById("forgot-card");
+    if (!forgotCard) return;
+
+    const forgotForm = forgotCard.querySelector("form");
+
+    if (forgotForm) {
+        forgotForm.addEventListener("submit", async (event) => {
+            // 1. Prevent the page from reloading traditionally
+            event.preventDefault();
+
+            // 2. Get the email value and the submit button
+            const emailInput = document.getElementById("forgot-email");
+            const submitBtn = forgotForm.querySelector(".auth-submit-btn");
+            
+            if (!emailInput || !emailInput.value) return;
+
+            // Optional: Disable button and show loading status
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = "Sending...";
+            submitBtn.disabled = true;
+
+            try {
+                // 3. Send the request to the backend dynamically via Fetch
+                const response = await fetch("/auth/forgot-password", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: new URLSearchParams({ email: emailInput.value })
+                });
+
+                // 4. Trigger the toast message on the frontend
+                showToastMessage("Recovery link sent successfully! Please check your email inbox.");
+                
+                // Clear the input field after success
+                emailInput.value = "";
+
+            } catch (error) {
+                console.error("Error sending recovery email:", error);
+                showToastMessage("An error occurred. Please try again later.");
+            } finally {
+                // Restore button state
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        });
+    }
+});
+
+function showToastMessage(message) {
+    // Dynamically create the toast notification element
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    
+    // Add a premium coffee icon before the text message
+    toast.innerHTML = `<span>☕</span> <span>${message}</span>`;
+    
+    document.body.appendChild(toast);
+    
+    // Apply entry animation
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 100);
+    
+    // Automatically remove the notification after 3.5 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+            toast.remove();
+        }, 400); // Wait for the fade-out animation to complete
+    }, 3500);
 }

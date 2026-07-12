@@ -1765,6 +1765,13 @@ footer a:hover, .footer-link:hover {
     margin-top: 25px !important;
 }
 
+
+/* Class to trigger entry animation and visibility */
+.toast-notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* Specific red pulsing override for active heart button on saved page */
 .floating-heart-btn {
     color: #c92a2a; /* Warning Red for saved state */
@@ -1929,4 +1936,33 @@ footer a:hover, .footer-link:hover {
     font-size: 0.95rem;
     color: #4a3f35;
     line-height: 1.6;
+}
+
+.toast-notification {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    padding: 16px 28px;
+    border-radius: 12px;
+    border-left: 4px solid #d4a373;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateX(40px) scale(0.95);
+    transition: opacity 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toast-notification.show {
+    opacity: 1;
+    transform: translateX(0) scale(1);
 }
