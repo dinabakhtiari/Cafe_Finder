@@ -13,7 +13,7 @@ router.get("/login", (req, res) => {
 
 router.post("/register", async (req, res) => {
     if (req.body.password !== req.body.confirm_password) {
-        return res.render("login-register", {
+        return res.render("login-register", { user: null,
             message: "Passwords don't match",
         });
     }
@@ -27,7 +27,7 @@ router.post("/register", async (req, res) => {
             [username, name, email, hashedPwd],
             (err, result) => {
                 if (err) {
-                    return res.render("login-register", {
+                    return res.render("login-register", { user: null,
                         message: "Username or email already in use",
                     });
                 }
@@ -36,7 +36,7 @@ router.post("/register", async (req, res) => {
             },
         );
     } catch (error) {
-        return res.render("login-register", {
+        return res.render("login-register", { user: null,
             message: "An error occurred during registration. Please try again.",
         });
     }
@@ -51,7 +51,7 @@ router.post("/login", async (req, res) => {
         [email],
         async (err, result) => {
             if (err || result.length === 0) {
-                return res.render("login-register", {
+                return res.render("login-register", { user: null,
                     message: "Email or password is incorrect",
                 });
             }
@@ -63,7 +63,7 @@ router.post("/login", async (req, res) => {
                 req.session.userId = result[0].id;
                 return res.redirect("/");
             } else {
-                return res.render("login-register", {
+                return res.render("login-register", { user: null,
                     message: "Email or password is incorrect",
                 });
             }
@@ -74,7 +74,7 @@ router.post("/login", async (req, res) => {
 router.get("/logout", (req, res) => {
     req.session.destroy((err) => {
         if (err) {
-            return res.render("login-register", { message: "Could not logout" });
+            return res.render("login-register", { user: null, message: "Could not logout" });
         }
         res.redirect("/login-register");
     });

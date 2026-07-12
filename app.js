@@ -49,31 +49,31 @@ app.use("/reviews", require("./controllers/reviews.js"));
 app.use("/favorites", require("./controllers/favorites.js"));
 
 app.get("/", (req, res) => {
-    res.render("home");
+    res.render("home", { user: req.session.userId || null });
 });
 
 app.get("/login-register", (req, res) => {
-    res.render("login-register", { message: null });
+    res.render("login-register", { message: null, user: req.session.userId || null });
 });
 
 app.get("/cafe-page", (req, res) => {
-    res.render("cafe-page");
+    res.render("cafe-page", { user: req.session.userId || null });
 });
 
 app.get("/search-results", (req, res) => {
-    res.render("search-results");
+    res.render("search-results", { user: req.session.userId || null });
 });
 
 app.get("/user-profile", requireLogin, (req, res) => {
-    res.render("user-profile");
+    res.render("user-profile", { user: req.session.userId || null });
 });
 
 app.get("/saved-cafes", requireLogin, (req, res) => {
-    res.render("saved-cafes");
+    res.render("saved-cafes", { user: req.session.userId || null });
 });
 
 app.get("/about-us", (req, res) => {
-    res.render("about-us");
+    res.render("about-us", { user: req.session.userId || null });
 });
 
 app.listen(port, () => {
