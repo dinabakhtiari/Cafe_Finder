@@ -138,58 +138,57 @@
             <h2>Comments & Reviews</h2>
 
             <!-- Form to Submit a New Review and Update Cafe Feature Status -->
-            <form action="/cafes/1/comments" method="POST" class="review-form">
+            <form action="/reviews" method="POST" class="review-form">
+                <input type="hidden" id="cafe_id" name="cafe_id" value="">
 
                 <div class="form-group rating-input-group">
                     <label for="rating">Rating (1-5):</label>
-                    <input type="number" id="rating" name="rating" min="1" max="5" step="0.1" placeholder="4.5" required
-                        required class="form-text-input">
+                    <input type="number" id="rating" name="rating" min="1" max="5" step="0.1" placeholder="4.5" required class="form-text-input">
                 </div>
 
                 <div class="cafe-features-selection">
                     <h4>What features did you experience here?</h4>
                     <p class="features-tip">Select all options that apply to this cafe location:</p>
 
-                    <!-- Modern Capsule Checkboxes Container -->
                     <div class="tags-flex-container">
                         <label class="tag-checkbox-label">
-                            <input type="checkbox" id="tag-wifi" name="tags" value="wifi">
+                            <input type="checkbox" id="tag-wifi" name="wifi" value="1">
                             <span>⚡ Fast Wi-Fi</span>
                         </label>
                         <label class="tag-checkbox-label">
-                            <input type="checkbox" id="tag-outlets" name="tags" value="outlets">
+                            <input type="checkbox" id="tag-outlets" name="outlets" value="1">
                             <span>🔌 Power Outlets</span>
                         </label>
                         <label class="tag-checkbox-label">
-                            <input type="checkbox" id="tag-quiet" name="tags" value="quiet">
+                            <input type="checkbox" id="tag-quiet" name="quiet" value="1">
                             <span>🤫 Quiet Environment</span>
                         </label>
                         <label class="tag-checkbox-label">
-                            <input type="checkbox" id="tag-tables" name="tags" value="tables">
+                            <input type="checkbox" id="tag-tables" name="tables" value="1">
                             <span>🪑 Big Tables</span>
                         </label>
                         <label class="tag-checkbox-label">
-                            <input type="checkbox" id="tag-outdoor" name="tags" value="outdoor">
+                            <input type="checkbox" id="tag-outdoor" name="outdoor" value="1">
                             <span>🌿 Outdoor Seating</span>
                         </label>
                         <label class="tag-checkbox-label">
-                            <input type="checkbox" id="tag-ac" name="tags" value="ac">
+                            <input type="checkbox" id="tag-ac" name="ac" value="1">
                             <span>❄️ Air Conditioning</span>
                         </label>
                         <label class="tag-checkbox-label">
-                            <input type="checkbox" id="tag-parking" name="tags" value="parking">
+                            <input type="checkbox" id="tag-parking" name="parking" value="1">
                             <span>🚗 Parking Available</span>
                         </label>
                         <label class="tag-checkbox-label">
-                            <input type="checkbox" id="tag-discount" name="tags" value="student-discount">
+                            <input type="checkbox" id="tag-discount" name="student_discount" value="1">
                             <span>🎓 Student Discount</span>
                         </label>
                         <label class="tag-checkbox-label">
-                            <input type="checkbox" id="tag-coffee" name="tags" value="specialty-coffee">
+                            <input type="checkbox" id="tag-coffee" name="specialty_coffee" value="1">
                             <span>☕ Specialty Coffee</span>
                         </label>
                         <label class="tag-checkbox-label">
-                            <input type="checkbox" id="tag-snacks" name="tags" value="snacks">
+                            <input type="checkbox" id="tag-snacks" name="snacks" value="1">
                             <span>🥐 Bakery & Snacks</span>
                         </label>
                     </div>
@@ -197,13 +196,17 @@
 
                 <div class="form-group">
                     <label for="comment-text">Your Review:</label>
-                    <textarea id="comment-text" name="commentText" rows="4"
+                    <textarea id="comment-text" name="comment" rows="4"
                         placeholder="Tell others about your study or remote work experience here..."
                         required></textarea>
                 </div>
 
                 <button type="submit" class="review-submit-btn">Submit Review & Features</button>
             </form>
+
+            <script>
+                document.getElementById("cafe_id").value = new URLSearchParams(window.location.search).get("id");
+            </script>
 
             <!-- Rendered Comments Container -->
             <div class="user-comments-container">

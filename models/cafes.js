@@ -4,9 +4,16 @@ const getAllCafes = (filters, callback) => {
     let conditions = [];
     let values = [];
 
+
     if (filters.city) {
         conditions.push("cafes.city = ?");
         values.push(filters.city);
+    }
+
+    if (filters.search) {
+        conditions.push("(cafes.name LIKE ? OR cafes.city LIKE ? OR cafes.address LIKE ?)");
+        const term = `%${filters.search}%`;
+        values.push(term, term, term);
     }
 
     const tags = ["wifi", "outlets", "quiet", "tables", "outdoor", "ac", "parking", "student_discount", "specialty_coffee", "snacks"];
