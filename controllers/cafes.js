@@ -3,6 +3,7 @@ const router = express.Router();
 const requireLogin = require("../middleware/authMiddleware.js");
 const upload = require("../middleware/upload.js");
 const cafeModel = require("../models/cafes.js");
+const reviewModel = require("../models/reviews.js");
 
 // Get cafes
 router.get("/", (req, res) => {
@@ -32,10 +33,14 @@ router.get("/search", (req, res) => {
 
 // Get specific cafe
 router.get("/:id", (req, res) => {
-    cafeModel.getCafeById(req.params.id, (err, result) => {
+    cafeModel.getCafeById(req.params.id, (err, cafeResult) => {
         if (err) return res.status(500).json({ error: err.message });
-        if (result.length === 0) return res.render("cafe-page", { user: req.session.userId || null, cafe: null });
-        return res.render("cafe-page", { user: req.session.userId || null, cafe: result[0] });
+        if (cafeResult.length === 0) return res.render("cafe-page", { user: req.session.userId || null, cafe: null, reviews: [] });
+
+        reviewModel.getReviewsByCafe(req.params.id, (err, reviews) => {
+            if (err) return res.status(500).json({ error: err.message });
+            return res.render("cafe-page", { user: req.session.userId || null, cafe: cafeResult[0], reviews });
+        });
     });
 });
 

@@ -1881,3 +1881,52 @@ footer a:hover, .footer-link:hover {
         margin-top: 10px;
     }
 }
+
+.review-card {
+    background-color: #ffffff;
+    border: 1px solid #e6dfd5;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.review-rating {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #2c2520;
+}
+
+.review-meta {
+    font-size: 0.82rem;
+    color: #888;
+}
+
+.review-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.review-tag-badge {
+    background-color: #f3ede4;
+    color: #6f4e37;
+    font-size: 0.78rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid #e0d5c5;
+}
+
+.review-comment {
+    font-size: 0.95rem;
+    color: #4a3f35;
+    line-height: 1.6;
+}

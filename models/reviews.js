@@ -1,7 +1,10 @@
 const connection = require("../middleware/connectionDB.js");
 
 const getReviewsByCafe = (cafe_id, callback) => {
-    connection.query("SELECT * FROM reviews WHERE cafe_id = ?", [cafe_id], callback);
+    connection.query(
+        "SELECT reviews.*, users.username FROM reviews JOIN users ON reviews.user_id = users.id WHERE reviews.cafe_id = ? ORDER BY reviews.created_at DESC",
+        [cafe_id], callback
+    );
 };
 
 const createReview = (data, callback) => {
