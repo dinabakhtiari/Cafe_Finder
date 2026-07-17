@@ -172,7 +172,10 @@ async function deleteCafe(cafeId) {
     if (!confirm('Are you sure you want to delete this cafe permanently?')) return;
 
     try {
-        const response = await fetch(`/cafes/${cafeId}`, { method: 'DELETE' });
+        const response = await fetch(`/cafes/${cafeId}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        });
         if (response.ok) {
             showToastMessage('Cafe deleted successfully.');
             window.location.reload();
@@ -229,7 +232,11 @@ function submitEditCafeForm(event, cafeId) {
 
     const formData = new FormData(formElement);
 
-    fetch(`/cafes/${cafeId}`, { method: 'PATCH', body: formData })
+    fetch(`/cafes/${cafeId}`, {
+        method: 'PATCH',
+        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+        body: formData
+    })
     .then(res => {
         if (res.status === 204 || res.ok) {
             showToastMessage('Cafe updated successfully!');
