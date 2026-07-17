@@ -117,7 +117,7 @@
                         <div id="inline-edit-cafe-<%= cafe.id %>" class="inline-form-wrapper auth-card id-hidden"
                             style="max-width: 100%; margin-top: 15px; border-inline-start: 4px solid #6f4e37;">
                             <h4 class="form-inner-title" style="color: #6f4e37;">Edit Cafe Details: <%= cafe.name %></h4>
-                            <form id="edit-cafe-form-<%= cafe.id %>" action="/cafes/<%= cafe.id %>" method="POST" enctype="multipart/form-data"
+                            <form id="edit-cafe-form-<%= cafe.id %>"
                                 class="review-form" onsubmit="submitEditCafeForm(event, '<%= cafe.id %>')"
                                 style="background-color: transparent; border: none; padding: 0; box-shadow: none;">
                                 <div class="form-group">
@@ -133,10 +133,6 @@
                                         <label class="form-field-label">Full Address:</label>
                                         <input type="text" name="address" value="<%= cafe.address %>" required class="form-text-input">
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-field-label">Change Cover Photo (Optional):</label>
-                                    <input type="file" name="photo" accept="image/*" class="form-file-input">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-field-label">Short Description:</label>

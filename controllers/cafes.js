@@ -76,15 +76,62 @@ router.delete('/:id', requireLogin, (req, res) => {
     const idDelete = Number(req.params.id);
     const sessionUserId = req.session.userId;
 
+    console.log('Delete cafe request - Session userId:', sessionUserId, 'Cafe id:', idDelete);
+
     cafeModel.getCafeById(idDelete, (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
         if (result.length === 0) return res.status(404).send("Cafe not found");
 
+        console.log('Cafe owner userId:', result[0].user_id);
+
         if (sessionUserId == result[0].user_id) {
-            cafeModel.deleteCafe(idDelete, (err, result) => {
+            const connection = require("../middleware/connectionDB.js");
+
+            connection.query("SELECT id FROM reviews WHERE cafe_id = ?", [idDelete], (err, reviews) => {
                 if (err) return res.status(500).json({ error: err.message });
-                if (result.affectedRows === 0) return res.status(404).json({ error: "Cafe not found" });
-                return res.status(204).send();
+
+                const reviewIds = reviews.map(r => r.id);
+
+                const deleteReviewPhotos = () => {
+                    if (reviewIds.length === 0) {
+                        return deleteReviews();
+                    }
+                    connection.query("DELETE FROM review_photos WHERE review_id IN (?)", [reviewIds], (err) => {
+                        if (err) return res.status(500).json({ error: err.message });
+                        deleteReviews();
+                    });
+                };
+
+                const deleteReviews = () => {
+                    connection.query("DELETE FROM reviews WHERE cafe_id = ?", [idDelete], (err) => {
+                        if (err) return res.status(500).json({ error: err.message });
+                        deletePhotos();
+                    });
+                };
+
+                const deletePhotos = () => {
+                    connection.query("DELETE FROM photos WHERE cafe_id = ?", [idDelete], (err) => {
+                        if (err) return res.status(500).json({ error: err.message });
+                        deleteFavorites();
+                    });
+                };
+
+                const deleteFavorites = () => {
+                    connection.query("DELETE FROM favorites WHERE cafe_id = ?", [idDelete], (err) => {
+                        if (err) return res.status(500).json({ error: err.message });
+                        deleteCafe();
+                    });
+                };
+
+                const deleteCafe = () => {
+                    cafeModel.deleteCafe(idDelete, (err, result) => {
+                        if (err) return res.status(500).json({ error: err.message });
+                        if (result.affectedRows === 0) return res.status(404).json({ error: "Cafe not found" });
+                        return res.status(204).send();
+                    });
+                };
+
+                deleteReviewPhotos();
             });
         } else {
             return res.status(403).json({ error: "Forbidden" });
